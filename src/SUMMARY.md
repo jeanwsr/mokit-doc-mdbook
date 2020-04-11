@@ -1,3 +1,3 @@
 # Summary
 
-- [Chapter 1](./chapter_1.md)
+- [mdbook Pages template](./chapter_1.md)
