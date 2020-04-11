@@ -1,5 +1,7 @@
 # mdbook Pages template
 
+<!-- toc -->
+
 An mdbook template for GitLab pages. This template automatically builds your mdbook with CI/CD using the following `.gitlab-ci.yml`:
 
 ```
@@ -18,7 +20,17 @@ pages:
   - master
 ```
 
+## Features
+
+### mdbook-toc
+
+This template comes with `mdbook-toc`. That means you can insert `<!-- toc -->` into your pages to generate a table of contents.
+
+## Links
+
 More Information:
 
 - [https://yethiel.gitlab.io/post/mdbook-with-gitlab-ci-cd/](https://yethiel.gitlab.io/post/mdbook-with-gitlab-ci-cd/)
 - [https://gitlab.com/yethiel/pages-mdbook](https://gitlab.com/yethiel/pages-mdbook)
+
+
