@@ -1,0 +1,13 @@
+[book]
+authors = [""]
+language = "en"
+multilingual = false
+src = "src"
+title = "GitLab Pages mdbook Template"
+
+[build]
+build-dir = "public"
+
+[preprocessor.toc]
+command = "./mdbook-toc"
+renderer = ["html"]
