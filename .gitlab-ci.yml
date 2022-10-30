@@ -5,6 +5,7 @@ pages:
   #- wget https://github.com/rust-lang/mdBook/releases/download/v0.4.21/mdbook-v0.4.21-x86_64-unknown-linux-gnu.tar.gz
   - tar xvzf mdbook-v0.4.21-x86_64-unknown-linux-gnu.tar.gz
   - tar xvzf mdbook-toc-0.10.0-x86_64-unknown-linux-gnu.tar.gz
+  - chown root:root mdbook*
   - ls -l
   - ./mdbook build
   artifacts:
