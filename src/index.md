@@ -1,12 +1,8 @@
-# Summary
+# MOKIT Doc
 
-[MOKIT Doc](./index.md)
 - [Introduction](./chap1_intro.md)
 - [Installation](./chap2_install.md)
-  - [Windows](./chap2-1.md)
-  - [Linux Pre-built](./chap2-2.md)
-  - [Linux](./chap2-3.md)
 - [Quick Start](./chap3_quick.md)
 - [User's Guide](./chap4_guide.md)
 - [Examples](./chap5_example.md)
-[Appendix](./appdx.md)
+- [Appendix](./appdx.md)
