@@ -10,9 +10,9 @@
 | centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.21 |
 | centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
 | py37_gcc8 | Debian 10 | Centos 8 | 3.7 | 8.3 | 1.21 |
-| py38_gcc8 | Debian 10 | Centos 8 | 3.8 | 8.3 | 1.23 |
+| py38_gcc8 | Debian 10 | Centos 8, Ubuntu 20.04 | 3.8 | 8.3 | 1.23 |
 | py39_gcc10 | Debian 11 |  | 3.9 | 10.2 | 1.23 |
-| py310_gcc10 | Debian 11, Arch | | 3.10 | 10.2 | 1.23 |
+| py310_gcc10 | Debian 11, Arch | Ubuntu 22.04 | 3.10 | 10.2 | 1.23 |
 
 Tips:
 * The artifacts started with 'centos7_conda' need to be used with Anaconda3/Miniconda3, and the rest works with system-provided python (conda is also OK).
