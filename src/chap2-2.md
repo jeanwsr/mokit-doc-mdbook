@@ -11,7 +11,7 @@
 | centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
 | py37_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.7 | 8.3 | 1.21 |
 | py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | 1.23 |
-| py39_gcc10 | Debian 11, Ubuntu 20.04 |  | 3.9 | 10.2 | 1.23 |
+| py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | 1.23 |
 | py310_gcc10 | Debian 11, Arch | Ubuntu 22.04 | 3.10 | 10.2 | 1.23 |
 
 Tips:
@@ -19,7 +19,7 @@ Tips:
 * The artifacts started with 'centos7_conda' need to be used with Anaconda3/Miniconda3, and the rest works with system-provided python (conda is also OK).
 * We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky 8, Manjaro, etc. More compatibility tests and reports are welcome.
 * The GCC and NumPy version listed refer to the version used to compile the artifacts. It does not mean users need to limit their GCC, NumPy versions strictly. 
-  - GCC with `libgfortran.so.4` can be compatible with py3x_gcc8, and `libgfortran.so.5` can be compatible with py3x_gcc10. Use `ldconfig -p | grep libgfort` to check your libgfortran.so version.
+  - GCC (7.x, 8.x) with `libgfortran.so.4` can be compatible with py3x_gcc8, and `libgfortran.so.5` can be compatible with py3x_gcc10. Use `ldconfig -p | grep libgfort` to check your libgfortran.so version.
   - NumPy can be sensitive to version sometimes. Try upgrade numpy if your python complained about version when `import`. 
 
 Known issues:
