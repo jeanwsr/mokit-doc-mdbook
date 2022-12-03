@@ -9,8 +9,11 @@ title = "GitLab Pages mdbook Template"
 build-dir = "public"
 
 [output.html]
-additional-css = ["./assets/custom.css"]
-
+#additional-css = ["./assets/custom.css"]
+additional-css = [
+  "theme/light.css",
+  "theme/dark.css",
+]
 [preprocessor.toc]
 command = "./mdbook-toc"
 renderer = ["html"]
