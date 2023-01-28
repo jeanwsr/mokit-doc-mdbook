@@ -4,7 +4,7 @@
 Set up environment by docker first (may require sudo)
 ```
 docker pull continuumio/miniconda3:latest
-docker run -it --name conda continuumio/miniconda3:latest /bin/bash
+docker run -it --name myconda continuumio/miniconda3:latest /bin/bash
 ```
 Now we enter the shell inside docker container
 ```
@@ -20,7 +20,13 @@ anaconda upload ./output/linux-64/*.bz2
 ```
 Next time, we can re-enter the container by
 ```
-docker start -i conda
+docker start -i myconda
+```
+and build a new version
+```
+conda activate mokit-build
+conda build --output-folder ./output conda
+anaconda upload ./output/linux-64/*.bz2
 ```
 
 # Pre-built Linux Executables and Libraries
