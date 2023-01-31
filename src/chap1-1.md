@@ -1,16 +1,16 @@
-# Introduction to MOKIT
+# 1.1 Introduction to MOKIT
 The full name of MOKIT is Molecular Orbital KIT. MOKIT offers various utilities and modules to transfer MOs among various quantum chemistry software packages. Besides, the AutoMR program in MOKIT can set up and run common multi-reference calculations in a block-box way.
 
 With MOKIT, one can perform multi-reference calculations in a quite simple way, and utilize the best modules of each program, e.g.
 
-  UHF(UNO) -> CASSCF -> CASPT2
-  Gaussian    PySCF     OpenMolcas
-or
-  UHF(UNO) -> GVB   -> CASSCF -> NEVPT2
-  Gaussian    GAMESS   PySCF     PySCF
-
-  RHF   ->   GVB   -> CASSCF  -> ic-MRCISD+Q
-  Gaussian    GAMESS   PySCF     OpenMolcas
+  UHF(UNO) -> CASSCF -> CASPT2  
+  Gaussian&emsp;&emsp;PySCF&emsp;&emsp;OpenMolcas  
+or  
+  UHF(UNO) -> GVB    -> CASSCF -> NEVPT2  
+  Gaussian&emsp;&emsp;GAMESS&emsp;&emsp;PySCF&emsp;&emsp;PySCF  
+or  
+  RHF      -> GVB    -> CASSCF -> ic-MRCISD+Q  
+  Gaussian&emsp;GAMESS&emsp;PySCF&emsp;OpenMolcas  
 
 Negligible energy loss (usually<1e-6 a.u., for the same wave function method in two programs) are ensured during transferring MOs, since the basis order of angular momentum up to H(i.e. l=5) is explicitly considered.
 

@@ -1,12 +1,22 @@
-# Quickstart
+# 3 Quickstart
 
-## Which method should I use?
-For practical use, e.g. to properly compare results with those from experiments, NEVPT2, CASPT2, MC-PDFT or MRCISD is recommended. The GVB and CASSCF methods are often qualitatively correct. For high accuracy results, dynamic correlation is necessary. Additional general recommendations are provided below:
+## 3.1 Which method should I use?
+For practical use, e.g. to properly compare results with those from experiments,
+NEVPT2, CASPT2, MC-PDFT or MRCISD is recommended. The GVB and CASSCF methods are
+often qualitatively correct. For high accuracy results, dynamic correlation is
+necessary. Additional general recommendations are provided below:
+
 (1) NEVPT2 is free of the intruder-state problem, thus is preferable to CASPT2.
-(2) If you find NEVPT2/CASPT2 is too expensive for your system, consider the MC-PDFT method.
-(3) If you find the computation cost of NEVPT2/CASPT2 is acceptable for your system and you want higher accuracy, consider ic-MRCISD in OpenMolcas/Molpro. For very small systems such as two or three atoms, the uncontracted MRCISD in ORCA is a good choice.
 
-## Which basis set should I use?
+(2) If you find NEVPT2/CASPT2 is too expensive for your system, consider the MC-
+PDFT method.
+
+(3) If you find the computation cost of NEVPT2/CASPT2 is acceptable for your system
+and you want higher accuracy, consider ic-MRCISD in OpenMolcas/Molpro. For very
+small systems such as two or three atoms, the uncontracted MRCISD in ORCA is a good
+choice.
+
+## 3.2 Which basis set should I use?
 For testing or debug, you can use any type of basis sets. You can, of course, use a small basis set like def2-SVP to test whether AutoMR works. However, for practical use or to obtain publishable data, please use at least triple-zeta basis set, e.g. cc-pVTZ, def-TZVP, def2-TZVP or def2-TZVPP. Results obtained from combinations like MRCISD/def2SVP, NEVPT2/6-31G(d) are almost useless. If, unfortunately, you have very limited computational resource, e.g. less than 8 CPU cores, then the cc-pVDZ basis set is recommended. Additional general recommendations are provided below:
 
 (1) If your system is large, or has complicated electronic structure and you want to see whether AutoMR works, or you just want to see the workflow of AutoMR, you can use a small basis set like def2SVP to go through the computation. After it normally terminates, you can switch to using a larger basis set.
@@ -31,12 +41,14 @@ For testing or debug, you can use any type of basis sets. You can, of course, us
 
 Currently AutoMR cannot read user-defined basis sets or pseudopotentials in .gjf file, so you have to provide a Gaussian .fch(k) file and use one of the three options `readrhf`, `readuhf`, `readno`. See Section 4.4.1~4.4.3 for related information.
 
-## Do I need to specify the active space?
+## 3.3 Do I need to specify the active space?
 AutoMR can automatically determine the active space, thus you need not specify that. If you do not want the automatically determined one, you can manually specify it, such as CASSCF(m,n) or NEVPT2(m,n), with m, n being the number of active electrons and active orbitals, respectively. Currently only m=n is supported (this is very reasonable, see DOI: 10.1021/acs.jctc.0c00123). While for GVB, you may specify GVB(n), where n is the number of pairs. Manually specifying is only recommended for experienced users.
+
 Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once AutoMR detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
+
 Usually the automatically determined active space is reasonable. The algorithm in MOKIT is designed to automatically find the minimum active space for a given molecule. However, when you are studying a potential energy curve/surface, the automatically determined active space may be not the same size for each geometry. For example, for N2 molecule at d(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined by AutoMR, but for for d(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus, if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6), MRCISD(6,6), etc.
 
-## Are my computation results reasonable?
+## 3.4 Are my computation results reasonable?
 (1) You should make sure that your CASSCF initial orbitals and final(i.e. converged) orbitals contain proper active orbitals. Here are two examples: (i) Assuming you are studying the bond breaking of a C-C bond, you use CAS(2,2) at least. And you should make sure that your CASSCF initial orbitals and final orbitals contain the bonding and anti-bonding orbitals this C-C bond. Note that the RHF orbitals or MP2 natural orbitals are usually poor to be used as the initial guess when studying bond breaking or transition-metal-containing molecules. (ii) Assuming you are studying the ->* excited energies, then your active space is expected to contain desired  and * orbitals.
 
 (2) If you perform the CASSCF (or CASSCF-based methods like NEVPT2, CASPT2, etc), there would be a file with suffix `*CASSCF_NO.fch` generated, in which the CASSCF natural orbitals and corresponding occupation numbers are held. You can use GaussView or Multiwfn to open this file and visualize whether these active orbitals are reasonable, if you know your molecule fairly well.
@@ -46,4 +58,4 @@ If you perform CASCI (or CASCI-based jobs), the CASCI NOs are held in a `*CASCI_
 
 (4) If you are calculating the bond dissociation energy, you should check whether the sum or combination of active space from two fragments equals to the active space of the original molecule. You are supposed to analyze main components of the active space. For example, assuming the original molecule has a CAS(6,6) active space, and assuming it contains 2 singly occupied orbitals from fragment 1, two bonding orbitals and two anti-bonding orbitals constructed by two fragments. Then quintuplet CAS(4,4) should be used for fragment 1 and triplet CAS(2,2) for fragment 2.
 
-(5) For the rigid/unrelaxed scanning of a chemical bond, you are always recommended to scan the bond from long distance to short distance, rather than from short to long. And you are recommended to write the keyword ‘scan’ in the Gaussian keyword #p line. This will perform the rigid/unrelaxed scan automatically. It is not recommended to calculate each scanned geometry manually.
+(5) For the rigid/unrelaxed scanning of a chemical bond, you are always recommended to scan the bond from long distance to short distance, rather than from short to long. And you are recommended to write the keyword `scan` in the Gaussian keyword #p line. This will perform the rigid/unrelaxed scan automatically. It is not recommended to calculate each scanned geometry manually.

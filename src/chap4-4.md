@@ -1,5 +1,5 @@
 # 4.4 List of AutoMR Keywords
-If any of the 'readrhf', 'readuhf', and 'readno' keywords is used, there is no need to write Cartesian coordinates in .gjf file (in fact AutoMR will not read coordinates in such case), since the geometry is already provided in the specified .fch(k) file.
+If any of the `readrhf`, `readuhf`, and `readno` keywords is used, there is no need to write Cartesian coordinates in .gjf file (in fact AutoMR will not read coordinates in such case), since the geometry is already provided in the specified .fch(k) file.
 
 ## 4.4.1 readrhf
 Read RHF (or ROHF) orbitals from a specified .fch file. Do not provide a UHF-type .fch file using this keyword. This keyword is usually used along with another keyword ist=3 (see Section 4.4.4 ist).
@@ -34,11 +34,14 @@ The value 0 (default) is recommended, if you do not know which one to choose.
 
 ## 4.4.5 LocalM
 Specify the orbital localization method. Only the Boys (also called Foster-Boys) localization and Pipek-Mezey (PM) localization method are supported. The corresponding keywords are 'LocalM=Boys' and 'LocalM=PM'. By default, the PM localization is used.
-Note: the Boys method will mix $\sigma$ and $\pi$ orbitals, while the PM method tends to keep them separated. These two methods make no difference when the target molecule contains only $\sigma$ bonds (and possibly a few isolated $\pi$ bonds). But if you are dealing with multiple $\pi$ bonds or conjugated $\pi$ systems like oligoacene(benzene, naphthalene, etc), or if you want the active space to contain only $\pi$ orbitals, better use the PM method. The GVB and CASSCF optimized orbitals will be affected by the localization method sometimes. If you explicitly specify the size of active space which is equal to the $\pi$ space (note that frontier natural orbitals are usually $\pi$ orbitals), then using LocalM=Boys is OK since Boys localization among pure $\pi$ orbitals is safe (no sigma orbital is in the set).
+
+Note: the Boys method will mix <em>$\sigma$</em> and $\pi$ orbitals, while the PM method tends to keep them separated. These two methods make no difference when the target molecule contains only $\sigma$ bonds (and possibly a few isolated $\pi$ bonds). But if you are dealing with multiple $\pi$ bonds or conjugated $\pi$ systems like oligoacene(benzene, naphthalene, etc), or if you want the active space to contain only $\pi$ orbitals, better use the PM method. The GVB and CASSCF optimized orbitals will be affected by the localization method sometimes. If you explicitly specify the size of active space which is equal to the $\pi$ space (note that frontier natural orbitals are usually $\pi$ orbitals), then using LocalM=Boys is OK since Boys localization among pure $\pi$ orbitals is safe (no sigma orbital is in the set).
+
 For people who are keen on comparing initial guesses generated from different methods/algorithms, 'Local=Boys' is strongly recommended to be taken into consideration, to see whether a lower GVB, CASCI or CASSCF energy occurs.
 
 ## 4.4.6 CIonly
 Skip the CASSCF orbital optimization in the CASPT2 or NEVPT2 job. Obviously, this keyword only applies to CASPT2 or NEVPT2 case. Writing CIonly means a CASCI -> CASPT2 or CASCI -> NEVPT2 job. In fact, the CASSCF orbital optimization is always recommended to be performed, unless it is too time-consuming, or you happen to want this type of result.
+
 Note: if you simply need a CASCI computation, do not use CIonly in a CASSCF job, but simply write CASCI/basis_set in the keyword line of .gjf file.
 
 ## 4.4.7 Force
