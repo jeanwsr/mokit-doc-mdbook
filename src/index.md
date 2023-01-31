@@ -5,4 +5,4 @@
 - [Quick Start](./chap3_quick.md)
 - [User's Guide](./chap4_guide.md)
 - [Examples](./chap5_example.md)
-- [Appendix](./appdx.md)
+- [Appendix](./chap_appdx.md)
