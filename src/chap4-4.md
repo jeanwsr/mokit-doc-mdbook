@@ -40,16 +40,16 @@ Specify the orbital localization method. Only the Boys (also called Foster-Boys)
 localization and PM (Pipek-Mezey) localization method are supported. The corresponding
 keywords are 'LocalM=Boys' and 'LocalM=PM'. By default, the PM localization is used.
 
-Note: the Boys method will mix $\sigma$ and $\pi$ orbitals, while the PM
+Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM
 method tends to keep them separated. These two methods make no difference when the
-target molecule contains only $\sigma$ bonds (and possibly a few isolated $\pi$
-bonds). But if you are dealing with multiple $\pi$ bonds or conjugated $\pi$ systems
+target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\)
+bonds). But if you are dealing with multiple $\pi$ bonds or conjugated \\( \pi \\) systems
 like oligoacene(benzene, naphthalene, etc), or if you want the active space to contain
-only $\pi$ orbitals, better use the PM method. The GVB and CASSCF optimized orbitals
+only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals
 will be affected by the localization method sometimes. If you explicitly specify the
-size of active space which is equal to the $\pi$ space (note that frontier natural
-orbitals are usually $\pi$ orbitals), then using LocalM=Boys is OK since Boys localization
-among pure $\pi$ orbitals is safe (no sigma orbital is in the set).
+size of active space which is equal to the \\( \pi \\) space (note that frontier natural
+orbitals are usually \\( \pi \\) orbitals), then using LocalM=Boys is OK since Boys localization
+among pure \\( \pi \\) orbitals is safe (no sigma orbital is in the set).
 
 For people who are keen on comparing initial guesses generated from different methods/
 algorithms, 'Local=Boys' is strongly recommended to be taken into consideration,

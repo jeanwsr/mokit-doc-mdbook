@@ -14,6 +14,8 @@ additional-css = [
   "theme/light.css",
   "theme/dark.css",
 ]
+mathjax-support = true
+
 [preprocessor.toc]
 command = "./mdbook-toc"
 renderer = ["html"]
