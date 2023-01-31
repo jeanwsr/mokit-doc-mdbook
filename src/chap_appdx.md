@@ -144,31 +144,54 @@ A21: Firstly, please read Section 3.1 and 3.2 for suggestions on choosing approp
 
 ## A2 Limitations and Suggestions
 ### A2.1 Basic knowledge of multi-reference methods
-Although MOKIT is a useful tool for black-box multi-reference computations, the users are assumed to know basic knowledge of multi-reference methods. If he/she does not even know the meaning of CAS(m,n), then the results of MOKIT are meaningless to he/she, and even wrong explanations may be made from the results. Therefore, if you know little about the multi-reference methods, I recommend you the following materials:
-(1) the ORCA CASSCF-tutorial (https://orcaforum.kofo.mpg.de/app.php/dlext/?cat=4), which is a quickstart guide (but also detailed) for CASSCF computations. To download this .pdf file, you may need to (register and) login to the forum.
+Although MOKIT is a useful tool for black-box multi-reference computations, the
+users are assumed to know basic knowledge of multi-reference methods. If he/she
+does not even know the meaning of CAS(m,n), then the results of MOKIT are meaningless
+to he/she, and even wrong explanations may be made from the results. Therefore,
+if you know little about the multi-reference methods, I recommend you the following
+materials:  
+(1) the ORCA CASSCF-tutorial (https://orcaforum.kofo.mpg.de/app.php/dlext/?cat=4),
+which is a quickstart guide (but also detailed) for CASSCF computations. To download
+this .pdf file, you may need to (register and) login to the forum.  
 (2) to be added.
-If, unfortunately, you are forced by your supervisor/advisor to learn how to perform multireference calculations, but meanwhile you are a totally newbie and you don't even know how to perform routine DFT calculations, it is recommended that you change a task/project as soon as possible (ASAP). Or more radically, you are encouraged to switch to a new supervisor ASAP, since he/she does not know how to teach/train a student properly. This is not your fault, but your supervisor's.
-A2.2 Symmetry
+
+If, unfortunately, you are forced by your supervisor/advisor to learn how to perform
+multireference calculations, but meanwhile you are a totally newbie and you don't
+even know how to perform routine DFT calculations, it is recommended that you change
+a task/project as soon as possible (ASAP). Or more radically, you are encouraged to
+switch to a new supervisor ASAP, since he/she does not know how to teach/train a
+student properly. This is not your fault, but your supervisor's.
+
+### A2.2 Symmetry
 Unfortunately, molecular point group symmetry cannot be taken into consideration in any module of MOKIT. This is due to: (1) use of symmetry may change the orientation of the target molecule, and the MO coefficients will be changed accordingly; (2) localized orbitals are used in almost all modules of AutoMR, this usually contradicts with symmetry.
 
 ### A2.3 Validity of MOs obtained by AutoMR for excited state calculations
 When you use AutoMR to perform a ground state CASSCF calculation, the obtained CASSCF MOs (whether pseudo-canonical MOs or NOs) is supposed to be excellent for the ground state electronic structure of the target molecule. And you can use this set of MOs (held in a .fch file) to further conduct excited state calculations like state-averaged CASSCF (SA-CASSCF). And moreover, NEVPT2, CASPT2 or MRCISD, if you wish.
+
 However, the resulting excitation energies and excited state MOs (e.g. state-averaged NOs) are not necessarily excellent. Here 'not necessarily excellent' means for some molecules you may get good results while may be unsatisfactory for some other molecules. The reason is simple: the current algorithms in AutoMR focus on the multi-reference characters in the ground state of the molecule. Thus AutoMR 'finds' excellent active orbitals of the ground state. But the active orbitals of excited states are not necessarily the same as those of the ground state. And the orbital optimization in SA-CASSCF does not guarantee leading to good MOs for excited states. This problem actually exists in almost all methods/programs which feature block-box or automatic multi-reference calculations.
+
 There is a solution (although not perfect or elegant) to this problem: (visually) inspect the doubly occupied orbitals, pick up important orbitals (usually the lone-pair orbitals) and add them into the active space. For example, if you obtain a CAS(6e,6o) active space from MOKIT, and assuming you find 4 lone pair orbitals among doubly occupied orbitals, then you can combine them (by interchanging or permuting orbitals) to be a CAS(14e,10o) active space. Because `6+2*4=14` active electrons, and 6+4=10 active orbitals. You can do a SA-CASSCF(14e,10o) computation next. This usually converges in several cycles. Finally you can perform a NEVPT2/CASPT2/MRCISD computation based on SA-CASSCF(14e,10o) orbitals to get more accurate excitation energies.
 
 ### A2.4 Possible multiple solutions of UHF
 There may exist multiple UHF solutions when a covalent bond cleavages homolytically, or in a transition-metal-containing molecule. In these special cases, if you use ist=0, the UHF calculated by AutoMR may be not the lowest UHF solution (but it is stable). You may need to perform several UHF computations (by yourself) using various initial guesses. After you identify the lowest UHF solution, you can use keywords ist=1 and `readuhf` to read in the desired UHF .fch file.
+
 Alternatively, you can simply write the fragment guess information into the .gjf file, exactly as the syntax of Gaussian. See an example in file examples/automr/05-N2_cc-pVTZ_4.0.gjf.
+
 Peter Pulay et al suggests that for cases involving multiple UHF solutions, one should use the averaged density (of all possible solutions) to generate UNOs. This approach is not supported in MOKIT currently.
 
 ### A2.5 Implicit Solvent Model
 Currently implicit solvent effect cannot be taken into consideration. But you can use the converged CASSCF wave function `*_NO.fch` file as an initial guess to your further calculations which takes implicit solvent effect into consideration.
 
 ## A3 Bug Report
-If you find any bug frequently occurs, please go to [MOKIT GitLab](https://gitlab.com/jxzou/mokit) to download the latest version of MOKIT and check whether the bug still exists. If it still exists, you can
-(1) contact the author jxzou via E-mail njumath[at]sina.cn, with your input file (.gjf, .fch) and output files attached;
-(2) open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page of MOKIT;
-(3) (if you can communicate in Chinese) you can join the Tencent QQ group (Group ID: 470745084).
+If you find any bug frequently occurs, please go to [MOKIT GitLab](https://gitlab.com/jxzou/mokit)
+to download the latest version of MOKIT and check whether the bug still exists.
+If it still exists, you can  
+(1) contact the author jxzou via E-mail njumath[at]sina.cn, with your input file
+(.gjf, .fch) and output files attached;  
+(2) open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page
+of MOKIT;  
+(3) (if you can communicate in Chinese) you can join the Tencent QQ group (Group
+ID: 470745084).
 
 ## A4 Acknowledgement
 Thanks to all MOKIT developers and users for constructive suggestions, bugs report and contributions.

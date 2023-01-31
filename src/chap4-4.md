@@ -131,24 +131,38 @@ Note that in fact the DMRG-CASSCF calculations are performed by Block-1.5 and Py
 Also note that the MPI version used by Block is probably contradicted with MPI version used by ORCA, thus you have to comment one version of MPI environment variables at a time. Or you can use a Shell script to submit the automr job, in which your desired MPI environment variables are written.
 
 ## 4.4.15 CASPT2_prog
-Specify the program for performing CASPT2 calculation, e.g. CASPT2_prog=OpenMolcas. Currently only OpenMolcas(default), Molpro and ORCA are supported. All core orbitals are not frozen. Note that a default IP-EA shift 0.25 a.u. will be applied and it cannot be modified. If your CASPT2 results are sensitive to the IP-EA shift, it implies that CASPT2 is not suitable to your problem. Another two types of shift (the real or imaginary shift) is not supported.
+Specify the program for performing CASPT2 calculation, e.g. `CASPT2_prog=OpenMolcas`.
+Currently only OpenMolcas(default), Molpro and ORCA are supported. All core orbitals
+are not frozen. Note that a default IP-EA shift 0.25 a.u. will be applied and it
+cannot be modified. If your CASPT2 results are sensitive to the IP-EA shift, it
+implies that CASPT2 is not suitable to your problem. Another two types of shift
+(the real or imaginary shift) is not supported.
 
-Generally speaking, NEVPT2 is more recommended than CASPT2 since there is no need for IP-EA shift, real or imaginary shift in NEVPT2.
+Generally speaking, NEVPT2 and CASPT2-K are more recommended than CASPT2 since there
+is no need for IP-EA shift, real or imaginary shift in NEVPT2 or CASPT2-K methods.
 
 ## 4.4.16 NEVPT2_prog
 Specify the program for performing NEVPT2 calculation, e.g. `NEVPT2_prog=PySCF`. Currently supported programs are PySCF(default), Molpro, ORCA, OpenMolcas and BDF. All core orbitals are not frozen.
 
-Note that there exist at least two variants of the NEVPT2: SC-NEVPT2 and FIC-NEVPT2(aka PC-NEVPT2). By default, for NEVPT2_prog=PySCF/Molpro/ORCA/OpenMolcas, SC-NEVPT2 is chosen; while for NEVPT2_prog=BDF, FIC-NEVPT2 is chosen. To turn on the FIC-NEVPT2 when using PySCF/Molpro/ORCA/OpenMolcas, please read Section 4.4.34. Also note that
+Note that there exist at least two variants of the NEVPT2: SC-NEVPT2 and FIC-NEVPT2
+(aka PC-NEVPT2). By default, for NEVPT2_prog=PySCF/Molpro/ORCA/OpenMolcas, SC-NEVPT2
+is chosen; while for `NEVPT2_prog=BDF`, FIC-NEVPT2 is chosen. To turn on the FIC-NEVPT2
+when using PySCF/Molpro/ORCA/OpenMolcas, please read Section 4.4.34. Also note that
 
-(1) When you specify `NEVPT2_prog=Molpro` or OpenMolcas, both of the SC-NEVPT2 and FIC-NEVPT2 energies are actually printed in Molpro/OpenMolcas output (.out file). You can open the output file and read it manually, if you need that energy.
-(2) If you specify `NEVPT2_prog=OpenMolcas`, it actually turns into a DMRG-NEVPT2 computation, no matter how large/small the size of active space is. In this special case, you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG computations.
+(1) When you specify `NEVPT2_prog=Molpro` or OpenMolcas, both of the SC-NEVPT2 and
+FIC-NEVPT2 energies are actually printed in Molpro/OpenMolcas output (.out file).
+You can open the output file and read it manually, if you need that energy.  
+(2) If you specify `NEVPT2_prog=OpenMolcas`, it actually turns into a DMRG-NEVPT2
+computation, no matter how large/small the size of active space is. In this special
+case, you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG
+computations.
 
 ## 4.4.17 MRCISD_prog
 Specify the program for performing MRCISD calculation. By default, `MRCISD_prog=OpenMolcas`. You MUST also specify a contraction type, please read Section 4.4.20 carefully.
 
-Currently, AutoMR supports the interfaces of three MRCISD variants:
-(1) uncontracted MRCISD
-(2) internally contracted MRCISD (ic-MRCISD)
+Currently, AutoMR supports the interfaces of three MRCISD variants:  
+(1) uncontracted MRCISD  
+(2) internally contracted MRCISD (ic-MRCISD)  
 (3) fully internally contracted MRCISD (FIC-MRCISD)
 
 where the computational cost and accuracy is (1)>(2)>(3). The ic- and FIC-MRCISD are both approximations of uncontracted MRCISD. If the Davidson size-consistency correction energy is added, then the method should be denoted as MRCISD+Q. It is recommended to use ic-MRCISD+Q or FIC-MRCISD+Q in practical calculations since the uncontracted MRCISD is often too expensive.
@@ -189,10 +203,17 @@ Generally, the ic- and FIC-MRCISD methods are recommended. If your calculation i
 Specify the bond dimension MaxM in DMRG-related calculations. The default values is 1000 (e.g. `MaxM=1000`). When maxM increases, the DMRG-CASCI energy will become closer to the CASCI energy, but the computational cost increases as well. The value 1000 is suitable for common cases. But do check whether it is valid for your system. For example, three computations using different MaxM (e.g. 500, 1000, 1500) may be conducted to study whether the energy converges with MaxM.
 
 ## 4.4.22 hardwfn
-This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas, GAMESS or PSI4. By specifying 'hardwfn', AutoMR will add extra keywords into the CAS input files to ensure a better convergence. Note that normally you do not need this keyword, and it is useless if you specify other programs as the CAS solver.
+This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas,
+GAMESS or PSI4. By specifying `hardwfn`, AutoMR will add extra keywords into the
+CAS input files to ensure a better convergence. Note that normally you do not need
+this keyword, and it is useless if you specify other programs as the CAS solver.
 
 ## 4.4.23 crazywfn
-This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas, GAMESS or PSI4. By specifying 'crazywfn', AutoMR will add extra keywords (more than those of 'hardwfn') into the CAS input files to ensure a better convergence. Note that usually you do not need this keyword, and it is useless if you specify other programs as the CAS solver.
+This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas,
+GAMESS or PSI4. By specifying `crazywfn`, AutoMR will add extra keywords (more than
+those of `hardwfn`) into the CAS input files to ensure a better convergence. Note that
+usually you do not need this keyword, and it is useless if you specify other programs
+as the CAS solver.
 
 For example, when the N2 molecule is stretched to d(N-N) = 4.0 Å, this is a system which features strong correlation and requires a CAS(6,6) active space. The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn` will increase the NSTATE to 10, so that the singlet state can be found.
 
@@ -310,16 +331,19 @@ Specify the root which you are interested in State-Specific CASSCF (SS-CASSCF) c
 ## 4.4.43 GVB_conv
 Modify/Set the density matrix convergence criterion in GAMESS GVB to be a desired threshold. The default threshold is 1D-5 (meaning 10-5 a.u.). Usually there is no need to modify the default value. But if you want to use a less tight threshold, 1D-4 ~ 5D-4 is recommended, e.g. GVB_conv=5D-4. Note that only 4 characters are allowed for this parameter. Do not write 5.0D-4 since it exceeds the length limit. This keyword is equivalent to the keyword CONV in GAMESS (please read the documentation file docs-input.txt in GAMESS package if you want know more details).
 
-There are two possible cases in which you may want to change the default GVB convergence threshold:  
+There are two possible cases in which you may want to change the default GVB convergence
+threshold:
+
 (1) When dealing with molecules which have many conjugated pi bonds (e.g. acene, zethrene),
 although the default orbital localization method Pipek-Mezey provides - separated initial
 guess orbitals for GVB computation, the converged GVB orbitals may still be - mixed.
-In that case you can specify keywords mokit{LocalM=Boys,GVB_conv=5d-4} and specify
+In that case you can specify keywords `mokit{LocalM=Boys,GVB_conv=5d-4}` and specify
 exactly the number of  bonds n in Route Section as GVB(n) (this is just a combination
 of keywords which have been explored by the author jxzou and found often useful).
 One may wonder why the Boys localization method is used here. This is because we
 have explicitly specified GVB(n), the n pairs of UNOs near HONO are usually pure
-pi orbitals and it is safe to use Boys localization among pi orbitals.  
+pi orbitals and it is safe to use Boys localization among pi orbitals.
+
 (2) When dealing with d transition metal (e.g. Fe) molecules, the GVB orbital optimization
 often takes many cycles to converge or even diverge in the end, but the first ~30
 cycles are often reasonable, so we can use a less tight threshold to converge the

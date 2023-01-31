@@ -16,10 +16,10 @@ the Windows search bar, then press `Enter` and click `Edit` to edit the `PATH` v
 Create a new path and type the path of MOKIT binary directory. For example, on my
 computer the path is `D:\360Downloads\mokit\bin`.
 
-<img src="images/edit_path_win.png" width="75%" height="75%" />
+<img src="images/edit_path_win.png" width="65%" height="65%" />
 
 Press the combination keys `Win+R` on the keyboard, type `cmd` to prompt CMD, and
 **change into the directory where your .fch(k) file holds**, simply run like
 
-<img src="images/fch2mkl_win.png" width="75%" height="75%" />
+<img src="images/fch2mkl_win.png" width="85%" height="85%" />
 

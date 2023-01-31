@@ -1,9 +1,9 @@
 # 4.3 Keywords of supported methods in AutoMR
-Currently, the keywords of all supported methods in `automr` are: *GVB*, *CASCI*,
-*CASSCF*, *DMRGCI*, *DMRGSCF*, *NEVPT2*, *CASPT2*, *CASPT2K*, *SDSPT2*, *MRMP2*,
-*MRCISD*, *MRCISDT*, *MCPDFT*, *DFTCI*, *BCCC2b* and *BCCC3b*. More multi-configurational
-and multi-reference methods will be supported in the future. These terms should
-be written in the `#p ...` line in the .gjf file.
+Currently, the keywords of all supported methods in `automr` are: **GVB**, **CASCI**,
+**CASSCF**, **DMRGCI**, **DMRGSCF**, **NEVPT2**, **CASPT2**, **CASPT2K**, **SDSPT2**,
+**MRMP2**, **MRCISD**, **MRCISDT**, **MCPDFT**, **DFTCI**, **BCCC2b** and **BCCC3b**.
+More multi-configurational and multi-reference methods will be supported in the future.
+These terms should be written in the `#p ...` line in the .gjf file.
 
 There must be a '/' symbol between the method and the basis set, e.g. CASSCF/cc-pVTZ. AutoMR does not allow the use of a spacing to separate the method and basis set (which is allowed in Gaussian). When `readrhf`, `readuhf`, or `readno` is used in mokit{}, the basis set after '/' symbol is usually useless, since the geometry and basis set data will be read from the given .fch(k) file. Note that, however, the user still needs to provide a basis set name, although it is not used in this case.
 
@@ -35,7 +35,7 @@ DMRGCI can be viewed as the 0-th step of the DMRGSCF step, i.e. DMRGSCF without 
 ## 4.3.6 NEVPT2
 Second order N-Electron Valence state Perturbation Theory based on the CASSCF reference.
 
-Please read related keyword NEVPT2_prog in Section 4.4.16.
+Please read related keyword `NEVPT2_prog` in Section 4.4.16.
 
 ## 4.3.7 CASPT2
 Second order Perturbation Theory based on CASSCF reference.
@@ -47,7 +47,10 @@ Second order Perturbation Theory based on CASSCF reference.
 
 This is a new feature since ORCA 5.0. A revised zeroth order Hamiltonian is applied to alleviate the intruder state problem of CASPT2 method. No IP-EA shift is needed in this method.
 
-Note here you can write this keyword as either CASPT2K or CASPT2-K in .gjf file, but you’d better use the method name CASPT2-K in official writing or publishing. The keyword CASPT2_prog will automatically be set as ORCA, since this method is only supported in ORCA currently.
+Note here you can write this keyword as either CASPT2K or CASPT2-K in .gjf file,
+but you'd better use the method name CASPT2-K in official writing or publishing.
+The keyword `CASPT2_prog` will automatically be set as ORCA, since this method is
+only supported in ORCA currently.
 
 ## 4.3.9 CASPT3
 Third order Perturbation Theory based on CASSCF reference.

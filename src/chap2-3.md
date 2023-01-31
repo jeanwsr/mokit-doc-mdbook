@@ -137,7 +137,7 @@ REMEMBER to run `make distclean` before re-compiling. Note that if you change th
 version of Python on your node/machine, the dynamic library files `*.so` in `$MOKIT_ROOT/mokit/lib/`
 may become unrecognized, in which case you have to re-compile MOKIT.
 
-If you want to use *Miniconda* instead of *Anaconda Python3*, you should install
+If you want to use **Miniconda** instead of **Anaconda Python3**, you should install
 `numpy` since `numpy` is not in Miniconda by default. `f2py` will be installed along
 with `numpy`. If your `f2py` comes from `psi4conda/bin/f2py`, then errors may occur
 when compiling MOKIT. In such case you are recommended to comment environment variables

@@ -151,7 +151,7 @@ NOTE: the recommended way is to firstly use Gaussian to generate a .fch file (wi
 This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. To transfer MOs from Gaussian to GAMESS, see Section 4.5.19 fch2inp.
 
 ## 4.5.15 extract_noon2fch
-Extract natural orbital occupation numbers (NOONs) from the following types of files
+Extract natural orbital occupation numbers (NOONs) from the following types of files  
 (1) .out file of PySCF  
 (2) .dat file of GAMESS  
 (3) .gms file of GAMESS  
