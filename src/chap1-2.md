@@ -19,21 +19,23 @@ configurational computations are performed in a black-box way with the help of
 MOKIT<sup>[4]</sup>.
 
 Currently we have not published the paper of MOKIT program. As for the content of
-the reference, you should cite like  
+the reference, you should cite like
+```
 [4] Jingxiang Zou, MOKIT program, https://gitlab.com/jxzou/mokit (accessed Jan 28, 2023).
+```
 
 where the "Jan 28" should be modified as the version you used. The version number
 can be found by running `automr --version`, or simply `automr -v`. Note that citing
 MOKIT only in the supporting information of a paper is insufficient, since such
 citation can hardly be gathered by search engine or database.
 
-If any of the keyword ist=0,1,3 (see Section 4.4.4) in program AutoMR is used,
+If any of the keyword ist=0,1,3 (see Section 4.4.4) in program `automr` is used,
 citing the following two papers would be appreciated  
-[2] J. Chem. Theory Comput. 2019, 15, 141-153. DOI: 10.1021/acs.jctc.8b00854  
-[3] J. Phys. Chem. A 2020. DOI: 10.1021/acs.jpca.0c05216.
+[2] J. Chem. Theory Comput. 2019, 15, 141–153. DOI: 10.1021/acs.jctc.8b00854  
+[3] J. Phys. Chem. A 2020, 124, 8321–8329. DOI: 10.1021/acs.jpca.0c05216.
 
 Besides, you need to CITE all quantum chemistry software packages called in your
-AutoMR job(s). For example, the file `examples/automr/00-h2o_cc-pVDZ_1.5.gjf` is
+`automr` job(s). For example, the file `examples/automr/00-h2o_cc-pVDZ_1.5.gjf` is
 a CASSCF job. 3 software packages will be called:  
 (1) Gaussian will be called to perform RHF/UHF;  
 (2) GAMESS will be called to perform GVB;  

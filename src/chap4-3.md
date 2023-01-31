@@ -1,5 +1,9 @@
 # 4.3 Keywords of supported methods in AutoMR
-Currently, the keywords of all supported methods in AutoMR are: GVB, CASCI, CASSCF, DMRGCI, DMRGSCF, NEVPT2, CASPT2, CASPT2K, SDSPT2, MRMP2, MRCISD, MRCISDT, MCPDFT, DFTCI, BCCC2b and BCCC3b. More multi-configurational and multi-reference methods will be supported in the future. These terms should be written in the `#p …` line in the .gjf file.
+Currently, the keywords of all supported methods in `automr` are: *GVB*, *CASCI*,
+*CASSCF*, *DMRGCI*, *DMRGSCF*, *NEVPT2*, *CASPT2*, *CASPT2K*, *SDSPT2*, *MRMP2*,
+*MRCISD*, *MRCISDT*, *MCPDFT*, *DFTCI*, *BCCC2b* and *BCCC3b*. More multi-configurational
+and multi-reference methods will be supported in the future. These terms should
+be written in the `#p ...` line in the .gjf file.
 
 There must be a '/' symbol between the method and the basis set, e.g. CASSCF/cc-pVTZ. AutoMR does not allow the use of a spacing to separate the method and basis set (which is allowed in Gaussian). When `readrhf`, `readuhf`, or `readno` is used in mokit{}, the basis set after '/' symbol is usually useless, since the geometry and basis set data will be read from the given .fch(k) file. Note that, however, the user still needs to provide a basis set name, although it is not used in this case.
 
@@ -78,12 +82,12 @@ Note that OVBMP2 is a keyword in AutoMR but OVB-MP2 is the method name. Do not m
 ## 4.3.13 MRCISD
 Multi-reference Configuration Interaction Singles and Doubles, based on the CASCI/CASSCF reference.
 
-Please read related keyword MRCISD_prog in Section 4.4.17.
+Please read related keyword `MRCISD_prog` in Section 4.4.17.
 
 ## 4.3.14 MRCISDT
 Multi-reference Configuration Interaction Singles, Doubles and Triples, based on the CASCI/CASSCF reference.
 
-The related keyword MRCISDT_prog can only be equal to one of OpenMolcas(default), Dalton, PSI4 and GAMESS. No Davidson correction will be provided, and only uncontracted MRCISDT is supported.
+The related keyword `MRCISDT_prog` can only be equal to one of OpenMolcas(default), Dalton, PSI4 and GAMESS. No Davidson correction will be provided, and only uncontracted MRCISDT is supported.
 
 ## 4.3.15 MCPDFT
 Multi-configurational Pair Density Functional Theory, based on CASSCF reference.
@@ -92,7 +96,7 @@ Note that MCPDFT is a keyword in AutoMR but MC-PDFT is the method name. Do not m
 
 Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG computations. DMRG-PDFT is not supported in GAMESS currently.
 
-Please read related keyword MCPDFT_prog in Section 4.4.19. Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
+Please read related keyword `MCPDFT_prog` in Section 4.4.19. Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
 
 ## 4.3.16 DFTCI
 The DFT/MRCI method by Stefan Grimme, Mirko Waletzke, and Martin Kleinschmidt et. al.
@@ -111,16 +115,24 @@ Currently only the FIC-MRCC method in ORCA(>=5.0.0) is supported.
 ## 4.3.18 BCCC2b
 Block-correlated coupled cluster theory based on the GVB reference.
 
-This is in fact a multi-reference coupled cluster theory based on GVB wave function, where 2b means only the two-block excitation operators are considered in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
+This is in fact a multi-reference coupled cluster theory based on GVB wave function,
+where 2b means only the two-block excitation operators $\hat{T}_{2}$ are considered
+in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
-Currently only spin singlet is supported. This program is developed by jxzou during his Ph.D. in Prof. Shuhua Li's research group. Currently this program has not been released yet, but will probably be released after its corresponding paper published.
+Currently only spin singlet is supported. This program is developed by jxzou during
+his Ph.D. in Prof. Shuhua Li's research group. Currently this program has not been
+released yet, but will probably be released after its corresponding paper published.
 
-Currently only correlations between two pairs are taken into consideration (i.e. occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough' theory. Note that the intra-pair excitation operator   plays little role, so the BCCC2b (i.e. only  ) is extremely close to BCCC2 (i.e.  ). For GVB(2), the BCCC2 is equivalent to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4). For GVB(n), n>2, the GVB(n)-BCCC is an approximation method to CASCI(2n,2n) using GVB orbitals.
+Currently only correlations between two pairs are taken into consideration (i.e.
+occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough'
+theory. Note that the intra-pair excitation operator   plays little role, so the
+BCCC2b (i.e. only ) is extremely close to BCCC2 (i.e.  ). For GVB(2), the BCCC2 is equivalent to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4). For GVB(n), n>2, the GVB(n)-BCCC is an approximation method to CASCI(2n,2n) using GVB orbitals.
 
 This program scales as O(n4), where n is the number of GVB pairs. But the integral transformation needed for the BCCC2b scales as O(n5), so the overall scaling might behave as O(n5) for large number of pairs.
 
 ## 4.3.19 BCCC3b
-Block-correlated coupled cluster theory based on the GVB reference, where 3b means $T_{2} + T_{3}$.
+Block-correlated coupled cluster theory based on the GVB reference, where 3b means
+$\hat{T}_{2} + \hat{T}_{3}$.
 
 This means two-pair and three-pair correlations are considered based on the GVB reference. Also, this method is spin-pure. Currently only spin singlet is supported.
 

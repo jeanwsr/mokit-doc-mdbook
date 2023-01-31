@@ -121,7 +121,7 @@ itype	type of density	itype	type of density
 Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All attributes of this module are shown below
 `write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)`
 where dm is the PySCF density matrix with dimension (nbf,nbf). itype has the same meaning with that in Section 4.6.5. force is a bool variable, and its meaning is:
-(1) If the string corresponding to itype (e.g. ‘Total SCF Density’) can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
+(1) If the string corresponding to itype (e.g. 'Total SCF Density') can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
 (2) If the string corresponding to itype cannot be found, setting force=True will enforce writing density matrix into the given file; setting force=False will stop/abort the program and signal errors immediately (this can be used to check whether desired strings exists in the specified file).
 
 You should use this module via
@@ -220,7 +220,7 @@ Generate natural orbitals using specified density in a .fch file. The density is
 from lo import gen_no_using_density_in_fch
 gen_no_using_density_in_fch('ben.fch', 1)
 ```
-where 1 means reading density from “Total SCF Density” section.
+where 1 means reading density from "Total SCF Density" section.
 
 ## 4.6.19 gen_cf_orb
 Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals are orthogonal, so this module actually performs an orthogonalnon-orthogonal orbital transformation. This transformation requires the information of GVB pair coefficients so currently only the GAMESS .dat file is accepted while the .fch file is not supported. An example is shown below

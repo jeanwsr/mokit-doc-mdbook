@@ -18,7 +18,7 @@ This is a water molecule with two O-H bonds stretched. CAS(4,4) active space wil
 %nprocshared=4
 #p CASSCF/cc-pVTZ
 
-mokit{ist=1,readuhf='N2_cc-pVTZ_4.0_uhf.fchk' }
+mokit{ist=1,readuhf='N2_cc-pVTZ_4.0_uhf.fchk'}
 ```
 For the memory and parallel settings, please read Section 4.2. For the theoretical method and basis set, please read Section 4.3. Here we focus on the keywords in mokit{}.
 
