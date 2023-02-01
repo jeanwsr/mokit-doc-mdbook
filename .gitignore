@@ -1,4 +1,5 @@
 book
 mdbook
 mdbook-toc
+mdbook-pdf*
 public/
