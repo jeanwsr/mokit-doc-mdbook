@@ -33,7 +33,7 @@ python
 >>>mol = load_mol_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk')
 >>>mf = scf.RHF(mol).run()
 ```
-where the module gaussian is actually the file $MOKIT_ROOT/lib/gaussian.py.
+where the module gaussian is actually the file `$MOKIT_ROOT/mokit/lib/gaussian.py`.
 
 ## 4.6.2 loc
 Perform orbital localization for a given .fch(k) file. Two localization methods are supported: Foster-Boys or Pipek-Mezey. For example, run python in Shell
@@ -132,7 +132,7 @@ where dm is the PySCF density matrix with dimension (nbf,nbf). itype has the sam
 You should use this module via
 ```
 python
->>>from py2fch import write_pyscf_dm_into_fch
+>>>from mokit.lib.py2fch import write_pyscf_dm_into_fch
 ```
 Note that this module cannot generate a .fch(k) file from scratch, the user must provide one such file. The recommended approach is firstly using the module bas_fch2py to generate PySCF input file or using load_mol_from_fch to generate proper PySCF object, then do computations in PySCF. Finally using the module write_pyscf_dm_into_fch to export desired density matrix.
 

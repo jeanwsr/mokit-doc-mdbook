@@ -54,8 +54,9 @@ studying the bond breaking of a C-C bond, you use CAS(2,2) at least. And you sho
 make sure that your CASSCF initial orbitals and final orbitals contain the bonding
 and anti-bonding orbitals this C-C bond. Note that the RHF orbitals or MP2 natural
 orbitals are usually poor to be used as the initial guess when studying bond breaking
-or transition-metal-containing molecules. (ii) Assuming you are studying the pi->pi*
-excited energies, then your active space is expected to contain desired pi and pi* orbitals.
+or transition-metal-containing molecules. (ii) Assuming you are studying the \\( \pi \\)
+-> \\( \pi \\)* excited energies, then your active space is expected to contain
+desired \\( \pi \\) and \\( \pi \\)* orbitals.
 
 (2) If you perform the CASSCF (or CASSCF-based methods like NEVPT2, CASPT2, etc), there would be a file with suffix `*CASSCF_NO.fch` generated, in which the CASSCF natural orbitals and corresponding occupation numbers are held. You can use GaussView or Multiwfn to open this file and visualize whether these active orbitals are reasonable, if you know your molecule fairly well.
 

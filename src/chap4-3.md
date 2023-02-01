@@ -5,7 +5,13 @@ Currently, the keywords of all supported methods in `automr` are: **GVB**, **CAS
 More multi-configurational and multi-reference methods will be supported in the future.
 These terms should be written in the `#p ...` line in the .gjf file.
 
-There must be a '/' symbol between the method and the basis set, e.g. CASSCF/cc-pVTZ. AutoMR does not allow the use of a spacing to separate the method and basis set (which is allowed in Gaussian). When `readrhf`, `readuhf`, or `readno` is used in mokit{}, the basis set after '/' symbol is usually useless, since the geometry and basis set data will be read from the given .fch(k) file. Note that, however, the user still needs to provide a basis set name, although it is not used in this case.
+There must be a '/' symbol between the method and the basis set, e.g. `CASSCF/cc-pVTZ`.
+AutoMR does not allow the use of a spacing to separate the method and basis set
+(which is allowed in Gaussian). When `readrhf`, `readuhf`, or `readno` is used in
+`mokit{}`, the basis set after '/' symbol is usually useless, since the geometry
+and basis set data will be read from the given .fch(k) file. Note that, however,
+the user still needs to provide a basis set name, although it is not used in this
+case.
 
 There is also an exception that the basis set after '/' symbol matters. If RI (see Section 4.4.29) approximation is turned on, the auxiliary basis set will be automatically determined (by AutoMR) according to the basis set. And if F12 (see Section 4.4.31) is turned on, the F12-CABS will be automatically determined (by AutoMR) according to the basis set, too.
 
@@ -80,7 +86,7 @@ Orthogonal valence bond Møller-Plesset 2 based on CASSCF reference.
 
 After CASSCF converged, AutoMR will call the Gaussian program to perform OVB-MP2 calculation. No other program is supported. Also, DMRG-OVB-MP2 is not supported and AutoMR will abort in that case.
 
-Note that OVBMP2 is a keyword in AutoMR but OVB-MP2 is the method name. Do not mix them up. Some literature might call this method as 'CASSCF MP2' but that is actually misleading (those authors were fooled by keywords “CASSCF MP2”in Gaussian input file).
+Note that OVBMP2 is a keyword in AutoMR but OVB-MP2 is the method name. Do not mix them up. Some literature might call this method as 'CASSCF MP2' but that is actually misleading (those authors were fooled by keywords "CASSCF MP2" in Gaussian input file).
 
 ## 4.3.13 MRCISD
 Multi-reference Configuration Interaction Singles and Doubles, based on the CASCI/CASSCF reference.
@@ -119,7 +125,7 @@ Currently only the FIC-MRCC method in ORCA(>=5.0.0) is supported.
 Block-correlated coupled cluster theory based on the GVB reference.
 
 This is in fact a multi-reference coupled cluster theory based on GVB wave function,
-where 2b means only the two-block excitation operators $\hat{T}_{2}$ are considered
+where 2b means only the two-block excitation operators \\( \hat{T}_{2} \\) are considered
 in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
 Currently only spin singlet is supported. This program is developed by jxzou during
@@ -128,16 +134,25 @@ released yet, but will probably be released after its corresponding paper publis
 
 Currently only correlations between two pairs are taken into consideration (i.e.
 occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough'
-theory. Note that the intra-pair excitation operator   plays little role, so the
-BCCC2b (i.e. only ) is extremely close to BCCC2 (i.e.  ). For GVB(2), the BCCC2 is equivalent to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4). For GVB(n), n>2, the GVB(n)-BCCC is an approximation method to CASCI(2n,2n) using GVB orbitals.
+theory. Note that the intra-pair excitation operator \\( \hat{T}_{1} \\) plays
+little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\)) is extremely close to
+BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\)). For GVB(2), the BCCC2 is equivalent
+to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4).
+For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*)
+using GVB orbitals.
 
-This program scales as O(n4), where n is the number of GVB pairs. But the integral transformation needed for the BCCC2b scales as O(n5), so the overall scaling might behave as O(n5) for large number of pairs.
+This program scales as *O*(*n*^4^), where n is the number of GVB pairs. But the
+integral transformation needed for the BCCC2b scales as *O*(*n*^5^), so the overall
+scaling might behave as *O*(*n*^5^) for large number of pairs.
 
 ## 4.3.19 BCCC3b
 Block-correlated coupled cluster theory based on the GVB reference, where 3b means
-$\hat{T}_{2} + \hat{T}_{3}$.
+\\( \hat{T}_{2} + \hat{T}_{3} \\).
 
-This means two-pair and three-pair correlations are considered based on the GVB reference. Also, this method is spin-pure. Currently only spin singlet is supported.
+This means two-pair and three-pair correlations are considered based on the GVB
+reference. Also, this method is spin-pure. Currently only spin singlet is supported.
 
-For practical computations with desired accuracy, you should use BCCC3b rather than BCCC2b. This program scales as O(n5), where n is the number of GVB pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
+For practical computations with desired accuracy, you should use BCCC3b rather
+than BCCC2b. This program scales as *O*(*n*^5^), where *n* is the number of GVB
+pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
 
