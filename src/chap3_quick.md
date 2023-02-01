@@ -18,9 +18,9 @@ small systems such as two or three atoms, the uncontracted MRCISD in ORCA is a g
 choice.
 
 ## 3.2 Which basis set should I use?
-For testing or debug, you can use any type of basis sets. You can, of course, use a small basis set like def2-SVP to test whether AutoMR works. However, for practical use or to obtain publishable data, please use at least triple-zeta basis set, e.g. cc-pVTZ, def-TZVP, def2-TZVP or def2-TZVPP. Results obtained from combinations like MRCISD/def2SVP, NEVPT2/6-31G(d) are almost useless. If, unfortunately, you have very limited computational resource, e.g. less than 8 CPU cores, then the cc-pVDZ basis set is recommended. Additional general recommendations are provided below:
+For testing or debug, you can use any type of basis sets. You can, of course, use a small basis set like def2-SVP to test whether `automr` works. However, for practical use or to obtain publishable data, please use at least triple-zeta basis set, e.g. cc-pVTZ, def-TZVP, def2-TZVP or def2-TZVPP. Results obtained from combinations like MRCISD/def2SVP, NEVPT2/6-31G(d) are almost useless. If, unfortunately, you have very limited computational resource, e.g. less than 8 CPU cores, then the cc-pVDZ basis set is recommended. Additional general recommendations are provided below:
 
-(1) If your system is large, or has complicated electronic structure and you want to see whether AutoMR works, or you just want to see the workflow of AutoMR, you can use a small basis set like def2SVP to go through the computation. After it normally terminates, you can switch to using a larger basis set.
+(1) If your system is large, or has complicated electronic structure and you want to see whether `automr` works, or you just want to see the workflow of `automr`, you can use a small basis set like def2SVP to go through the computation. After it normally terminates, you can switch to using a larger basis set.
 
 (2) If your system is large (>600 basis functions), you should consider properly simplify your system or use mixed basis sets for different elements/atoms. For example, replace unimportant methyl group(s) by hydrogen atoms, use cc-pVTZ for important atoms and cc-pVDZ (or even 6-31G(d)) for other atoms, etc. Also/Alternatively you can turn on the RI approximation (see Section 4.4.29) in CASSCF and CASSCF-NEVPT2 computations.
 
@@ -36,21 +36,21 @@ For testing or debug, you can use any type of basis sets. You can, of course, us
 
 (8) If you want to compute the NMR shielding constants, basis sets like pcSseg-1 or pcSseg-2 are strongly recommended. Large basis sets like pcSseg-3, def2-QZVP or cc-pVQZ would be better but they are very time-consuming.
 
-(9) If you only want to obtain the radical indices printed by AutoMR, and accurate electronic energies are not desired, then basis sets cc-pVDZ/6-31G(d,p)/def2SVP are sufficient. There is no need to use triple-zeta basis set like def2TZVP. If your studied molecule is very small (e.g. <10 atoms), then you can still use any triple-zeta basis set.
+(9) If you only want to obtain the radical indices printed by `automr`, and accurate electronic energies are not desired, then basis sets cc-pVDZ/6-31G(d,p)/def2SVP are sufficient. There is no need to use triple-zeta basis set like def2TZVP. If your studied molecule is very small (e.g. <10 atoms), then you can still use any triple-zeta basis set.
 
 (10) If you only want to perform energy decomposition analysis, e.g. GKS-EDA, usually def2TZVP basis set is sufficient. If there is any anion in your studied molecule(s), it is recommended to use diffuse functions only for anion-related atoms. It is not recommended to apply ma-TZVPP for all atoms (which will probably cause basis set linear dependence problems and make SCF in GAMESS converges slowly, even with MOs written in the .inp file). Also, it is recommended to use the implicit solvent model PCM rather than SMD, since PCM is frequently used in original papers of GKS-EDA.
 
 ## 3.3 Do I need to specify the active space?
 The `automr` program can automatically determine the active space, thus you need not specify that. If you do not want the automatically determined one, you can manually specify it, such as CASSCF(m,n) or NEVPT2(m,n), with m, n being the number of active electrons and active orbitals, respectively. Currently only m=n is supported (this is very reasonable, see DOI: 10.1021/acs.jctc.0c00123). While for GVB, you may specify GVB(n), where n is the number of pairs. Manually specifying is only recommended for experienced users.
 
-Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once AutoMR detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
+Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once `automr` detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
 
 Usually the automatically determined active space is reasonable. The algorithm in
 MOKIT is designed to automatically find the minimum active space for a given molecule.
 However, when you are studying a potential energy curve/surface, the automatically
 determined active space may be not the same size for each geometry. For example,
 for N<sub>2</sub> molecule at *d*(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined
-by AutoMR, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus,
+by `automr`, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus,
 if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6),
 MRCISD(6,6), etc.
 

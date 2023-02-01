@@ -1,4 +1,4 @@
-# 4.4 List of AutoMR Keywords
+# 4.4 List of `automr` Keywords
 If any of the `readrhf`, `readuhf`, and `readno` keywords is used, there is no need
 to write Cartesian coordinates in .gjf file, since the geometry will be read from
 the specified .fch(k) file.
@@ -7,7 +7,7 @@ the specified .fch(k) file.
 Read RHF (or ROHF) orbitals from a specified .fch file. Do not provide a UHF-type .fch file using this keyword. This keyword is usually used along with another keyword ist=3 (see Section 4.4.4 ist).
 
 ## 4.4.2 readuhf
-Read UHF orbitals from a specified .fch(k) file. AutoMR will firstly check the difference between alpha and beta MOs. If the difference is tiny, the wave function in .fch file will be identified as a RHF one and will call utility fch_u2r to generate a RHF-type .fch file (in which all beta information is deleted). Otherwise (i.e. truly UHF), AutoMR will generate UHF natural orbitals (UNO) using input UHF orbitals. It is strongly recommended to check the stability of UHF wave function (using keyword 'stable=opt' in Gaussian). An instable or not-the-lowest UHF solution sometimes leads to improper GVB or CASSCF results.
+Read UHF orbitals from a specified .fch(k) file. `automr` will firstly check the difference between alpha and beta MOs. If the difference is tiny, the wave function in .fch file will be identified as a RHF one and will call utility fch_u2r to generate a RHF-type .fch file (in which all beta information is deleted). Otherwise (i.e. truly UHF), `automr` will generate UHF natural orbitals (UNO) using input UHF orbitals. It is strongly recommended to check the stability of UHF wave function (using keyword 'stable=opt' in Gaussian). An instable or not-the-lowest UHF solution sometimes leads to improper GVB or CASSCF results.
 
 The author jxzou does not recommend the usage of UDFT orbitals. But in case you have to do that (e.g. forced by your Boss or driven by your curiosity), remember to add an extra keyword 'no10cycle' (see 4.4.24 for no10cycle).
 
@@ -66,7 +66,7 @@ Note that this keyword do not have any attribute value, i.e. do not write 'force
 
 ## 4.4.8 Cart
 Request the use of Cartesian type atomic basis functions. The default basis type
-in AutoMR (i.e. spherical harmonic functions) will then be disabled. These two
+in `automr` (i.e. spherical harmonic functions) will then be disabled. These two
 types of basis functions correspond to '6D 10F' (Cartesian functions) and '5D 7F'
 (spherical harmonic functions) in Gaussian. It is strongly recommended to use spherical
 harmonic functions, especially in all-electron relativistic computations (DKH2,
@@ -90,7 +90,7 @@ It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the
 
 mokit{RI,HF_prog=PySCF} (or PSI4, ORCA if you wish)
 
-in the input file of AutoMR. For small to medium-size molecules (Nbasis < 1500), better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge than that of Gaussian.
+in the input file of `automr`. For small to medium-size molecules (Nbasis < 1500), better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge than that of Gaussian.
 
 Note: implementation of this keyword for PySCF/PSI4/ORCA has not been finished yet.
 
@@ -160,24 +160,25 @@ computations.
 ## 4.4.17 MRCISD_prog
 Specify the program for performing MRCISD calculation. By default, `MRCISD_prog=OpenMolcas`. You MUST also specify a contraction type, please read Section 4.4.20 carefully.
 
-Currently, AutoMR supports the interfaces of three MRCISD variants:  
+Currently, `automr` supports the interfaces of three MRCISD variants:  
 (1) uncontracted MRCISD  
 (2) internally contracted MRCISD (ic-MRCISD)  
 (3) fully internally contracted MRCISD (FIC-MRCISD)
 
 where the computational cost and accuracy is (1)>(2)>(3). The ic- and FIC-MRCISD are both approximations of uncontracted MRCISD. If the Davidson size-consistency correction energy is added, then the method should be denoted as MRCISD+Q. It is recommended to use ic-MRCISD+Q or FIC-MRCISD+Q in practical calculations since the uncontracted MRCISD is often too expensive.
 
-AutoMR is able to call OpenMolcas/Molpro/ORCA/Gaussian/GAMESS/PSI4/Dalton programs to perform MRCISD. Currently all core orbitals are not frozen. MRCISD based on the DMRG reference is not supported currently.
-If MRCISD_prog=OpenMolcas, only variants (1) and (2) are supported. The Davidson correction can be provided for both methods.
+`automr` is able to call OpenMolcas/Molpro/ORCA/Gaussian/GAMESS/PSI4/Dalton programs to perform MRCISD. Currently all core orbitals are not frozen. MRCISD based on the DMRG reference is not supported currently.
 
-If MRCISD_prog=ORCA, only (1) and (3) are supported. The Davidson correction can be provided for both methods. However, only spherical harmonic functions of basis sets are supported in ORCA. But this is often not a problem, since it is recommended to use spherical harmonic functions than Cartesian functions.
+If `MRCISD_prog=OpenMolcas`, only variants (1) and (2) are supported. The Davidson correction can be provided for both methods.
+
+If `MRCISD_prog=ORCA`, only (1) and (3) are supported. The Davidson correction can be provided for both methods. However, only spherical harmonic functions of basis sets are supported in ORCA. But this is often not a problem, since it is recommended to use spherical harmonic functions than Cartesian functions.
 Note that you should use ORCA>=5.0.0 for FIC-MRCISD+Q computations since older versions have a tiny bug in the Davidson correction.
 
-If MRCISD_prog=Gaussian or Dalton, only (1) is supported and no Davidson correction is given.
+If `MRCISD_prog=Gaussian` or Dalton, only (1) is supported and no Davidson correction is given.
 
-If MRCISD_prog=GAMESS or PSI4, only (1) is supported. The Davidson correction energy will also be printed.
+If `MRCISD_prog=GAMESS` or PSI4, only (1) is supported. The Davidson correction energy will also be printed.
 
-If MRCISD_prog=Molpro, only (2) is supported. The Davidson correction energy will also be printed. Note that the MRCIC program of Molpro will be called to perform ic-MRCISD. This ic-MRCISD is not exactly identical to that of OpenMolcas, so their electronic energies are different with (but close to) each other. If you want to compare (relative) electronic energies of two molecules using ic-MRCISD method, please choose the same type, i.e. both using Molpro or both using OpenMolcas.
+If `MRCISD_prog=Molpro`, only (2) is supported. The Davidson correction energy will also be printed. Note that the MRCIC program of Molpro will be called to perform ic-MRCISD. This ic-MRCISD is not exactly identical to that of OpenMolcas, so their electronic energies are different with (but close to) each other. If you want to compare (relative) electronic energies of two molecules using ic-MRCISD method, please choose the same type, i.e. both using Molpro or both using OpenMolcas.
 
 ## 4.4.18 MRMP2_prog
 Specify the program for performing MRMP2 calculation. Only GAMESS is supported and this is the default.
@@ -204,13 +205,13 @@ Specify the bond dimension MaxM in DMRG-related calculations. The default values
 
 ## 4.4.22 hardwfn
 This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas,
-GAMESS or PSI4. By specifying `hardwfn`, AutoMR will add extra keywords into the
+GAMESS or PSI4. By specifying `hardwfn`, `automr` will add extra keywords into the
 CAS input files to ensure a better convergence. Note that normally you do not need
 this keyword, and it is useless if you specify other programs as the CAS solver.
 
 ## 4.4.23 crazywfn
 This option can only be applied to CASCI/CASSCF calculations using PySCF, OpenMolcas,
-GAMESS or PSI4. By specifying `crazywfn`, AutoMR will add extra keywords (more than
+GAMESS or PSI4. By specifying `crazywfn`, `automr` will add extra keywords (more than
 those of `hardwfn`) into the CAS input files to ensure a better convergence. Note that
 usually you do not need this keyword, and it is useless if you specify other programs
 as the CAS solver.
@@ -222,12 +223,12 @@ not find the singlet state in the lowest 5 states. In this case, specifying `cra
 will increase the NSTATE to 10, so that the singlet state can be found.
 
 ## 4.4.24 no10cycle
-Skip the 10 cycles of SCF calculations after importing MOs. By default, AutoMR will do several (up to 10) cycles of RHF or UHF after importing MOs from .fch file. This has two advantages: (1) check whether the SCF converges immediately. If not, the MO in .fch file may be wrong, or there exists some bug of fch2py (which has never been observed by the author). (2) it will slightly improve the orthonormality of the input MOs, although the orthonormality is already good. Thus usually you do not need to write this keyword.
+Skip the 10 cycles of SCF calculations after importing MOs. By default, `automr` will do several (up to 10) cycles of RHF or UHF after importing MOs from .fch file. This has two advantages: (1) check whether the SCF converges immediately. If not, the MO in .fch file may be wrong, or there exists some bug of fch2py (which has never been observed by the author). (2) it will slightly improve the orthonormality of the input MOs, although the orthonormality is already good. Thus usually you do not need to write this keyword.
 
 If you start with MOs which are not RHF or UHF MOs (e,g, NOs, UDFT MOs, etc), you must specify 'no10cycle' in mokit{}. Because any iteration of input MOs will change them, which is not what you want.
 
 ## 4.4.25 charge
-This keyword has identical meaning with the same keyword in Gaussian software, i.e. including background point charges in calculations. This keyword is supported for almost all methods in AutoMR. Methods which are incompatible with background point charges will signal errors immediately. The charge-charge and charge-nuclei interaction energies are both included in all electronic energies printed (UHF, GVB, CASSCF, NEVPT2, etc).
+This keyword has identical meaning with the same keyword in Gaussian software, i.e. including background point charges in calculations. This keyword is supported for almost all methods in `automr`. Methods which are incompatible with background point charges will signal errors immediately. The charge-charge and charge-nuclei interaction energies are both included in all electronic energies printed (UHF, GVB, CASSCF, NEVPT2, etc).
 
 The including of background point charges is useful for QM/MM calculations or fragmentation-based linear scaling methods (like GEBF, Many-body expansion, etc).
 
@@ -237,7 +238,7 @@ Section of .gjf file (i.e. '#p ...' line).
 ## 4.4.26 OtPDF
 The choice of the on-top pair density functional. This keyword has identical meaning with the keyword KSDFT in (Open)Molcas software. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. For more details please refer to the Molcas manual. Note that the available functionals depends on your version of OpenMolcas or GAMESS. Old versions may not support some of the functionals.
 
-Note that for Openmolcas >= v22.02, the on-top pair density functional keywords in .input file of OpenMolcas have been changed to T:PBE, FT:PBE, etc. The user need not worry about this problem in MOKIT, since AutoMR will automatically detect the version of OpenMolcas and change the keyword tPBE into T:PBE if needed.
+Note that for Openmolcas >= v22.02, the on-top pair density functional keywords in .input file of OpenMolcas have been changed to T:PBE, FT:PBE, etc. The user need not worry about this problem in MOKIT, since `automr` will automatically detect the version of OpenMolcas and change the keyword tPBE into T:PBE if needed.
 
 Note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
 
@@ -249,7 +250,7 @@ Currently only the point nuclei charge distribution is supported. The DKH0 Hamil
 ## 4.4.28 X2C
 Request the scalar (i.e. spin-free) relativistic X2C (eXact-two-Component) corrections to the one-electron Hamiltonian. Note that: (1) The two keywords DKH2 and X2C are mutually exclusive, i.e. you can only write one of them. (2) You should use all-electron basis sets like 'cc-pVTZ-DK', 'x2c-TZVPall' or 'ANO-RCC-VDZ' for all-electron relativistic calculations. Pseudopotential should not be used. (3) It is strongly not recommended to use Cartesian-type function of basis set (severe numerical instability observed), please just use the default spherical harmonic functions.
 
-Also note that by default, the RHF/UHF is performed using Gaussian called by AutoMR, and GVB is performed using GAMESS called by AutoMR. Since Gaussian and GAMESS do not support X2C, in these steps the X2C will be replaced by DKH2. According to the limited tests of the author jxzou, MOs resulting from DKH2 and X2C are similar and often converge in few cycles.
+Also note that by default, the RHF/UHF is performed using Gaussian called by `automr`, and GVB is performed using GAMESS called by `automr`. Since Gaussian and GAMESS do not support X2C, in these steps the X2C will be replaced by DKH2. According to the limited tests of the author jxzou, MOs resulting from DKH2 and X2C are similar and often converge in few cycles.
 
 Currently only the point nuclei charge distribution is supported. These programs support the X2C Hamiltonian: BDF, OpenMolcas, Molpro, PSI4, PySCF. After several months, X2C will be supported in ORCA.
 
@@ -261,7 +262,7 @@ This option currently can only be used in CASSCF computations conducted by PySCF
 ## 4.4.30 RIJK_bas
 Specify an auxiliary basis set for RI-JK approximation in CASSCF computations conducted by ORCA. Usually you do not need to specify this, since the automr program will automatically assign a proper auxiliary basis set according to the basis set (e.g. def2/JK for def2TZVP, cc-pVTZ/JK for cc-pVTZ). You can simply open the output file of automr and see what auxiliary basis set is assigned.
 
-In the current version of OpenMolcas, there is no auxiliary basis set in it. The AutoMR program in MOKIT will automatically transformed the needed basis set file and put that into $MOLCAS/basis_library/jk_Basis/.
+In the current version of OpenMolcas, there is no auxiliary basis set in it. The `automr` program in MOKIT will automatically transformed the needed basis set file and put that into $MOLCAS/basis_library/jk_Basis/.
 
 ## 4.4.31 F12
 Request to turn on the F12 technique in NEVPT2 computations conducted by ORCA. F12 is not used by default. But if you turn on F12, RI (see Section 4.4.29) will be turned on as a byproduct.
