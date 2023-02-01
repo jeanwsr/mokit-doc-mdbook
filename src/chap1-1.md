@@ -6,7 +6,7 @@ calculations in a black-box way.
 
 A list of important utilities along with their functions are shown below
 
-<img src="images/orbital_transfer.png" width="50%" height="50%" />
+<img src="images/orbital_transfer.png" width="90%" height="90%" />
 
 With MOKIT, one can perform multi-reference calculations in a quite simple way,
 and utilize the best modules of each program, e.g.

@@ -129,12 +129,12 @@ where 2b means only the two-block excitation operators \\( \hat{T}_{2} \\) are c
 in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
 Currently only spin singlet is supported. This program is developed by jxzou during
-his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)\'s research group.
+his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua) research group.
 Currently this program has not been released yet, but will probably be released
 after its corresponding paper published.
 
 Currently only correlations between two pairs are taken into consideration (i.e.
-occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough'
+occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a *rough*
 theory. Note that the intra-pair excitation operator \\( \hat{T}_{1} \\) plays
 little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\) ) is extremely close to
 BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\) ). For GVB(2), the BCCC2 is equivalent
