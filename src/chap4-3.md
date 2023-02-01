@@ -135,7 +135,7 @@ after its corresponding paper published.
 
 Currently only correlations between two pairs are taken into consideration (i.e.
 occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a *rough*
-theory. Note that the intra-pair excitation operator `\\( \hat{T}_{1} \\)` plays
+theory. Note that the intra-pair excitation operator \\( \hat{T}_{1} \\) plays
 little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\) ) is extremely close to
 BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\) ). For GVB(2), the BCCC2 is equivalent
 to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4).

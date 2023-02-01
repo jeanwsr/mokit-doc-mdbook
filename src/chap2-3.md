@@ -50,12 +50,12 @@ a compilation of two or three modules is necessary sometimes.
 After successful compilation, you need to add the following environment variables
 into your `~/.bashrc` file:
 ```
-export MOKIT_ROOT=/home/$USER/software/mokit
+export MOKIT_ROOT=$HOME/software/mokit
 export PATH=$MOKIT_ROOT/bin:$PATH
 export PYTHONPATH=$MOKIT_ROOT/mokit/lib:$PYTHONPATH
-export GMS=/home/$USER/software/games/rungms        # optional
-export PSI4=/home/$USER/psi4conda/bin/psi4          # optional
-export BDF=/home/$USER/software/bdf-pkg/sbin/run.sh # optional
+export GMS=$HOME/software/games/rungms        # optional
+export PSI4=$HOME/psi4conda/bin/psi4          # optional
+export BDF=$HOME/software/bdf-pkg/sbin/run.sh # optional
 ```
 Please modify the above paths to suit your situations. Since PySCF is run by `python`,
 OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4`

@@ -22,7 +22,7 @@ This keyword is usually used along with another keyword ist=5 (see Section 4.4.4
 ## 4.4.4 ist
 Request the use of the i-th strategy. Default is 0. This means: (1) if the spin of the target molecule is singlet, MOKIT will call the Gaussian software to perform RHF and UHF computations, then determine whether to change 'ist' to 1 or 3. If the EUHF = ERHF, ist will be changed to 3. If EUHF < ERHF, ist will become 1. (2) if not singlet, ist will be changed to 1 immediately.
 
-For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc/. If you can read Chinese, you are recommended to read Sobereva's blog http://sobereva.com/82.
+For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc/. If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/82).
 
 Currently, there are 7 allowed values for ist:  
 0: meaning that if RHF wave function is stable, use strategy 3; otherwise use strategy 1  
@@ -31,7 +31,7 @@ Currently, there are 7 allowed values for ist:
 3: RHF -> virtual orbital projection -> localization -> pairing -> GVB -> CASCI/CASSCF -> ...  
 4: RHF -> virtual orbital projection -> CASCI/CASSCF -> ...  
 5: NOs -> CASCI/CASSCF -> ...  
-6: minimal basis GVB -> target basis GVB -> CASCI/CASSCF -> …  
+6: minimal basis GVB -> target basis GVB -> CASCI/CASSCF -> ...
 
 The value 0 (default) is recommended, if you do not know which one to choose.
 
@@ -77,7 +77,7 @@ since ORCA only support spherical harmonic functions.
 
 If you don't know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's
 paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5).
-If you can read Chinese, you are recommended to read Sobereva's [blog](http://sobereva.com/51).
+If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
 
 ## 4.4.9 HF_prog
 Specify the program for performing Hartree-Fock (HF) calculations. Supported programs
@@ -86,24 +86,39 @@ RHF and broken symmetry UHF (plus wave function stability analysis) will be succ
 performed. If not singlet, only UHF (plus wave function stability analysis) will
 be performed.
 
-It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the SCF algorithm in Gaussian is the most effect in almost all cases, among all quantum software packages. The only case when you are recommended to use PySCF/PSI4/ORCA, is that if your studied molecule is large and cannot be further simplified (Nbasis > 1500), you can consider turn on the RI approximation of HF to accelerate computations in PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
-
-mokit{RI,HF_prog=PySCF} (or PSI4, ORCA if you wish)
-
-in the input file of `automr`. For small to medium-size molecules (Nbasis < 1500), better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge than that of Gaussian.
-
-Note: implementation of this keyword for PySCF/PSI4/ORCA has not been finished yet.
+It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the
+SCF algorithm in Gaussian is the most effect in almost all cases, among all quantum
+software packages. The only case when you are recommended to use PySCF/PSI4/ORCA,
+is that if your studied molecule is large and cannot be further simplified (Nbasis>1500),
+you can consider turn on the RI approximation of HF to accelerate computations in
+PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
+```
+mokit{RI,HF_prog=PySCF} # (or PSI4, ORCA if you wish)
+```
+in the input file of `automr`. For small to medium-size molecules (Nbasis<1500),
+better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge
+than that of Gaussian.
 
 ## 4.4.10 GVB_prog
 Specify the GVB program. Supported programs are GAMESS(default), Gaussian and QChem. The second-order SCF (SOSCF) algorithm in GAMESS is used to converge the GVB wave function. The GAMESS version >=2017 is strongly recommended. Older versions of GAMESS may work or may not, since they are not tested by the developers. It is always recommended to use the default program GAMESS, rather than Gaussian (due to poor convergence for transition metal).
 
 Note the original GAMESS can only do GVB up to 12 pairs. Nowadays we can do a black-box GVB computation with hundreds of pairs. So, to go beyond 12 pairs, you need to modify and re-compile the source code of GAMESS.
 
-MOKIT offers a Shell script to help you automatically handle this. Assuming you've compiled GAMESS before (i.e. all `*.o` files are still in gamess/object/ directory of GAMESS), now you simply need to copy two files (modify_GMS1.sh and modify_GMS2.f90) from mokit/src/ into gamess/source/ directory, and run './modify_GMS1.sh'. The script will modify source code and re-compile GAMESS, taking about 2 minutes. The linked GAMESS executable will be gamess.01.x. If you already had an executable named gamess.01.x, please rename it to another filename. Otherwise it will be destroyed and replaced during re-compilation.
+MOKIT offers a Shell script to help you automatically handle this. Assuming you've
+compiled GAMESS before (i.e. all `*.o` files are still in gamess/object/ directory
+of GAMESS), now you simply need to copy two files (modify_GMS1.sh and modify_GMS2.f90)
+from `mokit/src/` into `gamess/source/` directory, and run `./modify_GMS1.sh`. The
+script will modify source code and re-compile GAMESS, taking about 2 minutes. The
+linked GAMESS executable will be `gamess.01.x`. If you already had an executable
+named `gamess.01.x`, please rename it to another filename. Otherwise it will be
+destroyed and replaced during re-compilation.
 
 Besides, for GAMESS earlier than version 2021-R1, it only supports 32 CPU cores. If your machine has more cores (and if you want to use >32 cores), you need to modify the variable MAXCPUS in file gamess/ddi/compddi. See a simple guide in file src/modify_GMS_beyond32CPU.txt. Since GAMESS 2021, the MAXCPUS is already set to 128, so modification is not needed.
 
-It is strongly recommended to check whether the GAMESS runs normally after modifying. Such check can be done by running './runall 01' in gamess/ directory, where 01 means checking the executable gamess.01.x. This is same as checking for version 00. All tests are supposed to be passed successfully.
+It is strongly recommended to check whether the GAMESS runs normally after modifying.
+Such check can be done by running `./runall 01` in gamess/ directory, where `01`
+means checking the executable `gamess.01.x`. This is same as checking for version
+`00`. All tests are supposed to be passed successfully.
 
 ## 4.4.11 CASCI_prog
 Specify the program for performing the CASCI calculation, e.g. `CASCI_prog=PySCF`. Supported programs are PySCF(default), Molpro, GAMESS, OpenMolcas, Gaussian, ORCA, BDF, PSI4 and Dalton.
@@ -278,7 +293,11 @@ Request to turn on the DLPNO technique in NEVPT2 computations conducted by ORCA.
 This option currently can only be used in CASSCF and CASSCF-NEVPT2 computations conducted by ORCA program, i.e. you need to specify `CASSCF_prog=ORCA,NEVPT2_prog=ORCA,DLPNO` in mokit{}. Of course it can be combined with F12 to perform RI-DLPNO-FIC-NEVPT2-F12 computations for large systems, where the keywords should be `mokit{CASSCF_prog=ORCA,NEVPT2_prog=ORCA,DLPNO,F12}`.
 
 ## 4.4.34 FIC
-Request the FIC- variant of NEVPT2 (i.e. FIC-NEVPT2) to be used. By default SC-NEVPT2 is invoked if you specify NEVPT2 in route section (#p NEVPT2/…) and use PySCF/Molpro/OpenMolcas/ORCA program as NEVPT2_prog. But if you specify NEVPT2_prog=BDF, this option is turned on as a byproduct and FIC-NEVPT2 will then be performed. SC-NEVPT2 is not supported in BDF. FIC-NEVPT2 is not supported in PySCF.
+Request the FIC- variant of NEVPT2 (i.e. FIC-NEVPT2) to be used. By default SC-
+NEVPT2 is invoked if you specify NEVPT2 in route section `#p NEVPT2/...` and use
+PySCF/Molpro/OpenMolcas/ORCA program as `NEVPT2_prog`. But if you specify `NEVPT2_prog=BDF`,
+this option is turned on as a byproduct and FIC-NEVPT2 will then be performed.
+SC-NEVPT2 is not supported in BDF. FIC-NEVPT2 is not supported in PySCF.
 
 ## 4.4.35 ON_thres
 When ist=5, this parameter is the threshold of natural orbital occupation numbers (NOON) for determining the number of active orbitals. Default value is 0.02, which means orbital occupation numbers 0.02~1.98 will be considered as active orbitals in subsequent CAS/DMRG calculations.
@@ -296,7 +315,7 @@ Request the exclusion of inactive X-H bonds after normal GVB computation finishe
 ## 4.4.38 NMR
 Request the calculation of nuclear shielding constants. Currently only the CASSF method is supported. Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shielding tensors. Note that:
 
-(1) This keyword should be written in mokit{}, not in the Gaussian keyword line (#p …).
+(1) This keyword should be written in mokit{}, not in the Gaussian keyword line `#p ...`.
 
 (2) The chemical shift of an atom or element is the difference of nuclear shielding constants between the studied molecule and the standard reference molecule. For example, hydrogen atoms in tetramethylsilane(TMS) is usually used as the reference for chemical shifts in 1H-NMR.
 

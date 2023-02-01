@@ -60,7 +60,7 @@ Q7: What are the possible reasons and solutions of the following errors
 (3) 'DDI Error: Could not initialize xx shared memory segments.'  
 (4) 'DDI was compiled to support 32 shared memory segments.'  
 (5) 'The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x
-could not be found in directory…'  
+could not be found in directory ...'  
 in GAMESS .gms file (where xx is an integer >12)?
 
 A7: Please read Section 4.4.10 carefully.
@@ -120,7 +120,11 @@ Why? How to make it disappear?
 A15: This is simply because both OMP_STACKSIZE and KMP_STACKSIZE environment variables are set. You can comment/delete one of them. Usually you can find these two environment variables in your ~/.bashrc file, or in file bdf-pkg/sbin/run.sh (if you use the BDF program).
 
 
-Q16: When using the utility frag_guess_wfn to generate GKS-EDA input files, there is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF does not converge. How to deal with that?
+Q16: When using the utility frag_guess_wfn to generate GKS-EDA input files, there
+is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF
+does not converge. How to deal with that?
+
+<img src="images/A1_Q16.png" width="100%" height="100%" />
 
 A16: As you can see in the screenshot above, GAMESS thinks your radial grid is insufficient for this molecule and recommends the minimum requirement. So, all you need to do is: modify the radial grid in the .inp file to the recommended value. For example, in this example, you should modify NRAD0=99 and NRAD=99 in the .inp file to (at least) NRAD0=126 and NRAD=126, respectively.
 
@@ -132,7 +136,10 @@ ValueError: Using default_file_mode other than 'r' is no longer supported. Pass 
 ```
 How to solve the problem?
 
-A17: Please check whether your current python is the PSI4 python by running which python in Shell. If yes, and if you do not have to use PSI4 currently, you are recommended to comment/deactivate PSI4's environment variables and use your previous Python (e.g. Anaconda Python 3). Note that .
+A17: Please check whether your current python is the PSI4 python by running `which python`
+in Shell. If yes, and if you do not have to use PSI4 currently, you are recommended
+to comment/deactivate PSI4's environment variables and use your previous Python
+(e.g. Anaconda Python 3).
 
 
 Q18: I found the following error in output of running automr
@@ -143,7 +150,12 @@ ModuleNotFoundError: No module named 'h5py'
 ```
 How to solve the problem?
 
-A18: If you are using python and f2py from PSI4 package, rather than python from Anaconda Python 3, you may encounter this PySCF error. One possible solution is to comment PSI4 variables and write this variable export PSI4=… (see Section 2.2.3). Then exit the terminal and re-login, and you now you are using your previous python, e.g. Anaconda Python 3. Next you should run make distclean and make all to re-compile MOKIT.
+A18: If you are using python and f2py from PSI4 package, rather than python from
+Anaconda Python 3, you may encounter this PySCF error. One possible solution is
+to comment PSI4 variables and write this variable `export PSI4=...` (see Section 2.2.3).
+Then exit the terminal and re-login, and you now you are using your previous python,
+e.g. Anaconda Python 3. Next you should run make distclean and make all to re-compile
+MOKIT.
 
 
 Q19: Is it possible that `automr` takes more (computational) time than that by manually doing multi-reference computations (by chemical intuition, manual inspection, etc) ?
@@ -169,7 +181,7 @@ to he/she, and even wrong explanations may be made from the results. Therefore,
 if you know little about the multi-reference methods, I recommend you the following
 materials:
 
-(1) the ORCA CASSCF-tutorial (https://orcaforum.kofo.mpg.de/app.php/dlext/?cat=4),
+(1) the ORCA [CASSCF-tutorial](https://orcaforum.kofo.mpg.de/app.php/dlext/?cat=4),
 which is a quickstart guide (but also detailed) for CASSCF computations. To download
 this .pdf file, you may need to (register and) login to the forum.  
 (2) to be added.

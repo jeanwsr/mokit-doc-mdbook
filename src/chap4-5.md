@@ -317,8 +317,7 @@ The Gaussian software package will be called to perform SCF computation for each
 Explanations of function (1):  
 Note: implementation of this function is not yet finished.  
 The SCF computations of radicals and transition-metal-containing molecules often suffers from multiple UHF/UKS solutions. Using a proper fragment guess (i.e., the 'guess(fragment=N)' keyword in Gaussian), one can then obtain a desired SCF solution or a lower energy solution after SCF converged and a check of wavefunction stability of the whole system. However, the wavefunction stability of each fragment in the initial guess cannot be assured in Gaussian, thus not efficient for complicated molecules. This utility – frag_guess_wfn – can ensure the wavefunction stability of each fragment and allow the usage of RHF/UHF (or RKS/UKS) for different fragments, which would improve the quality of initial guess and save time for subsequent SCF computation of the whole system. Examples of the fragment guess can be found at http://gaussian.com/afc. If you can read Chinese, a nice introduction to this topic from Sobereva's blog
-《谈谈片段组合波函数与自旋极化单重态》 http://sobereva.com/82
-is recommended.
+[《谈谈片段组合波函数与自旋极化单重态》](http://sobereva.com/82) is recommended.
 
 Explanations of function (2):  
 The Morokuma-EDA calculation is supported by GAMESS-US program, while GKS-EDA calculation is supported by the XEDA program (a modified GAMESS-US program from Prof. Peifeng Su of Xiamen University, supi@xmu.edu.cn). These methods are very useful but often suffer from SCF convergence failure due to the "just so-so" SCF convergence techniques in GAMESS. Even if all SCF converge, their wave function stabilities cannot be checked in GAMESS.
