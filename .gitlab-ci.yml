@@ -11,7 +11,7 @@ pages:
   - tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
   - chown root:root mdbook*
   - apt update -y
-  - apt install chromium -y
+  - apt install chromium-browser -y
   - ls -l
   - ./mdbook build
   - mv public/pdf/output.pdf public/pdf/${TARGET}.pdf
