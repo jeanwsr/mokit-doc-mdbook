@@ -34,5 +34,4 @@ pdf:
   artifacts:
     paths:
     - public/pdf/${TARGET}.pdf
-  only:
-  - master
+
