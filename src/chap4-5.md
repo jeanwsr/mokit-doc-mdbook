@@ -24,7 +24,12 @@ This utility is in fact a wrapper of two utilities 'fch2inp' and 'bas_gms2py'. S
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .py file, either. To add background charges, you need to use the utility add_bgcharge_to_inp (see Section 4.5.1).
 
 ## 4.5.3 bas_gau2molcas
-Transform a basis set file in Gaussian format to another in (Open)Molcas format. If you turn on RI (see Section 4.4.29) and use OpenMolcas as the CASSCF_prog, there is no RI-JI auxiliary basis set file in current version of OpenMolcas package. Therefore, this utility will be called automatically to transform the auxiliary basis set file in $MOKIT_ROOT/basis/ directory to the (Open)Molcas syntax. And the transformed file will normally be in $MOLCAS/basis_library/jk_Basis/.
+Transform a basis set file in Gaussian format to another in (Open)Molcas format.
+If you turn on RI (see Section 4.4.29) and use OpenMolcas as the `CASSCF_prog`,
+there is no RI-JI auxiliary basis set file in current version of OpenMolcas package.
+Therefore, this utility will be called automatically to transform the auxiliary
+basis set file in `$MOKIT_ROOT/basis/` directory to the (Open)Molcas syntax. And
+the transformed file will normally be in `$MOLCAS/basis_library/jk_Basis/`.
 
 You can, of course, use this utility by yourself. An example is shown below
 ```

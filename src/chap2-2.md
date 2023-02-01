@@ -10,8 +10,10 @@ conda create -n mokit-py37 python=3.7 # 3.8, 3.9 are also available
 conda activate mokit-py37
 conda install mokit -c mokit
 ```
+If you have no access to network, but still don't want to compile MOKIT manually,
+you can try options in Section 2.2.2.
 
-### Optional 2: Use hombrew-toolchains (for MacOS only)
+### Optional 2: Use homebrew-toolchains (for MacOS only)
 * Prerequisites: 
     - You need to install [homebrew](https://brew.sh) on your mac 
     - You need to install conda via brew and install numpy in base env. via pip 
@@ -70,9 +72,6 @@ conda activate mokit-build
 conda build --output-folder ./output conda
 anaconda upload ./output/linux-64/*.bz2
 ```
-
-If you have no access to network, but still don't want to compile MOKIT manually,
-you can try the following options.
 
 ## 2.2.2 Pre-built Linux Executables and Libraries
 

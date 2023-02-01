@@ -38,12 +38,12 @@ The value 0 (default) is recommended, if you do not know which one to choose.
 ## 4.4.5 LocalM
 Specify the orbital localization method. Only the Boys (also called Foster-Boys)
 localization and PM (Pipek-Mezey) localization method are supported. The corresponding
-keywords are 'LocalM=Boys' and 'LocalM=PM'. By default, the PM localization is used.
+keywords are `LocalM=Boys` and `LocalM=PM`. By default, the PM localization is used.
 
 Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM
 method tends to keep them separated. These two methods make no difference when the
 target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\)
-bonds). But if you are dealing with multiple $\pi$ bonds or conjugated \\( \pi \\) systems
+bonds). But if you are dealing with multiple \\( \pi \\) bonds or conjugated \\( \pi \\) systems
 like oligoacene(benzene, naphthalene, etc), or if you want the active space to contain
 only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals
 will be affected by the localization method sometimes. If you explicitly specify the
@@ -52,7 +52,7 @@ orbitals are usually \\( \pi \\) orbitals), then using LocalM=Boys is OK since B
 among pure \\( \pi \\) orbitals is safe (no sigma orbital is in the set).
 
 For people who are keen on comparing initial guesses generated from different methods/
-algorithms, 'Local=Boys' is strongly recommended to be taken into consideration,
+algorithms, `Local=Boys` is strongly recommended to be taken into consideration,
 to see whether a lower GVB, CASCI or CASSCF energy occurs.
 
 ## 4.4.6 CIonly
@@ -374,7 +374,7 @@ mokit{ist=1,readuhf='naphthalene_cc-pVDZ_uhf.fch',Npair=5}
 ## 4.4.47 FcGVB
 Request to freeze all doubly occupied orbitals in GVB calculations. Do not write
 FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work. This keyword
-is useful for obtaining the GVB solution with pure $\pi$ orbitals in calculations
+is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations
 of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember
 to specify FcGVB in both singlet and triplet cases.
 

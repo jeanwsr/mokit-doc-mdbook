@@ -16,9 +16,9 @@ or
   RHF      -> GVB    -> CASSCF -> ic-MRCISD+Q  
   Gaussian GAMESS&emsp;PySCF&emsp;OpenMolcas  
 
-Negligible energy loss (usually < 1e<sup>-6</sup> a.u., for the same wave function
-method in two programs) are ensured during transferring MOs, since the basis order
-of angular momentum up to H(i.e. *l*=5) is explicitly considered.
+Negligible energy loss (usually < 1e-6 a.u., for the same wave function method
+in two programs) are ensured during transferring MOs, since the basis order of
+angular momentum up to H(i.e. *l*=5) is explicitly considered.
 
 Note that although MOKIT aims to make the multi-reference calculations block-box,
 the users are still required to have practical experiences of quantum chemistry

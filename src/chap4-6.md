@@ -29,7 +29,7 @@ Load a PySCF mol object from a Gaussian .fch(k) file. For example, run python in
 ```
 python
 >>>from pyscf import scf
->>>from gaussian import load_mol_from_fch
+>>>from mokit.lib.gaussian import load_mol_from_fch
 >>>mol = load_mol_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk')
 >>>mf = scf.RHF(mol).run()
 ```
@@ -39,24 +39,29 @@ where the module gaussian is actually the file $MOKIT_ROOT/lib/gaussian.py.
 Perform orbital localization for a given .fch(k) file. Two localization methods are supported: Foster-Boys or Pipek-Mezey. For example, run python in Shell
 ```
 python
->>>from gaussian import loc
+>>>from mokit.lib.gaussian import loc
 >>>loc(fchname='benzene_5D7F_rhf.fchk', method='pm', idx=range(6,21))
 ```
 Only 'boys' or 'pm' is allowed for the 2nd argument. You should specify the orbital indices or range in the 3rd argument. Note that the starting integer index is 0 in Python convention, and the final index cannot be reached. So range(6,21) means orbitals 7-21, which are valence occupied orbitals for benzene. The localized orbitals will be exported/written into a new file with suffix `*_LMO.fch` (in this case, it is benzene_5D7F_rhf_LMO.fch).
-For system containing only $\sigma$ bonds, these two methods make little difference. While for system containing $\sigma$ and $\pi$ bonds, the Boys localization method tends to mix $\sigma$ and $\pi$ bonds, which leads to 'banana' bonds. The PM localization method tends to keep $\sigma$ and $\pi$ separated. If you want to analyze localized $\pi$ bonds after localization, you should choose method='pm'.
+
+For system containing only \\( \sigma \\) bonds, these two methods make little difference.
+While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization
+method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds.
+The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If
+you want to analyze localized \\( \pi \\) bonds after localization, you should choose method='pm'.
 
 ## 4.6.3 uno
 Generate UHF natural orbitals(UNOs) from a given Gaussian .fch(k) file. For example,
 ```
 python
->>>from gaussian import uno
+>>>from mokit.lib.gaussian import uno
 >>>uno(fchname='benzene_uhf.fch')
 ```
 ## 4.6.4 permute_orb
 Swap/exchange two orbitals in a given .fch(k) file. For example,
 ```
 python
->>>from gaussian import permute_orb
+>>>from mokit.lib.gaussian import permute_orb
 >>>permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',6,13)
 ```
 then the MO 6 and MO 13 will be swapped/exchanged. The index of the first orbital starts from 1.
@@ -65,7 +70,7 @@ then the MO 6 and MO 13 will be swapped/exchanged. The index of the first orbita
 Generate a FCIDUMP file which contains the effective 1e integrals and 2e integrals from a given Gaussian .fch(k) file. Such a FICUDMP file can be used in CASCI, DMRG-CASCI, GVB-BCCC, or any post-CASCI calculations. For example,
 ```
 python
->>>from gaussian import gen_fcidump
+>>>from mokit.lib.gaussian import gen_fcidump
 >>>gen_fcidump(fchname='anthracene_cc-pVDZ_uhf_uno_asrot2gvb7_s.fch',nacto=14,nacte=14)
 ```
 where the arguments nacto and nacte are the number of active orbitals and the number of active electrons, respectively. This functionality requires the PySCF installed.
@@ -74,7 +79,7 @@ where the arguments nacto and nacte are the number of active orbitals and the nu
 Read various one-electron integral matrices from a Gaussian output file. For example, read AO-basis overlap
 ```
 python
->>>import rwwfn
+>>>from mokit.lib import rwwfn
 >>>S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 ```
 Attribute itype:
@@ -84,7 +89,7 @@ The type of one-electron integral matrices. Allowed values are 1,2,3,4 for Overl
 Read MOs from a Gaussian .fch(k) file. For example
 ```
 python
->>>import rwwfn
+>>>from mokit.lib import rwwfn
 >>>mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',nbf=24,nif=24,ab='a')
 ```
 Attribute ab:
@@ -94,7 +99,7 @@ character with length=1, 'a'/'b' for reading alpha/beta orbitals.
 Read various types of density matrix from a Gaussian output file. For example, read the Alpha Density Matrix from a .log file
 ```
 python
->>>import rwwfn
+>>>from mokit.lib import rwwfn
 >>>den = rwwfn.read_density_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',
 itype=2,nbf=24)
 ```
@@ -105,7 +110,7 @@ Attribute itype:
 Read various types of density matrix from a Gaussian .fch(k) file. For example, read the Total SCF Density from a .fchk file
 ```
 python
->>>import rwwfn
+>>>from mokit.lib import rwwfn
 >>>den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',
 itype=1,nbf=24)
 ```
@@ -135,7 +140,7 @@ Note that this module cannot generate a .fch(k) file from scratch, the user must
 Generate AO-basis ground->excited state Transition Density Matrix for CIS/TDHF/TDDFT from a Gaussian output file. Currently only closed shell is taken into consideration. For example, read the S0->S1 Transition Density Matrix from a Gaussian .log file (with iop(9/40=5) specified in .gjf file)
 ```
 python
->>>import rwwfn, excited
+>>>from mokit.lib import rwwfn, excited
 >>>mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk',nbf=24,
 nif=24,ab='a')
 >>>tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,
@@ -151,7 +156,7 @@ The last python statement means exporting the transition density matrix into a p
 Export a square matrix into a plain text file. The example of exporting transition density matrix is shown in Section 4.6.6. Here I offer one more example – export the lower triangle of a symmetric AO-basis overlap matrix
 ```
 python
->>>import rwwfn
+>>>from mokit.lib import rwwfn
 >>>S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 >>>rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overlap')
 ```
@@ -174,7 +179,7 @@ Read the i-th frame from a given pdb file. See an example in Section 4.6.13.
 ## 4.6.16 write_frame_into_pdb
 Write a frame into the given pdb file. A python script is shown below, to illustrate how to use these pdb-related APIs:
 ```
-import rwgeom as rg
+import mokit.lib.rwgeom as rg
 natom = rg.read_natom_from_pdb(pdbname='test.pdb')
 cell, elem, resname, coor = rg.read_iframe_from_pdb('test.pdb', 10, natom)
 for i in range(0,natom):
@@ -187,7 +192,7 @@ rg.write_frame_into_pdb('a.pdb', 10, natom, cell, elem, resname, coor, False)
 ## 4.6.17 calc_unpaired_from_fch
 Calculate the Yamaguchi’s unpaired electrons and Head-Gordon’s unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. A python script is shown below:
 ```
-from wfn_analysis import calc_unpaired_from_fch
+from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
 ```
 The attribute wfn_type has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively. The example above will print the following
@@ -202,12 +207,12 @@ where   is the CI coefficients of the 2nd configurations in CASCI wave function 
 
 There are also modules which calculate the number of unpaired electrons of GVB by reading information from GAMESS .dat/.gms file:
 ```
-from wfn_analysis import calc_unpaired_from_gms_dat
+from mokit.lib.wfn_analysis import calc_unpaired_from_gms_dat
 calc_unpaired_from_gms_dat(datname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch',mult=1)
 ```
 It requires the user to input the spin multiplicity since there is no spin information in .dat file. Or you can use
 ```
-from wfn_analysis import calc_unpaired_from_gms_out
+from mokit.lib.wfn_analysis import calc_unpaired_from_gms_out
 calc_unpaired_from_gms_out(outname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4.gms')
 ```
 Reference for these two types of unpaired eletrons:
@@ -217,7 +222,7 @@ Reference for these two types of unpaired eletrons:
 ## 4.6.18 gen_no_using_density_in_fch
 Generate natural orbitals using specified density in a .fch file. The density is read from the specified section of .fch file and the AO-basis overlap is obtained by calling Gaussian. An example is shown below
 ```
-from lo import gen_no_using_density_in_fch
+from mokit.lib.lo import gen_no_using_density_in_fch
 gen_no_using_density_in_fch('ben.fch', 1)
 ```
 where 1 means reading density from "Total SCF Density" section.
@@ -225,7 +230,7 @@ where 1 means reading density from "Total SCF Density" section.
 ## 4.6.19 gen_cf_orb
 Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals are orthogonal, so this module actually performs an orthogonalnon-orthogonal orbital transformation. This transformation requires the information of GVB pair coefficients so currently only the GAMESS .dat file is accepted while the .fch file is not supported. An example is shown below
 ```
-from lo import gen_cf_orb
+from mokit.lib.lo import gen_cf_orb
 gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 ```
 
@@ -237,7 +242,7 @@ Export MOs from PySCF to Q-Chem. An input (.in) file and a directory containing 
 (1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. h2o.py
 ```
 from pyscf import gto, scf
-from py2qchem import py2qchem
+from mokit.lib.py2qchem import py2qchem
 
 mol = gto.M(atom = '''
 O  -0.49390246   0.93902438   0.0
