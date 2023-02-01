@@ -22,7 +22,7 @@ This keyword is usually used along with another keyword ist=5 (see Section 4.4.4
 ## 4.4.4 ist
 Request the use of the i-th strategy. Default is 0. This means: (1) if the spin of the target molecule is singlet, MOKIT will call the Gaussian software to perform RHF and UHF computations, then determine whether to change 'ist' to 1 or 3. If the EUHF = ERHF, ist will be changed to 3. If EUHF < ERHF, ist will become 1. (2) if not singlet, ist will be changed to 1 immediately.
 
-For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc/. If you can read Chinese, you are recommended to read Sobereva’s blog http://sobereva.com/82.
+For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc/. If you can read Chinese, you are recommended to read Sobereva's blog http://sobereva.com/82.
 
 Currently, there are 7 allowed values for ist:  
 0: meaning that if RHF wave function is stable, use strategy 3; otherwise use strategy 1  
@@ -77,7 +77,7 @@ since ORCA only support spherical harmonic functions.
 
 If you don't know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's
 paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5).
-If you can read Chinese, you are recommended to read Sobereva’s [blog](http://sobereva.com/51).
+If you can read Chinese, you are recommended to read Sobereva's [blog](http://sobereva.com/51).
 
 ## 4.4.9 HF_prog
 Specify the program for performing Hartree-Fock (HF) calculations. Supported programs
@@ -99,7 +99,7 @@ Specify the GVB program. Supported programs are GAMESS(default), Gaussian and QC
 
 Note the original GAMESS can only do GVB up to 12 pairs. Nowadays we can do a black-box GVB computation with hundreds of pairs. So, to go beyond 12 pairs, you need to modify and re-compile the source code of GAMESS.
 
-MOKIT offers a Shell script to help you automatically handle this. Assuming you’ve compiled GAMESS before (i.e. all `*.o` files are still in gamess/object/ directory of GAMESS), now you simply need to copy two files (modify_GMS1.sh and modify_GMS2.f90) from mokit/src/ into gamess/source/ directory, and run './modify_GMS1.sh'. The script will modify source code and re-compile GAMESS, taking about 2 minutes. The linked GAMESS executable will be gamess.01.x. If you already had an executable named gamess.01.x, please rename it to another filename. Otherwise it will be destroyed and replaced during re-compilation.
+MOKIT offers a Shell script to help you automatically handle this. Assuming you've compiled GAMESS before (i.e. all `*.o` files are still in gamess/object/ directory of GAMESS), now you simply need to copy two files (modify_GMS1.sh and modify_GMS2.f90) from mokit/src/ into gamess/source/ directory, and run './modify_GMS1.sh'. The script will modify source code and re-compile GAMESS, taking about 2 minutes. The linked GAMESS executable will be gamess.01.x. If you already had an executable named gamess.01.x, please rename it to another filename. Otherwise it will be destroyed and replaced during re-compilation.
 
 Besides, for GAMESS earlier than version 2021-R1, it only supports 32 CPU cores. If your machine has more cores (and if you want to use >32 cores), you need to modify the variable MAXCPUS in file gamess/ddi/compddi. See a simple guide in file src/modify_GMS_beyond32CPU.txt. Since GAMESS 2021, the MAXCPUS is already set to 128, so modification is not needed.
 

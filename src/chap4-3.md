@@ -129,7 +129,7 @@ where 2b means only the two-block excitation operators \\( \hat{T}_{2} \\) are c
 in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
 Currently only spin singlet is supported. This program is developed by jxzou during
-his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)'s research group.
+his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)\'s research group.
 Currently this program has not been released yet, but will probably be released
 after its corresponding paper published.
 

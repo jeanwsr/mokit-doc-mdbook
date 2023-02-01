@@ -4,7 +4,7 @@ The settings of memory and the number of processors are identical to that in Gau
 %chk=16GB
 %nprocshared=8
 ```
-requests a AutoMR calculation use 16GB memory and 8 processors. Note that only the unit GB and %nprocshared is supported. Some DON’T things are listed below:  
+requests a AutoMR calculation use 16GB memory and 8 processors. Note that only the unit GB and %nprocshared is supported. Some DON'T things are listed below:  
 (1) Do not use unit MB, MW, GW, or %cpu..  
 (2) Do not write %chk since it is useless for AutoMR.
 

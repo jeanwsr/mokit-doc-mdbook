@@ -190,7 +190,7 @@ rg.write_frame_into_pdb('a.pdb', 10, natom, cell, elem, resname, coor, False)
 ```
 
 ## 4.6.17 calc_unpaired_from_fch
-Calculate the Yamaguchi’s unpaired electrons and Head-Gordon’s unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. A python script is shown below:
+Calculate the Yamaguchi's unpaired electrons and Head-Gordon's unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. A python script is shown below:
 ```
 from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
