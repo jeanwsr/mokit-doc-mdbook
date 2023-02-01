@@ -125,7 +125,7 @@ Currently only the FIC-MRCC method in ORCA(>=5.0.0) is supported.
 Block-correlated coupled cluster theory based on the GVB reference.
 
 This is in fact a multi-reference coupled cluster theory based on GVB wave function,
-where 2b means only the two-block excitation operators \\( \hat{T}_{2} \\) are considered
+where 2b means only the two-block excitation operators \\( {\hat{T_2}} \\) are considered
 in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
 Currently only spin singlet is supported. This program is developed by jxzou during
@@ -135,9 +135,9 @@ after its corresponding paper published.
 
 Currently only correlations between two pairs are taken into consideration (i.e.
 occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a *rough*
-theory. Note that the intra-pair excitation operator \\( \hat{T}_{1} \\) plays
-little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\) ) is extremely close to
-BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\) ). For GVB(2), the BCCC2 is equivalent
+theory. Note that the intra-pair excitation operator \\( \hat{{T_1}} \\) plays
+little role, so the BCCC2b (i.e. only \\( \hat{{T_2}} \\) ) is extremely close to
+BCCC2 (i.e. \\( \hat{{T_1}} + \hat{{T_2}} \\) ). For GVB(2), the BCCC2 is equivalent
 to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4).
 For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*)
 using GVB orbitals.
