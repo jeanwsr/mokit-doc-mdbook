@@ -43,7 +43,7 @@ keywords are 'LocalM=Boys' and 'LocalM=PM'. By default, the PM localization is u
 Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM
 method tends to keep them separated. These two methods make no difference when the
 target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\)
-bonds). But if you are dealing with multiple $\pi$ bonds or conjugated \\( \pi \\) systems
+bonds). But if you are dealing with multiple \\( \pi \\) bonds or conjugated \\( \pi \\) systems
 like oligoacene(benzene, naphthalene, etc), or if you want the active space to contain
 only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals
 will be affected by the localization method sometimes. If you explicitly specify the

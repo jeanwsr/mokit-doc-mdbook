@@ -1,5 +1,15 @@
 # MOKIT Doc
 
+for MOKIT version 1.2.5rc6 
+
+MOKIT developers
+
+Feb 1, 2023
+
+<br>
+
+**Contents**
+
 - [Introduction](./chap1_intro.md)
 - [Installation](./chap2_install.md)
 - [Quick Start](./chap3_quick.md)
