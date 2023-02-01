@@ -74,7 +74,7 @@ There are several restrictions when you use this method:
 
 (3) background point charges are not supported.
 
-This version of SDSPT2 is performed by the Xi’an CI module of BDF program. So you are assumed to have successfully installed BDF. You should cite this paper DOI: 10.1080/00268976.2017.1308029 if you use this method.
+This version of SDSPT2 is performed by the Xi'an CI module of BDF program. So you are assumed to have successfully installed BDF. You should cite this paper DOI: 10.1080/00268976.2017.1308029 if you use this method.
 
 ## 4.3.11 MRMP2
 Second order Multi-reference Perturbation Theory based on CASSCF reference.
@@ -135,8 +135,8 @@ released yet, but will probably be released after its corresponding paper publis
 Currently only correlations between two pairs are taken into consideration (i.e.
 occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough'
 theory. Note that the intra-pair excitation operator \\( \hat{T}_{1} \\) plays
-little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\)) is extremely close to
-BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\)). For GVB(2), the BCCC2 is equivalent
+little role, so the BCCC2b (i.e. only \\( \hat{T}_{2} \\) ) is extremely close to
+BCCC2 (i.e. \\( \hat{T}_{1} + \hat{T}_{2} \\) ). For GVB(2), the BCCC2 is equivalent
 to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4).
 For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*)
 using GVB orbitals.

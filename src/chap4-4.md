@@ -215,7 +215,11 @@ those of `hardwfn`) into the CAS input files to ensure a better convergence. Not
 usually you do not need this keyword, and it is useless if you specify other programs
 as the CAS solver.
 
-For example, when the N2 molecule is stretched to d(N-N) = 4.0 Å, this is a system which features strong correlation and requires a CAS(6,6) active space. The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn` will increase the NSTATE to 10, so that the singlet state can be found.
+For example, when the N~2~ molecule is stretched to *d*(N-N) = 4.0 Å, this is
+a system which features strong correlation and requires a CAS(6,6) active space.
+The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may
+not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn`
+will increase the NSTATE to 10, so that the singlet state can be found.
 
 ## 4.4.24 no10cycle
 Skip the 10 cycles of SCF calculations after importing MOs. By default, AutoMR will do several (up to 10) cycles of RHF or UHF after importing MOs from .fch file. This has two advantages: (1) check whether the SCF converges immediately. If not, the MO in .fch file may be wrong, or there exists some bug of fch2py (which has never been observed by the author). (2) it will slightly improve the orthonormality of the input MOs, although the orthonormality is already good. Thus usually you do not need to write this keyword.

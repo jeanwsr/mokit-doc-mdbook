@@ -45,7 +45,14 @@ The `automr` program can automatically determine the active space, thus you need
 
 Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once AutoMR detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
 
-Usually the automatically determined active space is reasonable. The algorithm in MOKIT is designed to automatically find the minimum active space for a given molecule. However, when you are studying a potential energy curve/surface, the automatically determined active space may be not the same size for each geometry. For example, for N2 molecule at d(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined by AutoMR, but for for d(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus, if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6), MRCISD(6,6), etc.
+Usually the automatically determined active space is reasonable. The algorithm in
+MOKIT is designed to automatically find the minimum active space for a given molecule.
+However, when you are studying a potential energy curve/surface, the automatically
+determined active space may be not the same size for each geometry. For example,
+for N~2~ molecule at *d*(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined
+by AutoMR, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus,
+if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6),
+MRCISD(6,6), etc.
 
 ## 3.4 Are my computation results reasonable?
 (1) You should make sure that your CASSCF initial orbitals and final(i.e. converged)
