@@ -5,18 +5,34 @@ pages:
   stage: deploy
   image: ubuntu:22.04
   script:
-  #- wget https://github.com/badboy/mdbook-toc/releases/download/0.10.0/mdbook-toc-0.10.0-x86_64-unknown-linux-gnu.tar.gz
-  #- wget https://github.com/rust-lang/mdBook/releases/download/v0.4.21/mdbook-v0.4.21-x86_64-unknown-linux-gnu.tar.gz
   - tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
   - tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
   - chown root:root mdbook*
-  - apt update -y
-  - apt install chromium-browser -y
   - ls -l
   - ./mdbook build
   - mv public/pdf/output.pdf public/pdf/${TARGET}.pdf
   artifacts:
     paths:
     - public
+  only:
+  - master
+
+pdf:
+  rules:
+    - if: $CI_COMMIT_TAG
+  image: ubuntu:22.04
+  before_script:
+    - apt update -y
+    - apt install chromium-browser -y
+  script:
+  - tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
+  - tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
+  - chown root:root mdbook*
+  - ls -l
+  - ./mdbook build
+  - mv public/pdf/output.pdf public/pdf/${TARGET}.pdf
+  artifacts:
+    paths:
+    - public/pdf/${TARGET}.pdf
   only:
   - master
