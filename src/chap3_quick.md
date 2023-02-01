@@ -49,7 +49,7 @@ Usually the automatically determined active space is reasonable. The algorithm i
 MOKIT is designed to automatically find the minimum active space for a given molecule.
 However, when you are studying a potential energy curve/surface, the automatically
 determined active space may be not the same size for each geometry. For example,
-for N~2~ molecule at *d*(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined
+for N<sub>2</sub> molecule at *d*(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined
 by AutoMR, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus,
 if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6),
 MRCISD(6,6), etc.

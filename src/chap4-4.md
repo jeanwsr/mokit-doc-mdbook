@@ -215,7 +215,7 @@ those of `hardwfn`) into the CAS input files to ensure a better convergence. Not
 usually you do not need this keyword, and it is useless if you specify other programs
 as the CAS solver.
 
-For example, when the N~2~ molecule is stretched to *d*(N-N) = 4.0 Å, this is
+For example, when the N<sub>2</sub> molecule is stretched to *d*(N-N) = 4.0 Å, this is
 a system which features strong correlation and requires a CAS(6,6) active space.
 The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may
 not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn`
@@ -230,7 +230,9 @@ If you start with MOs which are not RHF or UHF MOs (e,g, NOs, UDFT MOs, etc), yo
 This keyword has identical meaning with the same keyword in Gaussian software, i.e. including background point charges in calculations. This keyword is supported for almost all methods in AutoMR. Methods which are incompatible with background point charges will signal errors immediately. The charge-charge and charge-nuclei interaction energies are both included in all electronic energies printed (UHF, GVB, CASSCF, NEVPT2, etc).
 
 The including of background point charges is useful for QM/MM calculations or fragmentation-based linear scaling methods (like GEBF, Many-body expansion, etc).
-Note: please write this keyword in mokit{}. DO NOT WRITE this keyword in the Route Section of .gjf file (i.e. '#p …'' line).
+
+Note: please write this keyword in mokit{}. DO NOT WRITE this keyword in the Route
+Section of .gjf file (i.e. '#p ...' line).
 
 ## 4.4.26 OtPDF
 The choice of the on-top pair density functional. This keyword has identical meaning with the keyword KSDFT in (Open)Molcas software. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. For more details please refer to the Molcas manual. Note that the available functionals depends on your version of OpenMolcas or GAMESS. Old versions may not support some of the functionals.
@@ -310,7 +312,7 @@ Request the calculation of nuclear shielding constants. Currently only the CASSF
 ## 4.4.39 ICSS
 Request the calculation ICSS (Isochemical Shielding Surfaces). Currently only the CASSF method is supported. Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shieldings. See the example $MOKIT_ROOT/examples/automr/16-C4H4.gjf. Note that:
 
-(1) This keyword should be written in mokit{}, not in the Gaussian keyword line (#p …).
+(1) This keyword should be written in mokit{}, not in the Gaussian keyword line (#p ...).
 
 (2) This is an extremely time-consuming job. So you'd better have a large node/machine to compute all the generated files. 6-31G(d) or 6-31+G(d) basis set is recommended since larger basis set requires very long time.
 

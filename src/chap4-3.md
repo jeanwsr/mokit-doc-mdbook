@@ -129,8 +129,9 @@ where 2b means only the two-block excitation operators \\( \hat{T}_{2} \\) are c
 in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
 Currently only spin singlet is supported. This program is developed by jxzou during
-his Ph.D. in Prof. Shuhua Li's research group. Currently this program has not been
-released yet, but will probably be released after its corresponding paper published.
+his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)'s research group.
+Currently this program has not been released yet, but will probably be released
+after its corresponding paper published.
 
 Currently only correlations between two pairs are taken into consideration (i.e.
 occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a 'rough'
@@ -141,9 +142,10 @@ to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,
 For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*)
 using GVB orbitals.
 
-This program scales as *O*(*n*^4^), where n is the number of GVB pairs. But the
-integral transformation needed for the BCCC2b scales as *O*(*n*^5^), so the overall
-scaling might behave as *O*(*n*^5^) for large number of pairs.
+This program scales as *O*(*n*<sup>4</sup>), where *n* is the number of GVB pairs.
+But the integral transformation needed for the BCCC2b scales as *O*(*n*<sup>5</sup>),
+so the overall scaling might behave as *O*(*n*<sup>5</sup>) for large number of
+pairs.
 
 ## 4.3.19 BCCC3b
 Block-correlated coupled cluster theory based on the GVB reference, where 3b means
@@ -152,7 +154,7 @@ Block-correlated coupled cluster theory based on the GVB reference, where 3b mea
 This means two-pair and three-pair correlations are considered based on the GVB
 reference. Also, this method is spin-pure. Currently only spin singlet is supported.
 
-For practical computations with desired accuracy, you should use BCCC3b rather
-than BCCC2b. This program scales as *O*(*n*^5^), where *n* is the number of GVB
-pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
+For practical computations with desired accuracy, you should use BCCC3b rather than
+BCCC2b. This program scales as *O*(*n*<sup>5</sup>), where *n* is the number of
+GVB pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
 
