@@ -10,7 +10,6 @@ pages:
   - chown root:root mdbook*
   - ls -l
   - ./mdbook build
-  - mv public/pdf/output.pdf public/pdf/${TARGET}.pdf
   artifacts:
     paths:
     - public
@@ -24,6 +23,17 @@ pdf:
   before_script:
     - apt update -y
     - apt install chromium-browser -y
+    - echo " "                            >> book.toml
+    - echo "[output.pdf]"                 >> book.toml
+    - echo "command = './mdbook-pdf'"     >> book.toml
+    - echo "display-header-footer = true" >> book.toml
+    - echo "scale = 1"                    >> book.toml
+    - echo "margin-top = 0.5"             >> book.toml
+    - echo "margin-bottom = 0.5"          >> book.toml
+    - echo "margin-left = 0.5"            >> book.toml
+    - echo "margin-right = 0.5"           >> book.toml
+    #header-template = "<p style='font-size:10px; text-align: center;'  class='title'></p>"
+    #footer-template = "<p style='font-size:10px; text-align: center'>Page <span class='pageNumber'></span> / <span class='totalPages'></span></p>"
   script:
   - tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
   - tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
