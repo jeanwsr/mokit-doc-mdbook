@@ -16,17 +16,6 @@ additional-css = [
 ]
 mathjax-support = true
 
-[output.pdf]
-command = "./mdbook-pdf"
-display-header-footer = true
-scale = 1
-margin-top = 0.5
-margin-bottom = 0.5
-margin-left = 0.5
-margin-right = 0.5
-#header-template = "<p style='font-size:10px; text-align: center;'  class='title'></p>"
-#footer-template = "<p style='font-size:10px; text-align: center'>Page <span class='pageNumber'></span> / <span class='totalPages'></span></p>"
-
 [preprocessor.toc]
 command = "./mdbook-toc"
 renderer = ["html"]
