@@ -149,7 +149,7 @@ pairs.
 
 ## 4.3.19 BCCC3b
 Block-correlated coupled cluster theory based on the GVB reference, where 3b means
-\\( \hat{T}_{2} + \hat{T}_{3} \\).
+\\( \hat{{T_2}} + \hat{{T_3}} \\).
 
 This means two-pair and three-pair correlations are considered based on the GVB
 reference. Also, this method is spin-pure. Currently only spin singlet is supported.

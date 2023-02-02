@@ -18,4 +18,7 @@
   - [List of Utilities in MOKIT](./chap4-5.md)
   - [APIs in MOKIT](./chap4-6.md)
 - [Examples](./chap5_example.md)
+  - [Manually making consistent active space](./chap5-5.md)
+  - [Generating different GVB solutions](./chap5-6.md)
+  - [Examples of dinuclear transition metal molecules](./chap5-7.md)
 - [Appendix](./chap_appdx.md)

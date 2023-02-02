@@ -1,6 +1,8 @@
 # 4.5 List of Utilities in MOKIT
 The utilities of transferring MOs are summarized in the following figure:
 
+<img src="images/orbital_transfer.png" width="95%" height="95%" />
+
 For detailed explanations of all utilities, please read the following subsections.
 
 ## 4.5.1 add_bgcharge_to_inp
@@ -19,7 +21,9 @@ Note that in all computations of the `automr` program, this situation is explici
 ## 4.5.2 bas_fch2py
 Generate a PySCF .py file from a Gaussian .fch file. The Cartesian coordinates and basis set data are written in the .py file. Note: `automr` does not use any built-in basis sets of PySCF, but always generates the basis set data from .fch file. This procedure ensures an (almost) exactly identical setting of basis set in Gaussian and PySCF.
 
-This utility is in fact a wrapper of two utilities 'fch2inp' and 'bas_gms2py'. So if you only want to compile this utility, you have to compile 'fch2inp' and 'bas_gms2py' additionally.
+This utility is in fact a wrapper of two utilities `fch2inp` and `bas_gms2py`. So
+if you only want to compile this utility, you have to compile `fch2inp` and `bas_gms2py`
+additionally.
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .py file, either. To add background charges, you need to use the utility add_bgcharge_to_inp (see Section 4.5.1).
 
@@ -326,7 +330,14 @@ Fortunately, these two methods can read wave function of each fragment (and of t
 
 If UHF/UDFT method is specified, wave function stability of each fragment (and of total system in GKS-EDA) will be checked. This is very important for biradical and transition-metal-containing systems. If any fragment is singlet and UHF/UDFT method is specified, broken symmetry initial guess (i.e., guess=mix) will be automatically applied.
 
-The Windows* pre-built executable frag_guess_wfn will be provided at Releases in the near future. Note that you should define the environment variable %GAUSS_EXEDIR% (in Windows* OS) before using this utility, since Gaussian program would be called to perform SCF computations. For example, search "environment variable" in your Windows search bar and click Edit to add a new environment variable, and set it as the correct G03W, G09W or G16W directory. A screenshot is shown below
+The Windows* pre-built executable frag_guess_wfn will be provided at Releases in
+the near future. Note that you should define the environment variable `%GAUSS_EXEDIR%`
+(in Windows* OS) before using this utility, since Gaussian program would be called
+to perform SCF computations. For example, search "environment variable" in your
+Windows search bar and click **Edit** to add a new environment variable, and set
+it as the correct G03W, G09W or G16W directory. A screenshot is shown below
+
+<img src="images/g09w_path.png"/>
 
 ## 4.5.29 gvb_sort_pairs
 Sort (part of) MOs in descending order of the pair coefficients of the 1st natural orbital in each pair. This utility is designed only for the GAMESS .dat file. A new .dat file will be generated, in which the sorted MOs and pair coefficients are held.
@@ -438,7 +449,7 @@ ensured. All attributes of py2fch are shown below
 py2fch('a.fch', nbf, nif, mf.mo_coeff, ab, ev, gen_density)
 ```
 The first few parameters are identical to those in Section 4.5.37 fch2py. The parameter
-'ev' means eigenvalues, it is supposed to contain orbital energies or orbital occupation
+`ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation
 numbers. The last parameter gen_density is a bool variable, where True/False meaning
 whether or not generating Total SCF Density (as well as writing density into .fch
 file) using mf.mo_coeff and ev. If gen_density is set to be True, the parameter
@@ -452,7 +463,7 @@ bas_fch2py (Section 4.5.2), fch2py (Section 4.5.37) and load_mol_from_fch (Secti
 ## 4.5.39 py2fch_cghf
 Export complex GHF MOs from PySCF to a Gaussian .fch file. Note that `py2fch_cghf`
 cannot generate a .fch file from scratch. The user must provide one .fch file. This
-module is similar to py2fch (which is usually used for R(O)HF, UHF and DFT methods).
+module is similar to `py2fch` (which is usually used for R(O)HF, UHF and DFT methods).
 The difference is that this module is only designed for complex GHF/GDFT methods.
 All attributes of `py2fch_cghf` are shown below
 ```

@@ -16,10 +16,10 @@ Currently only Python APIs are provided. C/C++ APIs may be provided in the futur
 13. write_frame_into_pdb(pdbname, iframe, natom, cell, elem, resname, coor, append)
 14. calc_unpaired_from_fch(fchname, wfn_type, gen_dm)
 
-Meanings of frequently appeared arguments are
-fchname: filename of .fch(k) file
-logname: filename of .log/.out file
-nbf: the number of basis functions
+Meanings of frequently appeared arguments are  
+fchname: filename of .fch(k) file  
+logname: filename of .log/.out file  
+nbf: the number of basis functions  
 nif: the number of (linear-independent) MOs
 
 Meanings of other arguments are shown in below subsections.
@@ -111,16 +111,16 @@ Read various types of density matrix from a Gaussian .fch(k) file. For example, 
 ```
 python
 >>>from mokit.lib import rwwfn
->>>den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',
-itype=1,nbf=24)
+>>>den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
 ```
 Attribute itype:
-itype	type of density	itype	type of density
-1	Total SCF Density	6	Spin MP2 Density
-2	Spin SCF Density	7	Total CC Density
-3	Total CI Density	8	Spin CC Density
-4	Spin CI Density	9	Total CI Rho(1)
-5	Total MP2 Density	10	Spin CI Rho(1)
+| itype | type of density | itype | type of density |
+| --- | --- | --- | --- |
+| 1 | Total SCF Density | 6 | Spin MP2 Density |
+| 2 | Spin SCF Density | 7 | Total CC Density |
+| 3 | Total CI Density | 8 | Spin CC Density |
+| 4 | Spin CI Density | 9 | Total CI Rho(1) |
+| 5 | Total MP2 Density | 10 | Spin CI Rho(1) |
 
 ## 4.6.10 write_pyscf_dm_into_fch
 Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All attributes of this module are shown below
@@ -141,10 +141,8 @@ Generate AO-basis ground->excited state Transition Density Matrix for CIS/TDHF/T
 ```
 python
 >>>from mokit.lib import rwwfn, excited
->>>mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk',nbf=24,
-nif=24,ab='a')
->>>tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,
-mo=mo,istate=1)
+>>>mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk',nbf=24,nif=24,ab='a')
+>>>tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,mo=mo,istate=1)
 >>>rwwfn.export_mat_into_txt(txtname='h2o_tdm.txt',n=24,mat=tdm,lower=False,label='transition density matrix')
 ```
 Attribute istate:
@@ -160,12 +158,12 @@ python
 >>>S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 >>>rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overlap')
 ```
-Attribute	Explanation
-txtname	file name
-mat	the square matrix with dimension (n,n)
-lower	True/False for whether or not printing only the lower triangle part of a matrix
-label	a string, the meaning of exported matrix (provided by yourself)
-
+| Attribute | Explanation |
+| --- | --- |
+| txtname | file name |
+| mat | the square matrix with dimension (n,n) |
+| lower | True/False for whether or not printing only the lower triangle part of a matrix |
+| label | a string, the meaning of exported matrix (provided by yourself) |
 
 ## 4.6.13 read_natom_from_pdb
 Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in Section 4.6.13.
@@ -195,15 +193,29 @@ Calculate the Yamaguchi's unpaired electrons and Head-Gordon's unpaired electron
 from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
 ```
-The attribute wfn_type has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively. The example above will print the following
+The attribute `wfn_type` has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively.
+The example above will print the following
+```
+----------------------- Radical index -----------------------
+biradical character   (2c^2) y0=  0.155
+tetraradical character(2c^2) y1=  0.155
+Yamaguchi's unpaired electrons  (sum_n n(2-n)      ):  1.183
+Head-Gordon's unpaired electrons(sum_n min(n,(2-n))):  0.639
+Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  0.328
+-------------------------------------------------------------
+```
 
 If the attribute gen_dm is set to True (i.e. gen_dm=True), then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
 
-Yamaguchi's biradical index for UHF:
+Yamaguchi's biradical index for UHF: \\( t = (n_{HONO} - n_{LUNO})/2, y = 1 - 2t/(1 + t^2) \\)
  
-Yamaguchi's biradical index for CAS(2,2):
- 
-where   is the CI coefficients of the 2nd configurations in CASCI wave function (assuming natural orbitals are used). Note that there is no unique way to define biradical (or tetraradical, etc) index for general cases including CASSCF(m,m) where m>=4, or GVB(n) where n>=2. The   formula is adopted in the module calc_unpaired_from_fch for these general cases.
+Yamaguchi's biradical index for CAS(2,2): \\( y = 2{c_2}^{2} = n_{LUNO} \\)
+
+where \\( c_2 \\) is the CI coefficients of the 2nd configurations in CASCI wave
+function (assuming natural orbitals are used). Note that there is no unique way
+to define biradical (or tetraradical, etc) index for general cases including CASSCF
+(*m*,*m*) where *m*>=4, or GVB(*n*) where *n*>=2. The \\( y_i = n_{LUNO+i} \\) formula
+is adopted in the module calc_unpaired_from_fch for these general cases.
 
 There are also modules which calculate the number of unpaired electrons of GVB by reading information from GAMESS .dat/.gms file:
 ```
@@ -215,8 +227,8 @@ It requires the user to input the spin multiplicity since there is no spin infor
 from mokit.lib.wfn_analysis import calc_unpaired_from_gms_out
 calc_unpaired_from_gms_out(outname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4.gms')
 ```
-Reference for these two types of unpaired eletrons:
-[1] Theoret. Chim. Acta (Berl.) 48, 175-183 (1978). DOI: 10.1007/BF00549017.
+Reference for these two types of unpaired eletrons:  
+[1] Theoret. Chim. Acta (Berl.) 48, 175-183 (1978). DOI: 10.1007/BF00549017.  
 [2] Chemical Physics Letters 372 (2003) 508–511. DOI: 10.1016/S0009-2614(03)00422-6.
 
 ## 4.6.18 gen_no_using_density_in_fch
@@ -234,7 +246,7 @@ from mokit.lib.lo import gen_cf_orb
 gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 ```
 
-where ndb is the number of doubly occupied orbitals and nopen is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the dat2fch utility to transfer orbitals from .dat to .fch.
+where ndb is the number of doubly occupied orbitals and nopen is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
 
 ## 4.6.20 py2qchem
 Export MOs from PySCF to Q-Chem. An input (.in) file and a directory containing orbital files will be generated. The restricted/unrestricted-type (i.e. RHF, ROHF or UHF) can be automatically detected. Two examples are shown below:
@@ -264,7 +276,8 @@ If you have performed GVB calculations and stored GVB orbitals in the object mf,
 ```
 py2qchem(mf, 'h2o.in', npair=2)
 ```
-to generate the GVB-PP input file of Q-Chem, where npair tells py2qchem how many pairs you want to calculate.
+to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how
+many pairs you want to calculate.
 
 ## 4.6.21 Other modules in rwwfn
 modify_IROHF_in_fch(fchname, k)  

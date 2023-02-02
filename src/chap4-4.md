@@ -20,7 +20,12 @@ With this keyword, you may try different NOs as the initial guess, like MP2 NOs,
 This keyword is usually used along with another keyword ist=5 (see Section 4.4.4 ist).
 
 ## 4.4.4 ist
-Request the use of the i-th strategy. Default is 0. This means: (1) if the spin of the target molecule is singlet, MOKIT will call the Gaussian software to perform RHF and UHF computations, then determine whether to change 'ist' to 1 or 3. If the EUHF = ERHF, ist will be changed to 3. If EUHF < ERHF, ist will become 1. (2) if not singlet, ist will be changed to 1 immediately.
+Request the use of the *i*-th strategy. Default is 0. This means: (1) if the spin
+of the target molecule is singlet, MOKIT will call the Gaussian software to perform
+RHF and UHF computations, then determine whether to change `ist` to 1 or 3. If the
+E<sub>UHF</sub> = E<sub>RHF</sub>, ist will be changed to 3. If E<sub>UHF</sub> <
+E<sub>RHF</sub>, ist will become 1. (2) if not singlet, ist will be changed to 1
+immediately.
 
 For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc/. If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/82).
 

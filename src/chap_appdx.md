@@ -26,7 +26,9 @@ A2: The author offers more than 20 utilities of Windows* OS pre-built executable
 The `automr` module is not included in pre-compiled executables, since multi-reference calculations are usually performed on high-performance computers/platforms, which usually contain Unix/Linux systems. However, if you really need all modules or utilities under Windows, you can compile the source code on your laptop/computer/node by yourself. The Mac OS pre-compiled executables will never be considered by the author.
 
 
-Q3: Why the utilities dat2fch, py2fch, mkl2fch, orb2fch xml2fch, bdf2fch and bdf2mkl cannot generate a .fch file from scratch, but require the user to provide one?
+Q3: Why the utilities `dat2fch`, `py2fch`, `mkl2fch`, `orb2fch`, `xml2fch`, `bdf2fch`
+and `bdf2mkl` cannot generate a .fch file from scratch, but require the user to
+provide one?
 
 A3: Strictly speaking, to correctly transfer MOs between different programs requires 'int=nobasistransform nosymm' (and also possibly '5D 7F' or '6D 10F') keywords in Gaussian, and equivalent keywords in other quantum chemistry programs. This rule also applies to other programs/software which claim they can transfer MOs or support file transformation.
 
@@ -44,9 +46,16 @@ A4: The author jxzou wishes to make the MOKIT recognize all kinds of MO files of
 
 Q5: Why there is a keyword error in OpenMolcas output when using DKH2 Hamiltonian? Two possible errors are given: (1) ERROR: RELATIVISTIC is not a keyword!, Error in keyword. (2) ERROR: R02O is not a keyword!, Error in keyword.
 
-A5: This is due to a recent update of OpenMolcas. If version <=18.09, the keyword for DKH2 is simply R02O; but for version >=20.10, this keyword become RELAtivistic = R02O. For version >18.09 and <20.10, the author jxzou has no manual and thus it is not tested (but you can test if you like).
+A5: This is due to a recent update of OpenMolcas. If version <= 18.09, the keyword
+for DKH2 is simply `R02O`; but for version >=20.10, this keyword become `RELAtivistic = R02O`.
+For version >18.09 and <20.10, the author jxzou has no manual and thus it is not
+tested (but you can test if you like).
 
-If you encounter any of the two errors, you have two choices: (1) update your OpenMolcas to a newer version, e.g. >=20.10; (2) modify the source code of MOKIT and re-compile it. If you choose (2), you will need to modify the words 'RELAtivistic = R02O' to 'R02O' in file src/automr.f90, and run `make automr` in Shell to re-compile the program automr.
+If you encounter any of the two errors, you have two choices: (1) update your OpenMolcas
+to a newer version, e.g. >=20.10; (2) modify the source code of MOKIT and re-compile
+it. If you choose (2), you will need to modify the words `RELAtivistic = R02O` to
+`R02O` in file `src/automr.f90`, and run `make automr` in Shell to re-compile the
+program automr.
 
 
 Q6: How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, ORCA, and GAMESS?
@@ -54,47 +63,57 @@ Q6: How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, 
 A6: For Gaussian, the paths of executable files are read from the environment variables $GAUSS_EXEDIR. For PySCF and OpenMolcas, the `python` and `pymolcas` executable files are used directly, assuming the user had installed the corresponding programs correctly. For ORCA, the absolute path is automatically obtained from echo `\which orca`. For GAMESS, the user must define the $GMS environment variable in his/her ~/.bashrc file, such that the automr program can find corresponding paths.
 
 
-Q7: What are the possible reasons and solutions of the following errors  
-(1) '***** ERROR **** DIMENSIONS EXCEEDED *****'  
-(2) 'PAIR=   xx MAX=   12'  
-(3) 'DDI Error: Could not initialize xx shared memory segments.'  
-(4) 'DDI was compiled to support 32 shared memory segments.'  
+Q7: What are the possible reasons and solutions of the following errors
+```
+(1) '***** ERROR **** DIMENSIONS EXCEEDED *****'
+(2) 'PAIR=   xx MAX=   12'
+(3) 'DDI Error: Could not initialize xx shared memory segments.'
+(4) 'DDI was compiled to support 32 shared memory segments.'
 (5) 'The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x
-could not be found in directory ...'  
+could not be found in directory ...'
+```
 in GAMESS .gms file (where xx is an integer >12)?
 
 A7: Please read Section 4.4.10 carefully.
 
 
-Q8: Errors like 'semget errno=ENOSPC -- check system limit for sysv semaphores' found in the .gms file. Why? How to solve the problem?
+Q8: Errors like `semget errno=ENOSPC -- check system limit for sysv semaphores`
+found in the .gms file. Why? How to solve the problem?
 
 A8: Please search the error on this page FAQ of GAMESS.
 
 
-Q9: I found the error 'DDI Process 0: trapped a floating point error (SIGFPE).' How to solve it?
+Q9: I found the error `DDI Process 0: trapped a floating point error (SIGFPE).`
+How to solve it?
 
 A9: See this page https://github.com/gms-bbg/gamess-issues/issues/40.
 
 
 Q10: I found the following error
+```
 AttributeError: 'CASSCF' object has no attribute 'mo_occ'
+```
 in PySCF output (e.g. .out file). Why? How to solve the problem?
 
 A10: This is because you were using PySCF version < 1.7.4, which has no mo_occ attribute in CASSCF object. Please update to PySCF >=1.7.4.
 
 
 Q11: I found the following error
+```
 FileNotFoundError: [Errno 2] No such file or directory: '/path/to/Block/block.spin_adapted'
+```
 in PySCF output (e.g. .out file). Why? How to solve the problem?
 
 A11: This is because you forgot to modify pyscf/dmrgscf/settings.py. You should copy file settings.py.example and rename it as settings.py. Then set the correct path (within the file) for the DMRG solver.
 
 
 Q12: I found the following error
+```
 HDF5-DIAG: Error detected in HDF5 (1.12.0) thread 0:
 #000: H5D.c line 435 in H5Dget_type(): invalid dataset identifier
 major: Invalid arguments to routine
 minor: Inappropriate type
+```
 occurs many times in OpenMolcas output, Why? How to solve the problem?
 
 A12: This does not affect the computations. It is just a tiny bug of old versions of OpenMolcas if the QCMaquis support is compiled but not used. You can find this problem here. It is recommended to update your OpenMolcas to the latest version.
@@ -108,7 +127,8 @@ A13: Yes. The CASCI/CASSCF total densities are correct in generate `*_NO.fch` fi
 Q14: I found the error `sh: 1: Syntax error: Bad fd number` on the terminal/screen.
 Why? How to solve the problem?
 
-A14: This often occurs on Ubuntu* OS, where the default sh is /bin/dash, not /usr/bin/bash. Please read Section 2.2.4 for details and examples.
+A14: This often occurs on Ubuntu* OS, where the default sh is `/bin/dash`, not `/usr/bin/bash`.
+Please read Section 2.2.4 for details and examples.
 
 
 Q15: I found the following warnings on terminal/screen, or output of `automr`:
@@ -124,7 +144,7 @@ Q16: When using the utility frag_guess_wfn to generate GKS-EDA input files, ther
 is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF
 does not converge. How to deal with that?
 
-<img src="images/A1_Q16.png" width="100%" height="100%" />
+<img src="images/A1_Q16.png"/>
 
 A16: As you can see in the screenshot above, GAMESS thinks your radial grid is insufficient for this molecule and recommends the minimum requirement. So, all you need to do is: modify the radial grid in the .inp file to the recommended value. For example, in this example, you should modify NRAD0=99 and NRAD=99 in the .inp file to (at least) NRAD0=126 and NRAD=126, respectively.
 
