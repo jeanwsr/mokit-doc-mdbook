@@ -103,9 +103,10 @@ Read various types of density matrix from a Gaussian .fch(k) file. For example, 
 from mokit.lib import rwwfn
 den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
 ```
-Attribute itype:
-| --- | --- | --- | --- |
+
+Attribute itype:  
 | itype | type of density | itype | type of density |
+| --- | --- | --- | --- |
 | 1 | Total SCF Density | 6 | Spin MP2 Density |
 | 2 | Spin SCF Density | 7 | Total CC Density |
 | 3 | Total CI Density | 8 | Spin CC Density |
@@ -146,8 +147,9 @@ from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overlap')
 ```
-| --- | --- |
+
 | Attribute | Explanation |
+| --- | --- |
 | txtname | file name |
 | mat | the square matrix with dimension (n,n) |
 | lower | True/False for whether or not printing only the lower triangle part of a matrix |
@@ -231,7 +233,12 @@ gen_no_using_density_in_fch('ben.fch', 1)
 where 1 means reading density from "Total SCF Density" section.
 
 ## 4.6.19 gen_cf_orb
-Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals are orthogonal, so this module actually performs an orthogonalnon-orthogonal orbital transformation. This transformation requires the information of GVB pair coefficients so currently only the GAMESS .dat file is accepted while the .fch file is not supported. An example is shown below
+Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat
+file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals
+are orthogonal, so this module actually performs an orthogonal -> non-orthogonal
+orbital transformation. This transformation requires the information of GVB pair
+coefficients so currently only the GAMESS .dat file is accepted while the .fch file
+is not supported. An example is shown below
 ```python
 from mokit.lib.lo import gen_cf_orb
 gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
