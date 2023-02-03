@@ -428,7 +428,7 @@ The utilities below are compiled by f2py, which is a Fortran to Python interface
 
 ## 4.5.37 fch2py
 Transfer MOs from Gaussian to PySCF. By importing fch2py, PySCF Python script is able to read alpha and/or beta MOs from a provided .fch file. All attributes are shown below
-```
+```python
 fch2py(fchname, nbf, nif, ab, mf.mo_coeff)
 ```
 There are 4 parameters required by fch2py: (1) filename of .fch(k) file; (2) the number of basis functions; (3) the number of molecular orbitals; and (4) a character 'a'/'b' for reading alpha/beta orbitals. You should write these contents into a Python script, and run that script using the python executable. If you want a more detailed example, just run any `automr` job and see all `*.py` files generated.
@@ -445,9 +445,10 @@ to use the bas_fch2py utility to generate a .py file from a .fch file first, and
 then import py2fch in this generated .py file. These descriptions seem a bit of
 tedious. But a rigorous transferring of MOs between two programs or two files is
 ensured. All attributes of py2fch are shown below
-```
+```python
 py2fch('a.fch', nbf, nif, mf.mo_coeff, ab, ev, gen_density)
 ```
+
 The first few parameters are identical to those in Section 4.5.37 fch2py. The parameter
 `ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation
 numbers. The last parameter gen_density is a bool variable, where True/False meaning
@@ -466,7 +467,7 @@ cannot generate a .fch file from scratch. The user must provide one .fch file. T
 module is similar to `py2fch` (which is usually used for R(O)HF, UHF and DFT methods).
 The difference is that this module is only designed for complex GHF/GDFT methods.
 All attributes of `py2fch_cghf` are shown below
-```
+```python
 py2fch_cghf(fchname, nbf, nif, coeff, ev, gen_density)
 ```
 
