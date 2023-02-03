@@ -1,5 +1,5 @@
 # 3 Quickstart
-See examples in $MOKIT_ROOT/examples/. More details to be added.
+See examples in `$MOKIT_ROOT/examples/`. More details to be added.
 
 ## 3.1 Which method should I use?
 For practical use, e.g. to properly compare results with those from experiments,

@@ -1,6 +1,7 @@
 # 5.3 Examples of the utility `frag_guess_wfn`
 
 ## 5.3.1 Construct initial guess wave function from fragments
+To be added.
 
 ## 5.3.2 Morokuma-EDA
 The input file of H<sub>2</sub>O-NH<sub>3</sub> complex is shown below
@@ -40,7 +41,7 @@ Both the total system and every fragment should be treated with RHF. This means
 broken bonds cannot be dealt with.
 
 (2) Spherical harmonic functions cannot be used. The utility `frag_guess_wfn` will
-automatically switch to Cartesian fucntions (i.e., 6D 10F) when calling Gaussian
+automatically switch to Cartesian fucntions (i.e. 6D 10F) when calling Gaussian
 to perform SCF computations.
 
 Assuming the filename is nh3_h2o_m.gjf, you simply need to run
@@ -119,6 +120,7 @@ def2TZVP
 ****
 2 0
 def2SVP
+****
 ```
 
 is currently NOT supported for utility `frag_guess_wfn`. Assuming the filename is
@@ -175,8 +177,8 @@ to perform the GKS-EDA calculation, where the 16 is the number of CPU cores for
 parallel computation.
 
 Then we come to the second example: the ethane molecule. Assuming we want to see
-the interaction of two \\( \dot \\)CH3 radicals, such fragmentation will involve
-breaking a covalent bond, which leads to an alpha unpaired electron in one \\( \dot \\)CH3
+the interaction of two \\( \cdot \\)CH3 radicals, such fragmentation will involve
+breaking a covalent bond, which leads to an alpha unpaired electron in one \\( \cdot \\)CH3
 radical and a beta unpaired electron in another radical. In this case we need to
 specify negative spin in the input file, which represents the beta spin:
 ```
@@ -245,14 +247,15 @@ psi4 h2o_nh3.inp h2o_nh3.out -n 16
 Both of SAPT0 and sSAPT0 results can be found in output. The SAPT paper (JCP 140, 094106 (2014))
 recommends three levels of theory to be used:
 
-(1) bronze: sSAPT0/jun-cc-pVDZ;  
-(2) silver: SAPT2+/aug-cc-pVDZ;  
-(3) gold: SAPT2+(3)\\( \delta\\)MP2/aug-cc-pVTZ. So far the open shell calculations
-have not been implemented for silver and gold level in PSI4 (it is OK for sSAPT0).
-Currently only the bronze level is supported in `frag_guess_wfn`. `{sapt}` or
-`{sapt,bronze}` in the Title Card line will be recognized as the bronze level.
-You are always recommended to use jun-cc-pVDZ unless there is some element which
-is out of the range of jun-cc-pVDZ.
+(1) *bronze*: sSAPT0/jun-cc-pVDZ;  
+(2) *silver*: SAPT2+/aug-cc-pVDZ;  
+(3) *gold*: SAPT2+(3)\\( \delta\\)MP2/aug-cc-pVTZ.
+
+So far the open shell calculations have not been implemented for *silver* and *gold*
+level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported
+in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be
+recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ
+unless there is some element which is out of the range of jun-cc-pVDZ.
 
 ## 5.3.5
 For some simple fragments (water molecules, organic ligands, etc), if you are sure

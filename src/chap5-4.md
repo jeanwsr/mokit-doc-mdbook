@@ -28,7 +28,7 @@ H     2.32222400   -0.00037400   -0.76294100
 
 ```
 
-**Step 1. Submit the automr job**
+**Step 1. Submit the automr job**  
 Run
 ```
 automr 16-C4H4.gjf >16-C4H4.out 2>&1 &
@@ -41,13 +41,13 @@ time. After the computation is accomplished, there would be a file named
 `16-C4H4_uhf_gvb10_CASSCF_ICSS.cub`. This file can be visualized by GaussView,
 Multiwfn or VMD.
 
-**Step 2. Open the .cub file with GaussView**
+**Step 2. Open the .cub file with GaussView**  
 You can simply drag the .cub file into GaussView. Next, click the `Results` ->
 `Surfaces/Contours`, set the `Density` to an appropriate value, e.g. 0.2. Finally,
 click `Surface Actions` -> `New Surface`. Then a figure like the following picture
 would be shown on your screen.
 
-<img src="images/cyclobutadiene_s0_icss.png"/>
+<img src="images/cyclobutadiene_s0_icss.png" width="85%" height="85%" />
 
 ## 5.4.2 ICSS of S1 state of cyclobutadiene
 
@@ -100,7 +100,7 @@ Since NICS computation is cheap, you can use a larger basis set like def2TZVP, r
 than 6-31G(d). Note that do not write `NICS` keyword in the input file, `NMR` is enough.
 
 Firstly, you should submit this file to `automr`. Now assuming you've accomplished the
-CASSCF computation, and next you want to compute NICS(1)_ZZ. Just open the file
+CASSCF computation, and next you want to compute NICS(1)<sub>ZZ</sub>. Just open the file
 `16-C4H4_uhf_gvb10_CASSCF_NMR.mol` and add the Cartesian coordinates of dummy atom Bq:
 
 ```
@@ -111,9 +111,9 @@ AtomTypes=9 Integrals=1.0D-14 Charge=0 NoSymmetry Angstrom
 Charge=6. Atoms=1 Basis=INTGRL Blocks=3 1 1 1
 ... (abbreviated for brevity)
         0.8000000000        1.0000000000
+```
 **Charge=0. Atoms=1 Basis=INTGRL Ghost**
 **Bq   0.7809234989   -1.0000597432    0.6745590841**
-```
 
 What you need to do is two things: (1) modify the AtomTypes from 8 to 9 (because
 we add one Bq atom); (2) add coordinates of the Bq dummy atom in the end of the
@@ -127,5 +127,6 @@ dalton -gb 16 -omp 16 -put "SIRIUS.RST" -noarch -ow 16-C4H4_uhf_gvb10_CASSCF_NMR
 
 This only takes 1-2 minutes. After it is finished, open the file `16-C4H4_uhf_gvb10_CASSCF_NMR.out`
 and search `@1 Bq`, you can find the chemical shielding of this Bq atom is -11.9931
-ppm. Remember that NICS(1)_ZZ is the negative of the chemical shielding, i.e. 11.9931 ppm.
+ppm. Remember that NICS(1)<sub>ZZ</sub> is the negative of the chemical shielding,
+i.e. 11.9931 ppm.
 
