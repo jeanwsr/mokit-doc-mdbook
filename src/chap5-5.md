@@ -80,19 +80,19 @@ H    -2.56286600 -1.92666800 -0.37754100
 
 And we find that the HONO and LUNO of CASSCF(2,2) correspond to the C-O bond
 
-<img src="images/5_5_3_ethanol.png" width="85%" height="85%" />
+<img src="images/5_5_3_ethanol.png" width="75%" height="75%" />
 
 If we want it to be the C-C bond, we should swap/exchange orbitals in GVB NOs since
 they are the initial guess of CASSCF. To accomplish that, we start python
-```
->>> from mokit.lib.gaussian import permute_orb
->>> permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',6,13)
->>> permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',14,21)
->>> exit()
+```python
+from mokit.lib.gaussian import permute_orb
+permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',6,13)
+permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',14,21)
+exit()
 ```
 
 The orbital indices 13 and 14 are just HONO and LUNO of GVB NOs, while the 6 and 21 are the C-C bonding and anti-bonding orbitals we want. To know the orbital indices, you should visualize MOs in advance. Now the file ethanol_rhf_proj_loc_pair2gvb8_s.fch is updated. We use it as the initial guess of CASSCF(2,2), i.e. submit the job
-```
+```python
 python ethanol_rhf_gvb8_CASSCF.py >ethanol_rhf_gvb8_CASSCF.out 2>&1
 ```
 

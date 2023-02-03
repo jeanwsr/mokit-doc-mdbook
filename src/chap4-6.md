@@ -104,8 +104,8 @@ from mokit.lib import rwwfn
 den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
 ```
 Attribute itype:
-| itype | type of density | itype | type of density |
 | --- | --- | --- | --- |
+| itype | type of density | itype | type of density |
 | 1 | Total SCF Density | 6 | Spin MP2 Density |
 | 2 | Spin SCF Density | 7 | Total CC Density |
 | 3 | Total CI Density | 8 | Spin CC Density |
@@ -133,8 +133,9 @@ mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk',nbf=24,nif=24
 tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,mo=mo,istate=1)
 rwwfn.export_mat_into_txt(txtname='h2o_tdm.txt',n=24,mat=tdm,lower=False,label='transition density matrix')
 ```
+
 Attribute istate:
-The i-th excited state. For example, i=1 for the first excited state.
+The *i*-th excited state. For example, i=1 for the first excited state.
 
 The last python statement means exporting the transition density matrix into a plain text file, see the API below.
 
@@ -145,9 +146,8 @@ from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overlap')
 ```
-
-| Attribute | Explanation |
 | --- | --- |
+| Attribute | Explanation |
 | txtname | file name |
 | mat | the square matrix with dimension (n,n) |
 | lower | True/False for whether or not printing only the lower triangle part of a matrix |

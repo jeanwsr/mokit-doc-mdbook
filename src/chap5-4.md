@@ -111,10 +111,8 @@ AtomTypes=9 Integrals=1.0D-14 Charge=0 NoSymmetry Angstrom
 Charge=6. Atoms=1 Basis=INTGRL Blocks=3 1 1 1
 ... (abbreviated for brevity)
         0.8000000000        1.0000000000
-<strong>
-Charge=0. Atoms=1 Basis=INTGRL Ghost
-Bq   0.7809234989   -1.0000597432    0.6745590841
-</strong>
+<strong>Charge=0. Atoms=1 Basis=INTGRL Ghost
+Bq   0.7809234989   -1.0000597432    0.6745590841</strong>
 </pre></code>
 
 What you need to do is two things: (1) modify the AtomTypes from 8 to 9 (because
