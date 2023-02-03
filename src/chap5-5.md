@@ -80,7 +80,7 @@ H    -2.56286600 -1.92666800 -0.37754100
 
 And we find that the HONO and LUNO of CASSCF(2,2) correspond to the C-O bond
 
-<img src="images/5_5_3_ethanol.png"/>
+<img src="images/5_5_3_ethanol.png" width="85%" height="85%" />
 
 If we want it to be the C-C bond, we should swap/exchange orbitals in GVB NOs since
 they are the initial guess of CASSCF. To accomplish that, we start python
