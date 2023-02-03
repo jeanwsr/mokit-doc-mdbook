@@ -104,7 +104,6 @@ from mokit.lib import rwwfn
 den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
 ```
 
-Attribute itype:  
 | itype | type of density | itype | type of density |
 | --- | --- | --- | --- |
 | 1 | Total SCF Density | 6 | Spin MP2 Density |
