@@ -47,7 +47,7 @@ You can simply drag the .cub file into GaussView. Next, click the `Results` ->
 click `Surface Actions` -> `New Surface`. Then a figure like the following picture
 would be shown on your screen.
 
-<img src="images/cyclobutadiene_s0_icss.png" width="65%" height="65%" />
+<img src="images/cyclobutadiene_s0_icss.png" width="50%" height="50%" />
 
 ## 5.4.2 ICSS of S1 state of cyclobutadiene
 
@@ -111,13 +111,11 @@ AtomTypes=9 Integrals=1.0D-14 Charge=0 NoSymmetry Angstrom
 Charge=6. Atoms=1 Basis=INTGRL Blocks=3 1 1 1
 ... (abbreviated for brevity)
         0.8000000000        1.0000000000
-```
 <strong>
-```
 Charge=0. Atoms=1 Basis=INTGRL Ghost
 Bq   0.7809234989   -1.0000597432    0.6745590841
-```
 </strong>
+```
 
 What you need to do is two things: (1) modify the AtomTypes from 8 to 9 (because
 we add one Bq atom); (2) add coordinates of the Bq dummy atom in the end of the

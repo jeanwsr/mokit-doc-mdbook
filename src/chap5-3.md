@@ -257,7 +257,7 @@ in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be
 recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ
 unless there is some element which is out of the range of jun-cc-pVDZ.
 
-## 5.3.5
+## 5.3.5 Tricks for accelerations in `frag_guess_wfn`
 For some simple fragments (water molecules, organic ligands, etc), if you are sure
 that they have closed-shell wave function, you can append a character `r` after
 the Cartesian coordinates of any atom of the fragment. Again, taking the
@@ -272,9 +272,9 @@ the Cartesian coordinates of any atom of the fragment. Again, taking the
 {gks}
 
 3 2 3 2 0 1
-Ti(fragment=1)       0.00000000       0.00000000       0.00000000
- H(fragment=2)       0.00000000       2.68428109      -0.78751709 r
- H(fragment=2)       2.68128062       0.78751744       0.00000000
+Ti(fragment=1)    0.00000000    0.00000000    0.00000000
+ H(fragment=2)    0.00000000    2.68428109   -0.78751709 r
+ H(fragment=2)    2.68128062    0.78751744    0.00000000
 ... (not shown)
 ```
 
