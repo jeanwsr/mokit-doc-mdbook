@@ -1,7 +1,8 @@
 # 5.4 ICSS and NICS
 
 ## 5.4.1 ICSS of the ground state of cyclobutadiene
-If you are not familiar with ICSS, you are recommended to read Sobereva's blog
+If you are not familiar with ICSS(iso-chemical-shielding surfaces), you are recommended
+to read Sobereva's blog
 [《通过Multiwfn绘制等化学屏蔽表面(ICSS)研究芳香性》](http://sobereva.com/216).
 That blog contains necessary information of ICSS using HF/DFT methods.
 
@@ -34,12 +35,14 @@ Run
 automr 16-C4H4.gjf >16-C4H4.out 2>&1 &
 ```
 
-This computation would take about 1 hour. For larger molecules, the computation is
-very time-consuming and it might take one or two days. The basis set 6-31G(d) or
-6-31+G(d) is recommended since larger basis set would cost too much computational
-time. After the computation is accomplished, there would be a file named
-`16-C4H4_uhf_gvb10_CASSCF_ICSS.cub`. This file can be visualized by GaussView,
-Multiwfn or VMD.
+This computation would take about 11 min. For larger molecules, the computation
+is very time-consuming and it might take one day or even more time. You are recommended
+to set the memory **as large as possible**. The basis set 6-31G(d) or 6-31+G(d)
+is recommended since larger basis set would cost too much computational time. Check
+and make sure the active space is smaller than (15,15), since ICSS is not supported
+using the DMRG method. After the computation is accomplished, there would be a
+file named `16-C4H4_uhf_gvb10_CASSCF_ICSS.cub`. This file can be visualized by
+GaussView, Multiwfn or VMD.
 
 **Step 2. Open the .cub file with GaussView**  
 You can simply drag the .cub file into GaussView. Next, click the `Results` ->
@@ -57,8 +60,8 @@ spin as the ground state are supported. For example, if the ground state is S<su
 then S<sub>*n*</sub> (*n*>=1) electronic excited states are supported. If you are
 interested in T<sub>1</sub> state, you should read Section 5.4.1, in which you can
 set the spin multiplicity as triplet in the input file. T<sub>*n*</sub> (*n*>=2)
-states are not supported currently. An input example for S<sub>1</sub> state is
-shown below:
+states are not supported currently. An input example (e.g. s1.gjf) for S<sub>1</sub>
+state is shown below:
 
 ```
 %mem=64GB
@@ -69,8 +72,21 @@ mokit{ist=5,readno='16-C4H4_uhf_gvb10_CASSCF_NO.fch',Root=1,ICSS}
 ```
 
 where the file `16-C4H4_uhf_gvb10_CASSCF_NO.fch` was generated in the ground state
-CASSCF job. `Root=1` stands for the first excited state. It is recommended to specify
-the memory as large as possible.
+CASSCF job. `Root=1` stands for the first excited state. It is recommended to copy
+the file `16-C4H4_uhf_gvb10_CASSCF_NO.fch` into another directory and then submit
+the excited state calculation since many files will be generated during computation.
+Submit the S1 state job
+```
+automr s1.gjf >s1.out 2>&1 &
+```
+This job will take about 11 min as well. There would be a file named
+`16-C4H4_uhf_gvb10_CASSCF_NO_CASSCF_ICSS.cub`. Open it with GaussView (Density
+isovalue=0.2), you will see
+
+<img src="images/cyclobutadiene_s1_icss.png" width="50%" height="50%" />
+
+Of course, you can use another isovalue for better visualization, but better to
+use the same isovalue in a paper.
 
 ## 5.4.3 NICS of cyclobutadiene
 If you think ICSS computation is too time-consuming, then NICS is a good choice.

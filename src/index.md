@@ -1,10 +1,10 @@
 # MOKIT Doc
 
-for MOKIT version 1.2.5rc6 
+for MOKIT version 1.2.5rc7
 
 MOKIT developers
 
-Feb 1, 2023
+Feb 8, 2023
 
 <br>
 
