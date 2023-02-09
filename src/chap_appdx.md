@@ -27,6 +27,7 @@ Note: not all the error messages shows on screen, they may be found in program l
 | [is density in fch correct?](#q13-is-density-in-fch-correct) | [automr takes more time than manual computation?](#q19-automr-takes-more-time) | [my computation so slow!](#q21-my-computation-so-slow) |
 
 **Limitations and Suggestions**
+
 | | | |
 | --- | --- | --- |
 | [Basic knowledge of multi-reference methods](#a21-basic-knowledge-of-multi-reference-methods) | [Symmetry](#a22-symmetry) | [Excited State Calculations](#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations) |
