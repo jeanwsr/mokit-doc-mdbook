@@ -7,11 +7,8 @@ You can also use the &#128269; tool in the left upper corner of this page to sea
 
 If any of those cannot solve your problem, please consider [Bug report](#a3-bug-report).
 
-**Error messages occured in using MOKIT**
 
-Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
-
-| | | |
+| Error messages | | |
 | --- | --- | --- |
 | [command not found!](#q1-command-not-found)  | [OpenMolcas: Error in keyword](#q5-error-in-keyword-when-calling-openmolcas) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
 | [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
@@ -19,16 +16,16 @@ Note: not all the error messages shows on screen, they may be found in program l
 | [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-ompstacksize) | [GKS-EDA: Warning for redial grid](#q16-gks-eda-warning-for-redial-grid) | 
 | [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
 
-**Other questions**
+Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
 
-| | | |
+| Other questions | | |
 | --- | --- | --- |
 | [pre-compiled version?](#q2-pre-compiled-version)  | [why orb2fch requires a fch?](#q3-why-orb2fch-requires-a-fch) | [support more programs?](#q4-support-more-programs) |
 | [is density in fch correct?](#q13-is-density-in-fch-correct) | [automr takes more time than manual computation?](#q19-automr-takes-more-time) | [my computation so slow!](#q21-my-computation-so-slow) |
 
-**Limitations and Suggestions**
+</br>
 
-| | | |
+| Limitations and Suggestions | | |
 | --- | --- | --- |
 | [Basic knowledge of multi-reference methods](#a21-basic-knowledge-of-multi-reference-methods) | [Symmetry](#a22-symmetry) | [Excited State Calculations](#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations) |
 | [Possible Multiple Solutions of UHF](#a24-possible-multiple-solutions-of-uhf) | [Implicit Solvent Model](#a25-implicit-solvent-model) |

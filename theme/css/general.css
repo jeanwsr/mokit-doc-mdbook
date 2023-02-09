@@ -124,9 +124,10 @@ table thead td {
 }
 table thead th {
     padding: 3px 20px;
+    text-align: left;
 }
 table thead tr {
-    border: 1px var(--table-header-bg) solid;
+    border: 1px var(--table-border-color) solid;
 }
 /* Alternate background colors for rows */
 table tbody tr:nth-child(2n) {

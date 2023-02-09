@@ -18,6 +18,7 @@
   --nord4: #FFFFFF;
   --nord5: #E5E9F0;
   --nord6: #ECEFF4;
+  --nord6b: #ECEFF4;
   /* --> Frost */
   --nord7: #8FBCBB;
   --nord8: #88C0DD;
@@ -57,8 +58,8 @@
   --quote-border: var(--quote);
 
   --table-border-color: var(--base-fg);
-  --table-header-bg: var(--base-bg);
-  --table-alternate-bg: var(--quote);
+  --table-header-bg: var(--quote);
+  --table-alternate-bg: var(--alt-bg2);
 
   --searchbar-border-color: var(--disabled);
   --searchbar-bg: var(--alt-bg);
@@ -73,12 +74,13 @@
 /* Themes */
 
 .light {
-  --base-bg: var(--nord4);
+  --base-bg: var(--nord4); /* white */
   --base-fg: var(--nord0);
-  --alt-bg: var(--nord6);
+  --alt-bg: var(--nord6); /* a little grey */
+  --alt-bg2: var(--nord6b);
   --alt-fg: var(--nord2);
   --disabled: var(--nord8);
-  --quote: var(--nord5);
+  --quote: var(--nord5);  /* more grey */
   --clickable: var(--nord11);
   --results: var(--nord14);
   --selected: var(--nord13);
@@ -88,6 +90,7 @@
   --base-bg: var(--nord2);
   --base-fg: var(--nord6);
   --alt-bg: var(--nord0);
+  --alt-bg2: var(--nord0);
   --alt-fg: var(--nord4);
   --disabled: var(--nord10);
   --quote: var(--nord1);
