@@ -1,7 +1,42 @@
 # Appendix
 
+
+Here we provide a brief outline of all frequently asked questions, limitations and suggestions. 
+
+You can also use the &#128269; tool in the left upper corner of this page to search the whole manual for your questions. 
+
+If any of those cannot solve your problem, please consider [Bug report](#a3-bug-report).
+
+**Error messages occured in using MOKIT**
+
+Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
+
+| | | |
+| --- | --- | --- |
+| [command not found!](#q1-command-not-found)  | [OpenMolcas: Error in keyword](#q5-error-in-keyword-when-calling-openmolcas) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
+| [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
+| [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-moocc) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspinadapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
+| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-ompstacksize) | [GKS-EDA: Warning for redial grid](#q16-gks-eda-warning-for-redial-grid) | 
+| [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
+
+**Other questions**
+
+| | | |
+| --- | --- | --- |
+| [pre-compiled version?](#q2-pre-compiled-version)  | [why orb2fch requires a fch?](#q3-why-orb2fch-requires-a-fch) | [support more programs?](#q4-support-more-programs) |
+| [is density in fch correct?](#q13-is-density-in-fch-correct) | [automr takes more time than manual computation?](#q19-automr-takes-more-time) | [my computation so slow!](#q21-my-computation-so-slow) |
+
+**Limitations and Suggestions**
+| | | |
+| --- | --- | --- |
+| [Basic knowledge of multi-reference methods](#a21-basic-knowledge-of-multi-reference-methods) | [Symmetry](#a22-symmetry) | [Excited State Calculations](#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations) |
+| [Possible Multiple Solutions of UHF](#a24-possible-multiple-solutions-of-uhf) | [Implicit Solvent Model](#a25-implicit-solvent-model) |
+
+
 ## A1 Frequently Asked Questions (FAQ)
-Q1: Find errors like `xxx: command not found`. What is the solution?
+
+### Q1: command not found
+Find errors like `xxx: command not found`. What is the solution?
 
 A1: This is simply because you haven't installed the corresponding software, or you didn't write environment variables correctly. Four examples are shown below:
 
@@ -19,14 +54,18 @@ is MKL on your node but you did not correctly (or you forgot to) write environme
 variables of MKL.
 
 
-Q2: Is there any Windows/Mac OS pre-compiled or pre-built version of MOKIT?
+### Q2: pre-compiled version
+Is there any Windows/Mac OS pre-compiled or pre-built version of MOKIT?
 
-A2: The author offers more than 20 utilities of Windows* OS pre-built executables, which are released as a .zip file. See instructions for download and setting environment variables in Section 2.1.
+A2: The author offers more than 20 utilities of Windows* OS pre-built executables, which are released as a .zip file. See instructions for download and setting environment variables in [Section 2.1](./chap2-1.md).
 
-The `automr` module is not included in pre-compiled executables, since multi-reference calculations are usually performed on high-performance computers/platforms, which usually contain Unix/Linux systems. However, if you really need all modules or utilities under Windows, you can compile the source code on your laptop/computer/node by yourself. The Mac OS pre-compiled executables will never be considered by the author.
+The `automr` module is not included in pre-compiled executables, since multi-reference calculations are usually performed on high-performance computers/platforms, which usually contain Unix/Linux systems. However, if you really need all modules or utilities under Windows, you can compile the source code on your laptop/computer/node by yourself.
+
+For Linux/MacOS pre-built version, see [Section 2.2](./chap2-2.md)
 
 
-Q3: Why the utilities `dat2fch`, `py2fch`, `mkl2fch`, `orb2fch`, `xml2fch`, `bdf2fch`
+### Q3: why orb2fch requires a fch
+Why the utilities `dat2fch`, `py2fch`, `mkl2fch`, `orb2fch`, `xml2fch`, `bdf2fch`
 and `bdf2mkl` cannot generate a .fch file from scratch, but require the user to
 provide one?
 
@@ -39,12 +78,14 @@ Therefore, the author jxzou has to require the users to provide a .fch file, to 
 In the future version of MOKIT, the utility xml2fch will not require the user to provide a .fch file.
 
 
-Q4: Can MOKIT support more types of files? Transferring MOs between other programs like QChem, NWChem is possible?
+### Q4: support more programs
+Can MOKIT support more types of files? Transferring MOs between other programs like QChem, NWChem is possible?
 
 A4: The author jxzou wishes to make the MOKIT recognize all kinds of MO files of quantum chemistry programs, but he is not likely to be familiar with all programs. Therefore, if you are very familiar with any program (other than supported ones in MOKIT), and you happens to need a transferring of MOs, please contact jxzou and tell him the information in the MO file of that program. With the help from experienced users, the development will be much easier and quicker.
 
 
-Q5: Why there is a keyword error in OpenMolcas output when using DKH2 Hamiltonian? Two possible errors are given: (1) ERROR: RELATIVISTIC is not a keyword!, Error in keyword. (2) ERROR: R02O is not a keyword!, Error in keyword.
+### Q5: OpenMolcas: Error in keyword
+Why there is a keyword error in OpenMolcas output when using DKH2 Hamiltonian? Two possible errors are given: (1) ERROR: RELATIVISTIC is not a keyword!, Error in keyword. (2) ERROR: R02O is not a keyword!, Error in keyword.
 
 A5: This is due to a recent update of OpenMolcas. If version <= 18.09, the keyword
 for DKH2 is simply `R02O`; but for version >=20.10, this keyword become `RELAtivistic = R02O`.
@@ -58,12 +99,14 @@ it. If you choose (2), you will need to modify the words `RELAtivistic = R02O` t
 program automr.
 
 
-Q6: How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, ORCA, and GAMESS?
+### Q6: executable paths of Gaussian, etc.
+How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, ORCA, and GAMESS?
 
 A6: For Gaussian, the paths of executable files are read from the environment variables $GAUSS_EXEDIR. For PySCF and OpenMolcas, the `python` and `pymolcas` executable files are used directly, assuming the user had installed the corresponding programs correctly. For ORCA, the absolute path is automatically obtained from echo `\which orca`. For GAMESS, the user must define the $GMS environment variable in his/her ~/.bashrc file, such that the automr program can find corresponding paths.
 
 
-Q7: What are the possible reasons and solutions of the following errors
+### Q7: GAMESS: ERROR DIMENSIONS EXCEEDED
+What are the possible reasons and solutions of the following errors
 ```
 (1) '***** ERROR **** DIMENSIONS EXCEEDED *****'
 (2) 'PAIR=   xx MAX=   12'
@@ -77,19 +120,22 @@ in GAMESS .gms file (where xx is an integer >12)?
 A7: Please read Section 4.4.10 carefully.
 
 
-Q8: Errors like `semget errno=ENOSPC -- check system limit for sysv semaphores`
+### Q8: GAMESS: semget errno=ENOSPC 
+Errors like `semget errno=ENOSPC -- check system limit for sysv semaphores`
 found in the .gms file. Why? How to solve the problem?
 
 A8: Please search the error on this page FAQ of GAMESS.
 
 
-Q9: I found the error `DDI Process 0: trapped a floating point error (SIGFPE).`
+### Q9: GAMESS: floating point error (SIGFPE)
+I found the error `DDI Process 0: trapped a floating point error (SIGFPE).`
 How to solve it?
 
 A9: See this page https://github.com/gms-bbg/gamess-issues/issues/40.
 
 
-Q10: I found the following error
+### Q10: PySCF: has no attribute mo_occ
+I found the following error
 ```
 AttributeError: 'CASSCF' object has no attribute 'mo_occ'
 ```
@@ -98,7 +144,8 @@ in PySCF output (e.g. .out file). Why? How to solve the problem?
 A10: This is because you were using PySCF version < 1.7.4, which has no mo_occ attribute in CASSCF object. Please update to PySCF >=1.7.4.
 
 
-Q11: I found the following error
+### Q11: PySCF: No such file block.spin_adapted
+I found the following error
 ```
 FileNotFoundError: [Errno 2] No such file or directory: '/path/to/Block/block.spin_adapted'
 ```
@@ -107,7 +154,8 @@ in PySCF output (e.g. .out file). Why? How to solve the problem?
 A11: This is because you forgot to modify pyscf/dmrgscf/settings.py. You should copy file settings.py.example and rename it as settings.py. Then set the correct path (within the file) for the DMRG solver.
 
 
-Q12: I found the following error
+### Q12: OpenMolcas: Error detected in HDF5
+I found the following error
 ```
 HDF5-DIAG: Error detected in HDF5 (1.12.0) thread 0:
 #000: H5D.c line 435 in H5Dget_type(): invalid dataset identifier
@@ -119,19 +167,22 @@ occurs many times in OpenMolcas output, Why? How to solve the problem?
 A12: This does not affect the computations. It is just a tiny bug of old versions of OpenMolcas if the QCMaquis support is compiled but not used. You can find this problem here. It is recommended to update your OpenMolcas to the latest version.
 
 
-Q13: Is 'Total SCF Density' in `*_NO.fch` file correct? Can it be used to perform wave function analysis?
+### Q13: is density in fch correct?
+Is 'Total SCF Density' in `*_NO.fch` file correct? Can it be used to perform wave function analysis?
 
 A13: Yes. The CASCI/CASSCF total densities are correct in generate `*_NO.fch` files. Besides, the GVB density is in `*_s.fch` file, and the UHF density are both in `*_uhf.fch` and `*_uno.fch` files. Other types of `*.fch` files (`*_asrot.fch`, etc) do not have well-defined density. Density and natural orbitals are not calculated for post-CASSCF methods (NEVPT2, CASPT2, MRCISD, etc).
 
 
-Q14: I found the error `sh: 1: Syntax error: Bad fd number` on the terminal/screen.
+### Q14: Syntax error: Bad fd number
+I found the error `sh: 1: Syntax error: Bad fd number` on the terminal/screen.
 Why? How to solve the problem?
 
 A14: This often occurs on Ubuntu* OS, where the default sh is `/bin/dash`, not `/usr/bin/bash`.
 Please read Section 2.2.4 for details and examples.
 
 
-Q15: I found the following warnings on terminal/screen, or output of `automr`:
+### Q15: Warning for OMP_STACKSIZE
+I found the following warnings on terminal/screen, or output of `automr`:
 ```
 OMP: Warning #181: OMP_STACKSIZE: ignored because KMP_STACKSIZE has been defined
 ```
@@ -140,7 +191,8 @@ Why? How to make it disappear?
 A15: This is simply because both OMP_STACKSIZE and KMP_STACKSIZE environment variables are set. You can comment/delete one of them. Usually you can find these two environment variables in your ~/.bashrc file, or in file bdf-pkg/sbin/run.sh (if you use the BDF program).
 
 
-Q16: When using the utility frag_guess_wfn to generate GKS-EDA input files, there
+### Q16: GKS-EDA: Warning for redial grid
+When using the utility frag_guess_wfn to generate GKS-EDA input files, there
 is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF
 does not converge. How to deal with that?
 
@@ -149,7 +201,8 @@ does not converge. How to deal with that?
 A16: As you can see in the screenshot above, GAMESS thinks your radial grid is insufficient for this molecule and recommends the minimum requirement. So, all you need to do is: modify the radial grid in the .inp file to the recommended value. For example, in this example, you should modify NRAD0=99 and NRAD=99 in the .inp file to (at least) NRAD0=126 and NRAD=126, respectively.
 
 
-Q17: I found the following error in output of running automr
+### Q17: Psi4: h5py Error
+I found the following error in output of running automr
 ```
 File "h5py/h5.pyx", line 183, in h5py.h5.H5PYConfig.default_file_mode.__set__
 ValueError: Using default_file_mode other than 'r' is no longer supported. Pass the mode to h5py.File() instead.
@@ -162,7 +215,8 @@ to comment/deactivate PSI4's environment variables and use your previous Python
 (e.g. Anaconda Python 3).
 
 
-Q18: I found the following error in output of running automr
+### Q18: PySCF: No module named h5py
+I found the following error in output of running automr
 ```
   File "/home/jxzou/software/pyscf-2.0.1/pyscf/lib/misc.py", line 31, in <module>
     import h5py
@@ -178,17 +232,20 @@ e.g. Anaconda Python 3. Next you should run make distclean and make all to re-co
 MOKIT.
 
 
-Q19: Is it possible that `automr` takes more (computational) time than that by manually doing multi-reference computations (by chemical intuition, manual inspection, etc) ?
+### Q19: automr takes more time than manual computation?
+Is it possible that `automr` takes more (computational) time than that by manually doing multi-reference computations (by chemical intuition, manual inspection, etc) ?
 
 A19: Yes, possible. Note that for some small and well-studied molecules, manually doing multi-reference computations (by chemical intuition, manual inspection, etc) may take less (computational) time than `automr`. But for general molecules, especially with dozens/hundreds of possible active orbitals, manual inspection is tedious and sometimes chemical intuition is unreliable. `automr` aims at tackling general and complicated cases.
 
 Besides, to better compare the cost (of time) between the human and automatic approach, the cost of time of human operations must be taken into consideration, since the time of manual inspection and permuting orbitals (when >10 orbitals) is not negligible.
 
-Q20: Why does the GKS-EDA jobs fail even if I used the utility frag_guess_wfn to generate GAMESS .inp file?
+### Q20: GKS-EDA: SCF fail
+Why does the GKS-EDA jobs fail even if I used the utility frag_guess_wfn to generate GAMESS .inp file?
 
 A20: Try to modify 'DIIS=.F. SOSCF=.T.' to 'DIIS=.T. SOSCF=.F.' in the .inp file, and re-submit the job (remember to remove temporary files before re-submitting).
 
-Q21: Why does my computation proceed slowly? It took a long time in HF and GVB calculations. Is there any acceleration techniques/tricks?
+### Q21: my computation so slow!
+Why does my computation proceed slowly? It took a long time in HF and GVB calculations. Is there any acceleration techniques/tricks?
 
 A21: Firstly, please read Section 3.1 and 3.2 for suggestions on choosing appropriate methods and basis sets. Secondly, assuming your method and basis set is already reasonable, there is no trick to be used currently. The HF step is performed by Gaussian and it does not support RI or density fitting techniques. In the future version of MOKIT, users can specify PSI4 as the HF_prog, where RI is supported. The author jxzou will write a RI-GVB program in a year, then the GVB computation can be greatly accelerated.
 
