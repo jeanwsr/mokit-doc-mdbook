@@ -189,11 +189,12 @@ used to make GVB converge early, which usually lead to a \\( \sigma \\) - \\( \p
 separated solution. We can further look into the GVB or CASSCF natural orbitals
 during computation, just for a double check:
 
-<img src="images/C9H9_cation_gvb.png" width="95%" height="95%" />  
+<img src="images/C9H9_cation_gvb.png" />  
 (Only bonding orbitals of 4 pairs with largest multiconfigurational characters are
 shown. Isovalue=0.04)  
 
-<img src="images/C9H9_cation_cas.png" width="95%" height="95%" />  
+
+<img src="images/C9H9_cation_cas.png" />  
 (Only 4 active orbitals with largest occupation numbers in the active space are
 shown. Isovalue=0.04)
 
