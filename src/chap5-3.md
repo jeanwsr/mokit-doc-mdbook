@@ -7,7 +7,6 @@ To be added.
 The input file of H<sub>2</sub>O-NH<sub>3</sub> complex is shown below
 
 ```
-%chk=nh3_h2o_m.chk
 %mem=16GB
 %nprocshared=16
 #p RHF/cc-pVDZ guess(fragment=2)
@@ -44,13 +43,13 @@ broken bonds cannot be dealt with.
 automatically switch to Cartesian fucntions (i.e. 6D 10F) when calling Gaussian
 to perform SCF computations.
 
-Assuming the filename is nh3_h2o_m.gjf, you simply need to run
+Assuming the filename is nh3_h2o.gjf, you simply need to run
 ```
-frag_guess_wfn nh3_h2o_m.gjf >nh3_h2o_m.out 2>&1
+frag_guess_wfn nh3_h2o.gjf >nh3_h2o.out 2>&1
 ```
 
-Since the molecule is small, you can obtain a file named `nh3_h2o_m.inp` in seconds.
-MOs of two fragments will be written into this file. You can submit the file `nh3_h2o_m.inp`
+Since the molecule is small, you can obtain a file named `nh3_h2o.inp` in seconds.
+MOs of two fragments will be written into this file. You can submit the file `nh3_h2o.inp`
 to GAMESS for Morokuma-EDA computations. All SCF of fragments will converge in 1-2
 cycles. The initial guess of orbitals of the total system (i.e. supermolecule) is
 not written in .inp file, but constructed from fragments within GAMESS, and it is
@@ -257,7 +256,7 @@ in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be
 recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ
 unless there is some element which is out of the range of jun-cc-pVDZ.
 
-## 5.3.5 Tricks for accelerations in `frag_guess_wfn`
+## 5.3.5 Tricks for accelerations
 For some simple fragments (water molecules, organic ligands, etc), if you are sure
 that they have closed-shell wave function, you can append a character `r` after
 the Cartesian coordinates of any atom of the fragment. Again, taking the

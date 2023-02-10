@@ -24,10 +24,10 @@ For the memory and parallel settings, please read Section 4.2. For the theoretic
 
 1. All keywords must be written in the curly bracket of `mokit{}` in the Title Card line of a .gjf file.
 
-2. Using upper or lower case of keywords in `automr` makes no difference. For example, the following two lines have identical meanings:
-
-(1) MOKIT{readuhf='a.fchk',ist=1,LocalM=Boys}  
-(2) mokit{readuhf='a.fchk',ist=1,localm=boys}
+2. Using upper or lower case of keywords in `automr` makes no difference. For example,
+the following two lines have identical meanings:
+`MOKIT{readuhf='a.fchk',ist=1,LocalM=Boys}`  
+`mokit{readuhf='a.fchk',ist=1,localm=boys}`
 
 3. If `readrhf`, `readuhf`, or `readno` keyword is used, a filename of the provided .fch(k) file must be included in a pair of single quotation marks `''`. Do not use double quotation marks `""` or no quotation marks.
 

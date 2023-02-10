@@ -21,5 +21,5 @@ computer the path is `D:\360Downloads\mokit\bin`.
 Press the combination keys `Win+R` on the keyboard, type `cmd` to prompt CMD, and
 **change into the directory where your .fch(k) file holds**, simply run like
 
-<img src="images/fch2mkl_win.png"/>
+<img src="images/fch2mkl_win.png" />
 
