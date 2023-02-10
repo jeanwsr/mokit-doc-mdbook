@@ -190,13 +190,29 @@ A15: This is simply because both OMP_STACKSIZE and KMP_STACKSIZE environment var
 
 
 ### Q16: GKS-EDA: Warning for redial grid
-When using the utility frag_guess_wfn to generate GKS-EDA input files, there
+When using the utility `frag_guess_wfn` to generate GKS-EDA input files, there
 is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF
 does not converge. How to deal with that?
 
-<img src="images/A1_Q16.png"/>
+```
+          **************************************************
+          *                                                *
+          * WARNING: QUESTIONABLE SELECTION OF RADIAL GRID *
+          *                                                *
+          **************************************************
 
-A16: As you can see in the screenshot above, GAMESS thinks your radial grid is insufficient for this molecule and recommends the minimum requirement. So, all you need to do is: modify the radial grid in the .inp file to the recommended value. For example, in this example, you should modify NRAD0=99 and NRAD=99 in the .inp file to (at least) NRAD0=126 and NRAD=126, respectively.
+ THIS RUN HAS REQUESTED NRAD=  99 IN $DFT OR $TDDFT
+ ATOM=   63 HAS LARGE EXPONENT=        565073.253000000026077
+ RECOMMEND NRAD ABOVE  50 FOR ZETA'S ABOVE 1E+4
+ RECOMMEND NRAD ABOVE  75 FOR ZETA'S ABOVE 1E+5
+ RECOMMEND NRAD ABOVE 125 FOR ZETA'S ABOVE 1E+6
+```
+
+A16: As you can see in the screenshot above, GAMESS thinks your radial grid is
+insufficient for this molecule and recommends the minimum requirement. So, all
+you need to do is: modify the radial grid in the .inp file to the recommended value.
+For example, in this example, you should modify NRAD0=99 and NRAD=99 in the .inp
+file to (at least) NRAD0=126 and NRAD=126,respectively.
 
 
 ### Q17: Psi4: h5py Error

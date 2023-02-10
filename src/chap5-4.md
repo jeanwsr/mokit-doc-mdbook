@@ -50,7 +50,7 @@ You can simply drag the .cub file into GaussView. Next, click the `Results` ->
 click `Surface Actions` -> `New Surface`. Then a figure like the following picture
 would be shown on your screen.
 
-<img src="images/cyclobutadiene_s0_icss.png" width="50%" height="50%" />
+<img src="images/cyclobutadiene_s0_icss.png" width="45%" height="45%" />
 
 ## 5.4.2 ICSS of S1 state of cyclobutadiene
 
@@ -83,10 +83,10 @@ This job will take about 11 min as well. There would be a file named
 `16-C4H4_uhf_gvb10_CASSCF_NO_CASSCF_ICSS.cub`. Open it with GaussView (Density
 isovalue=0.2), you will see
 
-<img src="images/cyclobutadiene_s1_icss.png" width="50%" height="50%" />
+<img src="images/cyclobutadiene_s1_icss.png" width="45%" height="45%" />
 
-Of course, you can use another isovalue for better visualization, but better to
-use the same isovalue in a paper.
+Of course, you can use other isovalues for better visualization, but better to use
+the same isovalue in a paper.
 
 ## 5.4.3 NICS of cyclobutadiene
 If you think ICSS computation is too time-consuming, then NICS is a good choice.
@@ -144,4 +144,68 @@ This only takes 1-2 minutes. After it is finished, open the file `16-C4H4_uhf_gv
 and search `@1 Bq`, you can find the chemical shielding of this Bq atom is -11.9931
 ppm. Remember that NICS(1)<sub>ZZ</sub> is the negative of the chemical shielding,
 i.e. 11.9931 ppm.
+
+## 5.4.4 Reproduction of C<sub>9</sub>H<sub>9</sub><sup>+</sup> cation ICSS in a paper
+Now let's look at a real example: the C<sub>9</sub>H<sub>9</sub><sup>+</sup> cation
+in a [paper](https://pubs.acs.org/doi/10.1021/acs.jpca.0c08594). Ground and excited
+state aromaticity are discussed in this paper, in a theoretical pespective. The
+authors used the basis set 6-311+G(d), but here we only want to do some homework,
+not to publish a paper, so we use 6-31G(d) for a quick check.
+
+The Cartesian coordinate can be found in Supporting Information of the paper. Here
+the `automr` input file is
+```
+%mem=100GB
+%nprocshared=48
+#p CASSCF/6-31G(d)
+
+mokit{GVB_conv=5d-4,ICSS}
+
+1 1
+C   0.             0.             1.645014194
+C   0.4905022324   1.2427684773   1.1554414148
+C  -0.4905022324  -1.2427684773   1.1554414148
+C   0.0100585215   2.0928052569   0.1040785875
+C  -0.0100585215  -2.0928052569   0.1040785875
+C  -0.8152087457   1.6410894083  -0.9354914584
+C   0.8152087457  -1.6410894083  -0.9354914584
+C  -0.6569284614   0.2832859329  -1.251946014
+C   0.6569284614  -0.2832859329  -1.251946014
+H   0.             0.             2.7459418542
+H   1.0699783805   1.7858874614   1.9137457041
+H  -1.0699783805  -1.7858874614   1.9137457041
+H   0.12964425     3.1677255378   0.2859658405
+H  -0.12964425    -3.1677255378   0.2859658405
+H  -1.5936377795   2.2790433661  -1.3665504299
+H   1.5936377795  -2.2790433661  -1.3665504299
+H  -1.490812806   -0.3325910524  -1.6109751404
+H   1.490812806    0.3325910524  -1.6109751404
+
+```
+
+Note that this molecule is non-planar/twisted, so GVB may converge to a solution
+with \\( \sigma \\) - \\( \pi \\) orbitals mixed. The keyword `GVB_conv=5d-4` is
+used to make GVB converge early, which usually lead to a \\( \sigma \\) - \\( \pi \\)
+separated solution. We can further look into the GVB or CASSCF natural orbitals
+during computation, just for a double check:
+
+<img src="images/C9H9_cation_gvb.png" width="90%" height="90%" />
+(Only bonding orbitals of 4 pairs with largest multiconfigurational characters are
+shown. Isovalue=0.04)
+
+<img src="images/C9H9_cation_cas.png" width="90%" height="90%" />
+(Only 4 active orbitals with largest occupation numbers in the active space are
+shown. Isovalue=0.04)
+
+One can see the active orbitals seem to be \\( \pi \\) orbitals. You may notice that
+`automr` recommends a CASSCF(8e,8e) calculation, not the (8e,9o) used by the authors.
+But the difference of 1 virtual orbital is not important. This job will take about
+6.5 h. The ICSS plot of C<sub>9</sub>H<sub>9</sub><sup>+</sup> is shown below
+
+<img src="images/C9H9_cation_icss.png" width="50%" height="50%" />
+
+which is similar to the corresponding picture in the
+[paper](https://pubs.acs.org/doi/10.1021/acs.jpca.0c08594). Because `automr` uses
+coarse grids for ghost atoms by default, and further render (e.g. using VMD) has
+not been performed, the plot may not be as beautiful as that in the paper.
 
