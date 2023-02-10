@@ -189,11 +189,11 @@ used to make GVB converge early, which usually lead to a \\( \sigma \\) - \\( \p
 separated solution. We can further look into the GVB or CASSCF natural orbitals
 during computation, just for a double check:
 
-<img src="images/C9H9_cation_gvb.png" width="90%" height="90%" />
+<img src="images/C9H9_cation_gvb.png" width="95%" height="95%" />  
 (Only bonding orbitals of 4 pairs with largest multiconfigurational characters are
-shown. Isovalue=0.04)
+shown. Isovalue=0.04)  
 
-<img src="images/C9H9_cation_cas.png" width="90%" height="90%" />
+<img src="images/C9H9_cation_cas.png" width="95%" height="95%" />  
 (Only 4 active orbitals with largest occupation numbers in the active space are
 shown. Isovalue=0.04)
 
@@ -201,8 +201,10 @@ One can see the active orbitals seem to be \\( \pi \\) orbitals. You may notice 
 `automr` recommends a CASSCF(8e,8e) calculation, not the (8e,9o) used by the authors.
 But the difference of 1 virtual orbital is not important. This job will take about
 6.5 h. The ICSS plot of C<sub>9</sub>H<sub>9</sub><sup>+</sup> is shown below
+(isovalue=16, the same to that in paper)
 
-<img src="images/C9H9_cation_icss.png" width="50%" height="50%" />
+<img src="images/C9H9_cation_icss.png" width="45%" height="45%" />  
+("isotropic shielding isosurfaces" called in the paper)
 
 which is similar to the corresponding picture in the
 [paper](https://pubs.acs.org/doi/10.1021/acs.jpca.0c08594). Because `automr` uses
