@@ -44,35 +44,6 @@ export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
 export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 ```
 
-### Instructions for Packaging (for developers)
-Set up environment by docker first (may require sudo)
-```
-docker pull continuumio/miniconda3:latest
-docker run -it --name myconda continuumio/miniconda3:latest /bin/bash
-```
-Now we enter the shell inside docker container
-```
-cd /root
-apt update && apt install git vim # and so on
-git clone https://gitlab.com/jxzou/MOKIT
-cd MOKIT
-conda create -n mokit-build python=3.7
-conda activate mokit-build
-conda install anaconda-client conda-build
-conda build --output-folder ./output conda
-anaconda upload ./output/linux-64/*.bz2
-```
-Next time, we can re-enter the container by
-```
-docker start -i myconda
-```
-and build a new version
-```
-conda activate mokit-build
-conda build --output-folder ./output conda
-anaconda upload ./output/linux-64/*.bz2
-```
-
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
 ### Download
