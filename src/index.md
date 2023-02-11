@@ -1,6 +1,6 @@
 # MOKIT Doc
 
-for MOKIT version 1.2.5rc7
+for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.5rc7
 
 MOKIT developers
 
@@ -18,3 +18,5 @@ Feb 8, 2023
 - [Appendix](./chap_appdx.md): FAQs, limitations and bug report
 
 Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your kerboard. 
+
+Documentation source code can be found at [GitLab](https://gitlab.com/jeanwsr/mokit-doc-mdbook).
