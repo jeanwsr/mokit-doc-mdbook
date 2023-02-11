@@ -15,7 +15,8 @@ Feb 8, 2023
 - [Quick Start](./chap3_quick.md)
 - [User's Guide](./chap4_guide.md): syntax rule, keywords, utilities, and APIs
 - [Examples](./chap5_example.md)
-- [Appendix](./chap_appdx.md): FAQs, limitations and bug report
+- [Developer's Guide](./chap6.md)
+- [Appendix](./chap_appdx.md): FAQs, limitations and [bug report](./chap_appdx.md#a3-bug-report)
 
 Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your kerboard. 
 

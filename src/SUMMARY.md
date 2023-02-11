@@ -27,8 +27,4 @@
   - [Examples of dinuclear transition metal molecules](./chap5-7.md)
 - [Developers' Guide](./chap6.md)
 - [Appendix](./chap_appdx.md)
-  - [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq)
-  - [Limitations and Suggestions](./chap_appdx.md#a2-limitations-and-suggestions)
-  - [Bug Report](./chap_appdx.md#a3-bug-report)
-  - [Acknowledgement](./chap_appdx.md#a4-acknowledgement)
 

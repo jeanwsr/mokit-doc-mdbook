@@ -1,13 +1,13 @@
-# Developers' Guide
-## How to contribute
+# 6 Developer's Guide
+## 6.1 How to contribute
 
 See [CONTRIBUTING](https://gitlab.com/jxzou/mokit/-/blob/master/CONTRIBUTING.md). Also, this page contains a few tips for handling the CI/CD.
 
-## Tips for Coding
+## 6.2 Tips for Coding
 
 To be added.
 
-## Tips for CI/CD and packaging
+## 6.3 Tips for CI/CD and packaging
 
 ### How to write GitLab CI yml file
 GitLab CI jobs are triggered by `.gitlab-ci.yml`.
@@ -95,7 +95,7 @@ For example, to manually debug centos7_conda_py37, you can `docker pull centos:7
 
 Of course, debugging can be: simply commit the change, push to GitLab and see what happens in the pipeline log. But this will consume the limited CI job time quota. Another option is to fork the repo to NJU Git and debug, which provides free, unlimited CI runner for NJUers.
 
-## Documentation
+## 6.4 Documentation
 
 The current online documentation is enabled via [mdBook](https://github.com/rust-lang/mdBook), utilizing [Yethiel's template](https://gitlab.com/yethiel/pages-mdbook) and modified [Nord Theme](https://github.com/gbrlsnchs/mdBook-nord-template).
 
