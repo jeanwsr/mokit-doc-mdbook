@@ -20,4 +20,3 @@ Feb 8, 2023
 
 Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your kerboard. 
 
-Documentation source code can be found at [GitLab](https://gitlab.com/jeanwsr/mokit-doc-mdbook).

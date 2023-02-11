@@ -15,6 +15,10 @@ additional-css = [
   "theme/dark.css",
 ]
 mathjax-support = true
+git-repository-url = "https://gitlab.com/jeanwsr/mokit-doc-mdbook"
+git-repository-icon = "fa-gitlab"
+
+#[output.markdown]
 
 [preprocessor.toc]
 command = "./mdbook-toc"
