@@ -114,9 +114,15 @@ den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=
 
 ## 4.6.10 write_pyscf_dm_into_fch
 Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All attributes of this module are shown below
-`write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)`
-where dm is the PySCF density matrix with dimension (nbf,nbf). itype has the same meaning with that in Section 4.6.5. force is a bool variable, and its meaning is:
+```
+write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
+```
+where dm is the PySCF density matrix with dimension (nbf,nbf). itype has the same
+meaning with that in [4.6.9](#469-read_density_from_fch). force is a bool variable,
+and its meaning is:
+
 (1) If the string corresponding to itype (e.g. 'Total SCF Density') can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
+
 (2) If the string corresponding to itype cannot be found, setting force=True will enforce writing density matrix into the given file; setting force=False will stop/abort the program and signal errors immediately (this can be used to check whether desired strings exists in the specified file).
 
 You should use this module via
@@ -140,7 +146,9 @@ The *i*-th excited state. For example, i=1 for the first excited state.
 The last python statement means exporting the transition density matrix into a plain text file, see the API below.
 
 ## 4.6.12 export_mat_into_txt
-Export a square matrix into a plain text file. The example of exporting transition density matrix is shown in Section 4.6.6. Here I offer one more example – export the lower triangle of a symmetric AO-basis overlap matrix
+Export a square matrix into a plain text file. The example of exporting transition
+density matrix is shown in Section 4.6.11. Here I offer one more example - export
+the lower triangle of a symmetric AO-basis overlap matrix
 ```python
 from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)

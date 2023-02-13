@@ -139,7 +139,7 @@ Specify the program for performing the CASSCF calculation, e.g. `CASSCF_prog=PyS
 
 If you use some old versions of BDF as the CASSCF_prog, you may find the NOONs are zero. In that case you should update to the latest version of BDF.
 For excited state calculations. Please read related comments in
-[A2.3](#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations).
+[A2.3](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap_appdx.html#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations).
 
 ## 4.4.13 DMRGCI_prog
 Specify the program for performing DMRG-CASCI calculation, e.g. `DMRGCI_prog=PySCF`. Currently only PySCF is supported and it is the default program.
@@ -255,7 +255,7 @@ This keyword has identical meaning with the same keyword in Gaussian software, i
 
 The including of background point charges is useful for QM/MM calculations or fragmentation-based linear scaling methods (like GEBF, Many-body expansion, etc).
 
-Note: please write this keyword in mokit{}. DO NOT WRITE this keyword in the Route
+Note: please write this keyword in `mokit{}`. DO NOT WRITE this keyword in the Route
 Section of .gjf file (i.e. '#p ...' line).
 
 ## 4.4.25 OtPDF
@@ -333,8 +333,8 @@ Request the calculation of nuclear shielding constants. Currently only the CASSF
 
 (3) For practical computations of chemical shifts, it is recommended to use specially designed basis sets like pcSseg-1 or pcSseg-2. Larger basis sets like pcSseg-3, def2-QZVP or cc-pVQZ would be better but often too expensive.
 
-(4) If you want to calculate NICS, please read [5.4.3 NICS of cyclobutadiene](#543-nics-of-cyclobutadiene).
-If you want ICSS, please read [5.4.1 ICSS of the ground state of cyclobutadiene](#541-icss-of-the-ground-state-of-cyclobutadiene).
+(4) If you want to calculate NICS, please read [5.4.3 NICS of cyclobutadiene](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap5-4.html#543-nics-of-cyclobutadiene).
+If you want ICSS, please read [5.4.1 ICSS of the ground state of cyclobutadiene](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap5-4.html#541-icss-of-the-ground-state-of-cyclobutadiene).
 
 (5) You should use the OpenMP version of Dalton for this functionality, do not use MPI-parallelized version of Dalton.
 
@@ -359,10 +359,10 @@ Note that:
 (5) This functionality cannot be used for active space >(14,14), since there is no DMRG-GIAO implementation.
 
 (6) MOKIT will submit 2, 3 or 4 Dalton jobs in parallel to accelerate the ICSS computation. The number of Dalton job is determined as three cases: (i) if %nproc is multiples of 4, then 4 jobs will be submitted; (ii) otherwise if %nproc is multiples of 3, then 3 jobs will be submitted; (iii) otherwise 2 jobs will be submitted. In these cases, the allowed maximum total memory is 64GB, 48GB and 32GB, respectively. This is because MOKIT assumes the user uses 32-bit integer of Dalton, which can only utilize up to 16GB.
-See a detailed example in [5.4 ICSS and NICS](#54-icss-and-nics).
+See a detailed example in [5.4 ICSS and NICS](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap5-4.html#54-icss-and-nics).
 
 ## 4.4.39 Nstates
-Specify the number of roots to be averaged in SA-CASSCF computations. For example, Nstates=2 stands for 3 electronic states (ground state + two excited states). The default is to average states with the same spin. If you want to average S0/T1, you should also write the keyword Mixed_Spin (see 4.4.40).
+Specify the number of roots to be averaged in SA-CASSCF computations. For example, Nstates=2 stands for 3 electronic states (ground state + two excited states). The default is to average states with the same spin. If you want to average S0/T1, you should also write the keyword `Mixed_Spin` (see [4.4.40](#4440-mixed_spin)).
 
 ## 4.4.40 Mixed_Spin
 Specifying this keyword means that allowing electronic states with different spin multiplicities to be averaged in SA-CASSCF. If you want to write this keyword, just write Mixed_Spin. Do not write Mixed_Spin=.True. or Mixed_Spin=True. If this keyword is not specified, the default setting is to average states with the same spin.

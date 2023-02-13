@@ -347,7 +347,14 @@ Sort (part of) MOs in descending order of the pair coefficients of the 1st natur
 ## 4.5.30 mkl2fch
 Transfer MOs from ORCA .mkl file into Gaussian .fch(k) file. A .fch(k) file must be provided by the user, in which the geometry and basis set data are valid (i.e. specifying 'noysmm int=nobasistransform 5D 7F' in Gaussian).
 
-Note that the number of digits in .mkl file is only 7, and the scientific notation is not used. Therefore, the transferred MOs will not be very accurate. This should be sufficient for visualizing orbitals and common wavefunction amalysis, but may cause up to 10-5 a.u. error on electronic energy in further computations. This can be viewed as a defect of the orca_2mkl utility in ORCA program. You are recommended to bring up an issue or request in the ORCA forum (https://orcaforum.kofo.mpg.de), to suggest ORCA developers to fix this. If the scientific notation is not used, then 10 digits of MO coefficients should be sufficient for further computations.
+Note that the number of digits in .mkl file is only 7, and the scientific notation
+is not used. Therefore, the transferred MOs will not be very accurate. This should
+be sufficient for visualizing orbitals and common wavefunction amalysis, but may
+cause up to 1e-5 a.u. error on electronic energy in further computations. This can
+be viewed as a defect of the `orca_2mkl` utility in ORCA program. You are recommended
+to bring up an issue or request in the [ORCA forum](https://orcaforum.kofo.mpg.de),
+to suggest ORCA developers to fix this. If the scientific notation is not used,
+then 10 digits of MO coefficients should be sufficient for further computations.
 
 Two examples are shown and explained below
 
@@ -426,7 +433,14 @@ To transfer MOs from Gaussian to Molpro, see [4.5.17 fch2com](#4517-fch2com).
 
 
 
-The utilities below are compiled by f2py, which is a Fortran to Python interface generator. These utilities are not binary executable files, but dynamic libraries `*.so` in `$MOKIT_ROOT/mokit/lib`. They can only be imported in a Python script. And this is the reason that why one of the environment variables of MOKIT is `PYTHONPATH`, not `LD_LIBRARY_PATH`. These utilities can also be viewed as APIs (Application Programming Interface), but they are described in this section not in [4.6](#46-apis-in-mokit), just for better comparison with other utilities of transferring MOs.
+The utilities below are compiled by `f2py`, which is a Fortran to Python interface
+generator. These utilities are not binary executable files, but dynamic libraries
+`*.so` in `$MOKIT_ROOT/mokit/lib`. They can only be imported in a Python script.
+And this is the reason that why one of the environment variables of MOKIT is `PYTHONPATH`,
+not `LD_LIBRARY_PATH`. These utilities can also be viewed as APIs (Application
+Programming Interface), but they are described in this section not in
+[4.6](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap4-6.html#46-apis-in-mokit),
+just for better comparison with other utilities of transferring MOs.
 
 ## 4.5.37 fch2py
 Transfer MOs from Gaussian to PySCF. By importing fch2py, PySCF Python script is able to read alpha and/or beta MOs from a provided .fch file. All attributes are shown below
@@ -436,7 +450,7 @@ fch2py(fchname, nbf, nif, ab, mf.mo_coeff)
 There are 4 parameters required by fch2py: (1) filename of .fch(k) file; (2) the number of basis functions; (3) the number of molecular orbitals; and (4) a character 'a'/'b' for reading alpha/beta orbitals. You should write these contents into a Python script, and run that script using the python executable. If you want a more detailed example, just run any `automr` job and see all `*.py` files generated.
 
 ## 4.5.38 py2fch
-Export MOs from PySCF to a Gaussian .fch file. Note that py2fch cannot generate
+Export MOs from PySCF to a Gaussian .fch file. Note that `py2fch` cannot generate
 a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha
 Orbital Energies' and 'Alpha MOs' sections (or beta orbital counterpart) will be
 replaced by occupation numbers and MOs from PySCF.
@@ -462,7 +476,7 @@ False, you can assign proper values to ev as your wish.
 
 This utility/module is supposed to be used usually along with other three utilities:
 `bas_fch2py` ([4.5.2](#452-bas_fch2py)), `fch2py` ([4.5.37](#4537-fch2py)) and
-`load_mol_from_fch` ([4.6.1](#461-load_mol_from_fch)).
+`load_mol_from_fch` ([4.6.1](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap4-6.html#461-load_mol_from_fch)).
 
 ## 4.5.39 py2fch_cghf
 Export complex GHF MOs from PySCF to a Gaussian .fch file. Note that `py2fch_cghf`
