@@ -13,7 +13,11 @@ and basis set data will be read from the given .fch(k) file. Note that, however,
 the user still needs to provide a basis set name, although it is not used in this
 case.
 
-There is also an exception that the basis set after '/' symbol matters. If RI (see Section 4.4.29) approximation is turned on, the auxiliary basis set will be automatically determined (by `automr`) according to the basis set. And if F12 (see Section 4.4.31) is turned on, the F12-CABS will be automatically determined (by `automr`) according to the basis set, too.
+There is also an exception that the basis set after '/' symbol matters. If RI (see
+Section 4.4.28) approximation is turned on, the auxiliary basis set will be automatically
+determined (by `automr`) according to the basis set. And if F12 (see Section 4.4.30)
+is turned on, the F12-CABS will be automatically determined (by `automr`) according
+to the basis set, too.
 
 ## 4.3.1 GVB
 Generalized Valence Bond theory.

@@ -77,9 +77,15 @@ In the future version of MOKIT, the utility xml2fch will not require the user to
 
 
 ### Q4: support more programs
-Can MOKIT support more types of files? Transferring MOs between other programs like QChem, NWChem is possible?
+Can MOKIT support more types of files? Transferring MOs between other programs like
+NWChem or BAGEL is possible?
 
-A4: The author jxzou wishes to make the MOKIT recognize all kinds of MO files of quantum chemistry programs, but he is not likely to be familiar with all programs. Therefore, if you are very familiar with any program (other than supported ones in MOKIT), and you happens to need a transferring of MOs, please contact jxzou and tell him the information in the MO file of that program. With the help from experienced users, the development will be much easier and quicker.
+A4: The MOKIT developers wish to make the MOKIT recognize all kinds of MO files of
+quantum chemistry programs, but they are not likely to be familiar with all programs.
+Therefore, if you are very familiar with any program (other than supported ones in
+MOKIT), and you happens to need a transferring of MOs, please contact MOKIT developers
+and tell the information in the MO file of that program. With the help from experienced
+users, the development will be much easier and quicker.
 
 
 ### Q5: OpenMolcas: Error in keyword
@@ -100,7 +106,12 @@ program automr.
 ### Q6: executable paths of Gaussian, etc.
 How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, ORCA, and GAMESS?
 
-A6: For Gaussian, the paths of executable files are read from the environment variables $GAUSS_EXEDIR. For PySCF and OpenMolcas, the `python` and `pymolcas` executable files are used directly, assuming the user had installed the corresponding programs correctly. For ORCA, the absolute path is automatically obtained from echo `\which orca`. For GAMESS, the user must define the $GMS environment variable in his/her ~/.bashrc file, such that the automr program can find corresponding paths.
+A6: For Gaussian, the paths of executable files are read from the environment variables
+`$GAUSS_EXEDIR`. For PySCF and OpenMolcas, the `python` and `pymolcas` executable
+are used directly, assuming the user had installed the corresponding programs correctly.
+For ORCA, the absolute path is automatically obtained from echo `which orca`. For
+GAMESS, the user must define the `$GMS` environment variable in his/her `~/.bashrc` file,
+such that the automr program can find corresponding paths.
 
 
 ### Q7: GAMESS: ERROR DIMENSIONS EXCEEDED

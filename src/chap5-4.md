@@ -204,7 +204,7 @@ One can see the active orbitals seem to be \\( \pi \\) orbitals. You may notice 
 `automr` recommends a CASSCF(8e,8e) calculation, not the (8e,9o) used by the authors.
 But the difference of 1 virtual orbital is not important. This job will take about
 6.5 h. The ICSS plot of C<sub>9</sub>H<sub>9</sub><sup>+</sup> is shown below
-(isovalue=16, the same to that in paper)
+(isovalue=16, the same as that in paper)
 
 <img src="images/C9H9_cation_icss.png" width="40%" height="40%" />
 
