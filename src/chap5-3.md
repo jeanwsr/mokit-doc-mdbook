@@ -60,7 +60,10 @@ EDA. UHF and UDFT methods can be applied in GKS-EDA. Thus it is powerful, especi
 when dealing with biradical system, where the symmetry broken UDFT calculations
 are necessary. See the following section for more examples.
 
-## 5.3.3 GKS-EDA
+## 5.3.3 LMO-EDA
+More details to be added.
+
+## 5.3.4 GKS-EDA
 To perform GKS-EDA calculations, you need the GAMESS program and xeda-patch script.
 After you download the required packages, use the xeda-patch script to modify the
 GAMESS source code. And then compile GAMESS in a usual way. Here is a tutorial
@@ -205,7 +208,7 @@ with a beta unpaired electron leads to the total spin singlet.
 The GKS-EDA supports up to 20 fragments. For convenience only examples containing
 two fragments are shown above.
 
-## 5.3.4 SAPT
+## 5.3.5 SAPT
 The utility `frag_guess_wfn` is also able to generate the input file of SAPT computation
 in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like
 SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the near future. Similarly,
@@ -256,7 +259,7 @@ in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be
 recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ
 unless there is some element which is out of the range of jun-cc-pVDZ.
 
-## 5.3.5 Tricks for accelerations
+## 5.3.6 Tricks for accelerations
 For some simple fragments (water molecules, organic ligands, etc), if you are sure
 that they have closed-shell wave function, you can append a character `r` after
 the Cartesian coordinates of any atom of the fragment. Again, taking the

@@ -139,7 +139,7 @@ Transfer MOs from Dalton (i.e. DALTON.MOPUN file) to Gaussian .fch(k) file. Note
 This is used for transferring R(O)HF or CASSCF orbitals.
 
 (2) `dal2fch a.dat a.fch -no`  
-This is used for transferring CASCI/CASSCF natural orbitals and corresponding natural orbital occupation numbers. To transfer MOs from Gaussian to Dalton, see [4.5.18 fch2dal](#4518-fch2dal).
+This is used for transferring CASCI/CASSCF natural orbitals and corresponding natural orbital occupation numbers. To transfer MOs from Gaussian to Dalton, see [4.5.19 fch2dal](#4519-fch2dal).
 
 ## 4.5.14 dat2fch
 Transfer MOs from GAMESS (.inp/.dat file) to Gaussian .fch file. Note that dat2fch can not generate a .fch file from scratch. The user must provide a .fch(k) file, and MOs in that file will be replaced. Four examples are shown and explained below
@@ -158,7 +158,7 @@ This is used for transferring natural orbitals (NOs) of CASCI/CASSCF. In this wa
 
 NOTE: the recommended way is to firstly use Gaussian to generate a .fch file (with keywords 'nosymm int=nobasistransform'), then generate the .inp file from .fch file. After GAMESS computations finished, you can transfer MOs from .dat back to .fch file. This procedure seems a little bit tedious, but it ensures an exact reproduce of energy in GAMESS.
 
-This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. To transfer MOs from Gaussian to GAMESS, see [4.5.19 fch2inp](#4519-fch2inp).
+This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. To transfer MOs from Gaussian to GAMESS, see [4.5.20 fch2inp](#4520-fch2inp).
 
 ## 4.5.15 extract_noon2fch
 Extract natural orbital occupation numbers (NOONs) from the following types of files  
@@ -184,7 +184,17 @@ Note that to transfer HF orbitals, the data in 'Alpha Orbital Energies' and 'Bet
 
 To transfer MOs from BDF back to Gaussian, see [4.5.10 bdf2fch](#4510-bdf2fch).
 
-## 4.5.17 fch2com
+## 4.5.17 fch2cfour
+Generate CFOUR files (ZMAT, OLDMOS, GENBAS and ECPDATA). One example is shown below
+```
+fch2cfour h2o.fch
+```
+This is used for transferring R(O)HF or UHF orbitals. One should first read the
+Cartesian coordinates from the CFOUR output and write a .gjf file to perform the
+single point calculation. Then use `fch2cfour` to generate CFOUR files, otherwise
+the molecular orientations of two programs will not be the same.
+
+## 4.5.18 fch2com
 Generate a Molpro .com file from a Gaussian .fch(k) file, with alpha MOs written in a .a file. One example is shown below
 ```
 fch2com a.fch
@@ -198,16 +208,16 @@ additionally.
 Note that in Windows* OS, any file with .com suffix/extension may be automatically associated with system, in which case double click of the mouse to open this file does not work. You have to right click on the .com file and choose 'open with'. You can modify the suffix/extension to .inp if you do not like that.
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .com file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
-To transfer MOs from Molpro back to Gaussian, see [4.5.36 xml2fch](#4536-xml2fch).
+To transfer MOs from Molpro back to Gaussian, see [4.5.37 xml2fch](#4537-xml2fch).
 
-## 4.5.18 fch2dal
+## 4.5.19 fch2dal
 Generate Dalton .dal and .mol files from a Gaussian .fch(k) file, where MOs are written in .dal file, and the Cartesian coordinates as well as basis set data are written in .mol file. One example is shown below
 ```
 fch2dal a.fch
 ```
 This is used for transferring R(O)HF or CASSCF orbitals. Note that there is no UHF method (or any methods based on UHF), thus you cannot use a .fch file containing UHF orbitals to transfer orbitals. To transfer MOs from Dalton back to Gaussian, see [4.5.13 dal2fch](#4513-dal2fch).
 
-## 4.5.19 fch2inp
+## 4.5.20 fch2inp
 Generate a GAMESS .inp file from a Gaussian .fch(k) file, with MOs written in the .inp file. The keywords in .inp file is already suitable for common simple calculations, but do check or modify it if you have additional requirements.
 
 Note that due to the different types of MOs (R(O)HF, UHF, GVB, and CASSCF orbitals), the fch2inp offers different options. Three examples are shown and explained below
@@ -225,7 +235,7 @@ This utility supports two types of basis functions: (1) pure spherical harmonic 
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .inp file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
 
-## 4.5.20 fch2inporb
+## 4.5.21 fch2inporb
 Transfer MOs from Gaussian to (Open)Molcas. A .input file and a .INPORB file will be generated. The .input file is the input file of (Open)Molcas, and it contains the geometry, basis set data and keywords. The .INPORB file contains the MOs. Two examples are shown and explained below
 
 (1) `fch2inporb a.fch`  
@@ -244,17 +254,17 @@ Note: if you use background charges in your studied system, the background charg
 
 Note: if you provide a .fch file generated by G09 and this .fch file is generated with DKH2 Hamiltonian in its corresponding .gjf file, the DKH2 information is not recorded in the .fch file. In such case, if you run fch2inporb xxx.fch, the generated xxx.input file will not include keyword Relativistic = R02O, you need to manually add this keyword into the .input file. This is not a problem for G16 since the Route section is recorded in .fch file for G16 so that it can be recognized/identified by fch2inporb.
 
-To transfer MOs from (Open)Molcas back to Gaussian, see [4.5.32 orb2fch](#4532-orb2fch).
+To transfer MOs from (Open)Molcas back to Gaussian, see [4.5.33 orb2fch](#4533-orb2fch).
 
-## 4.5.21 fch2mkl
+## 4.5.22 fch2mkl
 Transfer MOs from Gaussian to ORCA. One .inp file and one .mkl file will be generated. The .input file of ORCA holds the geometry, basis set data and keywords. The .mkl file contains the MOs. One example is shown below
 ```
 fch2mkl a.fch
 ```
 This is used for transferring R(O)HF, UHF or CASSCF orbitals. Two files will be generated: a_o.inp and a_o.mkl. The `_o` characters are added to avoid file overwritten in case that there is already a xxx.inp file in the current directory (for example, generated by utility fch2inp).
 
-To transfer MOs from ORCA back to Gaussian, see [4.5.30 mkl2fch](#4530-mkl2fch)
-and [4.5.31 mkl2gjf](#4531-mkl2gjf).
+To transfer MOs from ORCA back to Gaussian, see [4.5.31 mkl2fch](#4531-mkl2fch)
+and [4.5.32 mkl2gjf](#4532-mkl2gjf).
 
 Note 1: Assuming your ORCA input file is a.inp, you need to run `orca_2mkl a_o -gbw` to generate the ORCA a.gbw file since ORCA cannot read a.mkl file directly.
 
@@ -262,7 +272,7 @@ Note 2: The default keywords in .inp file does not contain any RI approximations
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .inp or .mkl file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
 
-## 4.5.22 fch2psi
+## 4.5.23 fch2psi
 Transfer MOs from Gaussian to PSI4. Two or three files will be generated: `*_psi.inp`, `*.A`, and `*.B` (if Beta MOs exist). The `_psi.inp` file of PSI4 holds the geometry, basis set data and keywords. The .A (and .B) file contains the Alpha (Beta) MOs. One example is shown below
 ```
 fch2psi a.fch
@@ -275,7 +285,7 @@ Note that if you use background charges in your studied system, the background c
 
 PSI4 can generate a .fch(k) file after calculation finished, which is equivalent to transferring MOs from PSI4 back to Gaussian.
 
-## 4.5.23 fch2qchem
+## 4.5.24 fch2qchem
 Transfer MOs from Gaussian to Q-Chem. For R(O)HF, UHF and DFT methods, two files will be generated: .in and 53.0. The molecular orbitals are stored in the file 53.0. For GVB, three files will be generated: .in, 53.0, and 169.0. The GVB orbitals are stored both in files 53.0 and 169.0 (the same content). Two examples are shown below
 
 (1) `fch2qchem h2o.fch`  
@@ -284,7 +294,7 @@ This is used for transferring R(O)HF, UHF or CASSCF orbitals.
 (2) `fch2qchem h2o.fch -gvb 2`  
 This is used for transferring GVB orbitals. The orbitals in h2o.fch must be ordered in Gaussian GVB preference (bonding1, bonding2, anti-bonding2, anti-bonding1). And `-gvb 2` tells fch2qchem to write GVB-PP related keywords into the .in file.
 
-## 4.5.24 fch2qm4d
+## 4.5.25 fch2qm4d
 Transfer MOs from Gaussian to QM4D. Input files for QM4D (.xyz, .inp, .xml and basis files for each element) will be generated. One example is shown below
 ```
 fch2qm4d a.fch
@@ -297,7 +307,7 @@ Note 2: QM4D supports ECP, but currently it seems to use spherical harmonic func
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .inp file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
 
-## 4.5.25 fch2wfn
+## 4.5.26 fch2wfn
 Generate .wfn file from a specified .fch(k) file. Two examples are shown below
 (1) `fch2wfn a.fch`  
 For a .fch file in which ground state HF/DFT orbitals are recorded, generate the corresponding a.wfn file.
@@ -305,17 +315,17 @@ For a .fch file in which ground state HF/DFT orbitals are recorded, generate the
 (2) `fch2wfn a.fch -no`  
 For a .fch file in which natural orbitals are recorded, generate the corresponding a.wfn file.
 
-## 4.5.26 fch_mo_copy
+## 4.5.27 fch_mo_copy
 Copy MOs from one .fch file into another .fch file. An example is shown below
 ```
 fch_mo_copy a.fch b.fch
 ```
 The default is to copy Alpha MOs in a.fch to Alpha MOs in b.fch. There are 4 optional parameters `-aa`, `-ab`, `-ba`, `-bb`. For example, `-ab` means copying Alpha MOs from a.fch to Beta MOs in b.fch.
 
-## 4.5.27 fch_u2r
+## 4.5.28 fch_u2r
 Transform a UHF-type .fch file into a RHF-type one. Only alpha MOs are retained.
 
-## 4.5.28 frag_guess_wfn
+## 4.5.29 frag_guess_wfn
 This utility has two functions: (1) perform a SCF (i.e. HF or DFT) computation using initial guess constructed from molecular orbitals of fragments. (2) generate GAMESS .inp file for GKS-EDA or Morokuma-EDA calculation.
 
 The Gaussian software package will be called to perform SCF computation for each fragment. The input file is exactly the Gaussian .gjf file, in which the atoms, charge and spin multiplicities of each fragment are properly defined. See examples in [5.3](#53-examples-of-the-utility-frag_guess_wfn).
@@ -341,10 +351,10 @@ it as the correct G03W, G09W or G16W directory. A screenshot is shown below
 
 <img src="images/g09w_path.png"/>
 
-## 4.5.29 gvb_sort_pairs
+## 4.5.30 gvb_sort_pairs
 Sort (part of) MOs in descending order of the pair coefficients of the 1st natural orbital in each pair. This utility is designed only for the GAMESS .dat file. A new .dat file will be generated, in which the sorted MOs and pair coefficients are held.
 
-## 4.5.30 mkl2fch
+## 4.5.31 mkl2fch
 Transfer MOs from ORCA .mkl file into Gaussian .fch(k) file. A .fch(k) file must be provided by the user, in which the geometry and basis set data are valid (i.e. specifying 'noysmm int=nobasistransform 5D 7F' in Gaussian).
 
 Note that the number of digits in .mkl file is only 7, and the scientific notation
@@ -364,9 +374,9 @@ This is used for transferring R(O)HF or UHF orbitals.
 (2) `mkl2fch a.mkl a.fch -no`  
 This is used for transferring NOs.
 
-To transfer MOs from Gaussian to ORCA, see [4.5.21 fch2mkl](#4521-fch2mkl).
+To transfer MOs from Gaussian to ORCA, see [4.5.22 fch2mkl](#4522-fch2mkl).
 
-## 4.5.31 mkl2gjf
+## 4.5.32 mkl2gjf
 Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinates, basis set data and MOs (optional) will be printed into the .gjf file. Two examples are shown and explained below
 
 (1) `mkl2gjf a.mkl`  
@@ -377,7 +387,7 @@ Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinat
 
 Note that the ORCA .mkl file has a defect: it does not contain ECP/PP information. Therefore, if you did not use ECP in your ORCA calculations, there would be no problem. But in case you used ECP, there would be no ECP data in the generated .gjf file (you must add them manually).
 
-## 4.5.32 orb2fch
+## 4.5.33 orb2fch
 Transfer MOs from (Open)Molcas `*Orb` file (e.g. .ScfOrb, .RasOrb.1, .UnaOrb, .UhfOrb, etc) to Gaussian .fch(k) file. A .fch(k) file must be provided by the user, in which the geometry and basis set data are available. Five examples are shown and explained below
 
 (1) `orb2fch a.ScfOrb a.fch`  
@@ -395,17 +405,17 @@ This is used for transferring UHF alpha and beta MOs.
 (5) `orb2fch a.RasOrb.1 a.fch -no`  
 This is used for transferring CASCI/CASSCF or RASCI/RASSCF NOs.
 
-To transfer MOs from Gaussian to (Open)Molcas, see [4.5.20 fch2inporb](#4520-fch2inporb).
+To transfer MOs from Gaussian to (Open)Molcas, see [4.5.21 fch2inporb](#4521-fch2inporb).
 
-## 4.5.33 mo_svd
+## 4.5.34 mo_svd
 Output the singular values of the overlap matrix between two sets of MOs. This utility will first read the atomic overlap matrix from a given file, then calculate the overlap matrix between two sets of MOs. Finally, perform singular value decomposition (SVD) on the molecular orbital overlap matrix and print information about singular values. The first two command line arguments can be both Gaussian .fch files, or both OpenMolcas orbital files (.INBORB, .RasOrb, etc). The third argument is a Gaussian .log file or a OpenMolcas output file, in which the atomic overlap matrix is written.
 
 The singular values can be used to measure the overlap or similarity of two sets of MOs. If all singular values are close to 1, the compared two sets of MOs are very similar. Any singular value being close to 0 means there exists at least 1 distinct orbital.
 
-## 4.5.34 solve_ON_matrix
+## 4.5.35 solve_ON_matrix
 Compute the occupation number matrix (a non-diagonal matrix) of a set of MOs. Assuming you have a .fch(k) file which holds some kind of MOs, and another .fch(k) file which holds some kind of NOs and corresponding NOONs, then this utility can compute the occupation numbers of this set of MOs (transformed from NOs and NOONs). Of course, in this case the occupation number matrix of MOs is not a diagonal matrix, only the diagonal elements are written into the 'Alpha Orbital Energies' section of the file which holds MOs.
 
-## 4.5.35 replace_xyz_in_inp
+## 4.5.36 replace_xyz_in_inp
 Replace the Cartesian coordinates in an input file, by coordinates from a given .xyz file or an output file. For the input/output file, currently only (Open)Molcas and Molpro formats are supported. Other formats will be supported in the near future. Four examples are shown below
 
 (1) `replace_xyz_in_inp a.xyz b.input -molcas`  
@@ -420,7 +430,7 @@ Replace the Cartesian coordinates in b.com file, by coordinates from the a.xyz f
 (4) `replace_xyz_in_inp a.out b.com -molpro`  
 Replace the Cartesian coordinates in b.com file, by coordinates from a Molpro output file. A file named b_new.com will be generated.
 
-## 4.5.36 xml2fch
+## 4.5.37 xml2fch
 Transfer MOs from Molpro .xml file to Gaussian .fch(k) file. Note that xml2fch cannot generate a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha Orbital Energies' and 'Alpha MOs' sections (and possibly Beta sections) will be replaced by occupation numbers and MOs from Molpro .xml file. Three examples are shown and explained below
 
 (1) `xml2fch a.xml a.fch`  
@@ -429,7 +439,7 @@ This is used for transferring R(O)HF or UHF orbitals.
 (2) `xml2fch a.xml a.fch -no`  
 This is used for transferring NOs.
 
-To transfer MOs from Gaussian to Molpro, see [4.5.17 fch2com](#4517-fch2com).
+To transfer MOs from Gaussian to Molpro, see [4.5.18 fch2com](#4518-fch2com).
 
 
 
@@ -438,18 +448,17 @@ generator. These utilities are not binary executable files, but dynamic librarie
 `*.so` in `$MOKIT_ROOT/mokit/lib`. They can only be imported in a Python script.
 And this is the reason that why one of the environment variables of MOKIT is `PYTHONPATH`,
 not `LD_LIBRARY_PATH`. These utilities can also be viewed as APIs (Application
-Programming Interface), but they are described in this section not in
-[4.6](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap4-6.html#46-apis-in-mokit),
+Programming Interface), but they are described in this section not in [4.6](./chap4-6.html#46-apis-in-mokit),
 just for better comparison with other utilities of transferring MOs.
 
-## 4.5.37 fch2py
+## 4.5.38 fch2py
 Transfer MOs from Gaussian to PySCF. By importing fch2py, PySCF Python script is able to read alpha and/or beta MOs from a provided .fch file. All attributes are shown below
 ```python
 fch2py(fchname, nbf, nif, ab, mf.mo_coeff)
 ```
 There are 4 parameters required by fch2py: (1) filename of .fch(k) file; (2) the number of basis functions; (3) the number of molecular orbitals; and (4) a character 'a'/'b' for reading alpha/beta orbitals. You should write these contents into a Python script, and run that script using the python executable. If you want a more detailed example, just run any `automr` job and see all `*.py` files generated.
 
-## 4.5.38 py2fch
+## 4.5.39 py2fch
 Export MOs from PySCF to a Gaussian .fch file. Note that `py2fch` cannot generate
 a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha
 Orbital Energies' and 'Alpha MOs' sections (or beta orbital counterpart) will be
@@ -465,7 +474,7 @@ ensured. All attributes of py2fch are shown below
 py2fch('a.fch', nbf, nif, mf.mo_coeff, ab, ev, gen_density)
 ```
 
-The first few parameters are identical to those in [4.5.37 fch2py](#4537-fch2py). The parameter
+The first few parameters are identical to those in [4.5.38 fch2py](#4538-fch2py). The parameter
 `ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation
 numbers. The last parameter gen_density is a bool variable, where True/False meaning
 whether or not generating Total SCF Density (as well as writing density into .fch
@@ -475,10 +484,10 @@ would be computed using MOs and occupation numbers. If gen_density is set to be
 False, you can assign proper values to ev as your wish.
 
 This utility/module is supposed to be used usually along with other three utilities:
-`bas_fch2py` ([4.5.2](#452-bas_fch2py)), `fch2py` ([4.5.37](#4537-fch2py)) and
-`load_mol_from_fch` ([4.6.1](https://jeanwsr.gitlab.io/mokit-doc-mdbook/chap4-6.html#461-load_mol_from_fch)).
+`bas_fch2py` ([4.5.2](#452-bas_fch2py)), `fch2py` ([4.5.38](#4538-fch2py)) and
+`load_mol_from_fch` ([4.6.1](./chap4-6.html#461-load_mol_from_fch)).
 
-## 4.5.39 py2fch_cghf
+## 4.5.40 py2fch_cghf
 Export complex GHF MOs from PySCF to a Gaussian .fch file. Note that `py2fch_cghf`
 cannot generate a .fch file from scratch. The user must provide one .fch file. This
 module is similar to `py2fch` (which is usually used for R(O)HF, UHF and DFT methods).

@@ -286,7 +286,20 @@ py2qchem(mf, 'h2o.in', npair=2)
 to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how
 many pairs you want to calculate.
 
-## 4.6.21 Other modules in rwwfn
+## 4.6.21 make_orb_resemble
+Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two
+.fch files are allowed, but their geometries and orientations should be identical
+or very similar. All attributes are
+```
+make_orb_resemble(target_fch, ref_fch, nmo=None)
+```
+where  
+`target_fch`: the .fch file which holds MOs to be updated  
+`ref_fch`: the .fch file which holds reference MOs  
+`nmo`: indices 1~nmo MOs in ref_fch will be set as reference MOs. If `nmo` is not
+given, it will be set as na (number of alpha electrons)
+
+## 4.6.22 Other modules in rwwfn
 modify_IROHF_in_fch(fchname, k)  
 read_charge_and_mult_from_fch(fchname, charge, mult)  
 read_charge_and_mult_from_mkl(mklname, charge, mult)  
@@ -351,12 +364,23 @@ get_no_from_density_and_ao_ovlp(nbf, nif, P, ao_ovlp, noon, new_coeff)
 read_mult_from_fch(fchname, mult)  
 get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
 
-## 4.6.22 Other modules in `$MOKIT_ROOT/mokit/lib`
+## 4.6.23 Other modules in `$MOKIT_ROOT/mokit/lib`
 py2bdf(mf, inpname, write_no=None)  
+py2cfour(mf)  
 py2dalton(mf, inpname)  
 py2gms(mf, inpname, npair=None, nopen=None)  
 py2molcas(mf, inpname)  
 py2molpro(mf, inpname)  
 py2orca(mf, inpname)  
-py2psi(mf, inpname)
+py2psi(mf, inpname)  
+
+The following modules are used by `from mokit.lib.qchem import xxx`:  
+qchem2bdf(fchname, inpname)  
+qchem2cfour(fchname)  
+qchem2dalton(fchname, dalname)  
+qchem2gms(fchname, inpname)  
+qchem2molcas(fchname, inpname)  
+qchem2molpro(fchname, inpname)  
+qchem2psi(fchname, inpname)  
+qchem2orca(fchname, inpname)
 
