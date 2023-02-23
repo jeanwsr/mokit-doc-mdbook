@@ -3,18 +3,24 @@ Currently only Python APIs are provided. C/C++ APIs may be provided in the futur
 
 1. load_mol_from_fch(fchname)
 2. loc(fchname, method, idx)
-3. read_int1e_from_gau_log(logname, itype, nbf)
-4. read_mo_from_fch(fchname, nbf, nif, ab)
-5. read_density_from_gau_log(logname, itype, nbf)
-6. read_density_from_fch(fchname, itype, nbf)
-7. write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
-8. gen_ao_tdm(logname, nbf, nif, mo, istate)
-9. export_mat_into_txt(txtname, n, mat, lower, label)
-10. read_natom_from_pdb(pdbname, natom)
-11. read_nframe_from_pdb(pdbname, nframe)
-12. read_iframe_from_pdb(pdbname, iframe, natom, cell, elem, resname, coor)
-13. write_frame_into_pdb(pdbname, iframe, natom, cell, elem, resname, coor, append)
-14. calc_unpaired_from_fch(fchname, wfn_type, gen_dm)
+3. uno(fchname)
+4. permute_orb(fchname, orb1, orb2)
+5. gen_fcidump(fchname, nacto, nacte, mem=4000, np=None)
+6. read_int1e_from_gau_log(logname, itype, nbf)
+7. read_mo_from_fch(fchname, nbf, nif, ab)
+8. read_density_from_gau_log(logname, itype, nbf)
+9. read_density_from_fch(fchname, itype, nbf)
+10. write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
+11. gen_ao_tdm(logname, nbf, nif, mo, istate)
+12. export_mat_into_txt(txtname, n, mat, lower, label)
+13. read_natom_from_pdb(pdbname, natom)
+14. read_nframe_from_pdb(pdbname, nframe)
+15. read_iframe_from_pdb(pdbname, iframe, natom, cell, elem, resname, coor)
+16. write_frame_into_pdb(pdbname, iframe, natom, cell, elem, resname, coor, append)
+17. calc_unpaired_from_fch(fchname, wfn_type, gen_dm)
+18. gen_no_using_density_in_fch
+19. gen_cf_orb(datname, ndb, nopen)
+20. make_orb_resemble(target_fch, ref_fch, nmo=None)
 
 Meanings of frequently appeared arguments are  
 `fchname`: filename of .fch(k) file  
@@ -253,40 +259,7 @@ gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 
 where ndb is the number of doubly occupied orbitals and nopen is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
 
-## 4.6.20 py2qchem
-Export MOs from PySCF to Q-Chem. An input (.in) file and a directory containing orbital files will be generated. The restricted/unrestricted-type (i.e. RHF, ROHF or UHF) can be automatically detected. Two examples are shown below:
-
-(1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. h2o.py
-```python
-from pyscf import gto, scf
-from mokit.lib.py2qchem import py2qchem
-
-mol = gto.M(atom = '''
-O  -0.49390246   0.93902438   0.0
-H   0.46609754   0.93902438   0.0
-H  -0.81435705   1.84396021   0.0
-''', basis = 'cc-pVDZ')
-
-mf = scf.RHF(mol).run()
-py2qchem(mf, 'h2o.in')
-```
-
-Run it using python and then a Q-Chem input file h2o.in and a scratch directory h2o will be generated. The orbital file(s) is put in h2o/. If you run
-```
-qchem h2o.in h2o.out h2o
-```
-you will find RHF in Q-Chem converges in 2 cycles. If the environment variable QCSCRATCH is already defined in your node/computer, the scratch directory h2o will be automatically put into $QCSCRATCH/; otherwise h2o will be put in the current directory.
-
-(2) Transfer GVB orbitals
-If you have performed GVB calculations and stored GVB orbitals in the object mf,
-then you can write in python
-```python
-py2qchem(mf, 'h2o.in', npair=2)
-```
-to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how
-many pairs you want to calculate.
-
-## 4.6.21 make_orb_resemble
+## 4.6.20 make_orb_resemble
 Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two
 .fch files are allowed, but their geometries and orientations should be identical
 or very similar. All attributes are
@@ -373,8 +346,7 @@ py2molcas(mf, inpname)
 py2molpro(mf, inpname)  
 py2orca(mf, inpname)  
 py2psi(mf, inpname)  
-
-The following modules are used by `from mokit.lib.qchem import xxx`:  
+py2qchem(mf, inpname, npair=None)  
 qchem2bdf(fchname, inpname)  
 qchem2cfour(fchname)  
 qchem2dalton(fchname, dalname)  
@@ -383,4 +355,58 @@ qchem2molcas(fchname, inpname)
 qchem2molpro(fchname, inpname)  
 qchem2psi(fchname, inpname)  
 qchem2orca(fchname, inpname)
+standardize_fch(fchname)
+
+Taking `py2qchem` as an example, it export MOs from PySCF to Q-Chem. An input (.in)
+file and a directory containing orbital files will be generated. The restricted/
+unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Two examples
+are shown below:
+
+(1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. h2o.py
+```python
+from pyscf import gto, scf
+from mokit.lib.py2qchem import py2qchem
+
+mol = gto.M(atom = '''
+O  -0.49390246   0.93902438   0.0
+H   0.46609754   0.93902438   0.0
+H  -0.81435705   1.84396021   0.0
+''', basis = 'cc-pVDZ')
+
+mf = scf.RHF(mol).run()
+py2qchem(mf, 'h2o.in')
+```
+
+Run it using python and then a Q-Chem input file h2o.in and a scratch directory h2o will be generated. The orbital file(s) is put in h2o/. If you run
+```
+qchem h2o.in h2o.out h2o
+```
+you will find RHF in Q-Chem converges in 2 cycles. If the environment variable QCSCRATCH is already defined in your node/computer, the scratch directory h2o will be automatically put into $QCSCRATCH/; otherwise h2o will be put in the current directory.
+
+(2) Transfer GVB orbitals
+If you have performed GVB calculations and stored GVB orbitals in the object mf,
+then you can write in python
+```python
+py2qchem(mf, 'h2o.in', npair=2)
+```
+to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how
+many pairs you want to calculate.
+
+Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k)
+file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type
+(i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
+```python
+from mokit.lib.qchem import qchem2molpro
+qchem2molpro('water.FChk','h2o.com')
+```
+Two files(`h2o.com` and `water_std.a`) will be generated. Keywords for reading MOs
+from `water_std.a` have been written in `h2o.com`.
+
+If you only want to standardize a Q-Chem .fch(k) file and do not want to transfer
+MOs. Then you only need
+```python
+from mokit.lib.qchem import standardize_fch
+standardize_fch('water.FChk')
+```
+A file named `water_std.fch` will be generated.
 
