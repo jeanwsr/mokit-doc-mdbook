@@ -277,7 +277,8 @@ the file h2o_o.inp and modify the keywords as
 ! RHF TightSCF DLPNO-CCSD(T) TightPNO RIJK cc-pVTZ/JK cc-pVTZ/C
 ```
 There no need to write the orbital basis set cc-pVTZ since the cc-pVTZ detailed
-data was already written in the file h2o_o.inp.
+data was already written in the file h2o_o.inp. Of course, you also need to modify
+the parallel and memory settings to suit your computer.
 
 Assuming you want firstly to perform the SCF part of the double hybrid functional
 PW91B95 in Gaussian using def2TZVPP, the Gaussian keywords are
@@ -287,9 +288,9 @@ PW91B95 in Gaussian using def2TZVPP, the Gaussian keywords are
 And assuming next you want to perform a PWPB95-D3(BJ) job using ORCA, then you can
 open the h2o_o.inp file and modify the ORCA keywords as
 ```
-! TightSCF RIJCOSX defgrid3 def2/J def2-TZVPP/C RI-PWPB95 D3BJ
+! RKS TightSCF RIJCOSX defgrid3 def2/J def2-TZVPP/C RI-PWPB95 D3BJ
 ```
-Again there is no need to write the orbital basis set `def2-TZVPP`.
+Again there is no need to write the orbital basis set def2-TZVPP.
 
 To transfer MOs from ORCA back to Gaussian, see [4.5.31 mkl2fch](#4531-mkl2fch)
 and [4.5.32 mkl2gjf](#4532-mkl2gjf).
