@@ -322,7 +322,7 @@ When ist=1 or 2, this parameter is the threshold of UNO occupation numbers for d
 DO NOT modify the default value unless you are an experienced user.
 
 ## 4.4.36 excludeXH
-Request the exclusion of inactive X-H bonds after normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword excludeXH is specified in mokit{}, then a GVB(9) computation containing only C-C bonds will be automatically performed after GVB(15).
+Request the exclusion of inactive X-H bonds after normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `excludeXH` is specified in `mokit{}`, then a GVB(9) computation containing only C-C bonds will be automatically performed after GVB(15).
 
 ## 4.4.37 NMR
 Request the calculation of nuclear shielding constants. Currently only the CASSF method is supported. Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shielding tensors. Note that:
@@ -368,11 +368,7 @@ Specify the number of roots to be averaged in SA-CASSCF computations. For exampl
 Specifying this keyword means that allowing electronic states with different spin multiplicities to be averaged in SA-CASSCF. If you want to write this keyword, just write Mixed_Spin. Do not write Mixed_Spin=.True. or Mixed_Spin=True. If this keyword is not specified, the default setting is to average states with the same spin.
 
 ## 4.4.41 Root
-Specify the root which you are interested in State-Specific CASSCF (SS-CASSCF)
-calculations. Default value is 0 (ground state). `Root=1` stands for the first
-excited state. For example, if the ground state is S0, then `Root=1` stands for
-the S1 state. Note that this keyword is mutually exclusive to the keyword `Nstates`
-in [4.4.39 Nstates](#4439-nstates), since the latter one is used for SA-CASSCF. Currently dynamic correlation based on SS-CASSCF is not supported.
+Specify the root which you are interested in State-Specific CASSCF (SS-CASSCF) calculations. Default value is 0 (ground state). `Root=1` stands for the first excited state. For example, if the ground state is S0, then `Root=1` stands for the S1 state. Note that this keyword is mutually exclusive to the keyword `Nstates` in [4.4.39 Nstates](#4439-nstates), since the latter one is used for SA-CASSCF. Currently dynamic correlation based on SS-CASSCF is not supported. The SS-CASSCF calculation is performed after the ground state CASSCF calculation.
 
 ## 4.4.42 GVB_conv
 Modify/Set the density matrix convergence criterion in GAMESS GVB to be a desired
@@ -440,4 +436,7 @@ FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work. This ke
 is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations
 of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember
 to specify FcGVB in both singlet and triplet cases.
+
+## 4.4.47 OnlyXH
+Request to keep only X-H bonds after a normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `OnlyXH` is specified in `mokit{}`, then a GVB(6) computation containing only C-H bonds will be automatically performed after GVB(15). This keyword can be viewed as an opposite option of [4.4.36 excludeXH](./chap4-4.html#4436-excludexh).
 
