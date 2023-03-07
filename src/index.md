@@ -1,10 +1,10 @@
 # MOKIT Doc
 
-for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.5rc12
+for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.5rc13
 
 MOKIT developers
 
-Feb 23, 2023
+Mar 7, 2023
 
 <br>
 
@@ -16,6 +16,7 @@ Feb 23, 2023
 - [User's Guide](./chap4_guide.md): syntax rule, keywords, utilities, and APIs
 - [Examples](./chap5_example.md)
 - [Developer's Guide](./chap6.md)
+- [Papers citing MOKIT](./citing.md)
 - [Appendix](./chap_appdx.md): FAQs, limitations and [bug report](./chap_appdx.md#a3-bug-report)
 
 Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your kerboard. 
