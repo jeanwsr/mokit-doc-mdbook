@@ -354,7 +354,7 @@ qchem2gms(fchname, inpname)
 qchem2molcas(fchname, inpname)  
 qchem2molpro(fchname, inpname)  
 qchem2psi(fchname, inpname)  
-qchem2orca(fchname, inpname)
+qchem2orca(fchname, inpname)  
 standardize_fch(fchname)
 
 Taking `py2qchem` as an example, it export MOs from PySCF to Q-Chem. An input (.in)
