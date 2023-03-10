@@ -440,3 +440,10 @@ to specify FcGVB in both singlet and triplet cases.
 ## 4.4.47 OnlyXH
 Request to keep only X-H bonds after a normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `OnlyXH` is specified in `mokit{}`, then a GVB(6) computation containing only C-H bonds will be automatically performed after GVB(15). This keyword can be viewed as an opposite option of [4.4.36 excludeXH](./chap4-4.html#4436-excludexh).
 
+## 4.4.48 Xmult
+Specify the spin multiplicity of the target excited state in a SS-CASSCF calculation. This keyword is usually used along with `root` in Section [4.4.41 Root](./chap4-4.html#4441-root). If the spin multiplicity in the input file is 1 (i.e. assuming a singlet ground state), here are some examples of calculating the target excited state:  
+(1) `mokit{root=1}` means the S<sub>1</sub> state;  
+(2) `mokit{root=1,Xmult=1}` is identical to (1);  
+(3) `mokit{root=1,Xmult=3}` means the T<sub>1</sub> state;  
+(4) `mokit{root=2,Xmult=1}` means the S<sub>2</sub> state.
+
