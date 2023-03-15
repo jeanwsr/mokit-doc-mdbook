@@ -76,4 +76,24 @@ Tips:
   - The NumPy version for conda based prebuilts is fixed, because we use fixed-version miniconda image for building and would not upgrade anything for convenience. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for other prebuilts are latest (currently 1.24, because they are installed from pip) except py37 (because NumPy did not provide newer releases than 1.21 for it).
 
 Known issues:
-* 
+*
+
+## 2.2.3 Only want `frag_guess_wfn`?
+If you do not need full functionality of MOKIT and only want `frag_guess_wfn` for generating the input file of various EDA methods, the easiest way is to download the pre-compiled MOKIT in Section [2.2.2](./chap2-2.html#222-pre-built-linux-executables-and-libraries). There is no need to install Miniconda/Anaconda Python in this case, and no need for `conda install`.
+
+Firstly, download a pre-compiled MOKIT package according to your OS (e.g. CentOS 7), and change the directory name
+```
+unzip mokit-master_linux_centos7_conda_py39.zip
+rm -f mokit-master_linux_centos7_conda_py39.zip
+mv mokit-master_linux_centos7_conda_py39 mokit
+```
+
+Then write proper environment variables in your `~/.bashrc` file,
+```
+export MOKIT_ROOT=$HOME/software/mokit
+export PATH=$MOKIT_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
+```
+
+Remember to run `source ~/.bashrc` to make the environment variables valid. If you are working on a Cluster（集群） and using a script to submit any computational task, you should write the environment variables into your script.
+

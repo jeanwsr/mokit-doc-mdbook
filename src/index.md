@@ -1,10 +1,10 @@
 # MOKIT Doc
 
-for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.5rc15
+for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.5
 
 MOKIT developers
 
-Mar 10, 2023
+Mar 15, 2023
 
 <br>
 

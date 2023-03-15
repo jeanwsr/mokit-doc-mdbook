@@ -23,9 +23,7 @@ Assuming you've already downloaded the MOKIT .zip package, just run
 ```
 unzip mokit-master.zip
 ```
-to uncompress it. Note that do not uncompress the package in Windows* OS, but un-
-compress it in Linux* OS. Then simply run the following three command lines in
-Shell
+to uncompress it. Note that do not unzip the package in Windows OS, but unzip it in Linux OS. Then simply run the following three command lines in Shell
 ```
 mv mokit-master mokit
 cd mokit/src
