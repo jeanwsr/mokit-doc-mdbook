@@ -447,3 +447,6 @@ Specify the spin multiplicity of the target excited state in a SS-CASSCF calcula
 (3) `mokit{root=1,Xmult=3}` means the T<sub>1</sub> state;  
 (4) `mokit{root=2,Xmult=1}` means the S<sub>2</sub> state.
 
+## 4.4.49 noDMRGNO
+Request not to generate natural orbitals in a DMRG-CASCI calculation. Only valid for a DMRG-CASCI job. This keyword would save some time when one wants to check whether the DMRG-CASCI electronic energy converges with [maxM](./chap4-4.html#4421-maxm). After the user confirms a suitable `maxM`, he/she can remove this keyword and perform a single point calculation to generate NOs.
+

@@ -60,10 +60,7 @@ EDA. UHF and UDFT methods can be applied in GKS-EDA. Thus it is powerful, especi
 when dealing with biradical system, where the symmetry broken UDFT calculations
 are necessary. See the following section for more examples.
 
-## 5.3.3 LMO-EDA
-More details to be added.
-
-## 5.3.4 GKS-EDA
+## 5.3.3 GKS-EDA
 To perform GKS-EDA calculations, you need the GAMESS program and xeda-patch script.
 After you download the required packages, use the xeda-patch script to modify the
 GAMESS source code. And then compile GAMESS in a usual way. Here is a tutorial
@@ -208,16 +205,32 @@ with a beta unpaired electron leads to the total spin singlet.
 The GKS-EDA supports up to 20 fragments. For convenience only examples containing
 two fragments are shown above.
 
-## 5.3.5 SAPT
-The utility `frag_guess_wfn` is also able to generate the input file of SAPT computation
-in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like
-SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the near future. Similarly,
-`frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and
-then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal
-with strong interactions come from two fragments by breaking covalent bonds (in
-that case you should use the GKS-EDA method).
+## 5.3.4 LMO-EDA
+The LMO-EDA calculations can be performed using HF, MP2, CCSD or CCSD(T) methods for monomers and the complex. This method is used less frequently than GKS-EDA nowadays. If you want to use HF or MP2, then maybe GKS-EDA is a better choice (since DFT is computationally economic). If you want to use CCSD or CCSD(T), the desired computation may be too time-consuming. Anyway, here is one input example of `frag_guess_wfn` for LMO-EDA:
+```
+%mem=16GB
+%nprocshared=8
+#p CCSD/jun-cc-pVDZ guess(fragment=2)
 
-Here is a SAPT example:
+{LMO}
+
+0 1 0 1 0 1
+O(fragment=1)    -1.90937854    1.06610853   -0.05598828
+H(fragment=1)    -2.23867796    0.17728177    0.09615925
+H(fragment=1)    -0.94953286    1.05932020   -0.04017097
+N(fragment=2)    -2.02042680   -1.64298230    0.34416157
+H(fragment=2)    -2.28323594   -1.98171649   -0.55927105
+H(fragment=2)    -2.67940800   -1.96304329    1.02482651
+H(fragment=2)    -1.10944265   -1.98408759    0.57601295
+
+```
+
+The `frag_guess_wfn` utility will call Gaussian to perform HF calculations for monomers and the complex. That is to say, currently only the SCF steps would be accelerated in GAMESS. The CCSD amplitude iteration is not accelerated.
+
+## 5.3.5 SAPT0
+The utility `frag_guess_wfn` is also able to generate the input file of SAPT0 computation in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the future. Similarly, `frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal with strong interactions come from two fragments by breaking covalent bonds (in that case you should use the GKS-EDA method).
+
+Here is an SAPT example:
 ```
 %mem=16GB
 %nprocshared=8
@@ -226,44 +239,73 @@ Here is a SAPT example:
 {sapt,bronze}
 
 0 1 0 1 0 1
-O(fragment=1)                 -1.90937854    1.06610853   -0.05598828
-H(fragment=1)                 -2.23867796    0.17728177    0.09615925
-H(fragment=1)                 -0.94953286    1.05932020   -0.04017097
-N(fragment=2)                 -2.02042680   -1.64298230    0.34416157
-H(fragment=2)                 -2.28323594   -1.98171649   -0.55927105
-H(fragment=2)                 -2.67940800   -1.96304329    1.02482651
-H(fragment=2)                 -1.10944265   -1.98408759    0.57601295
+O(fragment=1)        -1.90937854    1.06610853   -0.05598828
+H(fragment=1)        -2.23867796    0.17728177    0.09615925
+H(fragment=1)        -0.94953286    1.05932020   -0.04017097
+N(fragment=2)        -2.02042680   -1.64298230    0.34416157
+H(fragment=2)        -2.28323594   -1.98171649   -0.55927105
+H(fragment=2)        -2.67940800   -1.96304329    1.02482651
+H(fragment=2)        -1.10944265   -1.98408759    0.57601295
 
 ```
 
-Using `frag_guess_wfn` to generate the sSAPT0 input file:
+Using `frag_guess_wfn` to generate the sSAPT0 input file with MOs:
 ```
-frag_guess_wfn h2o_nh3.gjf >h2o_nh3.log 2>&1
+frag_guess_wfn h2o_nh3.gjf >h2o_nh3.log 2>&1 &
 ```
 
-Submit the generated h2o_nh3.inp to PSI4:
+If the job above is accomplished successfully, you will find the following information in the output file h2o_nh3.log:
+```
+...
+i=  1, frags(i)%e =      -76.037065444, frags(i)%ssquare=  0.00
+i=  2, frags(i)%e =      -56.203022091, frags(i)%ssquare=  0.00
+i=  3, frags(i)%e =     -132.241272191, frags(i)%ssquare=  0.00
+All SCF computations finished. Generating PSI4 input file...
+
+Done. Now you can submit file h2o_nh3.inp to PSI4 (DO NOT delete *.A and
+*.B files) like
+
+-------------------------------------------------------------------------------
+psi4 h2o_nh3.inp h2o_nh3.out -n 8 &
+-------------------------------------------------------------------------------
+...
+```
+
+And there should be 8 files in the current directory:
+```
+001-h2o_nh3.A, 002-h2o_nh3.A, 003-h2o_nh3.A, 003-h2o_nh3.fch, 003-h2o_nh3.log,
+h2o_nh3.gjf, h2o_nh3.inp, h2o_nh3.log
+```
+
+The converged MOs are stored in `*.A` files. If UHF-based SAPT calculations are performed, there should also be `*.B` files generated. Please do not delete these orbital files since they will be needed in SAPT calculations. Now submit the generated h2o_nh3.inp to PSI4:
 ```
 psi4 h2o_nh3.inp h2o_nh3.out -n 16
 ```
 
-Both of SAPT0 and sSAPT0 results can be found in output. The SAPT paper (JCP 140, 094106 (2014))
-recommends three levels of theory to be used:
+Both of SAPT0 and sSAPT0 results can be found in PSI4 output:
+```
+...
+  Total HF                         -1.16949611 [mEh]      -0.73386989 [kcal/mol]      -3.07051162 [kJ/mol]
+  Total SAPT0                      -5.33584033 [mEh]      -3.34829036 [kcal/mol]     -14.00924687 [kJ/mol]
+
+  Special recipe for scaled SAPT0 (see Manual):
+    Electrostatics sSAPT0         -24.50676069 [mEh]     -15.37822450 [kcal/mol]     -64.34249132 [kJ/mol]
+    Exchange sSAPT0                31.00203914 [mEh]      19.45407327 [kcal/mol]      81.39584256 [kJ/mol]
+    Induction sSAPT0               -7.07990345 [mEh]      -4.44270649 [kcal/mol]     -18.58828396 [kJ/mol]
+    Dispersion sSAPT0              -4.06339883 [mEh]      -2.54982126 [kcal/mol]     -10.66845216 [kJ/mol]
+  Total sSAPT0                     -4.64802383 [mEh]      -2.91667899 [kcal/mol]     -12.20338488 [kJ/mol]
+```
+
+The SAPT paper (JCP 140, 094106 (2014)) recommends three levels of theory to be used:
 
 (1) *bronze*: sSAPT0/jun-cc-pVDZ;  
 (2) *silver*: SAPT2+/aug-cc-pVDZ;  
 (3) *gold*: SAPT2+(3)\\( \delta\\)MP2/aug-cc-pVTZ.
 
-So far the open shell calculations have not been implemented for *silver* and *gold*
-level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported
-in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be
-recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ
-unless there is some element which is out of the range of jun-cc-pVDZ.
+So far the open shell calculations have not been implemented for *silver* and *gold* level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ unless there is some element which is out of the range of jun-cc-pVDZ.
 
 ## 5.3.6 Tricks for accelerations
-For some simple fragments (water molecules, organic ligands, etc), if you are sure
-that they have closed-shell wave function, you can append a character `r` after
-the Cartesian coordinates of any atom of the fragment. Again, taking the
-[Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation as the example,
+For some simple fragments (water molecules, organic ligands, etc), if you are sure that they have closed-shell wave function, you can append a character `r` after the Cartesian coordinates of any atom of the fragment. Again, taking the [Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation as the example
 
 ```
 %chk=Ti.chk
