@@ -210,7 +210,7 @@ The LMO-EDA calculations can be performed using HF, MP2, CCSD or CCSD(T) methods
 ```
 %mem=16GB
 %nprocshared=8
-#p CCSD/jun-cc-pVDZ guess(fragment=2)
+#p CCSD/cc-pVTZ guess(fragment=2)
 
 {LMO}
 
@@ -225,10 +225,10 @@ H(fragment=2)    -1.10944265   -1.98408759    0.57601295
 
 ```
 
-The `frag_guess_wfn` utility will call Gaussian to perform HF calculations for monomers and the complex. That is to say, currently only the SCF steps would be accelerated in GAMESS. The CCSD amplitude iteration is not accelerated.
+`frag_guess_wfn` will call Gaussian to perform HF calculations for monomers and the complex. That is to say, currently only the SCF steps would be accelerated in GAMESS. The CCSD amplitude iteration is not accelerated.
 
 ## 5.3.5 SAPT0
-The utility `frag_guess_wfn` is also able to generate the input file of SAPT0 computation in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the future. Similarly, `frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal with strong interactions come from two fragments by breaking covalent bonds (in that case you should use the GKS-EDA method).
+`frag_guess_wfn` is also able to generate the input file of SAPT0 computation in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the future. Similarly, `frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal with strong interactions come from two fragments by breaking covalent bonds (in that case you should use the GKS-EDA method).
 
 Here is an SAPT example:
 ```
@@ -302,7 +302,7 @@ The SAPT paper (JCP 140, 094106 (2014)) recommends three levels of theory to be 
 (2) *silver*: SAPT2+/aug-cc-pVDZ;  
 (3) *gold*: SAPT2+(3)\\( \delta\\)MP2/aug-cc-pVTZ.
 
-So far the open shell calculations have not been implemented for *silver* and *gold* level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ unless there is some element which is out of the range of jun-cc-pVDZ.
+So far the open shell calculations have not been implemented for *silver* and *gold* level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ unless there is some element which is out of the range of jun-cc-pVDZ (in that case def2TZVP is recommended).
 
 ## 5.3.6 Tricks for accelerations
 For some simple fragments (water molecules, organic ligands, etc), if you are sure that they have closed-shell wave function, you can append a character `r` after the Cartesian coordinates of any atom of the fragment. Again, taking the [Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation as the example
