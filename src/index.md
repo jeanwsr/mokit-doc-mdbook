@@ -19,5 +19,5 @@ Mar 20, 2023
 - [Papers citing MOKIT](./citing.md)
 - [Appendix](./chap_appdx.md): FAQs, limitations and [bug report](./chap_appdx.md#a3-bug-report)
 
-Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your kerboard. 
+Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your keyboard.
 
