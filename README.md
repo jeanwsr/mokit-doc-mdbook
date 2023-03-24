@@ -10,6 +10,18 @@ tar xzvf mdbook-v*.tar.gz
 # open your browser to visit http://localhost:3000
 ```
 
+## Offline browsing
+
+Download the released tar.gz of this repo, and do
+
+```
+tar xzvf mokit-doc-1.2.5rc19.tar.gz
+cd mokit-doc-1.2.5rc19
+firefox public/index.md
+```
+
+Most of the the links in doc in offline mode should be still valid, but I'm not very sure...
+
 ## Features
 
 ### mdbook-toc
