@@ -13,6 +13,14 @@ conda install mokit -c mokit
 If you have no access to network, but still don't want to compile MOKIT manually,
 you can try options in Section 2.2.2.
 
+**Update MOKIT with conda**
+
+Usually `conda update mokit -c mokit` works. Sometimes it may fail to find the latest version of MOKIT. In this case, a workaround can be 
+```
+conda uninstall mokit mkl
+conda install mokit -c mokit
+```
+
 ### Optional 2: Use homebrew-toolchains (for MacOS only)
 * Prerequisites: 
     - You need to install [homebrew](https://brew.sh) on your mac 
