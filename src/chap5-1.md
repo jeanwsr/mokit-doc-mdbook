@@ -50,8 +50,69 @@ For T<sub>1</sub> state, you need to write `mokit{root=1,Xmult=3}`, where `Xmult
 
 The State-Averaged CASSCF (SA-CASSCF) calculation is under development. To give it a shot, you can try `mokit{nstates=2}` for an average of S<sub>0</sub>, S<sub>1</sub>, and S<sub>2</sub> states. To mix electronic states with different spins, you need `mokit{nstates=2,Mix_Spin}`.
 
-## 5.1.3 MRCISD calculation of the ground state
-To be added.
+## 5.1.3 MRCISD+Q calculation of the ground state
+The MRCISD calculations using `automr` are worthy of additional explainations. There are at least 3 variants of MRCISD: (1) uncontracted MRCISD (unc-MRCISD); (2) internally contracted MRCISD (ic-MRCISD); (3) fully internally contracted MRCISD (FIC-MRCISD). All these variants are not size-consistent, therefore, the Davidson size-consistency correction is usually calculated and added into the total electronic energy (e.g. termed as FIC-MRCISD+Q). The computational cost and accuracy is unc-MRCISD > ic-MRCISD > FIC-MRCISD.
+
+The unc-MRCISD is very expensive and usually used for benchmark of small active space of small molecules. The ic-MRCISD+Q and FIC-MRCISD+Q variants are commonly used for routine MRCISD calculations. Some input examples are shown below
+
+(1) unc-MRCISD+Q
+```
+%mem=20GB
+%nprocshared=4
+#p MRCISD/TZVP
+
+mokit{CtrType=1}
+
+0 1
+O      -0.23497692    0.90193619   -0.068688
+H       1.26502308    0.90193619   -0.068688
+H      -0.73568721    2.31589843   -0.068688
+
+```
+
+This example will triggers UHF, GVB(4), CASSCF(4,4) and MRCISD+Q based on CAS(4,4) calculations successively. By default, `MRCISD_prog` is OpenMolcas for unc-MRCISD and thus there is no need to write `MRCISD_prog=OpenMolcas`. The `+Q` correction energy is calculated by `automr` and you can find related energies in the output of `automr`
+```
+Davidson correction=       -0.00797009 a.u.
+E_corr(MRCISD) =       -0.17768879 a.u.
+E(MRCISD+Q)    =      -76.11894741 a.u.
+```
+
+If you want to use another `MRCISD_prog`, you can choose ORCA/GAMESS/PSI4/Gaussian/Dalton. But currently for Gaussian and Dalton, `automr` cannot provide the `+Q` correction energy. Note that you need to install HDF5-enabled OpenMolcas since `automr` need to read the .h5 file in order to calculate the `+Q` energy.
+
+(2) ic-MRCISD+Q
+```
+%mem=20GB
+%nprocshared=4
+#p MRCISD/TZVP
+
+mokit{CtrType=2}
+
+0 1
+O      -0.23497692    0.90193619   -0.068688
+H       1.26502308    0.90193619   -0.068688
+H      -0.73568721    2.31589843   -0.068688
+
+```
+
+By default, `MRCISD_prog` is also OpenMolcas for ic-MRCISD+Q. You can also use Molpro.
+
+(3) FIC-MRCISD+Q
+```
+%mem=20GB
+%nprocshared=4
+#p MRCISD/TZVP
+
+mokit{CtrType=3,MRCISD_prog=ORCA}
+
+0 1
+O      -0.23497692    0.90193619   -0.068688
+H       1.26502308    0.90193619   -0.068688
+H      -0.73568721    2.31589843   -0.068688
+
+```
+For FIC-MRCISD+Q, the only option of `MRCISD_prog` is ORCA.
+
+The definition of size-consistency correction is not unique, and `automr` adopts the simplest one: \\( E_{+Q} = E_{corr}(1-{c_0}^{2}) \\). If you are interested in other types of size-consistency correction, you are referred to [this paper](https://doi.org/10.1039/C2CP23757A). If you find your result is sensitive to the type of size-consistency correction, maybe MRCISD+Q is not appropriate for your molecule, and you may want to try more advanced methods like FIC-MRCCSD.
 
 ## 5.1.4 Acceleration techniques
 To speed up the calculation for a large molecule and/or a large basis set, one can add `RI` to enable the Resolution-of-Identity (RI) techniques whenever possible. For example,

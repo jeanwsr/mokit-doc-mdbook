@@ -50,16 +50,13 @@ into your `~/.bashrc` file:
 ```
 export MOKIT_ROOT=$HOME/software/mokit
 export PATH=$MOKIT_ROOT/bin:$PATH
-export PYTHONPATH=$MOKIT_ROOT/mokit/lib:$PYTHONPATH
+export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
 export GMS=$HOME/software/games/rungms        # optional
 export PSI4=$HOME/psi4conda/bin/psi4          # optional
 export BDF=$HOME/software/bdf-pkg/sbin/run.sh # optional
 ```
-Please modify the above paths to suit your situations. Since PySCF is run by `python`,
-OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4`
-and Dalton is run by `dalton`, there is no extra environment variable to be exported
-here. But if you define `export PSI4=...`, then this variable has priority to the
-path found by `which psi4`.
+
+Please modify the above paths to suit your situations. Since PySCF is run by `python`, OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4` and Dalton is run by `dalton`, there is no extra environment variable to be exported here. But if you define `export PSI4=...`, then this variable has priority to the path found by `which psi4`.
 
 Note that the original GAMESS source code can only deal with GVB up to 12 pairs.
 To go beyond that (which is routine type of calculation in `automr` of MOKIT), please
