@@ -1,4 +1,4 @@
-# 5.3 Examples of the utility `frag_guess_wfn`
+# 5.3 Examples of `frag_guess_wfn`
 
 ## 5.3.1 Construct initial guess wave function from fragments
 To be added.

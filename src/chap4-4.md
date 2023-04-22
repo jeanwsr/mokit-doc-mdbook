@@ -212,21 +212,19 @@ If `MRCISD_prog=Molpro`, only (2) is supported. The Davidson correction energy w
 Specify the program for performing MRMP2 calculation. Only GAMESS is supported and this is the default.
 
 ## 4.4.19 MCPDFT_prog
-Specify the program for performing MC-PDFT calculation. Only OpenMolcas(default) and GAMESS are supported.
+Specify the program for performing a MC-PDFT calculation. Supported programs are OpenMolcas(default)/PySCF/GAMESS.
 
-Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG computations. DMRG-PDFT is not supported in GAMESS currently.
+Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package if you use the default `MCPDFT_prog`, i.e. OpenMolcas. If you use `MCPDFT_prog=PySCF`, you need to install PySCF [extensions](https://github.com/pyscf/pyscf-forge). DMRG-PDFT is not supported in GAMESS currently.
 
 Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2), and currently it can only be run in serial.
 
 ## 4.4.20 CtrType
-Specify the contraction type of the MRCISD method. The default value is 0. When
-you specify the MRCISD method and the MRCISD_prog, you must assign an integer for
-this variable, where  
+Specify the contraction type of the MRCISD method. The default value is 0. When you specify the MRCISD method and the `MRCISD_prog`, you must assign an integer for this variable, where  
 1 for uncontracted MRCISD  
 2 for ic-MRCISD  
 3 for FIC-MRCISD.
 
-Generally, the ic- and FIC-MRCISD methods are recommended. If your calculation involves Cartesian-type basis functions, then you cannot use FIC-MRCISD in ORCA. In such case, you can choose ic-MRCISD in OpenMolcas instead.
+Generally, the ic- and FIC-MRCISD methods are recommended. See [here](./chap5-1.html#513-mrcisdq-calculation-of-the-ground-state) for more explanations of MRCISD computations. If your calculation involves Cartesian-type basis functions, then you cannot use FIC-MRCISD in ORCA. In such case, you can choose ic-MRCISD in OpenMolcas instead.
 
 ## 4.4.21 MaxM
 Specify the bond dimension MaxM in DMRG-related calculations. The default values is 1000 (e.g. `MaxM=1000`). When maxM increases, the DMRG-CASCI energy will become closer to the CASCI energy, but the computational cost increases as well. The value 1000 is suitable for common cases. But do check whether it is valid for your system. For example, three computations using different MaxM (e.g. 500, 1000, 1500) may be conducted to study whether the energy converges with MaxM.
@@ -400,18 +398,10 @@ the first ~30 cycles are often reasonable, so we can use a less tight threshold
 to converge the GVB wavefuntion.
 
 ## 4.4.43 Skip_UNO
-Specify the number of pairs of UNOs to be skipped during orbital localization. Default
-is 0. For example, `Skip_UNO=1` means that the HONO and LUNO will be kept unchanged
-when localizing UNOs. And `Skip_UNO=2` means that the HONO-1, HONO, LUNO and LUNO+1
-will be kept unchanged when localizing UNOs. This is useful when GVB exists multiple
-SCF solutions. Using `Skip_UNO=1` you can probably obtain a biradical-like GVB solution
-(if the molecule indeed has significant biradical characters). It is recommended
-to choose the solution with the lowest GVB electronic energies for subsequent post-GVB
+Specify the number of pairs of UNOs to be skipped during orbital localization. Default is 0. For example, `Skip_UNO=1` means that the HONO and LUNO will be kept unchanged when localizing UNOs. And `Skip_UNO=2` means that the HONO-1, HONO, LUNO and LUNO+1 will be kept unchanged when localizing UNOs. This is useful when GVB exists multiple SCF solutions. Using `Skip_UNO=1` you can probably obtain a biradical-like GVB solution (if the molecule indeed has significant biradical characters). It is recommended to choose the solution with the lowest GVB electronic energies for subsequent post-GVB
 computations.
 
-This keyword is invalid for keyword ist=3,4,5. It is also invalid when `mokit{ist=6}`
-is specified. But it is valid for keywords `mokit{ist=6,inherit}` since the keyword
-inherit will force skip_UNO=N to be inherited in the GVB/STO-6G computation.
+This keyword is invalid for keyword ist=3,4,5. It is also invalid when `mokit{ist=6}` is specified. But it is valid for keywords `mokit{ist=6,inherit}` since the keyword `inherit` will force skip_UNO=N to be inherited in the GVB/STO-6G computation.
 
 ## 4.4.44 Inherit
 Request to inherit keywords and the number of GVB pairs (if explicitly specified) in GVB/STO-6G calculation from the target calculation. This keyword can only be used when ist=6. Default is not to inherit keywords. If you want to write this keyword, just write Inherit. Do not write Inherit=.True. or Inherit=True.
@@ -431,11 +421,7 @@ mokit{ist=1,readuhf='naphthalene_cc-pVDZ_uhf.fch',Npair=5}
 ```
 
 ## 4.4.46 FcGVB
-Request to freeze all doubly occupied orbitals in GVB calculations. Do not write
-FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work. This keyword
-is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations
-of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember
-to specify FcGVB in both singlet and triplet cases.
+Request to freeze all doubly occupied orbitals in GVB calculations. Do not write FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work. This keyword is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember to specify FcGVB in both singlet and triplet cases.
 
 ## 4.4.47 OnlyXH
 Request to keep only X-H bonds after a normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `OnlyXH` is specified in `mokit{}`, then a GVB(6) computation containing only C-H bonds will be automatically performed after GVB(15). This keyword can be viewed as an opposite option of [4.4.36 excludeXH](./chap4-4.html#4436-excludexh).
@@ -448,5 +434,19 @@ Specify the spin multiplicity of the target excited state in a SS-CASSCF calcula
 (4) `mokit{root=2,Xmult=1}` means the S<sub>2</sub> state.
 
 ## 4.4.49 noDMRGNO
-Request not to generate natural orbitals in a DMRG-CASCI calculation. Only valid for a DMRG-CASCI job. This keyword would save some time when one wants to check whether the DMRG-CASCI electronic energy converges with [maxM](./chap4-4.html#4421-maxm). After the user confirms a suitable `maxM`, he/she can remove this keyword and perform a single point calculation to generate NOs.
+Request not to generate natural orbitals in a DMRG-CASCI calculation. Only valid for a DMRG-CASCI job. This keyword would save some time when one wants to check whether the DMRG-CASCI electronic energy converges with [maxM](./chap4-4.html#4421-maxm). After the user confirms a suitable `maxM`, he/she can remove this keyword and perform a single point calculation to generate DMRG NOs.
+
+## 4.4.50 HFonly
+Request the `automr` program to terminate after the HF calculations are finished. This is useful when one wants to perform the sfX2C-UHF calculation using fragment guess. An input example is shown below
+
+```
+%mem=200GB
+%nprocshared=48
+#p GVB/gen guess(fragment=5)
+
+mokit{HF_prog=PySCF,DKH2,HFonly}
+...
+```
+
+`automr` will firstly call Gaussian to generate the fragment guess, then transfer initial guess orbitals to PySCF and call PySCF to perform the sfX2C-UHF calculation. After UHF is finished, `automr` will terminate and no GVB calculation will be performed. Here the keyword `DKH2` is for GVB calculation and will not be used in the UHF calculation.
 

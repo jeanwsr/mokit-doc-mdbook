@@ -19,21 +19,26 @@ The first line holds the number of point charges. While the charges are written 
 Note that in all computations of the `automr` program, this situation is explicitly considered. This utility will be automatically called if needed. The only situation when you need this utility is merely using utilities fch2com, fch2inp, fch2iporb, fch2psi or bas_fch2py (and of course, with background charges).
 
 ## 4.5.2 bas_fch2py
-Generate a PySCF .py file from a Gaussian .fch file. The Cartesian coordinates and basis set data are written in the .py file. Note: `automr` does not use any built-in basis sets of PySCF, but always generates the basis set data from .fch file. This procedure ensures an (almost) exactly identical setting of basis set in Gaussian and PySCF.
+Generate a PySCF .py file from a Gaussian .fch file. The Cartesian coordinates, basis set data and keywords to read MOs from the .fch file are written in the .py file. It is not recommended to delete these basis set data and use PySCF built-in basis set name, since the auto-generated basis set data ensures an exact correspondence of two programs. Two examples are shown below
 
-This utility is in fact a wrapper of two utilities `fch2inp` and `bas_gms2py`. So
-if you only want to compile this utility, you have to compile `fch2inp` and `bas_gms2py`
-additionally.
+(1) transfer RHF/ROHF/UHF/GHF MOs from Gaussian to PySCF
+```
+bas_fch2py h2o.fch
+```
+
+(2) transfer DFT MOs from Gaussian to PySCF
+```
+bas_fch2py h2o.fch -dft
+```
+
+This utility is in fact a wrapper of two utilities `fch2inp` and `bas_gms2py`. So if you only want to use this utility, you need to make sure that `fch2inp` and `bas_gms2py` are available (i.e. also compiled).
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .py file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
 
+See relevant Python modules [fch2py](#4538-fch2py), [py2fch](#4539-py2fch), and [fchk](#4541-fchk).
+
 ## 4.5.3 bas_gau2molcas
-Transform a basis set file in Gaussian format to another in (Open)Molcas format.
-If you turn on RI (see [4.4.28 RI](#4428-ri)) and use OpenMolcas as the `CASSCF_prog`,
-there is no RI-JI auxiliary basis set file in current version of OpenMolcas package.
-Therefore, this utility will be called automatically to transform the auxiliary
-basis set file in `$MOKIT_ROOT/basis/` directory to the (Open)Molcas syntax. And
-the transformed file will normally be in `$MOLCAS/basis_library/jk_Basis/`.
+Transform a basis set file in Gaussian format to another in (Open)Molcas format. If you turn on [RI](#4428-ri) and use OpenMolcas as the `CASSCF_prog`, there is no RI-JI auxiliary basis set file in current version of OpenMolcas package. Therefore, this utility will be called automatically to transform the auxiliary basis set file in `$MOKIT_ROOT/basis/` directory to the (Open)Molcas syntax. And the transformed file will normally be in `$MOLCAS/basis_library/jk_Basis/`.
 
 You can, of course, use this utility by yourself. An example is shown below
 ```
@@ -469,57 +474,94 @@ This is used for transferring NOs.
 
 NOTE: `xml2fch` cannot generate a fch file from scratch, and a fch file must be provided and the MOs in it will be replaced. You should firstly use Gaussian to generate a .fch file (with keywords 'nosymm int=nobasistransform'), then generate the `*.com` file using `fch2com`. After Molpro computations finished, you can transfer MOs from Molpro back to Gaussian using `xml2fch`. This procedure seems a little bit tedious, but it ensures an exact reproduce of energy.
 
-To transfer MOs from Gaussian to Molpro, see [4.5.18 fch2com](#4518-fch2com).
+To transfer MOs from Gaussian to Molpro, see [fch2com](#4518-fch2com).
 
 
 
-The utilities below are compiled by `f2py`, which is a Fortran to Python interface
-generator. These utilities are not binary executable files, but dynamic libraries
-`*.so` in `$MOKIT_ROOT/mokit/lib`. They can only be imported in a Python script.
-And this is the reason that why one of the environment variables of MOKIT is `PYTHONPATH`,
-not `LD_LIBRARY_PATH`. These utilities can also be viewed as APIs (Application
-Programming Interface), but they are described in this section not in [4.6](./chap4-6.html#46-apis-in-mokit),
-just for better comparison with other utilities of transferring MOs.
+The modules/utilities below are compiled by `f2py`, which is a Fortran to Python interface generator. These utilities are not binary executable files, but dynamic libraries `*.so` in `$MOKIT_ROOT/mokit/lib`. They can only be imported in a Python script. And this is the reason that why one of the environment variables of MOKIT is `PYTHONPATH`, not `LD_LIBRARY_PATH`. These modules can also be viewed as APIs (Application Programming Interface), but they are described in this section not in [4.6](./chap4-6.html#46-apis-in-mokit), just for better comparison with other utilities of transferring MOs.
 
 ## 4.5.38 fch2py
 Transfer MOs from Gaussian to PySCF. By importing fch2py, PySCF Python script is able to read alpha and/or beta MOs from a provided .fch file. All attributes are shown below
+
 ```python
 fch2py(fchname, nbf, nif, ab, mf.mo_coeff)
 ```
+
 There are 4 parameters required by fch2py: (1) filename of .fch(k) file; (2) the number of basis functions; (3) the number of molecular orbitals; and (4) a character 'a'/'b' for reading alpha/beta orbitals. You should write these contents into a Python script, and run that script using the python executable. If you want a more detailed example, just run any `automr` job and see all `*.py` files generated.
 
-## 4.5.39 py2fch
-Export MOs from PySCF to a Gaussian .fch file. Note that `py2fch` cannot generate
-a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha
-Orbital Energies' and 'Alpha MOs' sections (or beta orbital counterpart) will be
-replaced by occupation numbers and MOs from PySCF.
+See relevant utilities/modules: [bas_fch2py](#452-bas_fch2py) and [load_mol_from_fch](./chap4-6.html#461-load_mol_from_fch).
 
-The provided .fch file must contain exactly the same geometry and basis set data
-as those data of PySCF. To obtain a valid .fch file, it is strongly recommended
-to use the bas_fch2py utility to generate a .py file from a .fch file first, and
-then import py2fch in this generated .py file. These descriptions seem a bit of
-tedious. But a rigorous transferring of MOs between two programs or two files is
-ensured. All attributes of py2fch are shown below
+## 4.5.39 py2fch
+Export MOs from PySCF to a Gaussian .fch file. Note that `py2fch` cannot generate a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha Orbital Energies' and 'Alpha MOs' sections (or beta orbital counterpart) will be replaced by occupation numbers and MOs from PySCF. If you want to generate a .fch file from scratch, see the [fchk](#4541-fchk) module.
+
+The provided .fch file must contain exactly the same geometry and basis set data as those data of PySCF. To obtain a valid .fch file, it is strongly recommended to use the `bas_fch2py` utility to generate a .py file from a .fch file first, and then `import py2fch` in this generated .py file. These descriptions seem a bit of tedious. But a rigorous transferring of MOs between two programs or two files is ensured. All attributes of `py2fch` are shown below
+
 ```python
 py2fch('a.fch', nbf, nif, mf.mo_coeff, ab, ev, gen_density)
 ```
 
-The first few parameters are identical to those in [4.5.38 fch2py](#4538-fch2py). The parameter
-`ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation
-numbers. The last parameter gen_density is a bool variable, where True/False meaning
-whether or not generating Total SCF Density (as well as writing density into .fch
-file) using mf.mo_coeff and ev. If gen_density is set to be True, the parameter
-ev must contain orbital occupation numbers, not orbital energies. Because density
-would be computed using MOs and occupation numbers. If gen_density is set to be
-False, you can assign proper values to ev as your wish.
+The first few parameters are identical to those in [fch2py](#4538-fch2py). The parameter `ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation numbers. The last parameter `gen_density` is a bool variable, where True/False meaning whether or not generating Total SCF Density (as well as writing density into .fch file) using mf.mo_coeff and ev. If `gen_density=True`, the parameter `ev` must contain orbital occupation numbers, not orbital energies. Because density would be computed using MOs and occupation numbers. If `gen_density=False`, you can assign proper values to `ev` as your wish.
 
-This utility/module is supposed to be used usually along with other three utilities:
-`bas_fch2py` ([4.5.2](#452-bas_fch2py)), `fch2py` ([4.5.38](#4538-fch2py)) and
-`load_mol_from_fch` ([4.6.1](./chap4-6.html#461-load_mol_from_fch)).
+This module is usually used along with these utilities/modules: [bas_fch2py](#452-bas_fch2py), [fch2py](#4538-fch2py) and [load_mol_from_fch](./chap4-6.html#461-load_mol_from_fch).
 
 ## 4.5.40 py2fch_cghf
 Export complex gHF MOs from PySCF to a Gaussian .fch file. Note that `py2fch_cghf` cannot generate a .fch file from scratch. The user must provide one .fch file. This module is similar to `py2fch` (which is usually used for R(O)HF, UHF and DFT methods). The difference is that this module is only designed for complex gHF/gDFT methods. All attributes of `py2fch_cghf` are shown below
+
 ```python
 py2fch_cghf(fchname, nbf, nif, coeff, ev, gen_density)
 ```
+
+## 4.5.41 fchk
+This is a powerful module since it can directly export/generated a Gaussian .fch(k) file (i.e. no need to provide one .fch file in advance). And this module is the basis of many other modules like py2molpro, py2molcas, etc, see [Other modules in $MOKIT_ROOT/mokit/lib](./chap4-6.html#4623-other-modules-in-mokit_rootmokitlib). Three examples are shown below:
+
+(1) transfer HF/DFT MOs from PySCF to Gaussian
+```python
+from pyscf import gto
+from mokit.lib.py2fch_direct import fchk
+
+mol = gto.M(atom='O 0.0 0.0 0.1; H 0.0 0.0 1.0',
+        basis='cc-pvtz',
+        charge=-1,
+        ).build()
+mf = mol.RHF().run()
+fchk(mf, 'test.fch')
+```
+
+(2) transfer CASSCF MOs from PySCF to Gaussian
+```
+from pyscf import gto, mcscf
+from mokit.lib.py2fch_direct import fchk
+
+mol = gto.M(
+    atom = 'O 0 0 0; O 0 0 1.2',
+    basis = 'ccpvdz',
+    spin = 2)
+
+mf = mol.RHF().run()
+mc = mcscf.CASSCF(mf, 6, 8).run() #CAS(6o,8e)
+fchk(mc, 'O2_cas6o8e.fch')
+```
+
+(3) transfer CASSCF NOs from PySCF to Gaussian
+```
+from pyscf import gto, mcscf
+from mokit.lib.py2fch_direct import fchk
+
+mol = gto.M(
+    atom = 'O 0 0 0; O 0 0 1.2',
+    basis = 'ccpvdz',
+    spin = 2)
+
+mf = mol.RHF().run()
+mc = mcscf.CASSCF(mf, 6, 8) #CAS(6o,8e)
+mc.natorb = True
+mc.kernel()
+fchk(mc, 'O2_cas6o8e_NO.fch', density=True)
+```
+
+There is a module named `fchk()` in PSI4, which is used to export/generated a .fch file. Here we use the same name for easy memorizing. You can also use its equivalent module name `py2gau`, e.g.
+```python
+py2gau(mf, 'test.fch')
+```
+if you think `py2gau` is more easy for you to memorize.
 

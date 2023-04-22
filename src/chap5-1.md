@@ -51,7 +51,11 @@ For T<sub>1</sub> state, you need to write `mokit{root=1,Xmult=3}`, where `Xmult
 The State-Averaged CASSCF (SA-CASSCF) calculation is under development. To give it a shot, you can try `mokit{nstates=2}` for an average of S<sub>0</sub>, S<sub>1</sub>, and S<sub>2</sub> states. To mix electronic states with different spins, you need `mokit{nstates=2,Mix_Spin}`.
 
 ## 5.1.3 MRCISD+Q calculation of the ground state
-The MRCISD calculations using `automr` are worthy of additional explainations. There are at least 3 variants of MRCISD: (1) uncontracted MRCISD (unc-MRCISD); (2) internally contracted MRCISD (ic-MRCISD); (3) fully internally contracted MRCISD (FIC-MRCISD). All these variants are not size-consistent, therefore, the Davidson size-consistency correction is usually calculated and added into the total electronic energy (e.g. termed as FIC-MRCISD+Q). The computational cost and accuracy is unc-MRCISD > ic-MRCISD > FIC-MRCISD.
+The MRCISD calculations using `automr` are worthy of additional explanations. There are at least 3 variants of MRCISD:  
+(1) uncontracted MRCISD (unc-MRCISD);  
+(2) internally contracted MRCISD (ic-MRCISD); 
+(3) fully internally contracted MRCISD (FIC-MRCISD).
+All these variants are not size-consistent, therefore, the Davidson size-consistency correction is usually calculated and added into the total electronic energy (e.g. termed as FIC-MRCISD+Q). The computational cost and accuracy is unc-MRCISD > ic-MRCISD > FIC-MRCISD.
 
 The unc-MRCISD is very expensive and usually used for benchmark of small active space of small molecules. The ic-MRCISD+Q and FIC-MRCISD+Q variants are commonly used for routine MRCISD calculations. Some input examples are shown below
 
@@ -70,7 +74,7 @@ H      -0.73568721    2.31589843   -0.068688
 
 ```
 
-This example will triggers UHF, GVB(4), CASSCF(4,4) and MRCISD+Q based on CAS(4,4) calculations successively. By default, `MRCISD_prog` is OpenMolcas for unc-MRCISD and thus there is no need to write `MRCISD_prog=OpenMolcas`. The `+Q` correction energy is calculated by `automr` and you can find related energies in the output of `automr`
+This example will triggers UHF, GVB(4), CASSCF(4,4) and MRCISD+Q based on CAS(4,4) calculations sequentially. By default, `MRCISD_prog` is OpenMolcas for unc-MRCISD and thus there is no need to write `MRCISD_prog=OpenMolcas`. The `+Q` correction energy is calculated by `automr` and you can find related energies in the output of `automr`
 ```
 Davidson correction=       -0.00797009 a.u.
 E_corr(MRCISD) =       -0.17768879 a.u.
