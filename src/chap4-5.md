@@ -38,7 +38,7 @@ Note that if you use background charges in your studied system, the background c
 See relevant Python modules [fch2py](#4538-fch2py), [py2fch](#4539-py2fch), and [fchk](#4541-fchk).
 
 ## 4.5.3 bas_gau2molcas
-Transform a basis set file in Gaussian format to another in (Open)Molcas format. If you turn on [RI](#4428-ri) and use OpenMolcas as the `CASSCF_prog`, there is no RI-JI auxiliary basis set file in current version of OpenMolcas package. Therefore, this utility will be called automatically to transform the auxiliary basis set file in `$MOKIT_ROOT/basis/` directory to the (Open)Molcas syntax. And the transformed file will normally be in `$MOLCAS/basis_library/jk_Basis/`.
+Transform a basis set file in Gaussian format to another in (Open)Molcas format. If you turn on [RI](#4428-ri) and use OpenMolcas as the `CASSCF_prog`, there is no RI-JI auxiliary basis set file in current version of OpenMolcas package. Therefore, this utility will be called automatically to transform the auxiliary basis set file in `$MOKIT_ROOT/mokit/basis/` directory to the (Open)Molcas syntax. And the transformed file will normally be in `$MOLCAS/basis_library/jk_Basis/`.
 
 You can, of course, use this utility by yourself. An example is shown below
 ```
@@ -559,7 +559,7 @@ mc.kernel()
 fchk(mc, 'O2_cas6o8e_NO.fch', density=True)
 ```
 
-There is a module named `fchk()` in PSI4, which is used to export/generated a .fch file. Here we use the same name for easy memorizing. You can also use its equivalent module name `py2gau`, e.g.
+There is a module named `fchk()` in PSI4, which is used to export/generated a .fch file. Here we use the same name for easy memorizing. You can also use its alias `py2gau`, e.g.
 ```python
 py2gau(mf, 'test.fch')
 ```

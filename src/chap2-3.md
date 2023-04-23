@@ -169,9 +169,12 @@ QChem >= 5.0
 
 For DMRG related packages:  
 Block >= 1.5.3  
-pyblock2 >= preview-0.5.0  
+block2 >= preview-0.5.0  
 QCMaquis >= 3.0.3  
 CheMPS2 >= 1.8.9
+
+For MC-PDFT related packages:  
+pyscf-forge latest
 
 Older versions are not recommended, since (1) they are possibly not tested by the
 developers, (2) they had been tested but some functionality had not been (correctly)
