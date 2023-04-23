@@ -103,13 +103,15 @@ Multi-reference Configuration Interaction Singles, Doubles and Triples, based on
 The related keyword `MRCISDT_prog` can only be equal to one of OpenMolcas(default), Dalton, PSI4 and GAMESS. No Davidson correction will be provided, and only uncontracted MRCISDT is supported.
 
 ## 4.3.15 MCPDFT
-Multi-configurational Pair Density Functional Theory, based on CASSCF reference.
+Multi-configurational Pair Density Functional Theory, based on CASSCF reference. 
 
 Note that MCPDFT is a keyword in `automr` but MC-PDFT is the method name. Do not mix them up.
 
-Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG computations. DMRG-PDFT is not supported in GAMESS currently.
+Supported programs are OpenMolcas(default)/PySCF/GAMESS. If you use `MCPDFT_prog=PySCF`, you need to install [pyscf-forge](https://github.com/pyscf/pyscf-forge).
 
-Please read related keyword `MCPDFT_prog` in Section 4.4.19. Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
+Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) or Block (interfaced with PySCF). DMRG-PDFT is not supported in GAMESS currently.
+
+Please read related keyword `MCPDFT_prog` in Section 4.4.19.
 
 ## 4.3.16 DFTCI
 The DFT/MRCI method by Stefan Grimme, Mirko Waletzke, and Martin Kleinschmidt et. al.

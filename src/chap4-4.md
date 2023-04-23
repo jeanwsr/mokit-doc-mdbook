@@ -212,9 +212,9 @@ If `MRCISD_prog=Molpro`, only (2) is supported. The Davidson correction energy w
 Specify the program for performing MRMP2 calculation. Only GAMESS is supported and this is the default.
 
 ## 4.4.19 MCPDFT_prog
-Specify the program for performing a MC-PDFT calculation. Supported programs are OpenMolcas(default)/PySCF/GAMESS.
+Specify the program for performing a MC-PDFT calculation. Supported programs are OpenMolcas(default)/PySCF/GAMESS. If you use `MCPDFT_prog=PySCF`, you need to install [pyscf-forge](https://github.com/pyscf/pyscf-forge).
 
-Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package if you use the default `MCPDFT_prog`, i.e. OpenMolcas. If you use `MCPDFT_prog=PySCF`, you need to install PySCF [extensions](https://github.com/pyscf/pyscf-forge). DMRG-PDFT is not supported in GAMESS currently.
+Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package if you use the default `MCPDFT_prog`, i.e. OpenMolcas. If you use `MCPDFT_prog=PySCF` in this case, you need to install Block. DMRG-PDFT is not supported in GAMESS currently.
 
 Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2), and currently it can only be run in serial.
 
