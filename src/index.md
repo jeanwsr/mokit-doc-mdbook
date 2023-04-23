@@ -19,5 +19,11 @@ Apr 22, 2023
 - [Papers citing MOKIT](./citing.md)
 - [Appendix](./chap_appdx.md): FAQs, limitations and [bug report](./chap_appdx.md#a3-bug-report)
 
-Tip: you can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your keyboard.
+**Hot Topics**
+
+[How to perform GKS-EDA/SAPT](./chap5-3.md) &nbsp;&nbsp;&nbsp; [How to transfer MOs](./chap4-5.md) &nbsp;&nbsp;&nbsp; [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq)
+
+**Tips**
+
+You can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your keyboard.
 

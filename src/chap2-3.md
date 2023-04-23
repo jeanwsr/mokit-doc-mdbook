@@ -173,6 +173,9 @@ pyblock2 >= preview-0.5.0
 QCMaquis >= 3.0.3  
 CheMPS2 >= 1.8.9
 
+For MC-PDFT related packages:  
+pyscf-forge latest
+
 Older versions are not recommended, since (1) they are possibly not tested by the
 developers, (2) they had been tested but some functionality had not been (correctly)
 implemented at that time. So that they may work or may not. OpenMolcas-v18.09 has
