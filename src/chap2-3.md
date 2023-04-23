@@ -169,7 +169,7 @@ QChem >= 5.0
 
 For DMRG related packages:  
 Block >= 1.5.3  
-pyblock2 >= preview-0.5.0  
+block2 >= preview-0.5.0  
 QCMaquis >= 3.0.3  
 CheMPS2 >= 1.8.9
 
