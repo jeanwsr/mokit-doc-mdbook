@@ -20,9 +20,9 @@ This is a water molecule with two O-H bonds stretched. CAS(4,4) active space wil
 
 mokit{ist=1,readuhf='N2_cc-pVTZ_4.0_uhf.fchk'}
 ```
-For the memory and parallel settings, please read Section 4.2. For the theoretical method and basis set, please read Section 4.3. Here we focus on the keywords in mokit{}.
+For the memory and parallel settings, please read Section 4.2. For the theoretical method and basis set, please read Section 4.3. Here we focus on the keywords in `mokit{}` (also known as "`automr` keywords", see Section 4.4 for details).
 
-1. All keywords must be written in the curly bracket of `mokit{}` in the Title Card line of a .gjf file.
+1. All `automr` keywords must be written in the curly bracket of `mokit{}` in the Title Card line of a .gjf file.
 
 2. Using upper or lower case of keywords in `automr` makes no difference. For example,
 the following two lines have identical meanings:

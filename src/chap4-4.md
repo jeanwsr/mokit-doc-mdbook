@@ -1,4 +1,45 @@
 # 4.4 List of `automr` Keywords
+
+Here are the list of all `automr` keywords, grouped by category.
+
+| For program specification | | | |
+| --- | --- | --- | --- |
+| [HF_prog](#449-hfprog) | [GVB_prog](#4410-gvbprog) | [CASCI_prog](#4411-casciprog) | [CASSCF_prog](#4412-casscfprog) |
+| [DMRGCI_prog](#4413-dmrgciprog) | [DMRGSCF_prog](#4414-dmrgscfprog) | [CASPT2_prog](#4415-caspt2prog) | [NEVPT2_prog](#4416-nevpt2prog) |
+| [MRCISD_prog](#4417-mrcisdprog) | [MRMP2_prog](#4418-mrmp2prog) | [MCPDFT_prog](#4419-mcpdftprog) | |
+
+</br>
+
+| For workflow specification | | | |
+| --- | --- | --- | --- |
+| [readrhf](#441-readrhf) | [readuhf](#442-readuhf) | [readno](#443-readno) | [ist](#444-ist) (most important!) |
+| [charge](#4424-charge) | [DKH2](#4426-dkh2), [X2C](#4427-x2c) | [ON_thres](#4434-onthres) | [UNO_thres](#4435-unothres) |
+| [excludeXH](#4436-excludexh), [OnlyXH](#4447-onlyxh) for GVB | [Skip_UNO](#4443-skipuno) | [HFonly](#4450-hfonly) |
+
+</br>
+
+| For method details | | | |
+| --- | --- | --- | --- |
+| [LocalM](#445-localm) | [CIonly](#446-cionly) | [Cart](#448-cart) | [CtrlType](#4420-ctrtype) for MRCI |
+| [MaxM](#4421-maxm) for DMRG | [hardwfn](#4422-hardwfn),[crazywfn](#4423-crazywfn) | [OtPDF](#4425-otpdf) for MCPDFT | [FIC](#4433-fic) for NEVPT2 |
+| [GVB_conv](#4442-gvbconv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
+| [noDMRGNO](#4449-nodmrgno) |
+
+</br>
+
+| For acceleration technique | | |
+| --- | --- | --- |
+| [RI](#4428-ri), [RIJK_bas](#4429-rijkbas) | [F12](#4430-f12), [F12_cabs](#4431-f12cabs) for NEVPT2 | [DLPNO](#4432-dlpno) for NEVPT2 |
+
+</br>
+
+| Others | | | | |
+| --- | --- | --- | --- | --- |
+|For additional properties | [Force](#447-force) | [NMR](#4437-nmr) | [ICSS](#4438-icss) |
+| For excited states  | [Nstates](#4439-nstates) | [Mixed_Spin](#4440-mixedspin) | [Root](#4441-root) | [Xmult](#4448-xmult) |
+
+</br>
+
 If any of the `readrhf`, `readuhf`, and `readno` keywords is used, there is no need
 to write Cartesian coordinates in .gjf file, since the geometry will be read from
 the specified .fch(k) file.

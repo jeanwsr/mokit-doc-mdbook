@@ -1,7 +1,13 @@
 # 4.3 Keywords of supported methods in `automr`
-Currently, the keywords of all supported methods in `automr` are: **GVB**, **CASCI**,
-**CASSCF**, **DMRGCI**, **DMRGSCF**, **NEVPT2**, **CASPT2**, **CASPT2K**, **SDSPT2**,
-**MRMP2**, **MRCISD**, **MRCISDT**, **MCPDFT**, **DFTCI**, **BCCC2b** and **BCCC3b**.
+Currently, the keywords of all supported methods in `automr` are: 
+
+[GVB](#431-gvb), [CASCI](#433-casci),
+[CASSCF](#432-casscf), [DMRGCI](#435-dmrgci), [DMRGSCF](#434-dmrgscf), 
+
+[NEVPT2](#436-nevpt2), [CASPT2](#437-caspt2), [CASPT2K](#438-caspt2k), [CASPT3](#439-caspt3), [SDSPT2](#4310-sdspt2), [MRMP2](#4311-mrmp2), [OVBMP2](#4312-ovbmp2), [MRCISD](#4313-mrcisd), [MRCISDT](#4314-mrcisdt), 
+
+[MCPDFT](#4315-mcpdft), [DFTCI](#4316-dftci), [MRCC](#4317-mrcc), [BCCC2b](#4318-bccc2b), [BCCC3b](#4319-bccc3b).
+
 More multi-configurational and multi-reference methods will be supported in the future.
 These terms should be written in the `#p ...` line in the .gjf file.
 
