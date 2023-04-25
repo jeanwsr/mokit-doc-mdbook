@@ -357,10 +357,7 @@ qchem2psi(fchname, inpname)
 qchem2orca(fchname, inpname)  
 standardize_fch(fchname)
 
-Taking `py2qchem` as an example, it export MOs from PySCF to Q-Chem. An input (.in)
-file and a directory containing orbital files will be generated. The restricted/
-unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Two examples
-are shown below:
+Taking `py2qchem` as an example, it exports MOs from PySCF to Q-Chem. An input file (.in) and a directory containing orbital files will be generated. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Two examples are shown below:
 
 (1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. h2o.py
 ```python
@@ -384,26 +381,23 @@ qchem h2o.in h2o.out h2o
 you will find RHF in Q-Chem converges in 2 cycles. If the environment variable QCSCRATCH is already defined in your node/computer, the scratch directory h2o will be automatically put into $QCSCRATCH/; otherwise h2o will be put in the current directory.
 
 (2) Transfer GVB orbitals
-If you have performed GVB calculations and stored GVB orbitals in the object mf,
-then you can write in python
+If you have performed GVB calculations and stored GVB orbitals in the object mf, then you can write in python
 ```python
 py2qchem(mf, 'h2o.in', npair=2)
 ```
-to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how
-many pairs you want to calculate.
-
-Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k)
-file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type
-(i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
+to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how many pairs you want to calculate.
+	
+	
+Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
 ```python
 from mokit.lib.qchem import qchem2molpro
 qchem2molpro('water.FChk','h2o.com')
 ```
+
 Two files(`h2o.com` and `water_std.a`) will be generated. Keywords for reading MOs
 from `water_std.a` have been written in `h2o.com`.
 
-If you only want to standardize a Q-Chem .fch(k) file and do not want to transfer
-MOs. Then you only need
+If you only want to standardize a Q-Chem .fch(k) file and do not want to transfer MOs. Then you only need
 ```python
 from mokit.lib.qchem import standardize_fch
 standardize_fch('water.FChk')

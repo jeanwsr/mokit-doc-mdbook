@@ -20,7 +20,7 @@
 - [Examples](./chap5_example.md)
   - [Examples of `automr`](./chap5-1.md)
   - [Examples of Transferring MOs](./chap5-2.md)
-  - [Examples of using utility frag_guess_wfn](./chap5-3.md)
+  - [Examples of `frag_guess_wfn`](./chap5-3.md)
   - [ICSS and NICS](./chap5-4.md)
   - [Manually making consistent active space](./chap5-5.md)
   - [Generating different GVB solutions](./chap5-6.md)
