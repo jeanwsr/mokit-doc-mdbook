@@ -57,7 +57,7 @@ Keywords in `mokit{}` are specified to make the GVB SCF not converged to \\( \si
 automr triangulene_cc-pVDZ_S.gjf >triangulene_cc-pVDZ_S.out 2>&1
 ```
 
-This job will take about 5 hours using 48 CPU cores. Since the active space would be (22,22), the CASSCF would automatically be switched to DMRG-CASSCF during calculation. After the job is accomplished, we obtain 3 .fch files which includes natural orbtials
+This job will take about 5 hours using 48 CPU cores. Since the active space would be (22,22), the CASSCF would automatically be switched to DMRG-CASSCF during calculation. After the job is accomplished, we obtain 3 fch files which includes natural orbtials
 ```
 triangulene_cc-pVDZ_S_uhf_uno.fch
 triangulene_cc-pVDZ_S_uhf_uno_asrot2gvb11_s.fch
@@ -121,8 +121,8 @@ calc_unpaired_from_fch(fchname='triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch',w
 
 This will generate the unpaired electron density stored in `triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch`. There are various ways to visualize the unpaired electron density:
 
-(1) Visualization using GaussView  
-Run the following command in Shell 
+**(1) Visualization using GaussView**  
+Run the following command in Shell
 ```
 cubegen 48 fdensity triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch triangulene_unpaired.cub -3 h
 ```
@@ -130,9 +130,9 @@ which uses 48 CPU cores to generate the cube file. Note here the `fdensity` cann
 
 Open the file `triangulene_unpaired.cub` with GaussView, click `Results` on the panel, click `Surfaces/Contours`, change the value of `Density =` to 0.01 a.u., click `Surface Actions` and finally click `New surface`. The plot would be like
 
-![Unpaired electron density shown by GaussView](unpaired_GV.png)
+![Unpaired electron density shown by GaussView](images/unpaired_GV.png)
 
-(2) Visualization using Multiwfn  
+**(2) Visualization using Multiwfn**  
 Start Multiwfn and load the file `triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch`, then type
 ```
 200
@@ -147,7 +147,7 @@ y
 ```
 The key idea is to make Multiwfn read the `Total SCF Density` section in .fch file and generate corresponding cubes. Now change the `Isosurface value` to 0.01 a.u. The plot would be like
 
-![Unpaired electron density shown by Multiwfn](unpaired_Multiwfn.png)
+![Unpaired electron density shown by Multiwfn](images/unpaired_Multiwfn.png)
 
 Of course, you can use also Multiwfn + VMD to get even better plots.
 
