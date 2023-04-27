@@ -364,30 +364,30 @@ The default is to copy Alpha MOs in a.fch to Alpha MOs in b.fch. There are 4 opt
 Transform a UHF-type .fch file into a RHF-type one. Only alpha MOs are retained.
 
 ## 4.5.29 frag_guess_wfn
-This utility has two functions: (1) perform a SCF (i.e. HF or DFT) computation using initial guess constructed from molecular orbitals of fragments. (2) generate GAMESS .inp file for GKS-EDA or Morokuma-EDA calculation.
+This utility is designed to generate various EDA input files, e.g. GKS-EDA, SAPT, LMO-EDA and Morokuma-EDA. The Cartesian coordinates, basis set data, converged MO coefficients and necessary keywords will be written in the generated input file. See [examples](./chap5-3.html#53-examples-of-frag_guess_wfn).
 
-The Gaussian software package will be called to perform SCF computation for each fragment. The input file is exactly the Gaussian .gjf file, in which the atoms, charge and spin multiplicities of each fragment are properly defined. See examples in [5.3](#53-examples-of-the-utility-frag_guess_wfn).
+The Morokuma-EDA is supported by the GAMESS-US program; the GKS-EDA and LMO-EDA are supported by the [XEDA](https://mp.weixin.qq.com/s/6nuJpYJdNbUJndrYM13Fog) program. These methods are very useful but often suffer from SCF convergence failure due to the "just so-so" SCF convergence techniques in GAMESS. Even if all SCF converge, their wave function stabilities cannot be checked in GAMESS.
 
-Explanations of function (1):  
-Note: implementation of this function is not yet finished.  
-The SCF computations of radicals and transition-metal-containing molecules often suffers from multiple UHF/UKS solutions. Using a proper fragment guess (i.e., the 'guess(fragment=N)' keyword in Gaussian), one can then obtain a desired SCF solution or a lower energy solution after SCF converged and a check of wavefunction stability of the whole system. However, the wavefunction stability of each fragment in the initial guess cannot be assured in Gaussian, thus not efficient for complicated molecules. This utility – frag_guess_wfn – can ensure the wavefunction stability of each fragment and allow the usage of RHF/UHF (or RKS/UKS) for different fragments, which would improve the quality of initial guess and save time for subsequent SCF computation of the whole system. Examples of the fragment guess can be found at http://gaussian.com/afc. If you can read Chinese, a nice introduction to this topic from Sobereva's blog
-[《谈谈片段组合波函数与自旋极化单重态》](http://sobereva.com/82) is recommended.
+The SAPT is supported by the [PSI4](https://mp.weixin.qq.com/s/I7Q1YXX5oSsXDe3oMo2jPw) program. When the molecule is large or the basis set includes diffuse functions, SCF often fails to converge.
 
-Explanations of function (2):  
-The Morokuma-EDA calculation is supported by GAMESS-US program, while GKS-EDA calculation is supported by the XEDA program (a modified GAMESS-US program from Prof. Peifeng Su of Xiamen University, supi@xmu.edu.cn). These methods are very useful but often suffer from SCF convergence failure due to the "just so-so" SCF convergence techniques in GAMESS. Even if all SCF converge, their wave function stabilities cannot be checked in GAMESS.
-
-Fortunately, these two methods can read wave function of each fragment (and of total system in GKS-EDA), if we can provide such wave function as initial guess. Therefore, the utility frag_guess_wfn will call Gaussian to perform SCF calculations for each fragment (and for total system in GKS-EDA), then write all MOs into the .inp file, so that all SCF steps during an EDA calculation will converge immediately.
+This utility will call Gaussian to perform SCF calculations for each fragment (and maybe also for the complex), then write all MOs into the input file, so that all SCF steps during an EDA calculation will converge immediately.
 
 If UHF/UDFT method is specified, wave function stability of each fragment (and of total system in GKS-EDA) will be checked. This is very important for biradical and transition-metal-containing systems. If any fragment is singlet and UHF/UDFT method is specified, broken symmetry initial guess (i.e., guess=mix) will be automatically applied.
 
-The Windows* pre-built executable frag_guess_wfn will be provided at Releases in
-the near future. Note that you should define the environment variable `%GAUSS_EXEDIR%`
-(in Windows* OS) before using this utility, since Gaussian program would be called
-to perform SCF computations. For example, search "environment variable" in your
-Windows search bar and click **Edit** to add a new environment variable, and set
-it as the correct G03W, G09W or G16W directory. A screenshot is shown below
+If you want to use the Windows* pre-built executable `frag_guess_wfn`, you need to define the environment variables of MOKIT and Gaussian. Assuming your input file nh3_h2o.gjf is put in `D:360Downloads\`, then you can run the following commands in CMD
 
-<img src="images/g09w_path.png"/>
+```cmd
+D:
+cd 360Downloads
+
+set PATH=D:\360Downloads\mokit\bin;%PATH%
+set PATH=D:\Program files\G09W;%PATH%
+set GAUSS_EXEDIR=D:\Program files\G09W
+
+frag_guess_wfn nh3_h2o.gjf >nh3_h2o.out
+```
+
+If you use G16W rather than G09W, remember to modify paths showns above.
 
 ## 4.5.30 gvb_sort_pairs
 Sort (part of) MOs in descending order of the pair coefficients of the 1st natural orbital in each pair. This utility is designed only for the GAMESS .dat file. A new .dat file will be generated, in which the sorted MOs and pair coefficients are held.
