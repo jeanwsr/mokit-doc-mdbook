@@ -26,6 +26,7 @@
   - [Generating different GVB solutions](./chap5-6.md)
   - [Examples of dinuclear transition metal molecules](./chap5-7.md)
   - [Examples of `autosr`](./chap5-8.md)
+  - [Visualization of upaired electrons](./chap5-9.md)
 - [Developers' Guide](./chap6.md)
 - [Papers citing MOKIT](./citing.md)
 - [Appendix](./chap_appdx.md)

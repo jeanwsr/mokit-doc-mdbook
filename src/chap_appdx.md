@@ -10,10 +10,10 @@ If any of those cannot solve your problem, please consider [Bug report](#a3-bug-
 
 | Error messages | | |
 | --- | --- | --- |
-| [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) | [OpenMolcas: Error in keyword](#q5-error-in-keyword-when-calling-openmolcas) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
-| [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
-| [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-moocc) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspinadapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
-| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-ompstacksize) | [GKS-EDA: Warning for redial grid](#q16-gks-eda-warning-for-redial-grid) | 
+| [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) | [OpenMolcas: Error in keyword](#q5-openmolcas-error-in-keyword) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
+| [GAMESS: ERROR DIMENSIONS EXCEEDED](q7-gamess-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
+| [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-mo_occ) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspinadapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
+| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for redial grid](#q16-gks-eda-warning-for-redial-grid) | 
 | [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
 
 Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
@@ -311,15 +311,11 @@ Peter Pulay et al suggests that for cases involving multiple UHF solutions, one 
 Currently implicit solvent effect cannot be taken into consideration. But you can use the converged CASSCF wave function `*_NO.fch` file as an initial guess to your further calculations which takes implicit solvent effect into consideration.
 
 ## A3 Bug Report
-If you find any bug frequently occurs, please go to [MOKIT GitLab](https://gitlab.com/jxzou/mokit)
-to download the latest version of MOKIT and check whether the bug still exists.
-If it still exists, you can  
-(1) contact the author jxzou via E-mail njumath[at]sina.cn, with your input file
-(.gjf, .fch) and output files attached;  
-(2) open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page
-of MOKIT;  
-(3) (if you can communicate in Chinese) you can join the Tencent QQ group (Group
-ID: 470745084).
+If you find any bug frequently occurs, please go to [MOKIT GitLab](https://gitlab.com/jxzou/mokit) to download the latest version of MOKIT and check whether the bug still exists. If it still exists, you can
+
+(1) Open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page of MOKIT.  
+(2) Join the Tencent QQ group (Group ID: 470745084) if you can communicate in Chinese. It is recommended to show your problem in the QQ group. Private messages through QQ will probably be answered with the least/lowest priority.  
+(3) Contact the developer jxzou via E-mail njumath[at]sina.cn, with your input and output files attached.
 
 ## A4 Acknowledgement
 Thanks to all MOKIT developers and users for constructive suggestions, bugs report and contributions.

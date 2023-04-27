@@ -53,7 +53,7 @@ The State-Averaged CASSCF (SA-CASSCF) calculation is under development. To give 
 ## 5.1.3 MRCISD+Q calculation of the ground state
 The MRCISD calculations using `automr` are worthy of additional explanations. There are at least 3 variants of MRCISD:  
 (1) uncontracted MRCISD (unc-MRCISD);  
-(2) internally contracted MRCISD (ic-MRCISD); 
+(2) internally contracted MRCISD (ic-MRCISD);  
 (3) fully internally contracted MRCISD (FIC-MRCISD).
 All these variants are not size-consistent, therefore, the Davidson size-consistency correction is usually calculated and added into the total electronic energy (e.g. termed as FIC-MRCISD+Q). The computational cost and accuracy is unc-MRCISD > ic-MRCISD > FIC-MRCISD.
 
@@ -141,4 +141,6 @@ To perform the NEVPT2 calculation for a large molecule, you can use the local co
 mokit{CASSCF_prog=ORCA,NEVPT2_prog=ORCA,DLPNO}
 ...
 ```
+
+Note that `RI` is useless for DMRG related calculations.
 

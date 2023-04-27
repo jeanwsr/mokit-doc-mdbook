@@ -20,7 +20,7 @@ Here are the list of all `automr` keywords, grouped by category.
 
 | For method details | | | |
 | --- | --- | --- | --- |
-| [LocalM](#445-localm) | [CIonly](#446-cionly) | [Cart](#448-cart) | [CtrlType](#4420-ctrtype) for MRCI |
+| [LocalM](#445-localm) | [CIonly](#446-cionly) | [Cart](#448-cart) | [CtrType](#4420-ctrtype) for MRCI |
 | [MaxM](#4421-maxm) for DMRG | [hardwfn](#4422-hardwfn),[crazywfn](#4423-crazywfn) | [OtPDF](#4425-otpdf) for MCPDFT | [FIC](#4433-fic) for NEVPT2 |
 | [GVB_conv](#4442-gvbconv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
 | [noDMRGNO](#4449-nodmrgno) |

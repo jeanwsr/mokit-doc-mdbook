@@ -197,8 +197,7 @@ from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
 ```
 
-The attribute `wfn_type` has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively.
-The example above will print the following
+The attribute `wfn_type` has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively. The example above will print the following
 ```
 ----------------------- Radical index -----------------------
 biradical character   (2c^2) y0=  0.155
@@ -215,11 +214,7 @@ Yamaguchi's biradical index for UHF: \\( t = (n_{HONO} - n_{LUNO})/2, y = 1 - 2t
  
 Yamaguchi's biradical index for CAS(2,2): \\( y = 2{c_2}^{2} = n_{LUNO} \\)
 
-where \\( c_2 \\) is the CI coefficients of the 2nd configurations in CASCI wave
-function (assuming natural orbitals are used). Note that there is no unique way
-to define biradical (or tetraradical, etc) index for general cases including CASSCF
-(*m*,*m*) where *m*>=4, or GVB(*n*) where *n*>=2. The \\( y_i = n_{LUNO+i} \\) formula
-is adopted in the module calc_unpaired_from_fch for these general cases.
+where \\( c_2 \\) is the CI coefficients of the 2nd configurations in CASCI wave function (assuming natural orbitals are used). Note that there is no unique way to define biradical (or tetraradical, etc) index for general cases including CASSCF (*m*,*m*) where *m*>=4, or GVB(*n*) where *n*>=2. The \\( y_i = n_{LUNO+i} \\) formula is adopted for these general cases.
 
 There are also modules which calculate the number of unpaired electrons of GVB by reading information from GAMESS .dat/.gms file:
 ```python
@@ -386,8 +381,9 @@ If you have performed GVB calculations and stored GVB orbitals in the object mf,
 py2qchem(mf, 'h2o.in', npair=2)
 ```
 to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how many pairs you want to calculate.
-	
-	
+<br/>
+<br/>
+<br/>
 Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
 ```python
 from mokit.lib.qchem import qchem2molpro

@@ -6,7 +6,7 @@ Currently, the keywords of all supported methods in `automr` are:
 
 [NEVPT2](#436-nevpt2), [CASPT2](#437-caspt2), [CASPT2K](#438-caspt2k), [CASPT3](#439-caspt3), [SDSPT2](#4310-sdspt2), [MRMP2](#4311-mrmp2), [OVBMP2](#4312-ovbmp2), [MRCISD](#4313-mrcisd), [MRCISDT](#4314-mrcisdt), 
 
-[MCPDFT](#4315-mcpdft), [DFTCI](#4316-dftci), [MRCC](#4317-mrcc), [BCCC2b](#4318-bccc2b), [BCCC3b](#4319-bccc3b).
+[MCPDFT](#4315-mcpdft), [DFTCI](#4316-dftci), [MRCC](#4317-ficmrccsd), [BCCC2b](#4318-bccc2b), [BCCC3b](#4319-bccc3b).
 
 More multi-configurational and multi-reference methods will be supported in the future.
 These terms should be written in the `#p ...` line in the .gjf file.
@@ -128,10 +128,10 @@ Currently, to perform DFT/MRCI computations, you should have ORCA and DFT/MRCI p
 
 Note: full implementation of this keyword has not been finished yet.
 
-## 4.3.17 MRCC
+## 4.3.17 FIC-MRCCSD
 Multi-reference Coupled Cluster theory, based on the CASCI/CASSCF reference.
 
-Currently only the FIC-MRCC method in ORCA(>=5.0.0) is supported.
+Currently only the FIC-MRCCSD method in ORCA(>=5.0.0) is supported.
 
 ## 4.3.18 BCCC2b
 Block-correlated coupled cluster theory based on the GVB reference.
