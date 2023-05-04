@@ -16,4 +16,7 @@
 
 8. The Pincer Ligand Supported Ruthenium Catalysts for Acetylene Hydrochlorination: Molecular Mechanisms from Theoretical Insights. ***Catalysts*** DOI: [10.3390/catal13010031](https://doi.org/10.3390/catal13010031)
 
+9. Oxygen-containing functional groups enhance uranium adsorption by aged polystyrene microplastics: Experimental and theoretical perspectives. ***Chem. Eng. J.*** DOI: [10.1016/j.cej.2023.142730](https://doi.org/10.1016/j.cej.2023.142730)
+
+10. Accurate rate constants for barrierless dissociation of ethanol: VRC-VTST and SS-QRRK calculations with the cheaper DFT method. ***Chem .Phys. Lett.*** DOI: [10.1016/j.cplett.2023.140522](https://doi.org/10.1016/j.cplett.2023.140522)
 
