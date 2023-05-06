@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tutorial Demo</title>
+  </head>
+  <body>
+    <div id="mountNode"></div>
+    <!-- <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script> -->
+    <!-- 4.x and later versions -->
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.3.11/dist/g6.min.js"></script>
+    <script>
+      const initData = {
+        nodes: [
+          {id: 'g', type: 'ellipse', size: [100,50], x: 500, y: 200, label: 'Gaussian', 
+          anchorPoints: [
+            [1.0, 0.3],
+            [1.0, 0.7],
+          ]},
+          {id: 'fch2mkl', type: 'diamond', size: [50,25], x: 700, y: 250, label: 'fch2mkl', },
+          {id: 'mkl2fch', type: 'diamond', size: [50,25], x: 700, y: 150, label: 'mkl2fch', },
+          {id: 'o', type: 'ellipse', size: [100,50], x: 900, y: 200, label: 'ORCA', },
+               ],
+        edges: [
+          {source: 'g', target: 'fch2mkl', sourceAnchor: 1},
+          {source: 'fch2mkl', target: 'o', },
+          {source: 'o', target: 'mkl2fch', },
+          {source: 'mkl2fch', target: 'g', targetAnchor: 0},
+    ],
+  };
+
+      //G6.registerNode('util', {
+      //  options: {
+      //    style: {
+      //      cursor: 'pointer',
+      //    },
+      //  },
+      //},
+      //'diamond');
+      const graph = new G6.Graph({
+        container: 'mountNode',
+        width: 1000,
+        height: 600,
+        //fitView: true,
+        //fitViewPadding: [20, 40, 50, 20],
+        defaultNode: {
+          
+          style: {
+            cursor: 'pointer',
+          }
+        },
+        defaultEdge: {
+          label: '',
+          type: 'quadratic',
+          style: {
+            lineWidth: 5,
+            endArrow: {
+              path: G6.Arrow.vee(5,10,10),
+              d: 10,
+            },
+          }
+        }
+      });
+
+      //const main = async () => {
+      //  const response = await fetch(
+      //    'https://gw.alipayobjects.com/os/basement_prod/6cae02ab-4c29-44b2-b1fd-4005688febcb.json',
+      //  );
+      //  const remoteData = await response.json();
+      //  graph.data(remoteData);
+      //  graph.render();
+      //};
+      //main();
+      graph.data(initData); 
+      graph.on('node:click', (ev) => {
+        const node = ev.item;
+        window.open('./chap4-5.html#4522-fch2mkl');
+      });
+      graph.render(); 
+</script>
+  </body>
+</html>
