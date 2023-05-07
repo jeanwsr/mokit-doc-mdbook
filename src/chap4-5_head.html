@@ -8,56 +8,85 @@
     <div id="mountNode"></div>
     <!-- <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script> -->
     <!-- 4.x and later versions -->
-    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.3.11/dist/g6.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.8.7/dist/g6.min.js"></script>
     <script>
       const initData = {
         nodes: [
-          {id: 'g', type: 'ellipse', size: [100,50], x: 500, y: 200, label: 'Gaussian', 
-          anchorPoints: [
-            [1.0, 0.3],
-            [1.0, 0.7],
-          ]},
-          {id: 'fch2mkl', type: 'diamond', size: [50,25], x: 700, y: 250, label: 'fch2mkl', },
-          {id: 'mkl2fch', type: 'diamond', size: [50,25], x: 700, y: 150, label: 'mkl2fch', },
-          {id: 'o', type: 'ellipse', size: [100,50], x: 900, y: 200, label: 'ORCA', },
+          {id: 'g', type: 'program', size: [100,50], x: 400, y: 200, label: 'Gaussian', 
+          //anchorPoints: [
+          //  [1.0, 0.3],
+          //  [1.0, 0.7],
+          //]
+        },
+          {id: 'fch2mkl', type: 'util', size: [50,25], x: 320, y: 130, label: 'fch2mkl', },
+          {id: 'mkl2fch', type: 'util', size: [50,25], x: 350, y: 110, label: 'mkl2fch', },
+          {id: 'o', type: 'program', size: [100,50], x: 280, y: 30, label: 'ORCA', },
+          {id: 'ga', type: 'program', size: [100,50], x: 520, y: 30, label: 'GAMESS', },
+          {id: 'fch2gms', type: 'util', size: [50,25], x: 450, y: 110, label: 'fch2gms', },
+          {id: 'dat2fch', type: 'util', size: [50,25], x: 480, y: 130, label: 'dat2fch', },
+          {id: 'e', type: 'program', size: [100,50], x: 640, y: 200, label: 'etc', },
                ],
         edges: [
-          {source: 'g', target: 'fch2mkl', sourceAnchor: 1},
-          {source: 'fch2mkl', target: 'o', },
-          {source: 'o', target: 'mkl2fch', },
-          {source: 'mkl2fch', target: 'g', targetAnchor: 0},
+          {source: 'g', target: 'o', //sourceAnchor: 1
+        },
+          //{source: 'fch2mkl', target: 'o', },
+          //{source: 'o', target: 'mkl2fch', },
+          {source: 'o', target: 'g', //targetAnchor: 0
+        },
+          {source: 'g', target: 'ga', },
+          {source: 'ga', target: 'g', },
+          {source: 'g', target: 'e', },
+          {source: 'e', target: 'g', },
     ],
   };
 
-      //G6.registerNode('util', {
-      //  options: {
-      //    style: {
-      //      cursor: 'pointer',
-      //    },
-      //  },
-      //},
-      //'diamond');
+      G6.registerNode('util', 
+      {
+        getCustomConfig() {
+          return {
+            size: [60,30],
+          style: {
+            cursor: 'pointer',
+          },
+        };
+        
+        },
+        //update(cfg, node) {},
+      },
+      'diamond',
+      );
+      G6.registerNode('program', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [100,50],
+          };
+        },
+      },
+      'ellipse',
+      );
       const graph = new G6.Graph({
         container: 'mountNode',
         width: 1000,
         height: 600,
         //fitView: true,
         //fitViewPadding: [20, 40, 50, 20],
-        defaultNode: {
-          
-          style: {
-            cursor: 'pointer',
-          }
-        },
+        //defaultNode: {
+        //  
+        //  style: {
+        //    cursor: 'pointer',
+        //  }
+        //},
         defaultEdge: {
           label: '',
           type: 'quadratic',
           style: {
             lineWidth: 5,
-            endArrow: {
-              path: G6.Arrow.vee(5,10,10),
-              d: 10,
-            },
+            endArrow: true,
+            //endArrow: {
+            //  path: G6.Arrow.vee(5,10,10),
+            //  d: 10,
+            //},
           }
         }
       });
