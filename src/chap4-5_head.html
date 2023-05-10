@@ -10,36 +10,7 @@
     <!-- 4.x and later versions -->
     <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.8.7/dist/g6.min.js"></script>
     <script>
-      const initData = {
-        nodes: [
-          {id: 'g', type: 'program', size: [100,50], x: 400, y: 200, label: 'Gaussian', 
-          //anchorPoints: [
-          //  [1.0, 0.3],
-          //  [1.0, 0.7],
-          //]
-        },
-          {id: 'fch2mkl', type: 'util', size: [50,25], x: 320, y: 130, label: 'fch2mkl', },
-          {id: 'mkl2fch', type: 'util', size: [50,25], x: 350, y: 110, label: 'mkl2fch', },
-          {id: 'o', type: 'program', size: [100,50], x: 280, y: 30, label: 'ORCA', },
-          {id: 'ga', type: 'program', size: [100,50], x: 520, y: 30, label: 'GAMESS', },
-          {id: 'fch2gms', type: 'util', size: [50,25], x: 450, y: 110, label: 'fch2gms', },
-          {id: 'dat2fch', type: 'util', size: [50,25], x: 480, y: 130, label: 'dat2fch', },
-          {id: 'e', type: 'program', size: [100,50], x: 640, y: 200, label: 'etc', },
-               ],
-        edges: [
-          {source: 'g', target: 'o', //sourceAnchor: 1
-        },
-          //{source: 'fch2mkl', target: 'o', },
-          //{source: 'o', target: 'mkl2fch', },
-          {source: 'o', target: 'g', //targetAnchor: 0
-        },
-          {source: 'g', target: 'ga', },
-          {source: 'ga', target: 'g', },
-          {source: 'g', target: 'e', },
-          {source: 'e', target: 'g', },
-    ],
-  };
-
+      //const initData = ;
       G6.registerNode('util', 
       {
         getCustomConfig() {
@@ -91,21 +62,24 @@
         }
       });
 
-      //const main = async () => {
-      //  const response = await fetch(
-      //    'https://gw.alipayobjects.com/os/basement_prod/6cae02ab-4c29-44b2-b1fd-4005688febcb.json',
-      //  );
-      //  const remoteData = await response.json();
-      //  graph.data(remoteData);
-      //  graph.render();
-      //};
-      //main();
-      graph.data(initData); 
-      graph.on('node:click', (ev) => {
-        const node = ev.item;
-        window.open('./chap4-5.html#4522-fch2mkl');
-      });
-      graph.render(); 
+      const main = async() => {
+        const theresponse = await fetch(
+          './data.json',
+        );
+        const initData = await theresponse.json();
+      
+        graph.data(initData); 
+        graph.on('node:click', (ev) => {
+          const node = ev.item.getModel().id;
+          var sel = '[id$="' + node + '"]';
+          var id = window.parent.document.querySelector(sel).id;
+          console.log(node);
+          console.log(id);
+          window.parent.open(window.parent.location.href + '#' + id);
+        });
+        graph.render(); 
+      };
+      main();
 </script>
   </body>
 </html>

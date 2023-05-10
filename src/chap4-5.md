@@ -5,6 +5,9 @@ The utilities of transferring MOs are summarized in the following figure:
 
 For detailed explanations of all utilities, please read the following subsections.
 
+<iframe width=770 height=500 src="./chap4-5_head.html">
+</iframe>
+
 ## 4.5.1 add_bgcharge_to_inp
 This utility is designed to add background charges to the input file of various software packages. If you do not use background charges in your computation, you can skip this section. But if you do use them (e.g. in subsystems of fragmentation-based or embedding methods), they are not recorded in any .fch(k) file. This can be viewed as a defect of the .fch(k) file. Therefore, the generated input file by utilities fch2com, fch2inp, fch2iporb, fch2psi or bas_fch2py will contain no background charges either.
 
