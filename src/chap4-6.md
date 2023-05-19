@@ -169,13 +169,13 @@ rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overla
 | label | a string, the meaning of exported matrix (provided by yourself) |
 
 ## 4.6.13 read_natom_from_pdb
-Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in Section 4.6.13.
+Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in [Section 4.6.16](#4616-writeframeintopdb).
 
 ## 4.6.14 read_nframe_from_pdb
-Read the number of frames from a given pdb file. See an example in Section 4.6.13.
+Read the number of frames from a given pdb file. See an example in [Section 4.6.16](#4616-writeframeintopdb).
 
 ## 4.6.15 read_iframe_from_pdb
-Read the i-th frame from a given pdb file. See an example in Section 4.6.13.
+Read the i-th frame from a given pdb file. See an example in [Section 4.6.16](#4616-writeframeintopdb).
 
 ## 4.6.16 write_frame_into_pdb
 Write a frame into the given pdb file. A python script is shown below, to illustrate how to use these pdb-related APIs:
@@ -267,7 +267,9 @@ where
 `nmo`: indices 1~nmo MOs in ref_fch will be set as reference MOs. If `nmo` is not
 given, it will be set as na (number of alpha electrons)
 
-## 4.6.22 Other modules in rwwfn
+## 4.6.22 Other functions in rwwfn
+
+```
 modify_IROHF_in_fch(fchname, k)  
 read_charge_and_mult_from_fch(fchname, charge, mult)  
 read_charge_and_mult_from_mkl(mklname, charge, mult)  
@@ -331,8 +333,13 @@ read_ao_ovlp_from_47(file47, nbf, S)
 get_no_from_density_and_ao_ovlp(nbf, nif, P, ao_ovlp, noon, new_coeff)  
 read_mult_from_fch(fchname, mult)  
 get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
+```
 
 ## 4.6.23 Other modules in `$MOKIT_ROOT/mokit/lib`
+
+There's a few py2xxx modules and a `qchem` module. The functions provided are as follows.
+
+```
 py2bdf(mf, inpname, write_no=None)  
 py2cfour(mf)  
 py2dalton(mf, inpname)  
@@ -351,10 +358,13 @@ qchem2molpro(fchname, inpname)
 qchem2psi(fchname, inpname)  
 qchem2orca(fchname, inpname)  
 standardize_fch(fchname)
+```
+
+**py2xxx modules**
 
 Taking `py2qchem` as an example, it exports MOs from PySCF to Q-Chem. An input file (.in) and a directory containing orbital files will be generated. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Two examples are shown below:
 
-(1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. h2o.py
+(1) Transfer RHF, ROHF or UHF orbitals. Create/Write a PySCF input file, e.g. `h2o.py`
 ```python
 from pyscf import gto, scf
 from mokit.lib.py2qchem import py2qchem
@@ -369,6 +379,8 @@ mf = scf.RHF(mol).run()
 py2qchem(mf, 'h2o.in')
 ```
 
+> After MOKIT version 1.2.6rc5, a lazy import of functions in this subsection is enabled. `from mokit.lib.py2qchem import py2qchem` can be replaced by `from mokit.lib import *` or `from mokit.lib import py2qchem`.
+
 Run it using python and then a Q-Chem input file h2o.in and a scratch directory h2o will be generated. The orbital file(s) is put in h2o/. If you run
 ```
 qchem h2o.in h2o.out h2o
@@ -381,9 +393,11 @@ If you have performed GVB calculations and stored GVB orbitals in the object mf,
 py2qchem(mf, 'h2o.in', npair=2)
 ```
 to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how many pairs you want to calculate.
-<br/>
-<br/>
-<br/>
+
+<br>
+
+**qchem module**
+
 Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
 ```python
 from mokit.lib.qchem import qchem2molpro

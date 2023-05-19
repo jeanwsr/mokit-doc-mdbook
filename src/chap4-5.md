@@ -526,6 +526,7 @@ mol = gto.M(atom='O 0.0 0.0 0.1; H 0.0 0.0 1.0',
 mf = mol.RHF().run()
 fchk(mf, 'test.fch')
 ```
+> After MOKIT version 1.2.6rc5, a lazy import of this function is enabled. `from mokit.lib.py2fch_direct import fchk` can be replaced by `from mokit.lib import *` or `from mokit.lib import fchk`.
 
 (2) transfer CASSCF MOs from PySCF to Gaussian
 ```
