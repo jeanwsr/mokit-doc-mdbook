@@ -169,13 +169,13 @@ rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overla
 | label | a string, the meaning of exported matrix (provided by yourself) |
 
 ## 4.6.13 read_natom_from_pdb
-Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in [Section 4.6.16](#4616-writeframeintopdb).
+Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in [Section 4.6.16](#4616-write_frame_into_pdb).
 
 ## 4.6.14 read_nframe_from_pdb
-Read the number of frames from a given pdb file. See an example in [Section 4.6.16](#4616-writeframeintopdb).
+Read the number of frames from a given pdb file. See an example in [Section 4.6.16](#4616-write_frame_into_pdb).
 
 ## 4.6.15 read_iframe_from_pdb
-Read the i-th frame from a given pdb file. See an example in [Section 4.6.16](#4616-writeframeintopdb).
+Read the i-th frame from a given pdb file. See an example in [Section 4.6.16](#4616-write_frame_into_pdb).
 
 ## 4.6.16 write_frame_into_pdb
 Write a frame into the given pdb file. A python script is shown below, to illustrate how to use these pdb-related APIs:

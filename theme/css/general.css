@@ -136,12 +136,13 @@ table tbody tr:nth-child(2n) {
 
 
 blockquote {
-    margin: 20px 0;
-    padding: 0 20px;
-    color: var(--fg);
-    background-color: var(--quote-bg);
-    border-top: .1em solid var(--quote-border);
-    border-bottom: .1em solid var(--quote-border);
+    margin: 15px 0;
+    padding: 0 15px;
+    /*color: var(--fg);*/
+    /*background-color: var(--quote-bg);*/
+    /*border-top: .1em solid var(--quote-border);
+    border-bottom: .1em solid var(--quote-border);*/
+    border-left: .3em solid var(--quote-border);
 }
 
 

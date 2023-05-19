@@ -54,7 +54,7 @@
   --theme-popup-border: var(--disabled);
   --theme-hover: var(--disabled);
 
-  --quote-bg: var(--quote);
+  --quote-bg: var(--alt-bg);
   --quote-border: var(--quote);
 
   --table-border-color: var(--base-fg);
