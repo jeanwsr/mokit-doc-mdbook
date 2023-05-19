@@ -2,13 +2,13 @@
     "nodes": [
       {"id": "g", "type": "program", "x": 400, "y": 200, "label": "Gaussian"
     },
-      {"id": "fch2mkl", "type": "util", "x": 320, "y": 130, "label": "fch2mkl" },
-      {"id": "mkl2fch", "type": "util", "x": 350, "y": 110, "label": "mkl2fch" },
       {"id": "o", "type": "program", "x": 280, "y": 30, "label": "ORCA" },
       {"id": "ga", "type": "program", "x": 520, "y": 30, "label": "GAMESS" },
+      {"id": "e", "type": "program", "x": 640, "y": 200, "label": "etc" },
+      {"id": "fch2mkl", "type": "util", "x": 320, "y": 130, "label": "fch2mkl" },
+      {"id": "mkl2fch", "type": "util", "x": 350, "y": 110, "label": "mkl2fch" },
       {"id": "fch2gms", "type": "util", "x": 450, "y": 110, "label": "fch2gms" },
-      {"id": "dat2fch", "type": "util", "x": 480, "y": 130, "label": "dat2fch" },
-      {"id": "e", "type": "program", "x": 640, "y": 200, "label": "etc" }
+      {"id": "dat2fch", "type": "util", "x": 480, "y": 130, "label": "dat2fch" }
            ],
     "edges": [
       {"source": "g", "target": "o"
