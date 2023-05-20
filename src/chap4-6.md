@@ -340,6 +340,7 @@ get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
 There's a few py2xxx modules and a `qchem` module. The functions provided are as follows.
 
 ```
+py2amesp(mf, aipname)
 py2bdf(mf, inpname, write_no=None)  
 py2cfour(mf)  
 py2dalton(mf, inpname)  
@@ -349,6 +350,8 @@ py2molpro(mf, inpname)
 py2orca(mf, inpname)  
 py2psi(mf, inpname)  
 py2qchem(mf, inpname, npair=None)  
+
+qchem2amesp(fchname, aipname)  
 qchem2bdf(fchname, inpname)  
 qchem2cfour(fchname)  
 qchem2dalton(fchname, dalname)  
@@ -396,21 +399,23 @@ to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how 
 
 <br>
 
-**qchem module**
+**qchem modules**
 
 Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
+
 ```python
 from mokit.lib.qchem import qchem2molpro
 qchem2molpro('water.FChk','h2o.com')
 ```
 
-Two files(`h2o.com` and `water_std.a`) will be generated. Keywords for reading MOs
-from `water_std.a` have been written in `h2o.com`.
+Two files(`h2o.com` and `water_std.a`) will be generated. Keywords for reading MOs from `water_std.a` have been written in `h2o.com`.
 
 If you only want to standardize a Q-Chem .fch(k) file and do not want to transfer MOs. Then you only need
+
 ```python
 from mokit.lib.qchem import standardize_fch
 standardize_fch('water.FChk')
 ```
+
 A file named `water_std.fch` will be generated.
 
