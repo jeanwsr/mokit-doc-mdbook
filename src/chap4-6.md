@@ -399,7 +399,7 @@ to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how 
 
 <br>
 
-**qchem modules**
+**qchem module**
 
 Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
 
