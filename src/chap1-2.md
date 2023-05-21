@@ -22,12 +22,12 @@ Currently we have not published the paper of MOKIT program. As for the content o
 [4] Jingxiang Zou, MOKIT program, https://gitlab.com/jxzou/mokit (accessed Jan 28, 2023).
 ```
 
-where the "Jan 28" should be modified as the version you used. The version number can be found by running `automr --version`, or simply `automr -v`. Note that citing MOKIT only in the supporting information of a paper is insufficient, since such citation can hardly be gathered by search engine or database.
+where the "Jan 28" should be modified as the version you used. The version number can be found by running `automr --version`, or simply `automr -v`. Note that citing MOKIT only in the supporting information of a paper is insufficient, since such citation can hardly be gathered by search engine or database. Citation files of MOKIT can be found in the `$MOKIT_ROOT/doc/` directory, you can import them into EndNote.
 
 If any of the keyword ist=0,1,3 (see Section 4.4.4) in program `automr` is used, citing the following two papers would be appreciated
 
-[2] J. Chem. Theory Comput. 2019, 15, 141–153. DOI: 10.1021/acs.jctc.8b00854  
-[3] J. Phys. Chem. A 2020, 124, 8321–8329. DOI: 10.1021/acs.jpca.0c05216.
+[2] J. Chem. Theory Comput. 2019, 15, 141–153. DOI: [10.1021/acs.jctc.8b00854](https://pubs.acs.org/doi/10.1021/acs.jctc.8b00854)  
+[3] J. Phys. Chem. A 2020, 124, 8321–8329. DOI: [10.1021/acs.jpca.0c05216](https://pubs.acs.org/doi/10.1021/acs.jpca.0c05216).
 
 Besides, you need to CITE all quantum chemistry software packages called in your `automr` job(s). For example, the file `examples/automr/00-h2o_cc-pVDZ_1.5.gjf` is a CASSCF job. 3 software packages will be called:
 
@@ -35,7 +35,7 @@ Besides, you need to CITE all quantum chemistry software packages called in your
 (2) GAMESS will be called to perform GVB;  
 (3) PySCF will be called to perform CASSCF.
 
-Therefore, in this case you should also cite corresponding references of Gaussian, GAMESS and PySCF, as well as possible references of electronic-structure methods and basis sets. In the future version of MOKIT, there will be a Citation.txt file generated after your computations terminated. You can simply copy citation information in that plain text file.
+Therefore, in this case you should also cite corresponding references of [Gaussian](http://gaussian.com/citation), [GAMESS](https://www.msg.chem.iastate.edu/gamess/citation.html) and [PySCF](https://www.msg.chem.iastate.edu/gamess/citation.html), as well as possible references of electronic-structure methods and basis sets.
 
 You can use MOKIT to perform computations for other people. But remember to remind him/her that MOKIT should be properly cited.
 
