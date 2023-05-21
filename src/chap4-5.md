@@ -408,15 +408,21 @@ Note that the number of digits in .mkl file is only 7, and the scientific notati
 You can also transfer MOs from ORCA to Gaussian via [mkl2gjf](#4532-mkl2gjf). To transfer MOs from Gaussian to ORCA, see [4.5.22 fch2mkl](#4522-fch2mkl).
 
 ## 4.5.32 mkl2gjf
-Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinates, basis set data and MOs (optional) will be printed into the .gjf file. Two examples are shown and explained below
+Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinates, basis set data and MOs will be printed into the .gjf file. An example is shown and explained below
 
-(1) `mkl2gjf a.mkl`  
-Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinates, basis set data will be printed into the .gjf file. There would be no MOs in it.
+```
+mkl2gjf a.mkl
+```
 
-(2) `mkl2gjf a.mkl -mo`  
-Generate the Gaussian .gjf file from the ORCA .mkl file. The Cartesian coordinates, basis set data plus MOs will be printed into the .gjf file.
+this will generate the file `a.gjf`. Note that the ORCA .mkl file has a defect: it does not contain ECP/PP information. Therefore, if you did not use ECP in your ORCA calculations, there would be no problem. But in case that you used ECP, there would be no ECP data in the generated .gjf file (you must add them manually), and there would be a warning printed on the screen
 
-Note that the ORCA .mkl file has a defect: it does not contain ECP/PP information. Therefore, if you did not use ECP in your ORCA calculations, there would be no problem. But in case you used ECP, there would be no ECP data in the generated .gjf file (you must add them manually).
+```
+Warning in subroutine mkl2gjf: element(s)>'Ar' detected.
+NOTE: the .mkl file does not contain ECP/PP information. If you use ECP/PP
+(in ORCA .inp file), there would be no ECP in the generated .gjf file. You
+should manually add ECP data into .gjf, and change 'gen' into 'genecp'. If
+you use all-electron basis set, there is no problem.
+```
 
 ## 4.5.33 orb2fch
 Transfer MOs from (Open)Molcas `*Orb` file (e.g. .ScfOrb, .RasOrb.1, .UnaOrb, .UhfOrb, etc) to Gaussian .fch(k) file. 5 examples are shown and explained below

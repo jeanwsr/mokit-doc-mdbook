@@ -35,7 +35,7 @@ Besides, you need to CITE all quantum chemistry software packages called in your
 (2) GAMESS will be called to perform GVB;  
 (3) PySCF will be called to perform CASSCF.
 
-Therefore, in this case you should also cite corresponding references of [Gaussian](http://gaussian.com/citation), [GAMESS](https://www.msg.chem.iastate.edu/gamess/citation.html) and [PySCF](https://www.msg.chem.iastate.edu/gamess/citation.html), as well as possible references of electronic-structure methods and basis sets.
+Therefore, in this case you should also cite corresponding references of [Gaussian](http://gaussian.com/citation), [GAMESS](https://www.msg.chem.iastate.edu/gamess/citation.html) and [PySCF](https://pyscf.org/about.html#how-to-cite), as well as possible references of electronic-structure methods and basis sets.
 
 You can use MOKIT to perform computations for other people. But remember to remind him/her that MOKIT should be properly cited.
 
