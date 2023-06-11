@@ -192,6 +192,7 @@ rg.write_frame_into_pdb('a.pdb', 10, natom, cell, elem, resname, coor, False)
 
 ## 4.6.17 calc_unpaired_from_fch
 Calculate the Yamaguchi's unpaired electrons and Head-Gordon's unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. A python script is shown below:
+
 ```python
 from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
@@ -234,19 +235,17 @@ Reference for these two types of unpaired eletrons:
 
 ## 4.6.18 gen_no_using_density_in_fch
 Generate natural orbitals using specified density in a .fch file. The density is read from the specified section of .fch file and the AO-basis overlap is obtained by calling Gaussian. An example is shown below
+
 ```python
 from mokit.lib.lo import gen_no_using_density_in_fch
 gen_no_using_density_in_fch('ben.fch', 1)
 ```
+
 where 1 means reading density from "Total SCF Density" section.
 
 ## 4.6.19 gen_cf_orb
-Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat
-file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals
-are orthogonal, so this module actually performs an orthogonal -> non-orthogonal
-orbital transformation. This transformation requires the information of GVB pair
-coefficients so currently only the GAMESS .dat file is accepted while the .fch file
-is not supported. An example is shown below
+Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals are orthogonal, so this module actually performs an orthogonal -> non-orthogonal orbital transformation. This transformation requires the information of GVB pair coefficients so currently only the GAMESS .dat file is accepted while the .fch file is not supported. An example is shown below
+
 ```python
 from mokit.lib.lo import gen_cf_orb
 gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
@@ -255,17 +254,18 @@ gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 where ndb is the number of doubly occupied orbitals and nopen is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
 
 ## 4.6.20 make_orb_resemble
-Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two
-.fch files are allowed, but their geometries and orientations should be identical
-or very similar. All attributes are
+Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two .fch files are allowed, but their geometries and orientations should be identical or very similar. An example is shown below
+
 ```
+from mokit.lib.gaussian import make_orb_resemble
+
 make_orb_resemble(target_fch, ref_fch, nmo=None)
 ```
+
 where  
 `target_fch`: the .fch file which holds MOs to be updated  
 `ref_fch`: the .fch file which holds reference MOs  
-`nmo`: indices 1~nmo MOs in ref_fch will be set as reference MOs. If `nmo` is not
-given, it will be set as na (number of alpha electrons)
+`nmo`: indices 1~nmo MOs in ref_fch will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons)
 
 ## 4.6.22 Other functions in rwwfn
 
@@ -337,33 +337,21 @@ get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
 
 ## 4.6.23 Other modules in `$MOKIT_ROOT/mokit/lib`
 
-There's a few py2xxx modules and a `qchem` module. The functions provided are as follows.
+### 4.6.23.1 The py2xxx modules
+There's a few py2xxx modules. The functions provided are as follows.
 
-```
+```python
 py2amesp(mf, aipname)
-py2bdf(mf, inpname, write_no=None)  
-py2cfour(mf)  
-py2dalton(mf, inpname)  
-py2gms(mf, inpname, npair=None, nopen=None)  
-py2molcas(mf, inpname)  
-py2molpro(mf, inpname)  
-py2orca(mf, inpname)  
-py2psi(mf, inpname)  
-py2qchem(mf, inpname, npair=None)  
-
-qchem2amesp(fchname, aipname)  
-qchem2bdf(fchname, inpname)  
-qchem2cfour(fchname)  
-qchem2dalton(fchname, dalname)  
-qchem2gms(fchname, inpname)  
-qchem2molcas(fchname, inpname)  
-qchem2molpro(fchname, inpname)  
-qchem2psi(fchname, inpname)  
-qchem2orca(fchname, inpname)  
-standardize_fch(fchname)
+py2bdf(mf, inpname, write_no=None)
+py2cfour(mf)
+py2dalton(mf, inpname)
+py2gms(mf, inpname, npair=None, nopen=None)
+py2molcas(mf, inpname)
+py2molpro(mf, inpname)
+py2orca(mf, inpname)
+py2psi(mf, inpname)
+py2qchem(mf, inpname, npair=None)
 ```
-
-**py2xxx modules**
 
 Taking `py2qchem` as an example, it exports MOs from PySCF to Q-Chem. An input file (.in) and a directory containing orbital files will be generated. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Two examples are shown below:
 
@@ -397,14 +385,26 @@ py2qchem(mf, 'h2o.in', npair=2)
 ```
 to generate the GVB-PP input file of Q-Chem, where `npair` tells `py2qchem` how many pairs you want to calculate.
 
-<br>
 
-**qchem module**
+### 4.6.23.2 The qchem module
+```python
+qchem2amesp(fchname, aipname)
+qchem2bdf(fchname, inpname)
+qchem2cfour(fchname)
+qchem2dalton(fchname, dalname)
+qchem2gms(fchname, inpname)
+qchem2molcas(fchname, inpname)
+qchem2molpro(fchname, inpname)
+qchem2psi(fchname, inpname)
+qchem2orca(fchname, inpname)
+standardize_fch(fchname)
+```
 
 Taking `qchem2molpro` as an example, it will first standardize your provided .fch(k) file and then export MOs from Q-Chem to Molpro. The restricted/unrestricted-type (i.e. R(O)HF or UHF) can be automatically detected. Start Python and run
 
 ```python
 from mokit.lib.qchem import qchem2molpro
+
 qchem2molpro('water.FChk','h2o.com')
 ```
 
@@ -414,8 +414,60 @@ If you only want to standardize a Q-Chem .fch(k) file and do not want to transfe
 
 ```python
 from mokit.lib.qchem import standardize_fch
+
 standardize_fch('water.FChk')
 ```
 
 A file named `water_std.fch` will be generated.
+
+
+### 4.6.23.3 The mirror_wfn module
+```python
+mirror_wfn(fchname)
+mirror_c2c(chkname)
+rotate_atoms_wfn(fchname, coor_file)
+geom_lin_intrplt(gjfname1, gjfname2, n)
+```
+
+The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For exmaple, if we provide a chrial molecule with R-chriality on the carbon center,
+
+```python
+from mokit.lib.mirror_wfn import mirror_wfn
+mirror_wfn('CHFClBr_R.fch')
+```
+
+the function `mirror_wfn` will return a file named `CHFClBr_R_m.fch`, where `_m` means mirror. This new file includes new Cartesian coordinates with S-chriality, updated MO coefficients, total density matrix and spin density matrix (if it was in the CHFClBr_R.fch file).
+
+If you start with the file `CHFClBr_R.chk`, not `CHFClBr_R.fch`, and you want to get the .chk file of the mirror image, you can use the function `mirror_c2c`, which is a wrapper of `formchk -> mirror_wfn -> unfchk`. For exemple,
+
+```python
+from mokit.lib.mirror_wfn import mirror_c2c
+mirror_c2c('CHFClBr_R.chk')
+```
+
+then you can directly obtain the file `CHFClBr_R_m.chk` without running `formchk` or `unfchk` manually. If you write/create a .gjf file to read MOs from `CHFClBr_R_m.chk`, the SCF will be converged in 1 cycle if you use the same computational level, because the mirror transformation here is exact.
+
+<br>
+
+The function `rotate_atoms_wfn` generates the MO coefficients of a translated and rotated molecule. For example,
+
+```python
+from mokit.lib.mirror_wfn import rotate_atoms_wfn
+rotate_atoms_wfn('h2o.fch','h2o_new.gjf')
+```
+
+The original geometry and MO coefficients are stored in `h2o.fch`, while the geometry after translation and rotation is stored in `h2o_new.gjf`. The xyz format is supported as well, e.g. you can provide `h2o_new.xyz` instead. A file named `h2o_r.fch` will be generated, which includes new Cartesian coordinates and MO coefficients. Again, if you read MOs from `h2o_r.fch` and use the same computational level, the SCF will be converged in 1 cycle.
+
+Note that the one-to-one atom correspondence in two files `h2o.fch` and `h2o_new.gjf` must be ensured by the user, this function will check whether the number of atoms in two files are equal to each other, but it will not check the atom correspondence.
+
+<br>
+
+The function `geom_lin_intrplt` generates a series of Cartesian coordinates by linear interpolation between the initial and final geometry. For example, if we have the geometries of the reactant and product in a Diels-Alder reaction, we can use this function to generate geometries connecting the reactant and product
+
+```
+from mokit.lib.mirror_wfn import geom_lin_intrplt
+geom_lin_intrplt('DA_reactant.gjf','DA_product.gjf',7)
+```
+
+These geometries can be used in subsequent (un)relaxed scan or NEB calculations. Also, you may visualize the generated geometries and choose one as the initial geometry of transition state. The one-to-one atom correspondence in two files should be ensured by the user, since this function will not check that.
 

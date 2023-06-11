@@ -560,14 +560,14 @@ fchk(mf, 'test.fch')
 ```
 
 Note that if you also want the HF/DFT Total SCF Density to be written into the generated fch file, you should add the `density` attribute/argument
-```
+```python
 fchk(mf, 'test.fch', density=True)
 ```
 
 > After MOKIT version 1.2.6rc5, a lazy import of this function is enabled. `from mokit.lib.py2fch_direct import fchk` can be replaced by `from mokit.lib import *` or `from mokit.lib import fchk`.
 
 (2) transfer CASSCF MOs from PySCF to Gaussian
-```
+```python
 from pyscf import gto, mcscf
 from mokit.lib.py2fch_direct import fchk
 
@@ -582,7 +582,7 @@ fchk(mc, 'O2_cas6o8e.fch')
 ```
 
 (3) transfer CASSCF NOs from PySCF to Gaussian
-```
+```python
 from pyscf import gto, mcscf
 from mokit.lib.py2fch_direct import fchk
 

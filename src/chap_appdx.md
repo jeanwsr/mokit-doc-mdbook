@@ -125,10 +125,9 @@ A7: Please read Section 4.4.10 carefully.
 
 
 ### Q8: GAMESS: semget errno=ENOSPC 
-Errors like `semget errno=ENOSPC -- check system limit for sysv semaphores`
-found in the .gms file. Why? How to solve the problem?
+Errors like `semget errno=ENOSPC -- check system limit for sysv semaphores` found in the .gms file. Why? How to solve the problem?
 
-A8: Please search the error on this page FAQ of GAMESS.
+A8: Please search `ENOSPC` on [this FAQ](https://github.com/gms-bbg/faq) of GAMESS.
 
 
 ### Q9: GAMESS: floating point error (SIGFPE)
