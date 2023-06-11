@@ -338,7 +338,7 @@ get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
 ## 4.6.23 Other modules in `$MOKIT_ROOT/mokit/lib`
 
 ### 4.6.23.1 The py2xxx modules
-There's a few py2xxx modules. The functions provided are as follows.
+There are a few py2xxx modules. The functions provided are as follows.
 
 ```python
 py2amesp(mf, aipname)
@@ -429,14 +429,14 @@ rotate_atoms_wfn(fchname, coor_file)
 geom_lin_intrplt(gjfname1, gjfname2, n)
 ```
 
-The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For exmaple, if we provide a chrial molecule with R-chriality on the carbon center,
+The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For exmaple, if we provide a chiral molecule with R-chirality on the carbon center,
 
 ```python
 from mokit.lib.mirror_wfn import mirror_wfn
 mirror_wfn('CHFClBr_R.fch')
 ```
 
-the function `mirror_wfn` will return a file named `CHFClBr_R_m.fch`, where `_m` means mirror. This new file includes new Cartesian coordinates with S-chriality, updated MO coefficients, total density matrix and spin density matrix (if it was in the CHFClBr_R.fch file).
+the function `mirror_wfn` will return a file named `CHFClBr_R_m.fch`, where `_m` means mirror. This new file includes new Cartesian coordinates with S-chirality, updated MO coefficients, total density matrix and spin density matrix (if it was in the CHFClBr_R.fch file).
 
 If you start with the file `CHFClBr_R.chk`, not `CHFClBr_R.fch`, and you want to get the .chk file of the mirror image, you can use the function `mirror_c2c`, which is a wrapper of `formchk -> mirror_wfn -> unfchk`. For exemple,
 
@@ -469,5 +469,5 @@ from mokit.lib.mirror_wfn import geom_lin_intrplt
 geom_lin_intrplt('DA_reactant.gjf','DA_product.gjf',7)
 ```
 
-These geometries can be used in subsequent (un)relaxed scan or NEB calculations. Also, you may visualize the generated geometries and choose one as the initial geometry of transition state. The one-to-one atom correspondence in two files should be ensured by the user, since this function will not check that.
+The integer 7 means generating seven geometries along the linear interpolation path. These geometries can be used in subsequent (un)relaxed scan or NEB calculations. Also, you may visualize the generated geometries and choose one as the initial geometry of transition state. The one-to-one atom correspondence in two files should be ensured by the user, since this function will not check that.
 
