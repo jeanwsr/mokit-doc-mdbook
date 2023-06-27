@@ -372,11 +372,11 @@ py2qchem(mf, 'h2o.in')
 
 > After MOKIT version 1.2.6rc5, a lazy import of functions in this subsection is enabled. `from mokit.lib.py2qchem import py2qchem` can be replaced by `from mokit.lib import *` or `from mokit.lib import py2qchem`.
 
-Run it using python and then a Q-Chem input file h2o.in and a scratch directory h2o will be generated. The orbital file(s) is put in h2o/. If you run
+Run it using python and then a Q-Chem input file `h2o.in` and a scratch directory `h2o` will be generated. The orbital file(s) is put in `h2o/`. If you run
 ```
 qchem h2o.in h2o.out h2o
 ```
-you will find RHF in Q-Chem converges in 2 cycles. If the environment variable QCSCRATCH is already defined in your node/computer, the scratch directory h2o will be automatically put into $QCSCRATCH/; otherwise h2o will be put in the current directory.
+you will find RHF in Q-Chem converges in 2 cycles. If the environment variable `QCSCRATCH` is already defined in your node/computer, the scratch directory `h2o` will be automatically put into `$QCSCRATCH/`; otherwise it will be put in the current directory.
 
 (2) Transfer GVB orbitals
 If you have performed GVB calculations and stored GVB orbitals in the object mf, then you can write in python

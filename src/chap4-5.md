@@ -350,13 +350,20 @@ Note that if you use background charges in your studied system, the background c
 PSI4 can generate a .fch(k) file after calculation finished, which is equivalent to transferring MOs from PSI4 back to Gaussian.
 
 ## 4.5.26 fch2qchem
-Transfer MOs from Gaussian to Q-Chem. For R(O)HF, UHF and DFT methods, two files will be generated: .in and 53.0. The molecular orbitals are stored in the file 53.0. For GVB, three files will be generated: .in, 53.0, and 169.0. The GVB orbitals are stored both in files 53.0 and 169.0 (the same content). Two examples are shown below
+Transfer MOs from Gaussian to Q-Chem. For R(O)HF, UHF and DFT methods, two files will be generated: `.in` and `53.0`. The molecular orbitals are stored in the file `53.0`. For GVB, three files will be generated: `.in`, `53.0`, and `169.0`. The GVB orbitals are stored both in files `53.0` and `169.0` (the same content). Two examples are shown below
 
 (1) `fch2qchem h2o.fch`  
 This is used for transferring R(O)HF, UHF or CASSCF orbitals.
 
 (2) `fch2qchem h2o.fch -gvb 2`  
 This is used for transferring GVB orbitals. The orbitals in h2o.fch must be ordered in Gaussian GVB preference (bonding1, bonding2, anti-bonding2, anti-bonding1). And `-gvb 2` tells fch2qchem to write GVB-PP related keywords into the .in file.
+
+After running any of these commands, a Q-Chem input file `h2o.in` and a scratch directory `h2o` will be generated. The orbital file(s) is put in `h2o/`. Run
+```
+qchem h2o.in h2o.out h2o
+```
+to perform the subsequent Q-Chem job. If the environment variable `QCSCRATCH` is already defined in your node/computer, the scratch directory `h2o` will be automatically put into `$QCSCRATCH/`; otherwise it will be put in the current directory.
+You can read [Q-Chem Manual](https://manual.q-chem.com/latest/ssect_general-usage.html) for more information.
 
 ## 4.5.27 fch2qm4d
 Transfer MOs from Gaussian to QM4D. Input files for QM4D (.xyz, .inp, .xml and basis files for each element) will be generated. One example is shown below
