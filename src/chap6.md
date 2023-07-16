@@ -54,8 +54,9 @@ It means, this job pull a docker `image` and run a `script` inside it, then zip 
 
 ### Conda packaging
 
-Currently the GitLab CI for conda build works fine. It can be triggered by any modification of `mokit/__init__.py` or `conda/meta.yaml`, as indicated by [this yml](
-https://gitlab.com/jxzou/mokit/-/blob/master/gitlab-ci/conda.yml#L6-L9).
+Any modification to the code will trigger CI/CD for normal build, but not all of them trigger the conda build and upload. The pipeline for conda can only be triggered by any modification of `mokit/__init__.py` or `conda/meta.yaml`, as indicated by [this yml](
+https://gitlab.com/jxzou/mokit/-/blob/master/gitlab-ci/conda.yml#L6-L9). 
+It means, uploading a new conda release should modify at least one of `__version__` (in `mokit/__init__.py`) and build number (in `meta.yaml`). Build number change usually means that there's no actual change in functionality or program behaviour.
 
 If something went wrong in the conda build, a manual build can be done to debug as follows.
 
@@ -74,8 +75,10 @@ conda create -n mokit-build python=3.7
 conda activate mokit-build
 conda install anaconda-client conda-build
 conda build --output-folder ./output conda
-anaconda upload ./output/linux-64/*.bz2
+#anaconda upload ./output/linux-64/*.bz2
 ```
+Usually no need to run `anaconda upload` because it's better to install and test locally. Uploading the debug version to anaconda is still possible, but it's recommended to use `anaconda upload xxx --label test`. Thus, the debug version will not be downloaded by `conda install mokit -c mokit` but can be downloaded by `conda install mokit -c mokit/label/test`.
+
 Next time, we can re-enter the container by
 ```
 docker start -i myconda
@@ -84,7 +87,7 @@ and build a new version
 ```
 conda activate mokit-build
 conda build --output-folder ./output conda
-anaconda upload ./output/linux-64/*.bz2
+#anaconda upload ./output/linux-64/*.bz2
 ```
 
 ### Other CI/CD
