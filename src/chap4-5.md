@@ -5,7 +5,7 @@ The utilities of transferring MOs are summarized in the following figure:
 
 For detailed explanations of all utilities, please read the following subsections.
 
-<iframe width=770 height=500 src="./chap4-5_head.html">
+<iframe width=750 height=520 src="./chap4-5_head.html">
 </iframe>
 
 ## 4.5.1 add_bgcharge_to_inp

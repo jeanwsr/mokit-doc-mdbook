@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Tutorial Demo</title>
+    <title>MOKIT flowchart</title>
   </head>
   <body>
     <div id="mountNode"></div>
@@ -15,10 +15,20 @@
       {
         getCustomConfig() {
           return {
-            size: [60,30],
-          style: {
-            cursor: 'pointer',
-          },
+            size: [80,40],
+            style: {
+              cursor: 'pointer',
+              lineWidth: 0,
+              //fill: '#FFE4E1',
+              opacity: 0.0,
+            },
+            labelCfg: {
+              style: {
+                fill: '#B22222',
+                fontSize: 16,
+                cursor: 'pointer',
+              },
+            },
         };
         
         },
@@ -30,16 +40,69 @@
       { 
         getCustomConfig() {
           return {
-            size: [100,50],
+            size: [180,80],
+            labelCfg: {
+              position: 'top',
+              offset: -27,
+              style: {
+                fill: 'blue',
+                fontSize: 20,
+              },
+            },
           };
         },
       },
       'ellipse',
       );
+      G6.registerNode('proginfo', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [180,60],
+            labelCfg: {
+              //position: 'top',
+              //offset: -22,
+              style: {
+                //fill: 'blue',
+                fontSize: 14,
+                fontFamily: "sans-serif",
+              },
+            },
+            style: {
+              lineWidth: 0,
+              opacity: 0.0,
+            },
+          };
+        },
+      },
+      'ellipse',
+      );
+      G6.registerNode('legend', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [180,60],
+            labelCfg: {
+              //position: 'top',
+              //offset: -22,
+              style: {
+                //fill: 'blue',
+                fontSize: 14,
+              },
+            },
+            style: {
+              lineWidth: 0,
+              opacity: 0.0,
+            },
+          };
+        },
+      },
+      'rect',
+      );
       const graph = new G6.Graph({
         container: 'mountNode',
-        width: 1000,
-        height: 600,
+        width: 720,
+        height: 500,
         //fitView: true,
         //fitViewPadding: [20, 40, 50, 20],
         //defaultNode: {

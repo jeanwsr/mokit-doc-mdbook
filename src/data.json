@@ -1,23 +1,58 @@
 {
     "nodes": [
-      {"id": "g", "type": "program", "x": 400, "y": 200, "label": "Gaussian"
+      {"id": "g", "type": "program", "x": 380, "y": 210, "label": "Gaussian"
     },
-      {"id": "o", "type": "program", "x": 280, "y": 30, "label": "ORCA" },
-      {"id": "ga", "type": "program", "x": 520, "y": 30, "label": "GAMESS" },
-      {"id": "e", "type": "program", "x": 640, "y": 200, "label": "etc" },
-      {"id": "fch2mkl", "type": "util", "x": 320, "y": 130, "label": "fch2mkl" },
-      {"id": "mkl2fch", "type": "util", "x": 350, "y": 110, "label": "mkl2fch" },
-      {"id": "fch2gms", "type": "util", "x": 450, "y": 110, "label": "fch2gms" },
-      {"id": "dat2fch", "type": "util", "x": 480, "y": 130, "label": "dat2fch" }
+      {"id": "o", "type": "program", "x": 260, "y": 40, "label": "ORCA" },
+      {"id": "ga", "type": "program", "x": 500, "y": 40, "label": "GAMESS" },
+      {"id": "m", "type": "program", "x": 120, "y": 210, "label": "Molpro" },
+      {"id": "e", "type": "program", "x": 620, "y": 210, 
+        "label": "BDF, PSI4,\nDalton, ...", "labelCfg": {"position": "center"} },
+      {"id": "p", "type": "program", "x": 260, "y": 380, "label": "PySCF" },
+      {"id": "om", "type": "program", "x": 500, "y": 380, "label": "OpenMolcas" },
+      
+      {"id": "g1", "type": "proginfo", "x": 380, "y": 220, "label": "HF, CASSCF"},
+      {"id": "o1", "type": "proginfo", "x": 260, "y": 50, 
+        "label": "CASSCF, CASPT2,\nNEVPT2, MRCISD"},
+      {"id": "ga1", "type": "proginfo", "x": 500, "y": 50, 
+        "label": "GVB, CASSCF,\nMRMP2, MC-PDFT"},
+      {"id": "m1", "type": "proginfo", "x": 120, "y": 220, 
+        "label": "CASSCF, NEVPT2,\nCASPT2, MRCISD"},
+      {"id": "p1", "type": "proginfo", "x": 260, "y": 390, 
+        "label": "CASSCF, NEVPT2,\nDMRG, MC-PDFT"},
+      {"id": "om1", "type": "proginfo", "x": 500, "y": 390, 
+        "label": "CASSCF, CASPT2\nMRCISD, MC-PDFT"},
+      
+      {"id": "fch2mkl", "type": "util", "x": 300, "y": 130, "label": "fch2mkl" },
+      {"id": "mkl2fch", "type": "util", "x": 330, "y": 110, "label": "mkl2fch" },
+      {"id": "fch2gms", "type": "util", "x": 430, "y": 110, "label": "fch2gms" },
+      {"id": "dat2fch", "type": "util", "x": 460, "y": 130, "label": "dat2fch" },
+      {"id": "fch2com", "type": "util", "x": 260, "y": 240, "label": "fch2com" },
+      {"id": "xml2fch", "type": "util", "x": 260, "y": 180, "label": "xml2fch" },
+      {"id": "fch2py", "type": "util", "x": 330, "y": 310, "label": "fch2py" },
+      {"id": "py2fch", "type": "util", "x": 300, "y": 290, "label": "py2fch" },
+      {"id": "fch2inporb", "type": "util", "x": 460, "y": 290, "label": "fch2inporb" },
+      {"id": "orb2fch", "type": "util", "x": 430, "y": 310, "label": "orb2fch" },
+      {"id": "legend1", "type": "legend", "x": 260, "y": 450, "label": "Red: utilities",
+        "labelCfg" : {"style" : {"fill" : "#B22222"}}
+      },
+      {"id": "legend2", "type": "legend", "x": 350, "y": 450, "label": "Blue: programs",
+        "labelCfg" : {"style" : {"fill" : "blue"}}
+      },
+      {"id": "legend3", "type": "legend", "x": 450, "y": 450, "label": "Black: methods"
+      }
            ],
     "edges": [
-      {"source": "g", "target": "o"
-    },
-      {"source": "o", "target": "g" 
-    },
+      {"source": "g", "target": "o" },
+      {"source": "o", "target": "g" },
       {"source": "g", "target": "ga"},
       {"source": "ga", "target": "g" },
+      {"source": "g", "target": "m" },
+      {"source": "m", "target": "g" },
       {"source": "g", "target": "e" },
-      {"source": "e", "target": "g" }
+      {"source": "e", "target": "g" },
+      {"source": "g", "target": "p" },
+      {"source": "p", "target": "g" },
+      {"source": "g", "target": "om" },
+      {"source": "om", "target": "g" }
 ]
 }
