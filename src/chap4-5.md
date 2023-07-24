@@ -1,12 +1,10 @@
 # 4.5 List of Utilities in MOKIT
-The utilities of transferring MOs are summarized in the following figure:
+The utilities of transferring MOs are summarized in the following figure.
 
-<img src="images/orbital_transfer.png" width="95%" height="95%" />
-
-For detailed explanations of all utilities, please read the following subsections.
-
-<iframe width=750 height=520 src="./chap4-5_head.html">
+<iframe width=750 height=510 src="./chap4-5_head.html">
 </iframe>
+
+For detailed explanations of all utilities, please read the following subsections. Clicking any utility label (in red color) -- for example, `fch2py` -- in the figure will redirect you to the corresponding subsection.
 
 ## 4.5.1 add_bgcharge_to_inp
 This utility is designed to add background charges to the input file of various software packages. If you do not use background charges in your computation, you can skip this section. But if you do use them (e.g. in subsystems of fragmentation-based or embedding methods), they are not recorded in any .fch(k) file. This can be viewed as a defect of the .fch(k) file. Therefore, the generated input file by utilities `fch2com`, `fch2inp`, `fch2iporb`, `fch2psi` or `bas_fch2py` will contain no background charges either.
