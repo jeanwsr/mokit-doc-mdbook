@@ -1,7 +1,5 @@
 book
-mdbook
-mdbook-toc
-mdbook-mermaid
-mermaid*.js
+mdbook*
+mer*.js
 public/
 *tar.gz

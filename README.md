@@ -1,6 +1,8 @@
 # mdbook Pages for MOKIT Doc
 
-## Usage
+## Usage for developers
+
+For linux (including WSL), the executable of mdbook and mdbook-toc is included in this repo, so we can do
 ```
 tar xzvf mdbook-toc*.tar.gz
 tar xzvf mdbook-v*.tar.gz
@@ -10,6 +12,9 @@ tar xzvf mdbook-v*.tar.gz
 # open your browser to visit http://localhost:3000
 ```
 
+If using Windows, please go to the [mdbook release](https://github.com/rust-lang/mdBook/releases) and [mdbook-toc release](https://github.com/badboy/mdbook-toc/releases) to download the executables for Windows platform.
+
+
 ## Offline browsing
 
 Download the released tar.gz of this repo, and do
@@ -17,7 +22,7 @@ Download the released tar.gz of this repo, and do
 ```
 tar xzvf mokit-doc-1.2.5rc19.tar.gz
 cd mokit-doc-1.2.5rc19
-firefox public/index.md
+firefox public/index.html # double-click it if using Windows
 ```
 
 Most of the the links in doc in offline mode should be still valid, but I'm not very sure...

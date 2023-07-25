@@ -11,7 +11,7 @@ conda activate mokit-py37
 conda install mokit -c mokit
 ```
 If you have no access to network, but still don't want to compile MOKIT manually,
-you can try options in Section 2.2.2.
+you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
 
 **Update MOKIT with conda**
 
@@ -54,7 +54,11 @@ export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
+Unlike the conda install approach, using pre-built MOKIT in this subsection do not require network. 
+But you still need to have a Python3 environment and NumPy, which can be achieved by anaconda/miniconda.
+
 ### Download
+
 [centos7_conda_py37](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py37)  
 [centos7_conda_py38](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py38)  
 [centos7_conda_py39](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py39)  
@@ -62,6 +66,27 @@ export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 [py38_gcc8](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py38_gcc8)  
 [py39_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py39_gcc10)  
 [py310_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py310_gcc10)
+
+After downloading the pre-built artifacts, you need to set the following environment
+variables (assuming MOKIT is put in `$HOME/software/mokit`) in your `~/.bashrc`:
+
+```bash
+export MOKIT_ROOT=$HOME/software/mokit
+export PATH=$MOKIT_ROOT/bin:$PATH
+export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
+export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
+export GMS=$HOME/software/gamess/rungms
+```
+  
+The `LD_LIBRARY_PATH` is needed since the OpenBLAS dynamic library is put there.
+Remember to modify the `GMS` path to suit your local environment. 
+
+> Attention: the PYTHONPATH has changed since MOKIT version 1.2.5rc2.
+
+Note that you need to run `source ~/.bashrc` or exit the terminal as well as
+re-login, in order to activate newly written environment variables.
+
+
 
 ### Compatibility Note
 
@@ -73,18 +98,19 @@ export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 | py37_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.7 | 8.3 | 1.21 |
 | py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | latest |
 | py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | latest |
-| py310_gcc10 | Debian 11, Arch | Ubuntu 22.04 | 3.10 | 10.2 | latest |
+| py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | latest |
 
 Tips:
-* Do not extract the zip with GUI (like KDE)! Use `unzip` in command line.
+* Do not extract the zip with right-click (like the one in KDE)! Use `unzip` in command line.
 * The artifacts started with 'centos7_conda' need to be used with Anaconda3/Miniconda3, and the rest works with system-provided python (conda is also OK).
-* We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky 8, Manjaro, etc. More compatibility tests and reports are welcome.
+* We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky Linux, OpenEuler, etc. More compatibility tests and reports are welcome.
 * The GCC and NumPy version listed refer to the version used to compile the artifacts. 
-  - NumPy can be sensitive to version sometimes. Try upgrade numpy if your python complained about version when `import`. 
+  - NumPy can be sensitive to version sometimes. Try upgrade (or downgrade) numpy if your python complained about version when `import`. 
   - The NumPy version for conda based prebuilts is fixed, because we use fixed-version miniconda image for building and would not upgrade anything for convenience. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for other prebuilts are latest (currently 1.24, because they are installed from pip) except py37 (because NumPy did not provide newer releases than 1.21 for it).
 
 Known issues:
-*
+* Currently no artifacts for Archlinux and Manjaro, because their python goes beyond 3.10.
+
 
 ## 2.2.3 Only want `frag_guess_wfn`?
 If you do not need full functionality of MOKIT and only want `frag_guess_wfn` for generating the input file of various EDA methods, the easiest way is to download the pre-compiled MOKIT in Section [2.2.2](./chap2-2.html#222-pre-built-linux-executables-and-libraries). There is no need to install Miniconda/Anaconda Python in this case, and no need for `conda install`.

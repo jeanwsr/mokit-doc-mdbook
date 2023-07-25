@@ -4,17 +4,17 @@ Here are the list of all `automr` keywords, grouped by category.
 
 | For program specification | | | |
 | --- | --- | --- | --- |
-| [HF_prog](#449-hfprog) | [GVB_prog](#4410-gvbprog) | [CASCI_prog](#4411-casciprog) | [CASSCF_prog](#4412-casscfprog) |
-| [DMRGCI_prog](#4413-dmrgciprog) | [DMRGSCF_prog](#4414-dmrgscfprog) | [CASPT2_prog](#4415-caspt2prog) | [NEVPT2_prog](#4416-nevpt2prog) |
-| [MRCISD_prog](#4417-mrcisdprog) | [MRMP2_prog](#4418-mrmp2prog) | [MCPDFT_prog](#4419-mcpdftprog) | |
+| [HF_prog](#449-hf_prog) | [GVB_prog](#4410-gvb_prog) | [CASCI_prog](#4411-casci_prog) | [CASSCF_prog](#4412-casscf_prog) |
+| [DMRGCI_prog](#4413-dmrgci_prog) | [DMRGSCF_prog](#4414-dmrgscf_prog) | [CASPT2_prog](#4415-caspt2_prog) | [NEVPT2_prog](#4416-nevpt2_prog) |
+| [MRCISD_prog](#4417-mrcisd_prog) | [MRMP2_prog](#4418-mrmp2_prog) | [MCPDFT_prog](#4419-mcpdft_prog) | |
 
 </br>
 
 | For workflow specification | | | |
 | --- | --- | --- | --- |
 | [readrhf](#441-readrhf) | [readuhf](#442-readuhf) | [readno](#443-readno) | [ist](#444-ist) (most important!) |
-| [charge](#4424-charge) | [DKH2](#4426-dkh2), [X2C](#4427-x2c) | [ON_thres](#4434-onthres) | [UNO_thres](#4435-unothres) |
-| [excludeXH](#4436-excludexh), [OnlyXH](#4447-onlyxh) for GVB | [Skip_UNO](#4443-skipuno) | [HFonly](#4450-hfonly) |
+| [charge](#4424-charge) | [DKH2](#4426-dkh2), [X2C](#4427-x2c) | [ON_thres](#4434-on_thres) | [UNO_thres](#4435-uno_thres) |
+| [excludeXH](#4436-excludexh), [OnlyXH](#4447-onlyxh) for GVB | [Skip_UNO](#4443-skip_uno) | [HFonly](#4450-hfonly) |
 
 </br>
 
@@ -22,21 +22,21 @@ Here are the list of all `automr` keywords, grouped by category.
 | --- | --- | --- | --- |
 | [LocalM](#445-localm) | [CIonly](#446-cionly) | [Cart](#448-cart) | [CtrType](#4420-ctrtype) for MRCI |
 | [MaxM](#4421-maxm) for DMRG | [hardwfn](#4422-hardwfn),[crazywfn](#4423-crazywfn) | [OtPDF](#4425-otpdf) for MCPDFT | [FIC](#4433-fic) for NEVPT2 |
-| [GVB_conv](#4442-gvbconv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
+| [GVB_conv](#4442-gvb_conv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
 | [noDMRGNO](#4449-nodmrgno) |
 
 </br>
 
 | For acceleration technique | | |
 | --- | --- | --- |
-| [RI](#4428-ri), [RIJK_bas](#4429-rijkbas) | [F12](#4430-f12), [F12_cabs](#4431-f12cabs) for NEVPT2 | [DLPNO](#4432-dlpno) for NEVPT2 |
+| [RI](#4428-ri), [RIJK_bas](#4429-rijk_bas) | [F12](#4430-f12), [F12_cabs](#4431-f12_cabs) for NEVPT2 | [DLPNO](#4432-dlpno) for NEVPT2 |
 
 </br>
 
 | Others | | | | |
 | --- | --- | --- | --- | --- |
 |For additional properties | [Force](#447-force) | [NMR](#4437-nmr) | [ICSS](#4438-icss) |
-| For excited states  | [Nstates](#4439-nstates) | [Mixed_Spin](#4440-mixedspin) | [Root](#4441-root) | [Xmult](#4448-xmult) |
+| For excited states  | [Nstates](#4439-nstates) | [Mixed_Spin](#4440-mixed_spin) | [Root](#4441-root) | [Xmult](#4448-xmult) |
 
 </br>
 
@@ -410,33 +410,18 @@ Specifying this keyword means that allowing electronic states with different spi
 Specify the root which you are interested in State-Specific CASSCF (SS-CASSCF) calculations. Default value is 0 (ground state). `Root=1` stands for the first excited state. For example, if the ground state is S0, then `Root=1` stands for the S1 state. Note that this keyword is mutually exclusive to the keyword `Nstates` in [4.4.39 Nstates](#4439-nstates), since the latter one is used for SA-CASSCF. Currently dynamic correlation based on SS-CASSCF is not supported. The SS-CASSCF calculation is performed after the ground state CASSCF calculation.
 
 ## 4.4.42 GVB_conv
-Modify/Set the density matrix convergence criterion in GAMESS GVB to be a desired
-threshold. The default threshold is 1D-5 (meaning 10-5 a.u.). Usually there is no
-need to modify the default value. But if you want to use a less tight threshold,
-1D-4 ~ 5D-4 is recommended, e.g. `GVB_conv=5D-4`. Note that only 4 characters are
-allowed for this parameter. Do not write 5.0D-4 since it exceeds the length limit.
-This keyword is equivalent to the keyword CONV in GAMESS (please read the documentation
-file docs-input.txt in GAMESS package if you want know more details).
+Modify/Set the density matrix convergence criterion in GAMESS GVB to be a desired threshold. The default threshold is different for two cases:
 
-There are two possible cases in which you may want to change the default GVB convergence
-threshold:
+(1) 5D-4 (i.e. 0.0005 a.u.) for CASSCF and post-CASSCF calculations;  
+(2) 1D-5 for GVB and GVB-BCCC calculations.
 
-(1) When dealing with molecules which have many conjugated pi bonds (e.g. acene,
-zethrene), although the default orbital localization method Pipek-Mezey provides
-\\( \sigma \\) - \\( \pi \\) separated initial guess orbitals for GVB computation,
-the converged GVB orbitals may still be \\( \sigma \\) - \\( \pi \\) mixed. In
-that case you can specify keywords `mokit{LocalM=Boys,GVB_conv=5d-4}` and specify
-exactly the number of \\( \pi \\) bonds *n* in Route Section as GVB(*n*) (this is
-just a combination of keywords which have been explored by the author jxzou and
-found often useful). One may wonder why the Boys localization method is used here.
-This is because we have explicitly specified GVB(*n*), the *n* pairs of UNOs near
-HONO are usually pure pi orbitals and it is safe to use Boys localization among
-\\( \pi \\) orbitals.
+Usually there is no need to modify the default value. But if you want to use a less tight threshold, 1D-4 ~ 5D-4 is recommended, e.g. `GVB_conv=5D-4`. Note that only 4 characters are allowed for this parameter. Do not write 5.0D-4 since it exceeds the length limit. This keyword is equivalent to the keyword CONV in GAMESS (please read the documentation file docs-input.txt in GAMESS package if you want know more details).
 
-(2) When dealing with *d* transition metal (e.g. Fe) molecules, the GVB orbital
-optimization often takes many cycles to converge or even diverge in the end, but
-the first ~30 cycles are often reasonable, so we can use a less tight threshold
-to converge the GVB wavefuntion.
+There are two possible cases in which you may want to change the default GVB convergence threshold:
+
+(1) When dealing with molecules which have many conjugated pi bonds (e.g. acene, zethrene), although the default orbital localization method Pipek-Mezey provides \\( \sigma \\) - \\( \pi \\) separated initial guess orbitals for GVB computation, the converged GVB orbitals may still be \\( \sigma \\) - \\( \pi \\) mixed. In that case you can specify keywords `mokit{LocalM=Boys,GVB_conv=5d-4}` and specify exactly the number of \\( \pi \\) bonds *n* in Route Section as GVB(*n*) (this is just a combination of keywords which have been explored by the developer jxzou and found often useful). One may wonder why the Boys localization method is used here. This is because we have explicitly specified GVB(*n*), the *n* pairs of UNOs near HONO are usually pure pi orbitals and it is safe to use Boys localization among \\( \pi \\) orbitals.
+
+(2) When dealing with *d* or *f* transition metal (e.g. Fe) molecules, the GVB orbital optimization often takes many cycles to converge or even diverge in the end, but the first ~30 cycles are often reasonable, so we can use a less tight threshold to converge the GVB wavefuntion.
 
 ## 4.4.43 Skip_UNO
 Specify the number of pairs of UNOs to be skipped during orbital localization. Default is 0. For example, `Skip_UNO=1` means that the HONO and LUNO will be kept unchanged when localizing UNOs. And `Skip_UNO=2` means that the HONO-1, HONO, LUNO and LUNO+1 will be kept unchanged when localizing UNOs. This is useful when GVB exists multiple SCF solutions. Using `Skip_UNO=1` you can probably obtain a biradical-like GVB solution (if the molecule indeed has significant biradical characters). It is recommended to choose the solution with the lowest GVB electronic energies for subsequent post-GVB
@@ -462,7 +447,9 @@ mokit{ist=1,readuhf='naphthalene_cc-pVDZ_uhf.fch',Npair=5}
 ```
 
 ## 4.4.46 FcGVB
-Request to freeze all doubly occupied orbitals in GVB calculations. Do not write FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work. This keyword is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember to specify FcGVB in both singlet and triplet cases.
+Request to freeze all doubly occupied orbitals in GVB calculations. Do not write FcGVB=.T., FcGVB=.True., or FcGVB=True. Just specifying FcGVB will work, i.e. `mokit{FcGVB,...}`. This keyword is useful for obtaining the GVB solution with pure \\( \pi \\) orbitals in calculations of non-planar polycyclic hydrocarbons. If you want to calculate the S-T gap, remember to specify FcGVB in both singlet and triplet cases.
+
+By default, for CASCI/CASSCF and post-CAS calculations, FcGVB is automatically enabled in MOKIT. While for GVB and GVB-BCCC calculations, FcGVB is automatically disabled. The keyword `NoFcGVB` prevents freezing doubly occupied orbitals.
 
 ## 4.4.47 OnlyXH
 Request to keep only X-H bonds after a normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `OnlyXH` is specified in `mokit{}`, then a GVB(6) computation containing only C-H bonds will be automatically performed after GVB(15). This keyword can be viewed as an opposite option of [4.4.36 excludeXH](./chap4-4.html#4436-excludexh).
