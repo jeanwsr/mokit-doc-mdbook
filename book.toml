@@ -17,9 +17,13 @@ additional-css = [
 mathjax-support = true
 git-repository-url = "https://gitlab.com/jeanwsr/mokit-doc-mdbook"
 git-repository-icon = "fa-gitlab"
+#additional-js = ["mermaid.min.js", "mermaid-init.js"]
 
 #[output.markdown]
 
 [preprocessor.toc]
 command = "./mdbook-toc"
 renderer = ["html"]
+
+#[preprocessor.mermaid]
+#command = "./mdbook-mermaid"

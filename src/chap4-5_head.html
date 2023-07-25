@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MOKIT flowchart</title>
+  </head>
+  <body>
+    <div id="mountNode"></div>
+    <!-- <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script> -->
+    <!-- 4.x and later versions -->
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g6/4.8.7/dist/g6.min.js"></script>
+    <script>
+      //const initData = ;
+      G6.registerNode('util', 
+      {
+        getCustomConfig() {
+          return {
+            size: [80,40],
+            style: {
+              cursor: 'pointer',
+              lineWidth: 0,
+              //fill: '#FFE4E1',
+              opacity: 0.0,
+            },
+            labelCfg: {
+              style: {
+                fill: '#B22222',
+                fontSize: 16,
+                cursor: 'pointer',
+              },
+            },
+        };
+        
+        },
+        //update(cfg, node) {},
+      },
+      'diamond',
+      );
+      G6.registerNode('program', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [180,80],
+            labelCfg: {
+              position: 'top',
+              offset: -27,
+              style: {
+                fill: 'blue',
+                fontSize: 20,
+              },
+            },
+          };
+        },
+      },
+      'ellipse',
+      );
+      G6.registerNode('proginfo', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [180,60],
+            labelCfg: {
+              //position: 'top',
+              //offset: -22,
+              style: {
+                //fill: 'blue',
+                fontSize: 14,
+                fontFamily: "sans-serif",
+              },
+            },
+            style: {
+              lineWidth: 0,
+              opacity: 0.0,
+            },
+          };
+        },
+      },
+      'ellipse',
+      );
+      G6.registerNode('legend', 
+      { 
+        getCustomConfig() {
+          return {
+            size: [180,60],
+            labelCfg: {
+              //position: 'top',
+              //offset: -22,
+              style: {
+                //fill: 'blue',
+                fontSize: 14,
+              },
+            },
+            style: {
+              lineWidth: 0,
+              opacity: 0.0,
+            },
+          };
+        },
+      },
+      'rect',
+      );
+      const graph = new G6.Graph({
+        container: 'mountNode',
+        width: 720,
+        height: 500,
+        //fitView: true,
+        //fitViewPadding: [20, 40, 50, 20],
+        //defaultNode: {
+        //  
+        //  style: {
+        //    cursor: 'pointer',
+        //  }
+        //},
+        defaultEdge: {
+          label: '',
+          type: 'quadratic',
+          style: {
+            lineWidth: 5,
+            endArrow: true,
+            //endArrow: {
+            //  path: G6.Arrow.vee(5,10,10),
+            //  d: 10,
+            //},
+          }
+        }
+      });
+
+      const main = async() => {
+        const theresponse = await fetch(
+          './data.json',
+        );
+        const initData = await theresponse.json();
+      
+        graph.data(initData); 
+        graph.on('node:click', (ev) => {
+          const node = ev.item.getModel().id;
+          var sel = '[id$="' + node + '"]';
+          var id = window.parent.document.querySelector(sel).id;
+          console.log(node);
+          console.log(id);
+          window.parent.open(window.parent.location.href + '#' + id);
+        });
+        graph.render(); 
+      };
+      main();
+</script>
+  </body>
+</html>

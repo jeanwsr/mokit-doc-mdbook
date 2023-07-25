@@ -31,4 +31,3 @@
 - [Papers citing MOKIT](./citing.md)
 - [Appendix](./chap_appdx.md)
 
-
