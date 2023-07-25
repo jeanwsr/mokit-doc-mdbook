@@ -102,9 +102,10 @@
       const graph = new G6.Graph({
         container: 'mountNode',
         width: 720,
-        height: 500,
+        height: 490,
         //fitView: true,
         //fitViewPadding: [20, 40, 50, 20],
+        //fitCenter: true,
         //defaultNode: {
         //  
         //  style: {
@@ -132,13 +133,16 @@
         const initData = await theresponse.json();
       
         graph.data(initData); 
+        //console.log(graph.modes);
         graph.on('node:click', (ev) => {
           const node = ev.item.getModel().id;
-          var sel = '[id$="' + node + '"]';
-          var id = window.parent.document.querySelector(sel).id;
-          console.log(node);
-          console.log(id);
-          window.parent.open(window.parent.location.href + '#' + id);
+          if ( ev.item.getModel().type == 'util' ) {
+            var sel = '[id$="' + node + '"]';
+            var id = window.parent.document.querySelector(sel).id;
+            //console.log(node);
+            //console.log(id);
+            window.parent.open(window.parent.location.href + '#' + id);
+          }
         });
         graph.render(); 
       };
