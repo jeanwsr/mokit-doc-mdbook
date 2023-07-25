@@ -24,7 +24,7 @@
       
       {"id": "fch2mkl", "type": "util", "x": 300, "y": 130, "label": "fch2mkl" },
       {"id": "mkl2fch", "type": "util", "x": 330, "y": 110, "label": "mkl2fch" },
-      {"id": "fch2gms", "type": "util", "x": 430, "y": 110, "label": "fch2gms" },
+      {"id": "fch2inp", "type": "util", "x": 430, "y": 110, "label": "fch2inp" },
       {"id": "dat2fch", "type": "util", "x": 460, "y": 130, "label": "dat2fch" },
       {"id": "fch2com", "type": "util", "x": 260, "y": 240, "label": "fch2com" },
       {"id": "xml2fch", "type": "util", "x": 260, "y": 180, "label": "xml2fch" },
