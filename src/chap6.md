@@ -118,7 +118,7 @@ tar xzvf mdbook-v*.tar.gz
 # open your browser to visit http://localhost:3000
 ```
 
-On other platforms, you can download the binaries in the GitHub repo of mdBook and mdbook-toc, or use WSL (you don't need a browser inside WSL).
+On other platforms, you can download the binaries in the GitHub repo of mdBook and mdbook-toc, or use WSL (you don't need a browser inside WSL), or use `cargo install mdbook mdbook-toc`.
 
 Simple modifications can be done on the GitLab website. Clicking the `Edit` button or `Open the Web IDE` allows you modify and commit online.
 
@@ -126,4 +126,11 @@ Simple modifications can be done on the GitLab website. Clicking the `Edit` butt
 
 You should [learn some basic Markdown](https://rust-lang.github.io/mdBook/format/markdown.html) to modify the documentation.
 
-However, mdBook's [math support](https://rust-lang.github.io/mdBook/format/mathjax.html) is a little different from common Markdown syntax.
+However, mdBook's [math support](https://rust-lang.github.io/mdBook/format/mathjax.html) is a little different from common Markdown syntax. 
+The inline math should be written as `\\( \\)`.
+
+**Flowchart**
+
+We now have a flowchart example at the beginning of [Section 4.5](./chap4-5.md), which is an [AntV G6](https://g6.antv.antgroup.com/manual/introduction) graph embedded in an iframe. The G6 graph can be configured in `chap4-5_head.html` and `data.json`.
+
+But for simple flowcharts, like `A -> B -> C`, it's not necessary to use G6. Instead, [Mermaid](https://mermaid.js.org/syntax/flowchart.html) is suitable, and well supported by Markdown, although we don't have a chance to use it yet.

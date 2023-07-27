@@ -133,7 +133,7 @@
         const initData = await theresponse.json();
       
         graph.data(initData); 
-        //console.log(graph.modes);
+        //console.log(graph.getCurrentMode());
         graph.on('node:click', (ev) => {
           const node = ev.item.getModel().id;
           if ( ev.item.getModel().type == 'util' ) {
