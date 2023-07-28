@@ -429,16 +429,16 @@ Sort (part of) MOs in descending order of the pair coefficients of the 1st natur
 ## 4.5.33 mkl2com
 Transfer MOs from ORCA .mkl file into Molpro (.com, .a and possibly .b files). Two examples are shown and explained below
 
-(1) `mkl2com h2o.mkl`
+(1) `mkl2com h2o.mkl`  
 This is used for transferring HF/DFT orbitals. `h2o.com` and `h2o.a` files will be generated. If the wavefucntion in .mkl is UHF-type, then `h2o.b` will also be generated.
 
-(2) `mkl2com h2o.mkl water.com`
+(2) `mkl2com h2o.mkl water.com`  
 Also used for transferring HF/DFT orbitals, but the input filename is specified by the user.
 
 ## 4.5.34 mkl2fch
 Transfer MOs from ORCA .mkl file into Gaussian .fch(k) file. Four examples are shown and explained below
 
-(1) `mkl2fch a.mkl`
+(1) `mkl2fch a.mkl`  
 This is used for transferring HF/DFT orbitals. If the file `a.fch` exists, orbitals will be directly exported into it. If it does not exist, `mkl2fch` will try to create one such file from scratch.
 
 (2) `mkl2fch a.mkl b.fch`  
@@ -447,7 +447,7 @@ Also used for transferring HF/DFT orbitals. But the filename `b.fch` is specifie
 (3) `mkl2fch a.mkl a.fch -no`  
 This is used for transferring CAS NOs, MP2 NOs, CCSD NOs, etc.
 
-(4) `mkl2fch a.mkl a.fch -no`
+(4) `mkl2fch a.mkl a.fch -no`  
 This is used for transferring Natural Spin Orbitals(NSO), e.g. UCCSD NSOs.
 
 NOTE: If no .fch(k) file is provided, then `mkl2fch` will try to generate one from scratch. This is usually O.K. but remember that there is no ECP/PP information in .mkl file. So if you use ECP/PP, the generated .fch file will not include ECP/PP data, and you need to add them into .gjf file if you want to perform further calculations using Gaussian.
