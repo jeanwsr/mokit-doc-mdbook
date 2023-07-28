@@ -58,9 +58,7 @@ For Linux/MacOS pre-built version, see [Section 2.2](./chap2-2.md)
 
 
 ### Q3: why orb2fch requires a fch
-Why the utilities `dat2fch`, `py2fch`, `mkl2fch`, `orb2fch`, `xml2fch`, `bdf2fch`
-and `bdf2mkl` cannot generate a .fch file from scratch, but require the user to
-provide one?
+Why the utilities `dat2fch`, `py2fch`, `orb2fch`, `xml2fch`, `bdf2fch` and `bdf2mkl` cannot generate a .fch file from scratch, but require the user to provide one?
 
 A3: Strictly speaking, to correctly transfer MOs between different programs requires 'int=nobasistransform nosymm' (and also possibly '5D 7F' or '6D 10F') keywords in Gaussian, and equivalent keywords in other quantum chemistry programs. This rule also applies to other programs/software which claim they can transfer MOs or support file transformation.
 
