@@ -22,5 +22,5 @@
 
 11. Assessment of DFT functionals for a minimal nitrogenase [Fe(SH)<sub>4</sub>H]<sup>-</sup> model employing state-of-the-art ab initio methods. ***J Chem Phys*** DOI: [10.1063/5.0152611](https://doi.org/10.1063/5.0152611)
 
-12. Equation-of-Motion Block-Correlated Coupled Cluster Method for Excited Electronic States of Strongly Correlated Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jpclett.3c01474](https://doi.org/10.1021/acs.jpclett.3c01474)
+12. Equation-of-Motion Block-Correlated Coupled Cluster Method for Excited Electronic States of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c01474](https://doi.org/10.1021/acs.jpclett.3c01474)
 
