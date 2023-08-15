@@ -528,7 +528,7 @@ fch2py(fchname, nbf, nif, ab, mf.mo_coeff)
 
 There are 4 parameters required by fch2py: (1) filename of .fch(k) file; (2) the number of basis functions; (3) the number of molecular orbitals; and (4) a character 'a'/'b' for reading alpha/beta orbitals. You should write these contents into a Python script, and run that script using the python executable. If you want a more detailed example, just run any `automr` job and see all `*.py` files generated.
 
-See relevant utilities/modules: [bas_fch2py](#453-bas_fch2py) and [load_mol_from_fch](./chap4-6.html#461-load_mol_from_fch).
+See relevant utilities/modules: [bas_fch2py](#453-bas_fch2py) and [load_mol_from_fch](./chap4-6.html#4611-load_mol_from_fch).
 
 ## 4.5.42 py2fch
 Export MOs from PySCF to a Gaussian .fch file. Note that `py2fch` cannot generate a .fch file from scratch. The user must provide one .fch file, in which the 'Alpha Orbital Energies' and 'Alpha MOs' sections (or beta orbital counterpart) will be replaced by occupation numbers and MOs from PySCF. If you want to generate a .fch file from scratch, see the [fchk](#4544-fchk) module.
@@ -541,7 +541,7 @@ py2fch('a.fch', nbf, nif, mf.mo_coeff, ab, ev, gen_density)
 
 The first few parameters are identical to those in [fch2py](#4541-fch2py). The parameter `ev` means eigenvalues, it is supposed to contain orbital energies or orbital occupation numbers. The last parameter `gen_density` is a bool variable, where True/False meaning whether or not generating Total SCF Density (as well as writing density into .fch file) using mf.mo_coeff and ev. If `gen_density=True`, the parameter `ev` must contain orbital occupation numbers, not orbital energies. Because density would be computed using MOs and occupation numbers. If `gen_density=False`, you can assign proper values to `ev` as your wish.
 
-This module is usually used along with these utilities/modules: [bas_fch2py](#453-bas_fch2py), [fch2py](#4541-fch2py) and [load_mol_from_fch](./chap4-6.html#461-load_mol_from_fch).
+This module is usually used along with these utilities/modules: [bas_fch2py](#453-bas_fch2py), [fch2py](#4541-fch2py) and [load_mol_from_fch](./chap4-6.html#4611-load_mol_from_fch).
 
 ## 4.5.43 py2fch_cghf
 Export complex gHF MOs from PySCF to a Gaussian .fch file. Note that `py2fch_cghf` cannot generate a .fch file from scratch. The user must provide one .fch file. This module is similar to `py2fch` (which is usually used for R(O)HF, UHF and DFT methods). The difference is that this module is only designed for complex gHF/gDFT methods. All attributes of `py2fch_cghf` are shown below
@@ -551,7 +551,7 @@ py2fch_cghf(fchname, nbf, nif, coeff, ev, gen_density)
 ```
 
 ## 4.5.44 fchk
-This is a powerful module since it can directly export/generated a Gaussian .fch(k) file (i.e. no need to provide one .fch file in advance). And this module is the basis of many other modules like py2molpro, py2molcas, etc, see [Other modules in $MOKIT_ROOT/mokit/lib](./chap4-6.html#4623-other-modules-in-mokit_rootmokitlib). Three examples are shown below:
+This is a powerful module since it can directly export/generated a Gaussian .fch(k) file (i.e. no need to provide one .fch file in advance). And this module is the basis of many other modules like py2molpro, py2molcas, etc, see [Section 4.6.5](./chap4-6.md#465-the-py2xxx-modules). Three examples are shown below:
 
 (1) transfer HF/DFT MOs from PySCF to Gaussian
 ```python
