@@ -45,63 +45,72 @@ loc(fchname='benzene_5D7F_rhf.fchk', method='pm', idx=range(6,21))
 ```
 Only 'boys' or 'pm' is allowed for the 2nd argument. You should specify the orbital indices or range in the 3rd argument. Note that the starting integer index is 0 in Python convention, and the final index cannot be reached. So range(6,21) means orbitals 7-21, which are valence occupied orbitals for benzene. The localized orbitals will be exported/written into a new file with suffix `*_LMO.fch` (in this case, it is benzene_5D7F_rhf_LMO.fch).
 
-For system containing only \\( \sigma \\) bonds, these two methods make little difference.
-While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization
-method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds.
-The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If
-you want to analyze localized \\( \pi \\) bonds after localization, you should choose method='pm'.
+For system containing only \\( \sigma \\) bonds, these two methods make little difference. While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds. The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If you want to analyze localized \\( \pi \\) bonds after localization, you should choose method='pm'.
 
 ### 4.6.1.3 uno
-Generate UHF natural orbitals(UNOs) from a given Gaussian .fch(k) file. For example,
+Generate UHF natural orbitals(UNOs) from a given Gaussian .fch(k) file. For example
+
 ```python
 from mokit.lib.gaussian import uno
 uno(fchname='benzene_uhf.fch')
 ```
+
 ### 4.6.1.4 permute_orb
-Swap/exchange two orbitals in a given .fch(k) file. For example,
+Swap/exchange two orbitals in a given .fch(k) file. For example
+
 ```python
 from mokit.lib.gaussian import permute_orb
 permute_orb('ethanol_rhf_proj_loc_pair2gvb8_s.fch',6,13)
 ```
+
 then the MO 6 and MO 13 will be swapped/exchanged. The index of the first orbital starts from 1.
 
 ### 4.6.1.5 gen_fcidump
-Generate a FCIDUMP file which contains the effective 1e integrals and 2e integrals from a given Gaussian .fch(k) file. Such a FICUDMP file can be used in CASCI, DMRG-CASCI, GVB-BCCC, or any post-CASCI calculations. For example,
+Generate a FCIDUMP file which contains the effective 1e integrals and 2e integrals from a given Gaussian .fch(k) file. Such a FICUDMP file can be used in CASCI, DMRG-CASCI, GVB-BCCC, or any post-CASCI calculations. For example
+
 ```python
 from mokit.lib.gaussian import gen_fcidump
 gen_fcidump(fchname='anthracene_cc-pVDZ_uhf_uno_asrot2gvb7_s.fch',nacto=14,nacte=14)
 ```
-where the arguments nacto and nacte are the number of active orbitals and the number of active electrons, respectively. This functionality requires the PySCF installed.
+
+where the arguments `nacto` and `nacte` are the number of active orbitals and the number of active electrons, respectively. This module requires the PySCF installed.
 
 ### 4.6.1.6 read_int1e_from_gau_log
 Read various one-electron integral matrices from a Gaussian output file. For example, read AO-basis overlap
+
 ```python
 from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 ```
-Attribute itype:
+
+Attribute `itype`:  
 The type of one-electron integral matrices. Allowed values are 1,2,3,4 for Overlap, Kinetic Energy, Potential Energy, and Core Hamiltonian, respectively.
 
 ### 4.6.1.7 read_mo_from_fch
 Read MOs from a Gaussian .fch(k) file. For example
+
 ```python
 from mokit.lib import rwwfn
 mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',nbf=24,nif=24,ab='a')
 ```
-Attribute ab:
+
+Attribute `ab`:  
 character with length=1, 'a'/'b' for reading alpha/beta orbitals.
 
 ### 4.6.1.8 read_density_from_gau_log
 Read various types of density matrix from a Gaussian output file. For example, read the Alpha Density Matrix from a .log file
+
 ```python
 from mokit.lib import rwwfn
 den = rwwfn.read_density_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log', itype=2, nbf=24)
 ```
-Attribute itype:
+
+Attribute `itype`:  
 1/2/3 for Total/Alpha/Beta Density Matrix.
 
 ### 4.6.1.9 read_density_from_fch
 Read various types of density matrix from a Gaussian .fch(k) file. For example, read the Total SCF Density from a .fchk file
+
 ```python
 from mokit.lib import rwwfn
 den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
@@ -117,25 +126,28 @@ den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=
 
 ### 4.6.1.10 write_pyscf_dm_into_fch
 Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All attributes of this module are shown below
-```
+
+```python
 write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
 ```
-where dm is the PySCF density matrix with dimension (nbf,nbf). itype has the same
-meaning with that in [4.6.1.9](#4619-read_density_from_fch). force is a bool variable,
-and its meaning is:
 
-(1) If the string corresponding to itype (e.g. 'Total SCF Density') can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
+where `dm` is the PySCF density matrix with dimension (nbf,nbf). `itype` has the same meaning with that in [read_density_from_fch](#4619-read_density_from_fch). `force` is a bool variable, and its meaning is:
 
-(2) If the string corresponding to itype cannot be found, setting force=True will enforce writing density matrix into the given file; setting force=False will stop/abort the program and signal errors immediately (this can be used to check whether desired strings exists in the specified file).
+(1) If the string corresponding to `itype` (e.g. 'Total SCF Density') can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
+
+(2) If the string corresponding to `itype` cannot be found, setting `force=True` will enforce writing density matrix into the given file; setting `force=False` will stop/abort the program and signal errors immediately (this can be used to check whether desired strings exists in the specified file).
 
 You should use this module via
+
 ```python
 from mokit.lib.py2fch import write_pyscf_dm_into_fch
 ```
-Note that this module cannot generate a .fch(k) file from scratch, the user must provide one such file. The recommended approach is firstly using the module bas_fch2py to generate PySCF input file or using load_mol_from_fch to generate proper PySCF object, then do computations in PySCF. Finally using the module write_pyscf_dm_into_fch to export desired density matrix.
+
+Note that this module cannot generate a .fch(k) file from scratch, the user must provide one such file. The recommended approach is firstly using the utility `bas_fch2py` to generate PySCF input file or using the Python module `load_mol_from_fch` to a generate proper PySCF object, then do computations in PySCF. Finally using the module `write_pyscf_dm_into_fch` to export desired density matrix.
 
 ### 4.6.1.11 gen_ao_tdm
 Generate AO-basis ground->excited state Transition Density Matrix for CIS/TDHF/TDDFT from a Gaussian output file. Currently only closed shell is taken into consideration. For example, read the S0->S1 Transition Density Matrix from a Gaussian .log file (with iop(9/40=5) specified in .gjf file)
+
 ```python
 from mokit.lib import rwwfn, excited
 mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_0.96_rhf.fchk',nbf=24,nif=24,ab='a')
@@ -143,15 +155,14 @@ tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,mo=
 rwwfn.export_mat_into_txt(txtname='h2o_tdm.txt',n=24,mat=tdm,lower=False,label='transition density matrix')
 ```
 
-Attribute istate:
+Attribute `istate`:
 The *i*-th excited state. For example, i=1 for the first excited state.
 
 The last python statement means exporting the transition density matrix into a plain text file, see the API below.
 
 ### 4.6.1.12 export_mat_into_txt
-Export a square matrix into a plain text file. The example of exporting transition
-density matrix is shown in Section 4.6.11. Here I offer one more example - export
-the lower triangle of a symmetric AO-basis overlap matrix
+Export a square matrix into a plain text file. The example of exporting transition density matrix is shown in Section 4.6.11. Here I offer one more example - export the lower triangle of a symmetric AO-basis overlap matrix
+
 ```python
 from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
@@ -183,6 +194,7 @@ Read the i-th frame from a given pdb file. See an example in [Section 4.6.2.4](#
 
 ### 4.6.2.4 write_frame_into_pdb
 Write a frame into the given pdb file. A python script is shown below, to illustrate how to use these pdb-related APIs:
+
 ```python
 import mokit.lib.rwgeom as rg
 natom = rg.read_natom_from_pdb(pdbname='test.pdb')
@@ -214,7 +226,7 @@ Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  0.328
 -------------------------------------------------------------
 ```
 
-If the attribute gen_dm is set to True (i.e. gen_dm=True), then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
+If the attribute `gen_dm` is set to `True`, then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
 
 Yamaguchi's biradical index for UHF: \\( t = (n_{HONO} - n_{LUNO})/2, y = 1 - 2t/(1 + t^2) \\)
  
@@ -256,21 +268,56 @@ from mokit.lib.lo import gen_cf_orb
 gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 ```
 
-where ndb is the number of doubly occupied orbitals and nopen is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
+where `ndb` is the number of doubly occupied orbitals and `nopen` is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
 
 ### 4.6.3.4 make_orb_resemble
 Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two .fch files are allowed, but their geometries and orientations should be identical or very similar. An example is shown below
 
-```
+```python
 from mokit.lib.gaussian import make_orb_resemble
-
-make_orb_resemble(target_fch, ref_fch, nmo=None)
+make_orb_resemble(target_fch, ref_fch, nmo=None, align=False)
 ```
 
 where  
 `target_fch`: the .fch file which holds MOs to be updated  
 `ref_fch`: the .fch file which holds reference MOs  
-`nmo`: indices 1~nmo MOs in ref_fch will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons)
+`nmo`: indices 1~nmo MOs in `ref_fch` will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons) for RHF-type wave function, and set to na/nb respectively for UHF-type wave function.
+`align`: whether to align two molecules in files `target_fch` and `ref_fch`. The default is `False`, i.e. assuming the geometries are already in a best alignment. If this is not your case, you need to set `align=True`.
+
+### 4.6.3.5 proj2target_basis
+Project MOs of the original basis set onto the target basis set. `cart` is True/False for Cartesian-type or spherical harmonic type functions, respectively. `target_basis` can be smaller than, equal to, or larger than the basis set in `fchname`, although usually a larger basis set would be used.
+
+```python
+from mokit.lib.gaussian import proj2target_basis
+proj2target_basis(fchname, target_basis='cc-pVTZ', cart=False)
+```
+
+Note: use this module to projecting MOs between two all-electron basis sets, or between two basis sets with the same ECP/PP. For example, the following 3 cases are recommended
+(1) cc-pVDZ -> cc-pVTZ;
+(2) cc-pVDZ -> def2TZVP (if the studied molecule include no element >Kr);
+(3) def2SVP -> def2TZVP.
+The basis sets def2SVP and def2TZVP have the same ECP/PP data, and they differ only in orbital basis data.
+
+The following 3 cases are not recommended
+(1) LANL2DZ -> cc-pVTZ;
+(2) cc-pVDZ -> LANL2TZ(f);
+(3) LANL2DZ -> def2TZVP.
+if the studied molecule include any element >Ne. This is because the number of doubly occupied core MOs are not consistent among these basis sets (with ECP/PP). If you use projected MOs to perform SCF calculations, SCF will probably be oscillating.
+
+### 4.6.3.6 lin_comb_two_mo
+Perform root2/2 (mo1+mo2) and root2/2 (mo1-mo2) unitary transformation for two specified MOs in a Gaussian .fch file. When the \\( \sigma \\) and \\( \pi \\) orbitals of a double bond are mixed (i.e. a banana bond), this can be used to make them separated.
+
+```python
+from mokit.lib.gaussian import lin_comb_two_mo
+lin_comb_two_mo(fchname, orb1, orb2)
+```
+
+`orb1`/`orb2` are in Python convention (starts from 0). You need to call this module 2 times for a double bond, for example
+
+```python
+lin_comb_two_mo('polyacene.fch', 30, 31) # for bonding orbitals
+lin_comb_two_mo('polyacene.fch', 50, 51) # for anti-bonding orbitals
+```
 
 ## 4.6.4 Other functions in rwwfn
 
@@ -429,6 +476,7 @@ A file named `water_std.fch` will be generated.
 mirror_wfn(fchname)
 mirror_c2c(chkname)
 rotate_atoms_wfn(fchname, coor_file)
+permute_atoms_wfn(fchname, coor_file)
 geom_lin_intrplt(gjfname1, gjfname2, n)
 ```
 
