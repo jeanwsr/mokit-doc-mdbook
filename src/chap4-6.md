@@ -281,7 +281,7 @@ make_orb_resemble(target_fch, ref_fch, nmo=None, align=False)
 where  
 `target_fch`: the .fch file which holds MOs to be updated  
 `ref_fch`: the .fch file which holds reference MOs  
-`nmo`: indices 1~nmo MOs in `ref_fch` will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons) for RHF-type wave function, and set to na/nb respectively for UHF-type wave function.
+`nmo`: indices 1~nmo MOs in `ref_fch` will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons) for RHF-type wave function, and set to na/nb respectively for UHF-type wave function.  
 `align`: whether to align two molecules in files `target_fch` and `ref_fch`. The default is `False`, i.e. assuming the geometries are already in a best alignment. If this is not your case, you need to set `align=True`.
 
 ### 4.6.3.5 proj2target_basis
@@ -292,16 +292,16 @@ from mokit.lib.gaussian import proj2target_basis
 proj2target_basis(fchname, target_basis='cc-pVTZ', cart=False)
 ```
 
-Note: use this module to projecting MOs between two all-electron basis sets, or between two basis sets with the same ECP/PP. For example, the following 3 cases are recommended
-(1) cc-pVDZ -> cc-pVTZ;
-(2) cc-pVDZ -> def2TZVP (if the studied molecule include no element >Kr);
-(3) def2SVP -> def2TZVP.
+Note: use this module to projecting MOs between two all-electron basis sets, or between two basis sets with the same ECP/PP. For example, the following 3 cases are recommended  
+(1) cc-pVDZ -> cc-pVTZ;  
+(2) cc-pVDZ -> def2TZVP (if the studied molecule include no element >Kr);  
+(3) def2SVP -> def2TZVP.  
 The basis sets def2SVP and def2TZVP have the same ECP/PP data, and they differ only in orbital basis data.
 
-The following 3 cases are not recommended
-(1) LANL2DZ -> cc-pVTZ;
-(2) cc-pVDZ -> LANL2TZ(f);
-(3) LANL2DZ -> def2TZVP.
+The following 3 cases are not recommended  
+(1) LANL2DZ -> cc-pVTZ;  
+(2) cc-pVDZ -> LANL2TZ(f);  
+(3) LANL2DZ -> def2TZVP.  
 if the studied molecule include any element >Ne. This is because the number of doubly occupied core MOs are not consistent among these basis sets (with ECP/PP). If you use projected MOs to perform SCF calculations, SCF will probably be oscillating.
 
 ### 4.6.3.6 lin_comb_two_mo
@@ -500,7 +500,7 @@ then you can directly obtain the file `CHFClBr_R_m.chk` without running `formchk
 
 <br>
 
-The function `rotate_atoms_wfn` generates the MO coefficients of a translated and rotated molecule. For example,
+The function `rotate_atoms_wfn` generates the MO coefficients of a translated and rotated molecule. For example
 
 ```python
 from mokit.lib.mirror_wfn import rotate_atoms_wfn
@@ -510,6 +510,19 @@ rotate_atoms_wfn('h2o.fch','h2o_new.gjf')
 The original geometry and MO coefficients are stored in `h2o.fch`, while the geometry after translation and rotation is stored in `h2o_new.gjf`. The xyz format is supported as well, e.g. you can provide `h2o_new.xyz` instead. A file named `h2o_r.fch` will be generated, which includes new Cartesian coordinates and MO coefficients. Again, if you read MOs from `h2o_r.fch` and use the same computational level, the SCF will be converged in 1 cycle.
 
 Note that the one-to-one atom correspondence in two files `h2o.fch` and `h2o_new.gjf` must be ensured by the user, this function will check whether the number of atoms in two files are equal to each other, but it will not check the atom correspondence.
+
+<br>
+
+The function `permute_atoms_wfn` generates the MO coefficients of a molecule where some atoms are exchanged/permuted. For example
+
+```python
+from mokit.lib.mirror_wfn import permute_atoms_wfn
+permute_atoms_wfn('h2o.fch','h2o_new.gjf')
+```
+
+The original geometry and MO coefficients are stored in `h2o.fch`, while the geometry after exchanging/permutations are stored in `h2o_new.gjf`. The xyz format is supported as well, e.g. you can provide `h2o_new.xyz` instead. A file named `h2o_p.fch` will be generated, which includes the Cartesian coordinates of `h2o_new.gjf` and generated MO coefficients. Again, if you read MOs from `h2o_p.fch` and use the same computational level, the SCF will be converged in 1 cycle.
+
+Note that only exchanging/permutations of atoms are allowed, while translation or rotation of the molecule are not allowed for this function. In the latter case, you should use `rotate_atoms_wfn` above.
 
 <br>
 
