@@ -55,14 +55,13 @@ export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
 Unlike the conda install approach, using pre-built MOKIT in this subsection do not require network. 
-But you still need to have a Python3 environment and NumPy, which can be achieved by anaconda/miniconda.
+If you want full functionality of MOKIT, you still need to have necessary dependencies: Python3 environment and NumPy, which can be achieved by anaconda/miniconda. If you only want part of MOKIT, especially some certain binary utilities, see [Section 2.2.3](#223-only-want-frag_guess_wfn) for a simpler instruction.
 
 ### Download
 
 [centos7_conda_py37](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py37)  
 [centos7_conda_py38](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py38)  
-[centos7_conda_py39](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py39)  
-[py37_gcc8](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py37_gcc8)  
+[centos7_conda_py39](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py39)   
 [py38_gcc8](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py38_gcc8)  
 [py39_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py39_gcc10)  
 [py310_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py310_gcc10)
@@ -92,10 +91,9 @@ re-login, in order to activate newly written environment variables.
 
 | Artifacts | Compatible OS | Maybe Compatible | Python version | GCC version | NumPy version |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| centos7_conda_py37 | Centos 7 | | 3.7 | 4.8.5 | 1.18 |
+| centos7_conda_py37 | Centos 7 | | 3.7 | 4.8.5 | 1.21 |
 | centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.21 |
 | centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
-| py37_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.7 | 8.3 | 1.21 |
 | py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | latest |
 | py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | latest |
 | py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | latest |
@@ -113,7 +111,8 @@ Known issues:
 
 
 ## 2.2.3 Only want `frag_guess_wfn`?
-If you do not need full functionality of MOKIT and only want `frag_guess_wfn` for generating the input file of various EDA methods, the easiest way is to download the pre-compiled MOKIT in Section [2.2.2](./chap2-2.html#222-pre-built-linux-executables-and-libraries). There is no need to install Miniconda/Anaconda Python in this case, and no need for `conda install`.
+
+If you do not need full functionality of MOKIT and only want `frag_guess_wfn` for generating the input file of various EDA methods (or other binary utilities, like `fch2mkl`), the easiest way is to download the pre-compiled MOKIT in Section [2.2.2](./chap2-2.html#222-pre-built-linux-executables-and-libraries). There is no need to install Miniconda/Anaconda Python in this case, and no need for `conda install`.
 
 Firstly, download a pre-compiled MOKIT package according to your OS (e.g. CentOS 7), and change the directory name
 ```
