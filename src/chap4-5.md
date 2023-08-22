@@ -431,7 +431,7 @@ Also used for transferring HF/DFT orbitals. But the filename `b.fch` is specifie
 (3) `mkl2fch a.mkl a.fch -no`  
 This is used for transferring CAS NOs, MP2 NOs, CCSD NOs, etc.
 
-(4) `mkl2fch a.mkl a.fch -no`  
+(4) `mkl2fch a.mkl a.fch -nso`  
 This is used for transferring Natural Spin Orbitals(NSO), e.g. UCCSD NSOs.
 
 NOTE: If no .fch(k) file is provided, then `mkl2fch` will try to generate one from scratch. This is usually O.K. but remember that there is no ECP/PP information in .mkl file. So if you use ECP/PP, the generated .fch file will not include ECP/PP data, and you need to add them into .gjf file if you want to perform further calculations using Gaussian.

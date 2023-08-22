@@ -10,33 +10,29 @@ Here are the list of all `automr` keywords, grouped by category.
 
 </br>
 
-| For workflow specification | | | |
-| --- | --- | --- | --- |
-| [readrhf](#441-readrhf) | [readuhf](#442-readuhf) | [readno](#443-readno) | [ist](#444-ist) (most important!) |
-| [charge](#4424-charge) | [DKH2](#4426-dkh2), [X2C](#4427-x2c) | [ON_thres](#4434-on_thres) | [UNO_thres](#4435-uno_thres) |
-| [excludeXH](#4436-excludexh), [OnlyXH](#4447-onlyxh) for GVB | [Skip_UNO](#4443-skip_uno) | [HFonly](#4450-hfonly) |
+| For workflow specification | | | | 
+| --- | --- | --- | --- | 
+| Input wavefunction | [readrhf](#441-readrhf) | [readuhf](#442-readuhf) | [readno](#443-readno) |
+| Workflow settings | [ist](#444-ist) (most important!) | [LocalM](#445-localm) |  [CIonly](#446-cionly) |
+| | [ON_thres](#4434-on_thres) | [UNO_thres](#4435-uno_thres) | [Skip_UNO](#4443-skip_uno) |
+| | [excludeXH](#4436-excludexh), [OnlyXH](#4447-onlyxh) | [HFonly](#4450-hfonly) |
 
 </br>
 
-| For method details | | | |
-| --- | --- | --- | --- |
-| [LocalM](#445-localm) | [CIonly](#446-cionly) | [Cart](#448-cart) | [CtrType](#4420-ctrtype) for MRCI |
-| [MaxM](#4421-maxm) for DMRG | [hardwfn](#4422-hardwfn),[crazywfn](#4423-crazywfn) | [OtPDF](#4425-otpdf) for MCPDFT | [FIC](#4433-fic) for NEVPT2 |
-| [GVB_conv](#4442-gvb_conv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
-| [noDMRGNO](#4449-nodmrgno) |
-
-</br>
-
-| For acceleration technique | | |
-| --- | --- | --- |
-| [RI](#4428-ri), [RIJK_bas](#4429-rijk_bas) | [F12](#4430-f12), [F12_cabs](#4431-f12_cabs) for NEVPT2 | [DLPNO](#4432-dlpno) for NEVPT2 |
-
-</br>
-
-| Others | | | | |
+| For method details | | | | |
 | --- | --- | --- | --- | --- |
+| General |   [Cart](#448-cart) | [hardwfn](#4422-hardwfn), [crazywfn](#4423-crazywfn) | [charge](#4424-charge) | [DKH2](#4426-dkh2), [X2C](#4427-x2c) |
+| For MR methods | [CtrType](#4420-ctrtype) for MRCI | [MaxM](#4421-maxm) for DMRG | [OtPDF](#4425-otpdf)| [FIC](#4433-fic) for NEVPT2 |
+| For GVB | [GVB_conv](#4442-gvb_conv) | [Inherit](#4444-inherit) | [Npair](#4445-npair) | [FcGVB](#4446-fcgvb) |
+| Wavefunction settings | [noDMRGNO](#4449-nodmrgno) |
+
+</br>
+
+| Others | | | | 
+| --- | --- | --- | --- | 
+| Acceleration technique | [RI](#4428-ri), [RIJK_bas](#4429-rijk_bas) | [F12](#4430-f12), [F12_cabs](#4431-f12_cabs) for NEVPT2 | [DLPNO](#4432-dlpno) for NEVPT2 |
 |For additional properties | [Force](#447-force) | [NMR](#4437-nmr) | [ICSS](#4438-icss) |
-| For excited states  | [Nstates](#4439-nstates) | [Mixed_Spin](#4440-mixed_spin) | [Root](#4441-root) | [Xmult](#4448-xmult) |
+| For excited states  | [Nstates](#4439-nstates) | [Mixed_Spin](#4440-mixed_spin) | [Root](#4441-root), [Xmult](#4448-xmult) |
 
 </br>
 
