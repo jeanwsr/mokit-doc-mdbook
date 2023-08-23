@@ -45,7 +45,7 @@ loc(fchname='benzene_5D7F_rhf.fchk', method='pm', idx=range(6,21))
 ```
 Only 'boys' or 'pm' is allowed for the 2nd argument. You should specify the orbital indices or range in the 3rd argument. Note that the starting integer index is 0 in Python convention, and the final index cannot be reached. So range(6,21) means orbitals 7-21, which are valence occupied orbitals for benzene. The localized orbitals will be exported/written into a new file with suffix `*_LMO.fch` (in this case, it is benzene_5D7F_rhf_LMO.fch).
 
-For system containing only \\( \sigma \\) bonds, these two methods make little difference. While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds. The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If you want to analyze localized \\( \pi \\) bonds after localization, you should choose method='pm'.
+For system containing only \\( \sigma \\) bonds, these two methods make little difference. While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds. The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If you want to analyze localized \\( \pi \\) bonds after localization, you should choose `method='pm'`.
 
 ### 4.6.1.3 uno
 Generate UHF natural orbitals(UNOs) from a given Gaussian .fch(k) file. For example
@@ -208,7 +208,9 @@ rg.write_frame_into_pdb('a.pdb', 10, natom, cell, elem, resname, coor, False)
 
 ## 4.6.3 Other wavefunction APIs
 ### 4.6.3.1 calc_unpaired_from_fch
-Calculate the Yamaguchi's unpaired electrons and Head-Gordon's unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. A python script is shown below:
+Calculate the Yamaguchi's unpaired electrons and Head-Gordon's unpaired electrons using the provided .fch(k) file. Biradical and tetraradical indices are printed as well. 
+This .fch file must include natural orbitals and their corresponding occupation numbers. For example, a UNO, GVB or CASSCF NO .fch file is expected. DO NOT use a UHF .fch file. 
+A python script is shown below:
 
 ```python
 from mokit.lib.wfn_analysis import calc_unpaired_from_fch
@@ -228,11 +230,13 @@ Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  0.328
 
 If the attribute `gen_dm` is set to `True`, then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
 
-Yamaguchi's biradical index for UHF: \\( t = (n_{HONO} - n_{LUNO})/2, y = 1 - 2t/(1 + t^2) \\)
+Yamaguchi's biradical index for UHF: \\( t = (n_{\text{HONO}} - n_{\text{LUNO}})/2, y = 1 - 2t/(1 + t^2) \\)
  
-Yamaguchi's biradical index for CAS(2,2): \\( y = 2{c_2}^{2} = n_{LUNO} \\)
+Yamaguchi's biradical index for CAS(2,2): \\( y = 2{c_2}^{2} = n_{\text{LUNO}} \\)
 
-where \\( c_2 \\) is the CI coefficients of the 2nd configurations in CASCI wave function (assuming natural orbitals are used). Note that there is no unique way to define biradical (or tetraradical, etc) index for general cases including CASSCF (*m*,*m*) where *m*>=4, or GVB(*n*) where *n*>=2. The \\( y_i = n_{LUNO+i} \\) formula is adopted for these general cases.
+where \\( c_2 \\) is the CI coefficients of the 2nd configurations in CASCI wave function (assuming natural orbitals are used). 
+Note that there is no unique way to define biradical (or tetraradical, etc) index for general cases including CASSCF (*m*,*m*) where *m*>=4, or GVB(*n*) where *n*>=2. 
+The \\( y_i = n_{\text{LUNO}+i} \\) formula is adopted for these general cases.
 
 There are also modules which calculate the number of unpaired electrons of GVB by reading information from GAMESS .dat/.gms file:
 ```python
@@ -305,7 +309,8 @@ The following 3 cases are not recommended
 if the studied molecule include any element >Ne. This is because the number of doubly occupied core MOs are not consistent among these basis sets (with ECP/PP). If you use projected MOs to perform SCF calculations, SCF will probably be oscillating.
 
 ### 4.6.3.6 lin_comb_two_mo
-Perform root2/2 (mo1+mo2) and root2/2 (mo1-mo2) unitary transformation for two specified MOs in a Gaussian .fch file. When the \\( \sigma \\) and \\( \pi \\) orbitals of a double bond are mixed (i.e. a banana bond), this can be used to make them separated.
+Perform \\(\sqrt{2}/2 \\) (mo1+mo2) and \\(\sqrt{2}/2 \\) (mo1-mo2) unitary transformation for two specified MOs in a Gaussian .fch file. 
+When the \\( \sigma \\) and \\( \pi \\) orbitals of a double bond are mixed (i.e. a banana bond), this can be used to make them separated.
 
 ```python
 from mokit.lib.gaussian import lin_comb_two_mo
