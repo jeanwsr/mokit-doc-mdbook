@@ -13,7 +13,7 @@ If any of those cannot solve your problem, please consider [Bug report](#a3-bug-
 | [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) | [OpenMolcas: Error in keyword](#q5-openmolcas-error-in-keyword) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
 | [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-gamess-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
 | [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-mo_occ) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
-| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for redial grid](#q16-gks-eda-warning-for-redial-grid) | 
+| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for radial grid](#q16-gks-eda-warning-for-radial-grid) | 
 | [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
 
 Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
@@ -192,7 +192,7 @@ Why? How to make it disappear?
 A15: This is simply because both OMP_STACKSIZE and KMP_STACKSIZE environment variables are set. You can comment/delete one of them. Usually you can find these two environment variables in your ~/.bashrc file, or in file bdf-pkg/sbin/run.sh (if you use the BDF program).
 
 
-### Q16: GKS-EDA: Warning for redial grid
+### Q16: GKS-EDA: Warning for radial grid
 When using the utility `frag_guess_wfn` to generate GKS-EDA input files, there
 is a warning (see below) in the GAMESS output file (e.g. xxx.gms file). And SCF
 does not converge. How to deal with that?
