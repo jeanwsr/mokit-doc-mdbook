@@ -1,13 +1,13 @@
 # 2.2 Linux Pre-built
 
 ## 2.2.1 Online Installation
-### Optional 1: Install from conda
+### Optional 1: Install from conda (for Linux only)
 This is the easiest way, but network is required to auto-download the requirements
 (like Intel MKL). And, creating a new environment before installing is highly
 recommended, to avoid changing your base environment.
 ```
-conda create -n mokit-py37 python=3.7 # 3.8, 3.9 are also available
-conda activate mokit-py37
+conda create -n mokit-py39 python=3.9 # 3.7-3.11 are all available
+conda activate mokit-py39
 conda install mokit -c mokit
 ```
 If you have no access to network, but still don't want to compile MOKIT manually,
