@@ -83,8 +83,7 @@ from mokit.lib import rwwfn
 S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=24)
 ```
 
-Attribute `itype`:  
-The type of one-electron integral matrices. Allowed values are 1,2,3,4 for Overlap, Kinetic Energy, Potential Energy, and Core Hamiltonian, respectively.
+Argument `itype`: The type of one-electron integral matrices. Allowed values are 1,2,3,4 for Overlap, Kinetic Energy, Potential Energy, and Core Hamiltonian, respectively.
 
 ### 4.6.1.7 read_mo_from_fch
 Read MOs from a Gaussian .fch(k) file. For example
@@ -94,8 +93,9 @@ from mokit.lib import rwwfn
 mo = rwwfn.read_mo_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',nbf=24,nif=24,ab='a')
 ```
 
-Attribute `ab`:  
-character with length=1, 'a'/'b' for reading alpha/beta orbitals.
+Argument `ab`: character with length=1, 'a'/'b' for reading alpha/beta orbitals.
+
+See also [4.6.4.1](#4641-readwrite-mo) to read/write MOs from files of other programs.
 
 ### 4.6.1.8 read_density_from_gau_log
 Read various types of density matrix from a Gaussian output file. For example, read the Alpha Density Matrix from a .log file
@@ -105,7 +105,7 @@ from mokit.lib import rwwfn
 den = rwwfn.read_density_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log', itype=2, nbf=24)
 ```
 
-Attribute `itype`:  
+argument `itype`:  
 1/2/3 for Total/Alpha/Beta Density Matrix.
 
 ### 4.6.1.9 read_density_from_fch
@@ -124,8 +124,10 @@ den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=
 | 4 | Spin CI Density | 9 | Total CI Rho(1) |
 | 5 | Total MP2 Density | 10 | Spin CI Rho(1) |
 
+See also [4.6.4.4](#4644-readwrite-density-and-other-matrices) for other operations on density matrix. 
+
 ### 4.6.1.10 write_pyscf_dm_into_fch
-Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All attributes of this module are shown below
+Write a PySCF density matrix into a given Gaussian .fch(k) file. This module does two things: (1) deal with the order of basis functions and their normalization factors, (2) then export density matrix into a given .fch(k) file. All arguments of this module are shown below
 
 ```python
 write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
@@ -155,8 +157,7 @@ tdm = excited.gen_ao_tdm(logname='00-h2o_cc-pVDZ_0.96_rhf.log',nbf=24,nif=24,mo=
 rwwfn.export_mat_into_txt(txtname='h2o_tdm.txt',n=24,mat=tdm,lower=False,label='transition density matrix')
 ```
 
-Attribute `istate`:
-The *i*-th excited state. For example, i=1 for the first excited state.
+Argument `istate`: the *i*-th excited state. For example, i=1 for the first excited state.
 
 The last python statement means exporting the transition density matrix into a plain text file, see the API below.
 
@@ -169,7 +170,7 @@ S = rwwfn.read_int1e_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log',itype=1,nbf=2
 rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overlap')
 ```
 
-| Attribute | Explanation |
+| Argument | Explanation |
 | --- | --- |
 | txtname | file name |
 | mat | the square matrix with dimension (n,n) |
@@ -217,7 +218,7 @@ from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch', wfn_type=2, gen_dm=False)
 ```
 
-The attribute `wfn_type` has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively. The example above will print the following
+The argument `wfn_type` has values 1/2/3 for UNO/GVB/CASSCF NOs, respectively. The example above will print the following
 ```
 ----------------------- Radical index -----------------------
 biradical character   (2c^2) y0=  0.155
@@ -228,7 +229,7 @@ Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  0.328
 -------------------------------------------------------------
 ```
 
-If the attribute `gen_dm` is set to `True`, then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
+If the argument `gen_dm` is set to `True`, then a file like `*_unpaired.fch` will also be generated, in which the unpaired electron density is stored. The unpaired density can be visualized by GaussView or Multiwfn+VMD.
 
 Yamaguchi's biradical index for UHF: \\( t = (n_{\text{HONO}} - n_{\text{LUNO}})/2, y = 1 - 2t/(1 + t^2) \\)
  
@@ -326,19 +327,23 @@ lin_comb_two_mo('polyacene.fch', 50, 51) # for anti-bonding orbitals
 
 ## 4.6.4 Other functions in rwwfn
 
+### 4.6.4.1 read/write mo
+
 ```
-modify_IROHF_in_fch(fchname, k)  
-read_charge_and_mult_from_fch(fchname, charge, mult)  
-read_charge_and_mult_from_mkl(mklname, charge, mult)  
-read_na_and_nb_from_fch(fchname, na, nb)  
-read_nbf_and_nif_from_fch(fchname, nbf, nif)  
-read_nbf_and_nif_from_orb(orbname, nbf, nif)  
-read_nbf_from_dat(datname, nbf)  
 read_mo_from_chk_txt(txtname, nbf, nif, ab, mo)  
 read_mo_from_orb(orbname, nbf, nif, ab, mo)  
 read_mo_from_xml(xmlname, nbf, nif, ab, mo)  
 read_mo_from_bdf_orb(orbname, nbf, nif, ab, mo)  
 read_mo_from_dalton_mopun(orbname, nbf, nif, coeff)  
+write_mo_into_fch(fchname, nbf, nif, ab, mo)  
+write_mo_into_psi_mat(matfile, nbf, nif, mo)  
+copy_orb_and_den_in_fch(fchname1, fchname2, deleted)  
+```
+See also [4.6.1.7](#4617-read_mo_from_fch).
+
+### 4.6.4.2 read/write eigenvalue or occupation number
+
+```
 read_eigenvalues_from_fch(fchname, nif, ab, noon)  
 read_on_from_orb(orbname, nif, ab, on)  
 read_on_from_dat(datname, nmo, on, alive)  
@@ -346,14 +351,41 @@ read_on_from_xml(xmlname, nmo, ab, on)
 read_on_from_bdf_orb(orbname, nif, ab, on)  
 read_ev_from_bdf_orb(orbname, nif, ab, ev)  
 read_on_from_dalton_mopun(orbname, nif, on)  
-read_ncontr_from_fch(fchname, ncontr)  
-read_shltyp_and_shl2atm_from_fch(fchname, k, shltyp, shl2atm)  
-read_ovlp_from_molcas_out(outname, nbf, S)  
 write_eigenvalues_to_fch(fchname, nif, ab, on, replace)  
 write_on_to_orb(orbname, nif, ab, on, replace)  
-write_mo_into_fch(fchname, nbf, nif, ab, mo)  
-write_mo_into_psi_mat(matfile, nbf, nif, mo)  
-determine_sph_or_cart(fchname, cart)  
+```
+
+### 4.6.4.3 read/write basic information
+
+```
+modify_IROHF_in_fch(fchname, k)  
+read_mult_from_fch(fchname, mult)  
+read_charge_and_mult_from_fch(fchname, charge, mult)  
+read_charge_and_mult_from_mkl(mklname, charge, mult)  
+read_na_and_nb_from_fch(fchname, na, nb)  
+read_nbf_and_nif_from_fch(fchname, nbf, nif)  
+read_nbf_and_nif_from_orb(orbname, nbf, nif)  
+read_nbf_from_dat(datname, nbf)  
+read_ncontr_from_fch(fchname, ncontr)  
+read_shltyp_and_shl2atm_from_fch(fchname, k, shltyp, shl2atm)  
+```
+
+### 4.6.4.4 read/write density and other matrices  
+
+```
+read_ovlp_from_molcas_out(outname, nbf, S)  
+write_density_into_fch(fchname, nbf, total, dm)  
+detect_spin_scf_density_in_fch(fchname, alive)  
+add_density_str_into_fch(fchname, itype)  
+update_density_using_mo_in_fch(fchname)  
+update_density_using_no_and_on(fchname)  
+read_ao_ovlp_from_47(file47, nbf, S)  
+```
+See also [4.6.1.6](#4616-read_int1e_from_gau_log), [4.6.1.8](#4618-read_density_from_gau_log), [4.6.1.9](#4619-read_density_from_fch), [4.6.1.10](#46110-write_pyscf_dm_into_fch).
+
+### 4.6.4.5 read energy and other results
+
+```
 read_npair_from_uno_out(nbf, nif, ndb, npair, nopen, lin_dep)  
 read_gvb_energy_from_gms(gmsname, e)  
 read_cas_energy_from_output(cas_prog, outname, e, scf, spin, dmrg, ptchg_e, nuc_pt_e)  
@@ -377,18 +409,16 @@ read_mcpdft_e_from_output(prog, outname, ref_e, corr_e)
 find_npair0_from_dat(datname, npair, npair0)  
 find_npair0_from_fch(fchname, nopen, npair0)  
 read_no_info_from_fch(fchname, nbf, nif, ndb, nopen, nacta, nactb, nacto, nacte)  
+```
+
+### 4.6.4.6 miscellaneous
+
+```
+determine_sph_or_cart(fchname, cart)  
 check_cart(fchname, cart)  
 check_sph(fchname, sph)  
-write_density_into_fch(fchname, nbf, total, dm)  
-detect_spin_scf_density_in_fch(fchname, alive)  
-add_density_str_into_fch(fchname, itype)  
-update_density_using_mo_in_fch(fchname)  
-update_density_using_no_and_on(fchname)  
 check_if_uhf_equal_rhf(fchname, eq)  
-copy_orb_and_den_in_fch(fchname1, fchname2, deleted)  
-read_ao_ovlp_from_47(file47, nbf, S)  
 get_no_from_density_and_ao_ovlp(nbf, nif, P, ao_ovlp, noon, new_coeff)  
-read_mult_from_fch(fchname, mult)  
 get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
 ```
 
