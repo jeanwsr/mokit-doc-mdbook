@@ -1,7 +1,39 @@
-# 3 Quickstart
-See examples in `$MOKIT_ROOT/examples/`. More details to be added.
+# 3 Quick Start
 
-## 3.1 Which method should I use?
+## 3.1 Quick Start with Examples
+
+* Each utility is self-explanatory. For example, run `fch2inp` in Shell, you will find
+```
+ ERROR in subroutine fch2inp: wrong command line arguments!  
+ Example 1 (R(O)HF, UHF, CAS): fch2inp a.fch  
+ Example 2 (GVB)             : fch2inp a.fch -gvb [npair]  
+ Example 3 (ROGVB)           : fch2inp a.fch -gvb [npair] -open [nopen]
+```
+You can search a utility and read the documentations in [Section 4.5](./chap4-5.md) or [4.6](./chap4-6.md).
+
+* The input syntax of the `automr` program is like Gaussian gjf. For example, the input file `00-h2o_cc-pVDZ_1.5.gjf` of the water molecule at d(O-H) = 1.5 A is shown below
+```
+%mem=4GB
+%nprocshared=4
+#p CASSCF/cc-pVDZ
+
+mokit{}
+
+0 1
+O      -0.23497692    0.90193619   -0.068688
+H       1.26502308    0.90193619   -0.068688
+H      -0.73568721    2.31589843   -0.068688
+```
+
+Run
+```
+automr 00-h2o_cc-pVDZ_1.5.gjf >& 00-h2o_cc-pVDZ_1.5.out
+```
+in Shell. The `automr` program will successively perform HF, GVB, and CASSCF computations. The active space will be automatically determined as (4,4) during computations. Detailed instructions for `automr` input can be found in [Section 4.1 - 4.4](./chap4-1.md).
+
+See more examples in `examples/` of source code. More details to be added.
+
+## 3.2 Which method should I use?
 For practical use, e.g. to properly compare results with those from experiments,
 NEVPT2, CASPT2, MC-PDFT or MRCISD is recommended. The GVB and CASSCF methods are
 often qualitatively correct. For high accuracy results, dynamic correlation is
@@ -17,7 +49,7 @@ and you want higher accuracy, consider ic-MRCISD in OpenMolcas/Molpro. For very
 small systems such as two or three atoms, the uncontracted MRCISD in ORCA is a good
 choice.
 
-## 3.2 Which basis set should I use?
+## 3.3 Which basis set should I use?
 For testing or debug, you can use any type of basis sets. You can, of course, use a small basis set like def2-SVP to test whether `automr` works. However, for practical use or to obtain publishable data, please use at least triple-zeta basis set, e.g. cc-pVTZ, def-TZVP, def2-TZVP or def2-TZVPP. Results obtained from combinations like MRCISD/def2SVP, NEVPT2/6-31G(d) are almost useless. If, unfortunately, you have very limited computational resource, e.g. less than 8 CPU cores, then the cc-pVDZ basis set is recommended. Additional general recommendations are provided below:
 
 (1) If your system is large, or has complicated electronic structure and you want to see whether `automr` works, or you just want to see the workflow of `automr`, you can use a small basis set like def2SVP to go through the computation. After it normally terminates, you can switch to using a larger basis set.
@@ -40,7 +72,7 @@ For testing or debug, you can use any type of basis sets. You can, of course, us
 
 (10) If you only want to perform energy decomposition analysis, e.g. GKS-EDA, usually def2TZVP basis set is sufficient. If there is any anion in your studied molecule(s), it is recommended to use diffuse functions only for anion-related atoms. It is not recommended to apply ma-TZVPP for all atoms (which will probably cause basis set linear dependence problems and make SCF in GAMESS converges slowly, even with MOs written in the .inp file). Also, it is recommended to use the implicit solvent model PCM rather than SMD, since PCM is frequently used in original papers of GKS-EDA.
 
-## 3.3 Do I need to specify the active space?
+## 3.4 Do I need to specify the active space?
 The `automr` program can automatically determine the active space, thus you need not specify that. If you do not want the automatically determined one, you can manually specify it, such as CASSCF(m,n) or NEVPT2(m,n), with m, n being the number of active electrons and active orbitals, respectively. Currently only m=n is supported (this is very reasonable, see DOI: 10.1021/acs.jctc.0c00123). While for GVB, you may specify GVB(n), where n is the number of pairs. Manually specifying is only recommended for experienced users.
 
 Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once `automr` detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
@@ -54,7 +86,7 @@ by `automr`, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6)
 if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6),
 MRCISD(6,6), etc.
 
-## 3.4 Are my computation results reasonable?
+## 3.5 Are my computation results reasonable?
 (1) You should make sure that your CASSCF initial orbitals and final(i.e. converged)
 orbitals contain proper active orbitals. Here are two examples: (i) Assuming you are
 studying the bond breaking of a C-C bond, you use CAS(2,2) at least. And you should

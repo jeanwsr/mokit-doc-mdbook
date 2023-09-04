@@ -1,4 +1,4 @@
-# 2.3 Installation under Linux
+# 2.3 Linux: Build from Source
 
 ## 2.3.1 Prerequisite
 1. Fortran compiler: `ifort`(>=2017) or `gfortran`(>=4.8.5)
