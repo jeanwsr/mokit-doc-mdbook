@@ -1,4 +1,4 @@
-# 2.2 Linux Pre-built
+# 2.2 Linux Pre-built and MacOS Build from Source
 
 ## 2.2.1 Online Installation
 ### Optional 1: Install from conda (for Linux only)
@@ -24,33 +24,73 @@ conda install mokit -c mokit
 ### Optional 2: Use homebrew-toolchains (for MacOS only)
 * Prerequisites: 
     - You need to install [homebrew](https://brew.sh) on your mac 
-    - You need to install conda via brew and install numpy in base env. via pip 
 
-Notice: if you are China, mainland user, follow [brew mirrors help doc](https://mirrors.ustc.edu.cn/help/brew.git.html) and [conda mirrors help doc](https://mirrors.ustc.edu.cn/help/anaconda.html) to install prerequisites
+
+Notice: if you are China, mainland user, follow [brew mirrors help doc](https://mirrors.ustc.edu.cn/help/brew.git.html) to install prerequisites
 * A detailed brew-tap install guideline is located in [homebrew-mokit github repo](https://github.com/ansatzX/homebrew-mokit)
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-```
-brew install --cask miniconda
-conda init bash (or zsh) 
-conda activate base
-pip install numpy
-```
-Then 
-`brew install ansatzx/homebrew-mokit/mokit`
+#### Release Installation
 
-Or `brew tap ansatzx/homebrew-mokit` and then `brew install mokit`.
-
-Finally, follow caveats guides, add these commmand in your zsh/bash/fish etc. profile.
+Assume you will use mokit in a python 3.9 environment (3.8-3.11 are all available)
 
 ```
-export MOKIT_ROOT="$(brew --prefix)/Cellar/mokit/master"
+brew install ansatzx/homebrew-mokit/mokit --with-py39
+```
+
+or
+
+```
+brew tap ansatzx/homebrew-mokit
+brew install mokit --with-py39 
+```
+
+However, the release version is not up-to-date, it's highly recommended to install the latest commit.
+
+#### Latest Commit Installation
+
+Also assume you use mokit in a py-39 environment.
+
+```
+brew install ansatzx/homebrew-mokit/mokit --with-py39 --HEAD
+
+```
+
+Finally, follow caveats guides, add these commmand in your `~/.zshrc` (or bash/fish etc. profile).
+
+You can run `brew info mokit` to check details.
+
+```
+export MOKIT_ROOT="$(brew --prefix mokit)"
 export PATH=$MOKIT_ROOT/bin:$PATH
 export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
 export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 ```
+
+#### Upgrade Mokit
+
+##### release upgrade 
+
+```
+brew update -f 
+```
+
+Run the command below if there's a newer mokit release.
+
+```
+brew upgrade mokit  # or `brew upgrade ` to upgrade everything
+
+```
+##### latest commit upgrade 
+
+```
+brew upgrade --fetch-HEAD mokit
+```
+
+
+
 
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
