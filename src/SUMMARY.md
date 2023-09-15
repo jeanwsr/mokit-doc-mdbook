@@ -6,7 +6,7 @@
   - [How to Cite](./chap1-2.md)
 - [Installation](./chap2_install.md)
   - [Windows Pre-built](./chap2-1.md)
-  - [Linux & MacOS Pre-built](./chap2-2.md)
+  - [Linux Pre-built & MacOS brew build](./chap2-2.md)
   - [Linux: Build from Source](./chap2-3.md)
   - [Installation on Cluster](./chap2-4.md)
 - [Quick Start](./chap3_quick.md)
