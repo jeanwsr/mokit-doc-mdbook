@@ -1,7 +1,7 @@
 # 2.2 Linux Pre-built and MacOS Build from Source
 
 ## 2.2.1 Online Installation
-### Optional 1: Install from conda (for Linux only)
+### Option 1: Install from conda (for Linux only)
 This is the easiest way, but network is required to auto-download the requirements
 (like Intel MKL). And, creating a new environment before installing is highly
 recommended, to avoid changing your base environment.
@@ -13,7 +13,7 @@ conda install mokit -c mokit
 If you have no access to network, but still don't want to compile MOKIT manually,
 you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
 
-**Update MOKIT with conda**
+#### Update MOKIT with conda
 
 Usually `conda update mokit -c mokit` works. Sometimes it may fail to find the latest version of MOKIT. In this case, a workaround can be 
 ```
@@ -21,12 +21,12 @@ conda uninstall mokit mkl
 conda install mokit -c mokit
 ```
 
-### Optional 2: Use homebrew-toolchains (for MacOS only)
+### Option 2: Use homebrew-toolchains (for MacOS only)
 * Prerequisites: 
     - You need to install [homebrew](https://brew.sh) on your mac 
 
 
-Notice: if you are China, mainland user, follow [brew mirrors help doc](https://mirrors.ustc.edu.cn/help/brew.git.html) to install prerequisites
+> If you are mainland China user, follow [brew mirrors help doc](https://mirrors.ustc.edu.cn/help/brew.git.html) to install prerequisites
 * A detailed brew-tap install guideline is located in [homebrew-mokit github repo](https://github.com/ansatzX/homebrew-mokit)
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -144,7 +144,7 @@ Tips:
 * We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky Linux, OpenEuler, etc. More compatibility tests and reports are welcome.
 * The GCC and NumPy version listed refer to the version used to compile the artifacts. 
   - NumPy can be sensitive to version sometimes. Try upgrade (or downgrade) numpy if your python complained about version when `import`. 
-  - The NumPy version for conda based prebuilts is fixed, because we use fixed-version miniconda image for building and would not upgrade anything for convenience. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for other prebuilts are latest (currently 1.24, because they are installed from pip) except py37 (because NumPy did not provide newer releases than 1.21 for it).
+  - The NumPy version for conda based prebuilts is fixed, because we use fixed-version miniconda image for building and would not upgrade anything for convenience. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for other prebuilts are latest (currently 1.24, because they are installed from pip).
 
 Known issues:
 * Currently no artifacts for Archlinux and Manjaro, because their python goes beyond 3.10.
