@@ -1,15 +1,16 @@
 # v1.2.6
 * documentation added
   - SA-CASSCF
-  - lazy import
-  - mirror_wfn
+  - utilities: lazy import, mirror_wfn, mkl2xxx
+  - quick start with examples
 * updated
   - autosr example
   - keywords: GVB_conv and FcGVB
-  - utilities: mkl2gjf, qchem and fch2qchem
-  - pre-built info
+  - utilities: mkl2gjf, qchem, fch2qchem, fch2mkl
+  - chap 2.2: conda, pre-built and homebrew install
 * style
   - new flowchart for utilities
+  - reorganize chap 4.6, 4.4
 
 # v1.2.5
 First version after documentation moved to mdbook.
