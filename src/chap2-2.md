@@ -7,7 +7,7 @@ This section goes over several installing approaches that, unlike [Section 2.3](
 3. Manually download pre-built Linux binaries (it's not a conda package). 
     > Unlike conda, this approach will not take care of dependency versions (like numpy) for you, and you need to set environment variables manually. So this approach is usually not recomended. 
     >
-    > However, this approach does not require network, which may be a reason to choose it.
+    > However, this approach does not require network, which may be a reason for choosing it.
 
 4. Even simpler way to use pre-built Linux binaries. 
 
@@ -16,7 +16,7 @@ This section goes over several installing approaches that, unlike [Section 2.3](
 Like [Section 2.3](./chap2-3.md), there's still something to do after "installation".
 
 1. Setup the environment variables of MOKIT itself. Except conda users, all other users need to set that, which is mentioned at the end of each approaches.
-2. Setup the environment variables of dependencies, like Gaussian, GAMESS, PySCF, etc. Please read [Section 2.5] to determine which dependencies are necessary for you and read [Section 2.3.3](./chap2-3.md#233-environment-variables) to set up them.
+2. Setup the environment variables of dependencies, like Gaussian, GAMESS, PySCF, etc. Please read [Section 2.5](./chap2-5.md) to determine which dependencies are necessary for you and read [Section 2.3.3](./chap2-3.md#233-environment-variables) to set up them.
 
 ## 2.2.1 Online Installation
 ### Option 1: Install from conda (for Linux only)
