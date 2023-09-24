@@ -9,6 +9,7 @@
   - [Linux Pre-built & MacOS brew build](./chap2-2.md)
   - [Linux: Build from Source](./chap2-3.md)
   - [Installation on Cluster](./chap2-4.md)
+  - [Dependency on QC Programs](./chap2-5.md)
 - [Quick Start](./chap3_quick.md)
 - [User's Guide](./chap4_guide.md)
   - [Syntax Rules of `automr`](./chap4-1.md)

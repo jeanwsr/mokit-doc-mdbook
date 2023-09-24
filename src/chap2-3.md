@@ -45,6 +45,7 @@ Be careful with hints on the screen, some modules depend on other modules, thus
 a compilation of two or three modules is necessary sometimes.
 
 ## 2.3.3 Environment variables
+
 After successful compilation, you need to add the following environment variables
 into your `~/.bashrc` file:
 ```
@@ -56,7 +57,15 @@ export PSI4=$HOME/psi4conda/bin/psi4          # optional
 export BDF=$HOME/software/bdf-pkg/sbin/run.sh # optional
 ```
 
-Please modify the above paths to suit your situations. Since PySCF is run by `python`, OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4` and Dalton is run by `dalton`, there is no extra environment variable to be exported here. But if you define `export PSI4=...`, then this variable has priority to the path found by `which psi4`.
+Please modify the above paths to suit your situations. Since PySCF is run by `python`, OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4` and Dalton is run by `dalton`, there is no extra environment variable to be exported here. But if you define `export PSI4=...`, then this variable has priority to the path found by `which psi4`. 
+For Dalton, currently only the MKL version of Dalton is supported. The MPI parallel version will be supported in the future.
+The environment variable `BDF` are optional, there is no need to write it if you do not want to use BDF.
+
+The configuration file 'program.info' is no longer used since MOKIT 1.2.1. After
+writing environment variables, a logout and re-login on your terminal is strongly
+recommended. 
+
+**Setup GAMESS**
 
 Note that the original GAMESS source code can only deal with GVB up to 12 pairs.
 To go beyond that (which is routine type of calculation in `automr` of MOKIT), please
@@ -64,13 +73,7 @@ read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully. After re-compiling 
 in Section 4.4.10), an executable `gamess.01.x` will be generated. This is the
 executable to be called in `automr`.
 
-The environment variable `BDF` are optional, there is no need to write it if you
-do not want to use BDF. For Dalton, currently only the MKL version of Dalton is
-supported. The MPI parallel version will be supported in the future.
-
-The configuration file 'program.info' is no longer used since MOKIT 1.2.1. After
-writing environment variables, a logout and re-login on your terminal is strongly
-recommended.
+**Setup scratch directory**
 
 The scratch directory (in Chinese, 临时文件存放目录) is not determined by MOKIT
 or `automr`, but by each quantum chemistry package (Gaussian, OpenMolcas, GAMESS,
