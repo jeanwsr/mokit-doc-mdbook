@@ -33,5 +33,5 @@ the following two lines have identical meanings:
 
 4. If pure Cartesian functions of basis set are used in the provided .fch(k) file, you need to write keyword `cart`. The default is pure spherical harmonic functions. And you do not need to write any keyword about this if you provide a .fch(k) file in which pure spherical harmonic functions are used.
 
-5. Use a comma to separate different keywords. Do not use other symbols (like spacing).
+5. Use a comma to separate different keywords. Do not use other symbols like spacing or dot.
 

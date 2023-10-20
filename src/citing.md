@@ -24,3 +24,7 @@
 
 12. Equation-of-Motion Block-Correlated Coupled Cluster Method for Excited Electronic States of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c01474](https://doi.org/10.1021/acs.jpclett.3c01474)
 
+13. A call to arms: making the case for more reusable libraries. DOI: [10.48550/arXiv.2309.02433](https://arxiv.org/abs/2309.02433)
+
+14. Methane activation by [LnO]<sup>+</sup>: the 4*f* orbital matters. ***Sci China Chem*** DOI: [10.1007/s11426-023-1801-4](https://doi.org/10.1007/s11426-023-1801-4)
+

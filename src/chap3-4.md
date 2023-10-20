@@ -1,0 +1,8 @@
+## 3.4 Do I need to specify the active space?
+
+The `automr` program can automatically determine the active space, thus you need not specify that. If you do not want the automatically determined one, you can manually specify it, such as CASSCF(m,n) or NEVPT2(m,n), with m, n being the number of active electrons and active orbitals, respectively. Currently only m=n is supported (this is very reasonable, see DOI: 10.1021/acs.jctc.0c00123). While for GVB, you may specify GVB(n), where n is the number of pairs. Manually specifying is only recommended for experienced users.
+
+Note that usually there is no need to write DMRGCI or DMRGSCF, the users can just write CASCI or CASSCF. Once `automr` detects the size of active space is larger than (15,15), it will switch from CASCI/CASSCF to DMRGCI/DMRGSCF automatically. Similarly, the NEVPT2/CASPT2/MC-PDFT will be automatically switched into DMRG-NEVPT2/DMRG-CASPT2/DMRG-PDFT when the active space is larger than (15,15). The only exception is that the users just want to perform a DMRG calculation with active space smaller than (15,15), then the DMRGCI or DMRGSCF must be specified.
+
+Usually the automatically determined active space is reasonable. The algorithm in MOKIT is designed to automatically find the minimum active space for a given molecule. However, when you are studying a potential energy curve/surface, the automatically determined active space may be not the same size for each geometry. For example, for N<sub>2</sub> molecule at *d*(N-N) = 1.15 Å, the CAS(4,4) may be automatically determined by `automr`, but for for *d*(N-N) = 4.0 Å, the active space turns into CAS(6,6). Thus, if you want to keep the size to be CAS(6,6), you need to specify CASSCF(6,6), NEVPT2(6,6), MRCISD(6,6), etc.
+
