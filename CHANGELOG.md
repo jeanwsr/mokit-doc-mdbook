@@ -2,7 +2,9 @@
 * documentation added
   - SA-CASSCF
   - utilities: lazy import, mirror_wfn, mkl2xxx
-  - quick start with examples
+  - chap 3.1: quick start with examples
+  - chap 2.5: dependency
+  - chap 4.7: autosr
 * updated
   - autosr example
   - keywords: GVB_conv and FcGVB
