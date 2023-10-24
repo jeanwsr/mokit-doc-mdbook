@@ -28,3 +28,7 @@
 
 14. Methane activation by [LnO]<sup>+</sup>: the 4*f* orbital matters. ***Sci China Chem*** DOI: [10.1007/s11426-023-1801-4](https://doi.org/10.1007/s11426-023-1801-4)
 
+15. Interpreting the Cu–O2 Antibonding Nature in Two Cu–O2 Complexes from Cu L-Edge X-ray Absorption Spectra. ***Inorg Chem*** DOI: [10.1021/acs.inorgchem.3c01896](https://doi.org/10.1021/acs.inorgchem.3c01896)
+
+16. Methane Activation by [AlFeO3]+: the Hidden Spin Selectivity. ***ChemPhysChem*** DOI: [10.1002/cphc.202300603](https://doi.org/10.1002/cphc.202300603)
+
