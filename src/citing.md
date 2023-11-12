@@ -24,11 +24,13 @@
 
 12. Equation-of-Motion Block-Correlated Coupled Cluster Method for Excited Electronic States of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c01474](https://doi.org/10.1021/acs.jpclett.3c01474)
 
-13. A call to arms: making the case for more reusable libraries. DOI: [10.48550/arXiv.2309.02433](https://arxiv.org/abs/2309.02433)
+13. A call to arms: making the case for more reusable libraries. ***J Chem Phys*** DOI: [10.1063/5.0175165](https://doi.org/10.1063/5.0175165)
 
 14. Methane activation by [LnO]<sup>+</sup>: the 4*f* orbital matters. ***Sci China Chem*** DOI: [10.1007/s11426-023-1801-4](https://doi.org/10.1007/s11426-023-1801-4)
 
 15. Interpreting the Cu–O2 Antibonding Nature in Two Cu–O2 Complexes from Cu L-Edge X-ray Absorption Spectra. ***Inorg Chem*** DOI: [10.1021/acs.inorgchem.3c01896](https://doi.org/10.1021/acs.inorgchem.3c01896)
 
 16. Methane Activation by [AlFeO3]+: the Hidden Spin Selectivity. ***ChemPhysChem*** DOI: [10.1002/cphc.202300603](https://doi.org/10.1002/cphc.202300603)
+
+17. Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Investigation. DOI: [10.26434/chemrxiv-2023-plj1t-v2](https://doi.org/10.26434/chemrxiv-2023-plj1t-v2)
 
