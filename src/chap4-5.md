@@ -27,21 +27,40 @@ addH2singlet benzene_triplet_gvb14_s.fch
 ```
 
 ## 4.5.3 bas_fch2py
-Generate a PySCF .py file from a Gaussian .fch file. The Cartesian coordinates, basis set data and keywords to read MOs from the .fch file are written in the .py file. It is not recommended to delete these basis set data and use PySCF built-in basis set name, since the auto-generated basis set data ensures an exact correspondence of two programs. Two examples are shown below
+Generate a PySCF .py file from a Gaussian .fch file. The Cartesian coordinates, basis set data and keywords to read MOs from the .fch file are written in the .py file. Please do not delete these basis set data and do not use PySCF built-in basis set name, since the auto-generated basis set data ensures an exact correspondence of MOs in two programs. Two examples are shown below
 
-(1) transfer RHF/ROHF/UHF/GHF MOs from Gaussian to PySCF
+(1) transfer RHF/ROHF/UHF/GHF/CAS MOs from Gaussian to PySCF
 ```
 bas_fch2py h2o.fch
 ```
+
+This will generate a Python input script `h2o.py`. You can find that the last 3 lines in `h2o.py` are commented
+```
+#dm = mf.make_rdm1()
+#mf.max_cycle = 10
+#mf.kernel(dm0=dm)
+```
+If you want to perform a HF calculation, remember to uncomment these lines. If you want to directly perform a CASSCF calculation or perform any orbital localization, just ignore or delete these lines.
 
 (2) transfer DFT MOs from Gaussian to PySCF
 ```
 bas_fch2py h2o.fch -dft
 ```
+Assuming the file `h2o.fch` contains the information of a B3LYP calculation, you can find that the last few lines in `h2o.py` are
+```
+dm = mf.make_rdm1()
+mf = dft.RKS(mol)
+mf.xc = 'b3lypg'
+mf.grids.atom_grid = (99,590)
+mf.verbose = 4
+mf.max_cycle = 128
+mf.kernel(dm0=dm) 
+```
+The functional `b3lypg` corresponds to `B3LYP` in Gaussian, and the grid `(99,590)` corresponds to `ultrafine` DFT grid of Gaussian. PySCF usually starts an SCF calculation using the density matrix, so `mf.make_rdm1()` requires to construct the density matrix using input MOs. And `mf.kernel(dm0=dm)` means that the constructed density matrix would be used as the initial guess.
 
 This utility is in fact a wrapper of two utilities `fch2inp` and `bas_gms2py`. So if you only want to use this utility, you need to make sure that `fch2inp` and `bas_gms2py` are available (i.e. also be compiled).
 
-Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .py file, either. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
+Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file, which might be viewed as a shortcoming of .fch file. So there would be no background charges in the generated .py file. To add background charges, you need to use the utility `add_bgcharge_to_inp` (see [4.5.1](#451-add_bgcharge_to_inp)).
 
 See relevant Python modules [fch2py](#4541-fch2py), [py2fch](#4542-py2fch), and [fchk](#4544-fchk).
 
