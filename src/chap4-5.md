@@ -8,7 +8,7 @@ For detailed explanations of all utilities, please read the following subsection
 
 **Other useful utilities**
 
-| | | | | 
+| &emsp;| | | | 
 | --- | --- | --- | --- | 
 | Pre-processing | [add_bgcharge_to_inp](#451-add_bgcharge_to_inp) | [replace_xyz_in_inp](#4539-replace_xyz_in_inp) |
 | Read/write fch | [extract_noon2fch](#4516-extract_noon2fch) | [fch_mo_copy](#4529-fch_mo_copy) | [fch_u2r](#4530-fch_u2r) |
@@ -30,7 +30,7 @@ The first line holds the number of point charges. While the charges are written 
 Note that in all computations of the `automr` program, this situation is explicitly considered. This utility will be automatically called if needed. The only situation when you need this utility is merely using utilities `fch2com`, `fch2inp`, `fch2iporb`, `fch2psi` or `bas_fch2py` (and of course, with background charges).
 
 ## 4.5.2 addH2singlet
-Add hydrogen atoms onto the principle axes of a high-spin open-shell molecule with a distance around 100.0 Å. The number of added atoms \\( n_{H} \\) = 1, 2, 3, ... for doublet, triplet, quartet, ..., respectively. And the basis set of added hydrogen atoms are automatically set to STO-2G. This utility is designed to transform a high-spin open-shell molecule into a singlet complex, then one can use the singlet GVB-BCCC code to calculate the complex. The electronic energy of the open-shell molecule is obtained by \\( E_{target} \\) = \\( E_{complex} \\) - \\( n_{H}*E_{H} \\), where \\( E_{H} \\) is the ROHF/STO-2G energy of an H atom, i.e. -0.454397402 a.u. An example of using this utility is shown below
+Add hydrogen atoms onto the principle axes of a high-spin open-shell molecule with a distance around 100.0 Å. The number of added atoms \\( n_{H} \\) = 1, 2, 3, ... for doublet, triplet, quartet, ..., respectively. And the basis set of added hydrogen atoms are automatically set to STO-2G. This utility is designed to transform a high-spin open-shell molecule into a singlet complex, then one can use the singlet GVB-BCCC code to calculate the complex. The electronic energy of the open-shell molecule is obtained by \\( E_{\text{target}} \\) = \\( E_{\text{complex}} \\) - \\( n_{H}*E_{H} \\), where \\( E_{H} \\) is the ROHF/STO-2G energy of an H atom, i.e. -0.454397402 a.u. An example of using this utility is shown below
 
 ```
 addH2singlet benzene_triplet_gvb14_s.fch
