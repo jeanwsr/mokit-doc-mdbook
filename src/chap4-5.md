@@ -1,10 +1,20 @@
 # 4.5 List of Utilities in MOKIT
-The utilities of transferring MOs are summarized in the following figure.
+**The utilities for transferring MOs** are summarized in the following figure.
 
 <iframe width=750 height=510 src="./chap4-5_head.html">
 </iframe>
 
 For detailed explanations of all utilities, please read the following subsections. Clicking any utility label (in red color) -- for example, `fch2py` -- in the figure will redirect you to the corresponding subsection.
+
+**Other useful utilities**
+
+| | | | | 
+| --- | --- | --- | --- | 
+| Pre-processing | [add_bgcharge_to_inp](#451-add_bgcharge_to_inp) | [replace_xyz_in_inp](#4539-replace_xyz_in_inp) |
+| Read/write fch | [extract_noon2fch](#4516-extract_noon2fch) | [fch_mo_copy](#4529-fch_mo_copy) | [fch_u2r](#4530-fch_u2r) |
+| Generating guess | [frag_guess_wfn](#4531-frag_guess_wfn) |
+| Math operation | [mo_svd](#4537-mo_svd) | [solve_ON_matrix](#4538-solve_on_matrix) | [gvb_sort_pairs](#4532-gvb_sort_pairs) |
+
 
 ## 4.5.1 add_bgcharge_to_inp
 This utility is designed to add background charges to the input file of various software packages. If you do not use background charges in your computation, you can skip this section. But if you do use them (e.g. in subsystems of fragmentation-based or embedding methods), they are not recorded in any .fch(k) file. This can be viewed as a defect of the .fch(k) file. Therefore, the generated input file by utilities `fch2com`, `fch2inp`, `fch2iporb`, `fch2psi` or `bas_fch2py` will contain no background charges either.
@@ -622,6 +632,27 @@ mc = mcscf.CASSCF(mf, 6, 8) #CAS(6o,8e)
 mc.natorb = True
 mc.kernel()
 fchk(mc, 'O2_cas6o8e_NO.fch', density=True)
+```
+By default, `fchk` will dump `mc.mo_coeff` and `mc.mo_occ` (if present) into the 'Alpha MO' and 'Alpha Orbital Energies' section in .fch file. It's also possible to manually dump any orbitals you want 
+```python
+fchk(mc, 'O2_cas6o8e_some_other_orb.fch', mo_coeff=some_other_mo, mo_occ=some_other_occ)
+```
+
+(4) write UNOs into fch
+
+By default, the `fchk(mf, fchname)` for UHF/UKS object dumps the orbital energies which prevents we writing the UNO occupation numbers. So another function `fchk_uno` can be used
+```python
+from pyscf import gto, mcscf
+from mokit.lib.py2fch_direct import fchk_uno
+
+mol = gto.M(
+    atom = 'O 0 0 0; O 0 0 1.2',
+    basis = 'ccpvdz',
+    spin = 2)
+
+mf = mol.UHF().run()
+unoon, uno = mcscf.addons.make_natural_orbitals(mf)
+fchk_uno(mf, 'O2_UNO.fch', uno, unoon)
 ```
 
 There is a module named `fchk()` in PSI4, which is used to export/generated a .fch file. Here we use the same name for easy memorizing. You can also use its alias `py2gau`, e.g.
