@@ -52,7 +52,7 @@ into your `~/.bashrc` file:
 export MOKIT_ROOT=$HOME/software/mokit
 export PATH=$MOKIT_ROOT/bin:$PATH
 export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
-export GMS=$HOME/software/games/rungms        # optional
+export GMS=$HOME/software/gamess/rungms       # optional
 export PSI4=$HOME/psi4conda/bin/psi4          # optional
 export BDF=$HOME/software/bdf-pkg/sbin/run.sh # optional
 ```
