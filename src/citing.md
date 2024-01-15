@@ -36,3 +36,5 @@
 
 18. Photocatalytic Reduction of CO<sub>2</sub> to HCOOH and CO by a Phosphine-Bipyridine-Phosphine Ir(III) Catalyst: Photophysics, Nonadiabatic Effects, Mechanism, and Selectivity. ***Angew Chem Int Ed*** DOI: [10.1002/anie.202315300](https://doi.org/10.1002/anie.202315300)
 
+19. Block-Correlated Coupled Cluster Theory with up to Four-Pair Correlation for Accurate Static Correlation of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c03373](https://doi.org/10.1021/acs.jpclett.3c03373)
+
