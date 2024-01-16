@@ -180,18 +180,22 @@ For excited state calculations. Please read related comments in
 [A2.3](./chap_appdx.html#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations).
 
 ## 4.4.13 DMRGCI_prog
-Specify the program for performing DMRG-CASCI calculation, e.g. `DMRGCI_prog=PySCF`. Currently only PySCF is supported and it is the default program.
+Specify the program for performing DMRG-CASCI calculation, e.g. `DMRGCI_prog=PySCF`. Currently only PySCF is supported and it is the default program. According to the computational experience of `jxzou`, the Block-1.5/Block2 are the fastest DMRG program currently.
 
-Note that in fact the DMRG-CASCI calculations are performed by Block-1.5 and PySCF, not only by PySCF. Thus you should install the Block-1.5 program. And you should also cite corresponding reference of the Block-1.5 program.
+Note that in fact the DMRG-CASCI calculations are performed by Block and PySCF, not only by PySCF. Thus you should install the Block-1.5 or Block2 program. And you should also cite corresponding reference of the Block program.
 
 Also note that the MPI version used by Block is probably contradicted with MPI version used by ORCA, thus you have to comment one version of MPI environment variables at a time. Or you can use a Shell script to submit the automr job, in which your desired MPI environment variables are written.
+
+By default, the OpenMP version of Block would be called during performing DMRG calculations. But if you want to use MPI version of Block (and you have installed it), you need to write `mokit{block_mpi}`.
 
 ## 4.4.14 DMRGSCF_prog
-Specify the program for performing DMRG-CASSCF calculation, e.g. `DMRGSCF_prog=PySCF`. Currently only PySCF is supported and it is the default program.
+Specify the program for performing DMRG-CASSCF calculation, e.g. `DMRGSCF_prog=PySCF`. Currently only PySCF is supported and it is the default program. According to the computational experience of `jxzou`, the Block-1.5/Block2 are the fastest DMRG program currently.
 
-Note that in fact the DMRG-CASSCF calculations are performed by Block-1.5 and PySCF, not only by PySCF. Thus you should install the Block-1.5 program. And you should also cite corresponding reference of the Block-1.5 program.
+Note that in fact the DMRG-CASSCF calculations are performed by Block and PySCF, not only by PySCF. Thus you should install the Block-1.5 or Block2 program. And you should also cite corresponding reference of the Block program.
 
 Also note that the MPI version used by Block is probably contradicted with MPI version used by ORCA, thus you have to comment one version of MPI environment variables at a time. Or you can use a Shell script to submit the automr job, in which your desired MPI environment variables are written.
+
+By default, the OpenMP version of Block would be called during performing DMRG calculations. But if you want to use MPI version of Block (and you have installed it), you need to write `mokit{block_mpi}`.
 
 ## 4.4.15 CASPT2_prog
 Specify the program for performing CASPT2 calculation, e.g. `CASPT2_prog=OpenMolcas`.
@@ -474,4 +478,7 @@ mokit{HF_prog=PySCF,DKH2,HFonly}
 ```
 
 `automr` will firstly call Gaussian to generate the fragment guess, then transfer initial guess orbitals to PySCF and call PySCF to perform the sfX2C-UHF calculation. After UHF is finished, `automr` will terminate and no GVB calculation will be performed. Here the keyword `DKH2` is for GVB calculation and will not be used in the UHF calculation.
+
+## 4.4.51 block_mpi
+Request the MPI version of Block program to be used in DMRG calculations. By default `automr` would call the OpenMP version of Block program since it is faster than MPI version in a single node. Note that this keyword only changes the parallelism of DMRG-CASCI and/or DMRG-CASSCF calculations, but the NEVPT2 calculation after DMRG always utilize MPI parallelism (which requires `mpi4py` to be intalled).
 

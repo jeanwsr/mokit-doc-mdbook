@@ -3,18 +3,84 @@
 ## 4.7.1 Methods in `autosr`
 
 ### 4.7.1.1 MP2, RI-MP2
-To be documented.
+```
+%mem=4GB
+%nprocshared=2
+#p MP2/cc-pVTZ
 
-### 4.7.1.2 CCD
-To be documented.
+mokit{noRI}
 
-### 4.7.1.3 CCSD, CCSD(T), CCSD(T)-F12
-To be documented.
+0 1
+O     0.000000    0.000000    0.062007
+H     0.000000   -0.783976   -0.492052
+H     0.000000    0.783976   -0.492052
+```
 
-### 4.7.1.4 DLPNO-CCSD, DLPNO-CCSD(T), DLPNO-CCSD(T1)
-To be documented.
+Different keywords in the Title Card Line can be applied:
 
-### 4.7.1.5 EOM-CCSD, IP-EOM-CCSD, EA-EOM-CCSD
+(1) RI-MP2: `mokit{}`.
+(2) MP2 NO using unrelaxed density: `mokit{noRI,NO}`.
+(3) MP2 NO using relaxed density: `mokit{noRI,NO,relaxed_dm}`.
+(4) RI-MP2 NO using unrelaxed density: `mokit{NO}`.
+(5) RI-MP2 NO using relaxed density: `mokit{NO,relaxed_dm}`.
+(6) MP2 analytical gradients: `mokit{noRI,force}`.
+(7) RI-MP2 analytical gradients: `mokit{force}`.
+
+### 4.7.1.2 CCD, CCSD, CCSD(T), CCSD(T)-F12
+```
+%mem=4GB
+%nprocshared=2
+#p CCSD(T)/cc-pVTZ
+
+mokit{noRI}
+
+0 1
+O     0.000000    0.000000    0.062007
+H     0.000000   -0.783976   -0.492052
+H     0.000000    0.783976   -0.492052
+```
+
+Other cases like:
+```
+#p CCSD(T)/cc-pVTZ
+
+mokit{noRI,CC_prog=Molpro,NO}
+```
+
+```
+#p CCSD/cc-pVTZ
+
+mokit{noRI,CC_prog=PySCF,force}
+```
+
+### 4.7.1.3 DLPNO methods
+```
+%mem=4GB
+%nprocshared=2
+#p DLPNO-CCSD(T1)/cc-pVTZ
+
+mokit{}
+
+0 1
+O     0.000000    0.000000    0.062007
+H     0.000000   -0.783976   -0.492052
+H     0.000000    0.783976   -0.492052
+```
+
+Other cases like:
+```
+#p MP2/cc-pVTZ
+
+mokit{DLPNO,NO,relaxed_dm}
+```
+
+```
+#p MP2/cc-pVTZ
+
+mokit{DLPNO,force}
+```
+
+### 4.7.1.4 EOM-CCSD, IP-EOM-CCSD, EA-EOM-CCSD
 To be documented.
 
 ## 4.7.2 Keywords in `autosr`
@@ -48,13 +114,13 @@ To be documented.
 ### 4.7.2.3 RI settings
 
 #### NoRI
-To be documented.
+Request to turn off the RI acceleration technique.
 
 #### RIJK_bas
-To be documented.
+Specify the RI-JK auxiliary basis set.
 
 #### RIC_bas
-To be documented.
+Specify the RI-C auxiliary basis set.
 
 ### 4.7.2.4 
 

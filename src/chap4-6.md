@@ -18,6 +18,7 @@ Currently only Python APIs are provided. C/C++ APIs may be provided in the futur
 10. write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
 11. gen_ao_tdm(logname, nbf, nif, mo, istate)
 12. export_mat_into_txt(txtname, n, mat, lower, label)
+13. pairing_open_with_vir
 
 Meanings of frequently appeared arguments are  
 `fchname`: filename of .fch(k) file  
@@ -176,6 +177,25 @@ rwwfn.export_mat_into_txt(txtname='ovlp.txt',n=24,mat=S,lower=True,label='Overla
 | mat | the square matrix with dimension (n,n) |
 | lower | True/False for whether or not printing only the lower triangle part of a matrix |
 | label | a string, the meaning of exported matrix (provided by yourself) |
+
+### 4.6.1.13 pairing_open_with_vir
+Paring each singly occupied orbital with a virtual one, for a high spin GVB wave function. These new pairs would be put after all normal GVB pairs. Such type of .fch file may be used for high-spin GVB-BCCC calculations. The order of MOs before calling this function is expected to be docc-socc-pair-vir. The order of MOs after calling this function would be docc-pair-(socc-vir1)-vir2. The input file `fchname` will be updated.
+
+```python
+from mokit.lib.rwwfn import pairing_open_with_vir
+
+pairing_open_with_vir(fchname='ben_triplet_uhf_uno_asrot2gvb2.fch')
+```
+
+The input filename is supposed to end with `gvbN.fch`. For example, `gvb2.fch` will be identified as 2 GVB pairs. The number of doubly and singly occupied orbitals are automatically determined from information in .fch file. If a singlet .fch file is provided (i.e. no singly occupied orbital), a warning would be printed and `fchname` would be left unchanged. The `Alpha Orbital Energies` section in .fch file would be updated as: doubly occupation orbitals with 2.0; normal GVB pairs with 1.8/0.2; singly occupied orbitals (paired with virtual MOs) with 1.0/0.0; and remaining virtual orbitals with 0.0. These occupation numbers are not real occupation numbers from any GVB calculation, but just some numerical values for visualizing orbitals conveniently (i.e. to remind the user that different ranges for various types of orbitals).
+
+If you do not have such a .fch file and want to create one, you can run the following Shell commands after an `automr` GVB or CASSCF calculation
+```
+cp ben_triplet_uhf_uno_asrot2gvb2_s.fch ben_triplet_uhf_uno_asrot2gvb2.fch
+dat2fch ben_triplet_uhf_uno_asrot2gvb2.dat ben_triplet_uhf_uno_asrot2gvb2.fch
+```
+the filenames above come from a triplet CASSCF(6,6) calculation for benzene.
+
 
 ## 4.6.2 APIs related to PDB file
 
