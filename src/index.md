@@ -13,7 +13,12 @@ Jan 16, 2024
 - [Introduction](./chap1_intro.md) and [how-to-cite](./chap1-2.md)
 - [Installation](./chap2_install.md)
 - [Quick Start](./chap3_quick.md)
-- [User's Guide](./chap4_guide.md): syntax rule, keywords, utilities, and APIs
+- [User's Guide](./chap4_guide.md)
+  + [Syntax rule](./chap4-1.md), [Memory and parallel settings](./chap4-2.md)
+  + [Methods](./chap4-3.md) and [keywords](./chap4-4.md) in `automr`
+  + [Utilities](./chap4-5.md)
+  + [APIs](./chap4-6.md)
+  + [Methods and keywords](./chap4-7.md) in `autosr`
 - [Examples](./chap5_example.md)
 - [Developer's Guide](./chap6.md)
 - [Papers citing MOKIT](./citing.md)

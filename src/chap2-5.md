@@ -2,10 +2,11 @@
 
 ## Minimal requirements
 
-Dependencies on quantum chemistry packages are different for each executable or module. Here the minimum requirements for binary executables `automr`, `frag_guess_wfn` and other various are listed:
+Dependencies on quantum chemistry packages are different for each executable or module. Here the minimum requirements for binary executables `automr`, `autosr`, `frag_guess_wfn` and other various are listed:
 1. `automr`: Gaussian, GAMESS, PySCF
-2. `frag_guess_wfn`: Gaussian
-3. Most of the utilities do not depend on quantum chemistry packages except that the modules `py2gau`, `py2orca`, `py2molpro`, etc, work with PySCF installed.
+2. `autosr`: Gaussian
+3. `frag_guess_wfn`: Gaussian
+4. Most of the utilities do not depend on quantum chemistry packages except that the modules `py2gau`, `py2orca`, `py2molpro`, etc, work with PySCF installed.
 
 ### Setup Gaussian and PySCF
 
