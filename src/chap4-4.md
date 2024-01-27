@@ -180,18 +180,12 @@ For excited state calculations. Please read related comments in
 [A2.3](./chap_appdx.html#a23-validity-of-mos-obtained-by-automr-for-excited-state-calculations).
 
 ## 4.4.13 DMRGCI_prog
-Specify the program for performing DMRG-CASCI calculation, e.g. `DMRGCI_prog=PySCF`. Currently only PySCF is supported and it is the default program. According to the computational experience of `jxzou`, the Block-1.5/Block2 are the fastest DMRG program currently.
-
-Note that in fact the DMRG-CASCI calculations are performed by Block and PySCF, not only by PySCF. Thus you should install the Block-1.5 or Block2 program. And you should also cite corresponding reference of the Block program.
-
-Also note that the MPI version used by Block is probably contradicted with MPI version used by ORCA, thus you have to comment one version of MPI environment variables at a time. Or you can use a Shell script to submit the automr job, in which your desired MPI environment variables are written.
-
-By default, the OpenMP version of Block would be called during performing DMRG calculations. But if you want to use MPI version of Block (and you have installed it), you need to write `mokit{block_mpi}`.
+The usage of this keyword is the same as [DMRGSCF_prog](#4414-dmrgscf_prog).
 
 ## 4.4.14 DMRGSCF_prog
 Specify the program for performing DMRG-CASSCF calculation, e.g. `DMRGSCF_prog=PySCF`. Currently only PySCF is supported and it is the default program. According to the computational experience of `jxzou`, the Block-1.5/Block2 are the fastest DMRG program currently.
 
-Note that in fact the DMRG-CASSCF calculations are performed by Block and PySCF, not only by PySCF. Thus you should install the Block-1.5 or Block2 program. And you should also cite corresponding reference of the Block program.
+Note that in fact the DMRG-CASSCF calculations are performed by Block and PySCF, not only by PySCF. Thus you should install the Block-1.5 or Block2 program. And you should also cite corresponding reference of the Block program. For PySCF >= 2.0, you also need to install the [pyscf[dmrgscf]](https://pyscf.org/install.html#install-pyscf-extensions) extension.
 
 Also note that the MPI version used by Block is probably contradicted with MPI version used by ORCA, thus you have to comment one version of MPI environment variables at a time. Or you can use a Shell script to submit the automr job, in which your desired MPI environment variables are written.
 
