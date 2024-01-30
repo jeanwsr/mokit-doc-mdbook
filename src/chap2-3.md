@@ -135,7 +135,11 @@ pyscf-forge latest
 
 Older versions are not recommended, since (1) they are possibly not tested by the developers, (2) they had been tested but some functionality had not been (correctly) implemented at that time. So that they may work or may not. OpenMolcas-v18.09 has also been tested, but you need to take care of a problem, see Section A1, Q5 in Appendix.
 
-Of course, not all packages will be called in an `automr` job. It depends on the job type and the program specified by users (see Section 4.4.9 ~ 4.4.19 for details). Usually three software packages (Gaussian, PySCF and GAMESS) are extensively used in routine computations. Thus you are recommended to install at least these 3 packages. If you have any difficulty in installing software, please read their corresponding manuals carefully. Or you can find answers from their official websites, forums, and GitHub/GitLab pages:
+Of course, not all packages will be called in an `automr` job. It depends on the job type and the program specified by users (see [Section 2.5](./chap2-5.md) for details). Usually three software packages (Gaussian, PySCF and GAMESS) are extensively used in routine computations. Thus you are recommended to install at least these 3 packages. 
+
+### Installation tips and instructions
+
+If you have any difficulty in installing software, please read their corresponding manuals carefully. Or you can find answers from their official websites, forums, and GitHub/GitLab pages:
 
 * [Gaussian](http://gaussian.com/help)  
 * [PySCF issues](https://github.com/pyscf/pyscf/issues)  
@@ -162,6 +166,8 @@ If you can read Chinese, the following installation instructions or tutorials of
 [自动做多参考态计算的程序MOKIT](https://mp.weixin.qq.com/s/bM244EiyhsYKwW5i8wq0TQ)  
 
 also these installation instructions on GitLab  
+[离线安装PySCF-2.x](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85PySCF-2.x.md)  
+[离线安装PySCF-2.x-extensions](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85PySCF-2.x-extensions.md?ref_type=heads) (for pyscf[dmrgscf], etc.)  
 [离线安装OpenMolcas-v22.06](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85OpenMolcas-v22.06.md)  
 [编译MPI并行版OpenMolcas](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%BC%96%E8%AF%91MPI%E5%B9%B6%E8%A1%8C%E7%89%88OpenMolcas.md)  
 [block2的编译和安装](https://gitlab.com/jxzou/qcinstall/-/blob/main/block2%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85.md)

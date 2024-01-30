@@ -16,6 +16,23 @@ Usually there are no special requirements on setup. Read [Section 2.3.6](./chap2
 
 Note that the original GAMESS code can only deal with GVB <=12 pairs. But nowadays we can do hundreds of pairs. It is required by MOKIT to modify GAMESS to go beyond 12 pairs. See instructions in [Section 4.4.10](./chap4-4.md#4410-gvb_prog).
 
+## Additional requirements for using specific methods
+
+Some methods supported by MOKIT cannot be used with minimal requirements above. Please read the documentation of "XXX_prog" keywords of `automr` or `autosr` for more information. For example, [DMRGSCF_prog](./chap4-4.md#4414-dmrgscf_prog) of `automr` and [CC_prog](./chap4-7.md#cc_prog) of `autosr`. 
+
+Here we provide a list for common used prog keywords and corresponding dependencies.
+
+| `automr` methods | additional dependencies | instructions |
+| --- | --- | --- |
+| [DMRGCI/DMRGSCF](./chap4-4.md#4414-dmrgscf_prog) | pyscf[dmrgscf] and Block | [here](./chap2-3.md#installation-tips-and-instructions) |
+| [CASPT2](./chap4-4.md#4415-caspt2_prog) | OpenMolcas/Molpro/ORCA | [here](./chap2-3.md#installation-tips-and-instructions) |
+| [MRCISD](./chap4-4.md#4417-mrcisd_prog) | See keyword documentation | |
+| [MC-PDFT](./chap4-4.md#4419-mcpdft_prog) | pyscf-forge | |
+
+| `autosr` methods | additional dependencies | instructions |
+| --- | --- | --- |
+| [DLPNO-CC](./chap4-7.md#cc_prog) | ORCA | |
+
 ## Setups for calling other QC programs
 
 See [Section 2.3.3](./chap2-3.md#233-environment-variables) and [Section 2.3.6](./chap2-3.md#236-notes-on-quantum-chemistry-packages).
