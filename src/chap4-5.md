@@ -534,7 +534,7 @@ convert a Turbomole-type h2o.molden into h2o.fch. Here `tm2molden` is a built-in
 
 More types of .molden files would be supported in the future. Note that .molden file does not include any ECP/PP data, so the generated .fch file would not include that data, either. If you use ECP/PP in your calculations, be careful about this problem.
 
-To transfer MOs from ORCA to Gaussian, see [mkl2fch](#4535-mkl2fch) and [mkl2gjf](#4536-mkl2gjf). To transfer MOs from Turbomole to Gaussian, see [fch2tm](#4528-fch2tm).
+To transfer MOs from ORCA to Gaussian, also see [mkl2fch](#4535-mkl2fch) and [mkl2gjf](#4536-mkl2gjf). To transfer MOs from Gaussian to Turbomole, see [fch2tm](#4528-fch2tm).
 
 
 ## 4.5.38 orb2fch

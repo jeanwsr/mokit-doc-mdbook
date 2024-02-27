@@ -275,7 +275,17 @@ Reference for these two types of unpaired eletrons:
 [1] Theoret. Chim. Acta (Berl.) 48, 175-183 (1978). DOI: 10.1007/BF00549017.  
 [2] Chemical Physics Letters 372 (2003) 508–511. DOI: 10.1016/S0009-2614(03)00422-6.
 
-### 4.6.3.2 gen_no_using_density_in_fch
+### 4.6.3.2 get_gvb_bond_order_from_fch
+Perform GVB bond order analysis using `_s.fch` and `_s.dat` files.
+```
+from mokit.lib.wfn_analysis import population
+
+population.get_gvb_bond_order_from_fch('ben_uhf_uno_asrot2gvb15_s.fch')
+```
+
+The `_s.fch` and `_s.dat` files can be obtained after a GVB or CASSCF job.
+
+### 4.6.3.3 gen_no_using_density_in_fch
 Generate natural orbitals using specified density in a .fch file. The density is read from the specified section of .fch file and the AO-basis overlap is obtained by calling Gaussian. An example is shown below
 
 ```python
@@ -285,7 +295,7 @@ gen_no_using_density_in_fch('ben.fch', 1)
 
 where 1 means reading density from "Total SCF Density" section.
 
-### 4.6.3.3 gen_cf_orb
+### 4.6.3.4 gen_cf_orb
 Generate Coulson-Fischer orbitals using GVB natural orbitals from a GAMESS .dat file. The Coulson-Fischer orbitals are non-orthogonal and the GVB natural orbitals are orthogonal, so this module actually performs an orthogonal -> non-orthogonal orbital transformation. This transformation requires the information of GVB pair coefficients so currently only the GAMESS .dat file is accepted while the .fch file is not supported. An example is shown below
 
 ```python
@@ -295,7 +305,7 @@ gen_cf_orb(datname='naphthalene_gvb5.dat',ndb=29,nopen=0)
 
 where `ndb` is the number of doubly occupied orbitals and `nopen` is the number of singly occupied orbitals. A new file named naphthalene_gvb5_new.dat will be generated. If you want to visualize the Coulson-Fischer orbitals, you need to use the `dat2fch` utility to transfer orbitals from .dat to .fch.
 
-### 4.6.3.4 make_orb_resemble
+### 4.6.3.5 make_orb_resemble
 Make a set of target MOs resembles the reference MOs. Ddifferent basis set in two .fch files are allowed, but their geometries and orientations should be identical or very similar. An example is shown below
 
 ```python
@@ -309,7 +319,7 @@ where
 `nmo`: indices 1~nmo MOs in `ref_fch` will be set as reference MOs. If `nmo` is not given, it will be set as na (number of alpha electrons) for RHF-type wave function, and set to na/nb respectively for UHF-type wave function.  
 `align`: whether to align two molecules in files `target_fch` and `ref_fch`. The default is `False`, i.e. assuming the geometries are already in a best alignment. If this is not your case, you need to set `align=True`.
 
-### 4.6.3.5 proj2target_basis
+### 4.6.3.6 proj2target_basis
 Project MOs of the original basis set onto the target basis set. `cart` is True/False for Cartesian-type or spherical harmonic type functions, respectively. `target_basis` can be smaller than, equal to, or larger than the basis set in `fchname`, although usually a larger basis set would be used.
 
 ```python
@@ -329,7 +339,7 @@ The following 3 cases are not recommended
 (3) LANL2DZ -> def2TZVP.  
 if the studied molecule include any element >Ne. This is because the number of doubly occupied core MOs are not consistent among these basis sets (with ECP/PP). If you use projected MOs to perform SCF calculations, SCF will probably be oscillating.
 
-### 4.6.3.6 lin_comb_two_mo
+### 4.6.3.7 lin_comb_two_mo
 Perform \\(\sqrt{2}/2 \\) (mo1+mo2) and \\(\sqrt{2}/2 \\) (mo1-mo2) unitary transformation for two specified MOs in a Gaussian .fch file. 
 When the \\( \sigma \\) and \\( \pi \\) orbitals of a double bond are mixed (i.e. a banana bond), this can be used to make them separated.
 

@@ -126,24 +126,13 @@ paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](htt
 If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
 
 ## 4.4.9 HF_prog
-Specify the program for performing Hartree-Fock (HF) calculations. Supported programs
-are Gaussian(default), PySCF, PSI4 and ORCA. If the input molecule is singlet,
-RHF and broken symmetry UHF (plus wave function stability analysis) will be successively
-performed. If not singlet, only UHF (plus wave function stability analysis) will
-be performed.
+Specify the program for performing Hartree-Fock (HF) calculations. Supported programs are Gaussian(default), PySCF, PSI4 and ORCA. If the input molecule is singlet, RHF and broken symmetry UHF (plus wave function stability analysis) will be successively performed. If not singlet, only UHF (plus wave function stability analysis) will be performed.
 
-It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the
-SCF algorithm in Gaussian is the most effect in almost all cases, among all quantum
-software packages. The only case when you are recommended to use PySCF/PSI4/ORCA,
-is that if your studied molecule is large and cannot be further simplified (Nbasis>1500),
-you can consider turn on the RI approximation of HF to accelerate computations in
-PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
+It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the SCF algorithm in Gaussian is the most effective in almost all cases, among all quantum software packages. The only case when you are recommended to use PySCF/PSI4/ORCA, is that if your studied molecule is large and cannot be further simplified (Nbasis>1500), you can consider turn on the RI approximation of HF to accelerate computations in PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
 ```
 mokit{RI,HF_prog=PySCF} # (or PSI4, ORCA if you wish)
 ```
-in the input file of `automr`. For small to medium-size molecules (Nbasis<1500),
-better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge
-than that of Gaussian.
+in .gjf file. For small to medium-size molecules (Nbasis<1000), better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge than that of Gaussian.
 
 ## 4.4.10 GVB_prog
 Specify the GVB program. Supported programs are GAMESS(default), Gaussian and QChem. The second-order SCF (SOSCF) algorithm in GAMESS is used to converge the GVB wave function. The GAMESS version >=2017 is strongly recommended. Older versions of GAMESS may work or may not, since they are not tested by the developers. It is always recommended to use the default program GAMESS, rather than Gaussian (due to poor convergence for transition metal).
@@ -307,9 +296,9 @@ Currently only the point nuclei charge distribution is supported. The DKH0 Hamil
 ## 4.4.27 X2C
 Request the scalar (i.e. spin-free) relativistic X2C (eXact-two-Component) corrections to the one-electron Hamiltonian. Note that: (1) The two keywords DKH2 and X2C are mutually exclusive, i.e. you can only write one of them. (2) You should use all-electron basis sets like 'cc-pVTZ-DK', 'x2c-TZVPall' or 'ANO-RCC-VDZ' for all-electron relativistic calculations. Pseudopotential should not be used. (3) It is strongly not recommended to use Cartesian-type function of basis set (severe numerical instability observed), please just use the default spherical harmonic functions.
 
-Also note that by default, the RHF/UHF is performed using Gaussian called by `automr`, and GVB is performed using GAMESS called by `automr`. Since Gaussian and GAMESS do not support X2C, in these steps the X2C will be replaced by DKH2. According to the limited tests of the author jxzou, MOs resulting from DKH2 and X2C are similar and often converge in few cycles.
+Also note that by default, the RHF/UHF is performed using Gaussian called by `automr`, and GVB is performed using GAMESS called by `automr`. When you specify `mokit{X2C}`, the `HF_prog` will be switched to PySCF automatically. Since GAMESS does not support X2C currently, in this step the X2C will be replaced by DKH2. According to the limited tests of the developer jxzou, MOs resulting from DKH2 and X2C are similar and often converge in few cycles.
 
-Currently only the point nuclei charge distribution is supported. These programs support the X2C Hamiltonian: BDF, OpenMolcas, Molpro, PSI4, PySCF. After several months, X2C will be supported in ORCA.
+Currently only the point nuclei charge distribution is supported. These programs support the X2C Hamiltonian: BDF, OpenMolcas, Molpro, PSI4, PySCF. X2C will be supported in ORCA in the near future.
 
 ## 4.4.28 RI
 Request to turn on the RI-JK approximation for two-electron integrals in CASSCF. Default is off. Please just write `mokit{RI}`, do not write 'mokit{RI=True}' or 'mokit{RI on}'. The other two types of RI approximations RI-J and RIJCOSX are not supported.
