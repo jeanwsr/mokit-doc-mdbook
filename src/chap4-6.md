@@ -277,9 +277,8 @@ Reference for these two types of unpaired eletrons:
 
 ### 4.6.3.2 get_gvb_bond_order_from_fch
 Perform GVB bond order analysis using `_s.fch` and `_s.dat` files.
-```
+```python
 from mokit.lib.wfn_analysis import population
-
 population.get_gvb_bond_order_from_fch('ben_uhf_uno_asrot2gvb15_s.fch')
 ```
 
