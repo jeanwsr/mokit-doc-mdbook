@@ -20,43 +20,43 @@ the user still needs to provide a basis set name, although it is not used in thi
 case.
 
 There is also an exception that the basis set after '/' symbol matters. If RI (see
-Section 4.4.28) approximation is turned on, the auxiliary basis set will be automatically
-determined (by `automr`) according to the basis set. And if F12 (see Section 4.4.30)
+[Section 4.4.28](./chap4-4.md#4428-ri)) approximation is turned on, the auxiliary basis set will be automatically
+determined (by `automr`) according to the basis set. And if F12 (see [Section 4.4.30](./chap4-4.md#4430-f12))
 is turned on, the F12-CABS will be automatically determined (by `automr`) according
 to the basis set, too.
 
 ## 4.3.1 GVB
 Generalized Valence Bond theory.
 
-Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read Section 4.4.10 carefully.
+Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully.
 
 ## 4.3.2 CASSCF
 Complete Active Space Self-consistent Field.
 
-Currently excited state computations are not supported. Please read Section A2.3 for comments on excited state computations. Please read related keyword `CASSCF_prog` in Section 4.4.12.
+Currently excited state computations are not supported. Please read Section A2.3 for comments on excited state computations. Please read related keyword [CASSCF_prog](./chap4-4.md#4412-casscf_prog) in Section 4.4.
 
 ## 4.3.3 CASCI
 Complete Active Space Configuration Interaction.
 
-CASCI can be viewed as the 0-th step of the CASSCF step, i.e. CASSCF without orbital optimization. It is always recommended to perform CASSCF rather than CASCI, expect for those who wish to compare the quality of different initial guesses, and/or do not want the CASSCF result. Please read related keyword `CASCI_prog` in Section 4.4.11.
+CASCI can be viewed as the 0-th step of the CASSCF step, i.e. CASSCF without orbital optimization. It is always recommended to perform CASSCF rather than CASCI, expect for those who wish to compare the quality of different initial guesses, and/or do not want the CASSCF result. Please read related keyword [CASCI_prog](./chap4-4.md#4411-casci_prog) in Section 4.4.
 
 ## 4.3.4 DMRGSCF
-Here the keyword DMRGSCF actually means the DMRG-CASSCF method. Please also read Section 4.4.14 for related information.
+Here the keyword DMRGSCF actually means the DMRG-CASSCF method. Please also read [DMRGSCF_prog](./chap4-4.md#4414-dmrgscf_prog) for related information.
 
 ## 4.3.5 DMRGCI
-Here the keyword DMRGCI actually means the DMRG-CASCI method. Please also read Section 4.4.13 for related information.
+Here the keyword DMRGCI actually means the DMRG-CASCI method. Please also read [DMRGCI_prog](./chap4-4.md#4413-dmrgci_prog) for related information.
 
 DMRGCI can be viewed as the 0-th step of the DMRGSCF step, i.e. DMRGSCF without orbital optimization. It is always recommended to perform DMRGSCF rather than DMRGCI, expect for those who wish to compare the quality of different initial guesses, and/or do not want the DMRGSCF result.
 
 ## 4.3.6 NEVPT2
 Second order N-Electron Valence state Perturbation Theory based on the CASSCF reference.
 
-Please read related keyword `NEVPT2_prog` in Section 4.4.16.
+Please read related keyword [NEVPT2_prog](./chap4-4.md#4416-nevpt2_prog) in Section 4.4.
 
 ## 4.3.7 CASPT2
 Second order Perturbation Theory based on CASSCF reference.
 
-Generally speaking, NEVPT2 is more recommended than CASPT2 since there is no need for IP-EA shift, real or imaginary shift in NEVPT2. If you are really a fan of CASPT2, it is recommended to use CASPT2K instead, see Section 4.3.8 CASPT2K. Please read related keyword CASPT2_prog in Section 4.4.15.
+Generally speaking, NEVPT2 is more recommended than CASPT2 since there is no need for IP-EA shift, real or imaginary shift in NEVPT2. If you are really a fan of CASPT2, it is recommended to use [CASPT2K](#438-caspt2k) instead. Please read related keyword [CASPT2_prog](./chap4-4.md#4415-caspt2_prog) in Section 4.4.
 
 ## 4.3.8 CASPT2K
 Second order Perturbation Theory based on CASSCF reference.
@@ -84,7 +84,7 @@ There are several restrictions when you use this method:
 
 (3) background point charges are not supported.
 
-This version of SDSPT2 is performed by the Xi'an CI module of BDF program. So you are assumed to have successfully installed BDF. You should cite this paper DOI: 10.1080/00268976.2017.1308029 if you use this method.
+This version of SDSPT2 is performed by the Xi'an CI module of BDF program. So you are assumed to have successfully installed BDF. You should cite this paper `DOI: 10.1080/00268976.2017.1308029` if you use this method.
 
 ## 4.3.11 MRMP2
 Second order Multi-reference Perturbation Theory based on CASSCF reference.
@@ -101,7 +101,7 @@ Note that OVBMP2 is a keyword in `automr` but OVB-MP2 is the method name. Do not
 ## 4.3.13 MRCISD
 Multi-reference Configuration Interaction Singles and Doubles, based on the CASCI/CASSCF reference.
 
-Please read related keyword `MRCISD_prog` in Section 4.4.17.
+Please read related keyword [MRCISD_prog](./chap4-4.md#4417-mrcisd_prog) in Section 4.4.
 
 ## 4.3.14 MRCISDT
 Multi-reference Configuration Interaction Singles, Doubles and Triples, based on the CASCI/CASSCF reference.
@@ -117,7 +117,7 @@ Supported programs are OpenMolcas(default)/PySCF/GAMESS. If you use `MCPDFT_prog
 
 Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) or Block (interfaced with PySCF). DMRG-PDFT is not supported in GAMESS currently.
 
-Please read related keyword `MCPDFT_prog` in Section 4.4.19.
+Please read related keyword [MCPDFT_prog](./chap4-4.md#4419-mcpdft_prog) in Section 4.4.
 
 ## 4.3.16 DFTCI
 The DFT/MRCI method by Stefan Grimme, Mirko Waletzke, and Martin Kleinschmidt et. al.
