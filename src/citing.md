@@ -38,3 +38,5 @@
 
 19. Block-Correlated Coupled Cluster Theory with up to Four-Pair Correlation for Accurate Static Correlation of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c03373](https://doi.org/10.1021/acs.jpclett.3c03373)
 
+20. Renormalized-Residue-Based Multireference Configuration Interaction Method for Strongly Correlated Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.3c01247](https://doi.org/10.1021/acs.jctc.3c01247)
+
