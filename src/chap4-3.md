@@ -19,16 +19,12 @@ and basis set data will be read from the given .fch(k) file. Note that, however,
 the user still needs to provide a basis set name, although it is not used in this
 case.
 
-There is also an exception that the basis set after '/' symbol matters. If RI (see
-[Section 4.4.28](./chap4-4.md#4428-ri)) approximation is turned on, the auxiliary basis set will be automatically
-determined (by `automr`) according to the basis set. And if F12 (see [Section 4.4.30](./chap4-4.md#4430-f12))
-is turned on, the F12-CABS will be automatically determined (by `automr`) according
-to the basis set, too.
+There is also an exception that the basis set after '/' symbol matters. If [RI](./chap4-4.md#4429-ri)) approximation is turned on, the auxiliary basis set will be automatically determined (by `automr`) according to the basis set. And if [F12](./chap4-4.md#4431-f12)) is turned on, the F12-CABS will be automatically determined (by `automr`) according to the basis set, too.
 
 ## 4.3.1 GVB
 Generalized Valence Bond theory.
 
-Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully.
+Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read [GVB_prog](./chap4-4.md#4410-gvb_prog) carefully.
 
 ## 4.3.2 CASSCF
 Complete Active Space Self-consistent Field.
@@ -106,7 +102,7 @@ Please read related keyword [MRCISD_prog](./chap4-4.md#4417-mrcisd_prog) in Sect
 ## 4.3.14 MRCISDT
 Multi-reference Configuration Interaction Singles, Doubles and Triples, based on the CASCI/CASSCF reference.
 
-The related keyword `MRCISDT_prog` can only be equal to one of OpenMolcas(default), Dalton, PSI4 and GAMESS. No Davidson correction will be provided, and only uncontracted MRCISDT is supported.
+Please read related keyword [MRCISDT_prog](./chap4-4.md#4418-mrcisdt_prog) in Section 4.4.
 
 ## 4.3.15 MCPDFT
 Multi-configurational Pair Density Functional Theory, based on CASSCF reference. 
@@ -117,7 +113,7 @@ Supported programs are OpenMolcas(default)/PySCF/GAMESS. If you use `MCPDFT_prog
 
 Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package (interfaced with OpenMolcas) or Block (interfaced with PySCF). DMRG-PDFT is not supported in GAMESS currently.
 
-Please read related keyword [MCPDFT_prog](./chap4-4.md#4419-mcpdft_prog) in Section 4.4.
+Please read related keyword [MCPDFT_prog](./chap4-4.md#4420-mcpdft_prog) in Section 4.4.
 
 ## 4.3.16 DFTCI
 The DFT/MRCI method by Stefan Grimme, Mirko Waletzke, and Martin Kleinschmidt et. al.

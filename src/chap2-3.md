@@ -60,7 +60,7 @@ The configuration file 'program.info' is no longer used since MOKIT 1.2.1. After
 
 **Setup GAMESS**
 
-Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), please read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully. After re-compiling GAMESS (followed by instructions in Section 4.4.10), an executable `gamess.01.x` will be generated. This is the executable to be called by `automr`.
+Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), please read [GVB_prog](./chap4-4.md#4410-gvb_prog) carefully. After re-compiling GAMESS (followed by instructions in Section 4.4.10), an executable `gamess.01.x` will be generated. This is the executable to be called by `automr`.
 
 **Setup scratch directory**
 
