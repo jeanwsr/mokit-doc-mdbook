@@ -12,14 +12,13 @@ More multi-configurational and multi-reference methods will be supported in the 
 These terms should be written in the `#p ...` line in the .gjf file.
 
 There must be a '/' symbol between the method and the basis set, e.g. `CASSCF/cc-pVTZ`.
-`automr` does not allow the use of a spacing to separate the method and basis set
-(which is allowed in Gaussian). When `readrhf`, `readuhf`, or `readno` is used in
-`mokit{}`, the basis set after '/' symbol is usually useless, since the geometry
-and basis set data will be read from the given .fch(k) file. Note that, however,
-the user still needs to provide a basis set name, although it is not used in this
-case.
+`automr` does not allow the use of a spacing to separate the method and basis set (which is allowed in Gaussian). 
+When `readrhf`, `readuhf`, or `readno` is used in `mokit{}`, the basis set after '/' symbol is usually useless, since the geometry and basis set data will be read from the given .fch(k) file. 
+Note that, however, the user still needs to provide a basis set name, although it is not used in this case.
 
-There is also an exception that the basis set after '/' symbol matters. If [RI](./chap4-4.md#4429-ri)) approximation is turned on, the auxiliary basis set will be automatically determined (by `automr`) according to the basis set. And if [F12](./chap4-4.md#4431-f12)) is turned on, the F12-CABS will be automatically determined (by `automr`) according to the basis set, too.
+There is also an exception that the basis set after '/' symbol matters. 
+If [RI](./chap4-4.md#4429-ri) approximation is turned on, the auxiliary basis set will be automatically determined (by `automr`) according to the basis set. 
+And if [F12](./chap4-4.md#4431-f12) is turned on, the F12-CABS will be automatically determined (by `automr`) according to the basis set, too.
 
 ## 4.3.1 GVB
 Generalized Valence Bond theory.
