@@ -113,7 +113,7 @@ brew upgrade --fetch-HEAD mokit
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
 Unlike the conda install approach, using pre-built MOKIT in this subsection do not require network. 
-If you want full functionality of MOKIT, you still need to have necessary dependencies: Python3 environment and NumPy, which can be achieved by anaconda/miniconda. If you only want part of MOKIT, especially some certain binary utilities, see [Section 2.2.3](#223-only-want-frag_guess_wfn) for a simpler instruction.
+If you want full functionality of MOKIT, you still need to have necessary dependencies: Python3 environment and NumPy, which can be achieved by anaconda/miniconda (Read [here](#how-to-choose-anaconda-version-if-installing-offline) for installing anaconda offline). If you only want part of MOKIT, especially some certain binary utilities, see [Section 2.2.3](#223-only-want-frag_guess_wfn) for a simpler instruction.
 
 ### Download
 
@@ -143,18 +143,32 @@ Remember to modify the `GMS` path to suit your local environment.
 Note that you need to run `source ~/.bashrc` or exit the terminal as well as
 re-login, in order to activate newly written environment variables.
 
+### How to choose Anaconda Version if installing offline
+
+Installing prebuilt MOKIT offline usually means the user cannot get NumPy with network. So it's important to get a certain version of anaconda which provides proper version of NumPy needed by MOKIT. The recommended versions of anaconda for some prebuilts are listed below (compatible miniconda version is also listed but it does not mean miniconda comes with NumPy).
+
+If your linux kernel is roughly as old as Centos7's, choose the one started with `centos7_`. 
+
+| Artifacts | Python version | Compatible Anaconda version | Compatible Miniconda version | NumPy version |
+| :---: | :---: | :---: | :---: | :---: |
+| centos7_conda_py39 | 3.9 | 2022.10 | py39_22.11.1 | 1.21 |
+| py39_gcc10 | 3.9 | 2022.10 | py39_22.11.1 | 1.21 |
+| py310_gcc10 | 3.10 | 2023.03 | py310_23.3.1 | 1.23 |
 
 
-### Compatibility Note
+> How to download certain version of anaconda?
+> > For example, if you are using [TUNA Mirror](https://mirrors.tuna.tsinghua.edu.cn), you can go to [mirrors.tuna.tsinghua.edu.cn/anaconda/archive/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/) and find `Anaconda3-[some version]-Linux-x86_64.sh`. The page address is similar in other mirror site, like [NJU Mirror](https://mirror.nju.edu.cn).
+
+### Detailed Compatibility Note
 
 | Artifacts | Compatible OS | Maybe Compatible | Python version | GCC version | NumPy version |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | centos7_conda_py37 | Centos 7 | | 3.7 | 4.8.5 | 1.21 |
 | centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.21 |
 | centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
-| py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | latest |
-| py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | latest |
-| py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | latest |
+| py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | 1.21 |
+| py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | 1.21 |
+| py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | 1.23 |
 
 Tips:
 * Do not extract the zip with right-click (like the one in KDE)! Use `unzip` in command line.
@@ -162,10 +176,8 @@ Tips:
 * We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky Linux, OpenEuler, etc. More compatibility tests and reports are welcome.
 * The GCC and NumPy version listed refer to the version used to compile the artifacts. 
   - NumPy can be sensitive to version sometimes. Try upgrade (or downgrade) numpy if your python complained about version when `import`. 
-  - The NumPy version for conda based prebuilts is fixed, because we use fixed-version miniconda image for building and would not upgrade anything for convenience. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for other prebuilts are latest (currently 1.24, because they are installed from pip).
+  - The NumPy version for each prebuilt is fixed, because offline anaconda users cannot update anything and have to follow the [anaconda version recommendation](#how-to-choose-anaconda-version-if-installing-offline) above. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for `py*_gcc*` prebuilts used to be latest but after 1.2.6rc26 they are also fixed.
 
-Known issues:
-* Currently no artifacts for Archlinux and Manjaro, because their python goes beyond 3.10.
 
 
 ## 2.2.3 Only want `frag_guess_wfn`?
