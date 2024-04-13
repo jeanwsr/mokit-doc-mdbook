@@ -126,12 +126,14 @@ The `automr` program in MOKIT is an integrated interface program connecting comm
 | QChem | >= 5.0 |
 
 For DMRG related packages:
+
 | Program | Recommended Version |
 | --- | --- |
 |(py)block2 | >= preview-0.5.0 |
 | Block | >= 1.5.3 |
 | QCMaquis | >= 3.0.3 |
 | CheMPS2 | >= 1.8.9 |
+
 The (py)block2 the most recommended one among these DMRG packages.
 
 For MC-PDFT related packages:  
@@ -161,10 +163,7 @@ If you can read Chinese, the following installation instructions or tutorials of
 [ORCA 5.0安装及运行](https://mp.weixin.qq.com/s/yeCOMhothZeL-V7veAcbuw)  
 [GAMESS简易编译教程](https://mp.weixin.qq.com/s/SF5BEfKsGwdKSlZdAe1t4A)  
 [PSI4程序安装及运行](https://mp.weixin.qq.com/s/I7Q1YXX5oSsXDe3oMo2jPw)  
-[量子化学程序OpenMolcas的简易安装](https://mp.weixin.qq.com/s/wA8YClRxkRTChtQvuum-Uw)  
 [离线编译OpenMolcas+QCMaquis](https://mp.weixin.qq.com/s/Gb1Lzv1bcQmvuHMZjAQLxQ)  
-[Block-1.5的编译和安装](https://mp.weixin.qq.com/s/EUZKLYSqbuIUL9-zlySfbQ)  
-[Boost.MPI的编译](https://mp.weixin.qq.com/s/AMYUTB5pTNLFZ8NEtFIG-Q)  
 [安装基于openmpi的mpi4py](https://mp.weixin.qq.com/s/f5bqgJYG5uAK1Zubngg65g)  
 [自动做多参考态计算的程序MOKIT](https://mp.weixin.qq.com/s/bM244EiyhsYKwW5i8wq0TQ)  
 

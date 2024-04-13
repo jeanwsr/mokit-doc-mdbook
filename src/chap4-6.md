@@ -196,13 +196,21 @@ dat2fch ben_triplet_uhf_uno_asrot2gvb2.dat ben_triplet_uhf_uno_asrot2gvb2.fch
 ```
 the filenames above come from a triplet CASSCF(6,6) calculation for benzene.
 
+### 4.6.1.14 reorder2dbabasv
+Reorder MOs in the file `gvbN_s.fch`. A new file `gvbN_new.fch` would be generated. The order of MOs in `gvbN_s.fch` is expected to be docc-bonding-socc-antibonding-vir. The order of MOs in `gvbN_new.fch` would be docc-bonding1-antibonding1-bonding2-antibonding2-...-socc-vir.
+
+```python
+from mokit.lib.rwwfn import reorder2dbabasv
+
+reorder2dbabasv(fchname='ben_triplet_uhf_uno_asrot2gvb2_s.fch')
+```
 
 ## 4.6.2 APIs related to PDB file
 
 1. read_natom_from_pdb(pdbname, natom)
-1. read_nframe_from_pdb(pdbname, nframe)
-1. read_iframe_from_pdb(pdbname, iframe, natom, cell, elem, resname, coor)
-1. write_frame_into_pdb(pdbname, iframe, natom, cell, elem, resname, coor, append)
+2. read_nframe_from_pdb(pdbname, nframe)
+3. read_iframe_from_pdb(pdbname, iframe, natom, cell, elem, resname, coor)
+4. write_frame_into_pdb(pdbname, iframe, natom, cell, elem, resname, coor, append)
 
 ### 4.6.2.1 read_natom_from_pdb
 Read the number of atoms from a given pdb file. If there exists more than one frame in the pdb file, only the 1st frame will be detected. See an example in [Section 4.6.2.4](#4624-writeframeintopdb).
