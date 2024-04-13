@@ -1,6 +1,8 @@
 ## 3.2 Which method should I use?
 
-For practical use, e.g. to properly compare results with those from experiments, NEVPT2, CASPT2, MC-PDFT or MRCISD is recommended. The GVB and CASSCF methods are often qualitatively correct. For high accuracy results, dynamic correlation is necessary. Additional general recommendations are provided below:
+For wave function analysis or visualization of active orbitals, GVB and CASSCF methods are sufficient.
+
+For practical use, e.g. to properly compare results with those from experiments, NEVPT2, CASPT2, MC-PDFT or MRCISD are recommended. The GVB and CASSCF methods are only qualitatively correct. Additional general recommendations are provided below:
 
 (1) NEVPT2 is free of the intruder-state problem, thus is preferable to CASPT2.
 

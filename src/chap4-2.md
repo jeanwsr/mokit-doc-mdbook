@@ -6,7 +6,7 @@ The settings of memory and the number of processors are identical to that in Gau
 %mem=16GB
 ```
 
-requests a `automr` calculation use 16GB memory and 8 processors. Note that only `%nprocshared` and the unit `GB` is supported. Some DON'T things are listed below:  
+requests a `automr` calculation use 16GB memory and 8 processors. Please specify reasonable/proper computational resource. For example, `%mem=1GB` with `%nprocshared=8` is usually unreasonable. Note that only `%nprocshared` and the unit `GB` is supported. Some DON'T things are listed below:  
 (1) Do not use units MB, MW, GW, and do not use `%cpu` to specify the number of processors.  
 (2) Do not write `%chk=xxx.chk` since it is useless for `automr`.
 

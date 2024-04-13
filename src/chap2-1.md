@@ -1,6 +1,6 @@
 # 2.1 Windows Pre-built
 
-If you only want to use some utilities of MOKIT (e.g. transfer MOs among various programs, generate input files of various programs), the most convenient way is probably to use the pre-built (or pre-compiled) Windows executables. Note that the version of pre-built Windows executables is often older than that of Linux pre-built executables, so you are recommended to download the latter one.
+If you only want to use some utilities of MOKIT (e.g. transfer MOs among various programs, generate input files of various programs), the most convenient way is probably to use the pre-built (or pre-compiled) Windows executables. Note that the version of pre-built Windows executables is usually older than that of Linux pre-built executables, so you are recommended to download the latter one.
 
 Only 20+ out of all utilities in MOKIT are provided. These executables are compressed into .7z file and can be downloaded at [Releases](https://gitlab.com/jxzou/mokit/-/releases). Download, uncompress it, and set the environment variables, then these utilities can used in any directory.
 

@@ -139,22 +139,21 @@ Specify the GVB program. Supported programs are GAMESS(default), Gaussian and QC
 
 Note the original GAMESS can only do GVB up to 12 pairs. Nowadays we can do a black-box GVB computation with hundreds of pairs. So, to go beyond 12 pairs, you need to modify and re-compile the source code of GAMESS.
 
-MOKIT offers a Shell script to help you automatically handle this. Assuming you've
-compiled GAMESS before (i.e. all `*.o` files are still in gamess/object/ directory
-of GAMESS), now you simply need to copy two files (modify_GMS1.sh and modify_GMS2.f90)
-from `mokit/src/` into `gamess/source/` directory, and run `./modify_GMS1.sh`. The
-script will modify source code and re-compile GAMESS, taking about 2 minutes. The
-linked GAMESS executable will be `gamess.01.x`. If you already had an executable
-named `gamess.01.x`, please rename it to another filename. Otherwise it will be
-destroyed and replaced during re-compilation.
+MOKIT offers a Shell script to help you automatically handle this. Assuming you have compiled GAMESS before (i.e. all `*.o` files are still in `gamess/object/` directory of GAMESS), now you simply need to copy two files (`modify_GMS1.sh` and `modify_GMS2.f90`) from `mokit/src/` into `gamess/source/` directory, and run `./modify_GMS1.sh`. For example, these Linux commands on my computer are
+
+```
+cp $MOKIT_ROOT/src/modify_GMS1.sh ~/software/gamess/source/
+cp $MOKIT_ROOT/src/modify_GMS2.f90 ~/software/gamess/source/
+cd ~/software/gamess/source/
+./modify_GMS1.sh
+```
+
+You may need to type `y` after running `./modify_GMS1.sh`. The script will modify source code and re-compile GAMESS, taking about 2 minutes. The linked GAMESS executable will be `gamess.01.x`. If you already had an executable named `gamess.01.x`, please rename it to another filename. Otherwise it will be destroyed and replaced during re-compilation.
 > Note for conda users: the MOKIT conda package does not contain `src/`. An alternative way is to go to [GitLab repo](https://gitlab.com/jxzou/mokit/-/tree/master/src?ref_type=heads) and download those two files.
 
-Besides, for GAMESS earlier than version 2021-R1, it only supports 32 CPU cores. If your machine has more cores (and if you want to use >32 cores), you need to modify the variable MAXCPUS in file gamess/ddi/compddi. See a simple guide in file src/modify_GMS_beyond32CPU.txt. Since GAMESS 2021, the MAXCPUS is already set to 128, so modification is not needed.
+Besides, for GAMESS earlier than version 2021-R1, it only supports 32 CPU cores. If your machine has more cores (and if you want to use >32 cores), you need to modify the variable MAXCPUS in file gamess/ddi/compddi. See a simple guide in file `src/modify_GMS_beyond32CPU.txt`. Since GAMESS 2021, the MAXCPUS is already set to 128, so modification is not needed.
 
-It is strongly recommended to check whether the GAMESS runs normally after modifying.
-Such check can be done by running `./runall 01` in gamess/ directory, where `01`
-means checking the executable `gamess.01.x`. This is same as checking for version
-`00`. All tests are supposed to be passed successfully.
+It is strongly recommended to check whether the GAMESS runs normally after modifying. Such check can be done by running `./runall 01` in gamess/ directory, where `01` means checking the executable `gamess.01.x`. This is same as checking for version `00`. All tests are supposed to be passed successfully.
 
 ## 4.4.11 CASCI_prog
 Specify the program for performing the CASCI calculation, e.g. `CASCI_prog=PySCF`. Supported programs are PySCF(default), Molpro, GAMESS, OpenMolcas, Gaussian, ORCA, BDF, PSI4 and Dalton.
