@@ -3,13 +3,14 @@
 ## 5.3.1 Construct initial guess wave function from fragments
 To be added.
 
+
 ## 5.3.2 Morokuma-EDA
 The input file of H<sub>2</sub>O-NH<sub>3</sub> complex is shown below
 
 ```
-%mem=16GB
+%mem=32GB
 %nprocshared=16
-#p RHF/cc-pVDZ guess(fragment=2)
+#p RHF/def2TZVP guess(fragment=2)
 
 {morokuma}
 
@@ -24,31 +25,34 @@ H(fragment=2)     0.95548613    1.60139824   -0.32993853
 
 ```
 
-This is clearly just a Gaussian .gjf file, and it looks very similar to two other types of calculations: 1) fragment guess calculation in Section 5.3.1; 2) BSSE calculation. The order of fragments is the same as that required in GAMESS. That is to say, you must define atoms in the order of monomer 1, monomer 2, monomer 3, etc. To conveniently add '(fragment=*N*)' in each row, you may need some advanced text editor like Sublime Text 3, UltraEdit, VSCode, etc.
+This is clearly a Gaussian .gjf file, and it can be opened by GaussView to show fragments:
 
-In Title Card line, `{morokuma}` must be written to tell the utility `frag_guess_wfn` you want the input file of Morokuma-EDA. Currently Morokuma-EDA in GAMESS has several restrictions:
+![Fragments visualized by GaussView](images/h2o_nh3.png)
 
-(1) Only the RHF method can be used. ROHF, UHF or any DFT methods cannot be used.
-Both the total system and every fragment should be treated with RHF. This means
-broken bonds cannot be dealt with.
+(click `Tools`, `Atom Groups` in the menu of GaussView)
 
-(2) Spherical harmonic functions cannot be used. The utility `frag_guess_wfn` will
-automatically switch to Cartesian fucntions (i.e. 6D 10F) when calling Gaussian
-to perform SCF computations.
+The order of fragments is the same as that required in GAMESS. That is to say, you must define atoms in the order of monomer 1, monomer 2, monomer 3, etc. To conveniently add `(fragment=N)` in each row, you may need some advanced text editor like Sublime Text 3, UltraEdit, VSCode, etc.
 
-Assuming the filename is nh3_h2o.gjf, you simply need to run
+In the Title Card line, `{morokuma}` is written to tell the utility `frag_guess_wfn` you want the input file of Morokuma-EDA. Currently Morokuma-EDA in GAMESS has several restrictions:
+
+(1) Only the RHF method can be used. ROHF, UHF or any DFT methods cannot be used. Both the total system and every fragment should be treated with RHF. This means broken bonds cannot be dealt with.
+
+(2) Spherical harmonic functions cannot be used. The utility `frag_guess_wfn` will automatically switch to Cartesian fucntions (i.e. 6D 10F) when calling Gaussian to perform SCF computations.
+
+Assuming the filename is `nh3_h2o.gjf`, you simply need to run
 ```
 frag_guess_wfn nh3_h2o.gjf >nh3_h2o.out 2>&1
 ```
 
-Since the molecule is small, you can obtain a file named `nh3_h2o.inp` in seconds. MOs of two fragments will be written into this file. You can submit the file `nh3_h2o.inp` to GAMESS for Morokuma-EDA computations. All SCF of fragments will converge in 1-2 cycles. The initial guess of orbitals of the total system (i.e. supermolecule) is not written in .inp file, but constructed from fragments within GAMESS, and it is supposed to be converged soon.
+Since the molecule is small, you can obtain a file named `nh3_h2o.inp` in seconds. MOs of two fragments will be written into this file. You can submit the file `nh3_h2o.inp` to GAMESS for Morokuma-EDA computations. All SCF of fragments will be converged in 1-2 cycles. The initial guess of orbitals of the total system (i.e. supermolecule) is not written in .inp file, but constructed from fragments within GAMESS, and it is supposed to be converged soon.
 
-Simply replacing the `{morokuma}` by `{gks}` means you want the input file of GKS-EDA. UHF and UDFT methods can be applied in GKS-EDA. Thus it is powerful, especially when dealing with biradical system, where the symmetry broken UDFT calculations are necessary. See the following section for more examples.
+Simply replacing `{morokuma}` by `{gks}` means you want the input file of GKS-EDA. UHF and UDFT methods can be applied in GKS-EDA. Thus it is powerful, especially when dealing with biradical/diradical system, where the symmetry broken UDFT calculations are necessary. See the following section for more examples.
+
 
 ## 5.3.3 GKS-EDA
 To perform GKS-EDA calculations, you need the GAMESS program and xeda-patch script. After you download the required packages, use the xeda-patch script to modify the GAMESS source code. And then compile GAMESS in a usual way. Here is a tutorial written in Chinese [《GKS-EDA计算简介》](https://mp.weixin.qq.com/s/6nuJpYJdNbUJndrYM13Fog).
 
-Here I offer two examples to illustrate how to use the utility `frag_wfn_guess` to generate the input file of GKS-EDA. The first example: [Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation, whose input file is shown below
+Two examples are shown bloew to illustrate how to use the utility `frag_wfn_guess`. The first example: [Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation
 
 ```
 %mem=32GB
@@ -88,30 +92,36 @@ def2SVP
 
 ```
 
-Mixed basis set, user-defined basis set or ECP/PP are all supported. DO REMEMBER
-to type at least 2 blank lines after the basis set data. The only exception of basis
-set is that definition for each atom tag is unsupported. For example, the following
-definition
-```
-1 0
-def2TZVP
-****
-2 0
-def2SVP
-****
-```
-
-is currently NOT supported for utility `frag_guess_wfn`. Assuming the filename is Ti.gjf, run
+You can use the basis set `def2TZVP` for all atoms for this small system. Here is just an example to show that mixed basis set, user-defined basis set or ECP/PP are supported. REMEMBER to type at least 2 blank lines after the basis set data. Assuming the filename is `Ti.gjf`, run
 ```
 frag_guess_wfn Ti.gjf >Ti.out 2>&1 &
 ```
 to submit the job to the current machine/node.
 
-If the current node cannot be used for computation, for example, you need to submit the job to a queue on a Cluster, then you can simply write
+If the current node cannot be used for computation, for example, you need to submit the job to a queue on a Cluster, then you need to write a script. Here is an example of SLURM script `run.sh`
+
 ```
+#!/bin/bash
+
+#SBATCH -J eda
+#SBATCH -e eda.err.%j
+#SBATCH -p small_s # queue name
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -c 16
+#SBATCH --mem=32GB
+#SBATCH --exclusive
+
 frag_guess_wfn Ti.gjf >Ti.out 2>&1
 ```
-into your script. This example may take about 20 min to generate the desired .inp file. Five SCF jobs will be performed in succession:
+
+You can run
+```
+sbatch run.sh
+```
+to submit the job. You can also upload the `Ti.inp` to the XACS platform and use their computers.
+
+This example may take about 20 min to generate the desired .inp file. Five SCF jobs will be performed in succession:
 
 (1) monomer 1 in its own basis;  
 (2) monomer 2 in its own basis;  
@@ -119,24 +129,22 @@ into your script. This example may take about 20 min to generate the desired .in
 (4) monomer 2 in all basis;  
 (5) supermolecule in all basis.
 
-`frag_guess_wfn` will automatically construct the initial guess for job (5) using MOs from job (1) and (2). This will save some time. After all 5 jobs normally terminated, the utility `fch2inp` will be automatically called to transfer 5 sets of MOs from Gaussian .fch files into one GAMESS .inp file. Proper keywords (including DFT name in DFTTYP, solvent name and radii of solute atoms in $PCM, etc) have been written in the generated .inp file. You can, of course, open this file and modify keywords according to your needs (e.g. dispersion correction).
+`frag_guess_wfn` will automatically construct the initial guess for job (5) using MOs from job (1) and (2). This will save some time. After all 5 jobs normally terminated, the utility `fch2inp` will be automatically called to transfer 5 sets of MOs from Gaussian .fch files into one GAMESS .inp file. Proper keywords (including DFT name in DFTTYP, solvent name and radii of solute atoms in $PCM, etc) have been written in the generated .inp file. Usually there is no need to modify this file unless you have other requirements.
 
 For HF methods, all 5 SCF jobs during GKS-EDA will converge in 1-2 cycles. While for UDFT, they may take about 10 cycles since the DFT integral grids (and functional implementation details possibly) in GAMESS are not identical to those in Gaussian. Note that when using DFT methods, grid settings `$DFT NRAD=99 NLEB=590 $END` will be automatically added into the .inp file, to mimic the `int=ultrafine` in Gaussian. If implicit solvent model is also applied, each SCF will take more cycles, since implementation details in GAMESS have differences with those in Gaussian (but the energy usually steadily decreases).
 
-You can write an alias into your `~/.bashrc` for convenience of running XEDA, for
-example,
+You can define an environment variable in your `~/.bashrc` for convenience of running XEDA, e.g.
 ```
-alias xeda='/home/jxzou/software/xeda/rungms'
+export XEDA=$HOME/software/xeda/rungms
 ```
-Again, if you are using a script to submit any job, you need to write the alias above into your script. Once the calculation of frag_guess_wfn is done (and you've modified keywords according to your needs), you can simply run
+Again, if you are using a script to submit any job, you need to write the definition into your script. Once the calculations are accomplished, you can simply run
 ```
-xeda Ti.inp 00 16 >Ti.gms 2>&1 &
+$XEDA Ti.inp 00 16 >Ti.gms 2>&1 &
 ```
-
-to perform the GKS-EDA calculation, where the 16 is the number of CPU cores for
-parallel computation.
+to perform the GKS-EDA calculation, where the 16 is the number of CPU cores for parallel computation.
 
 Then we come to the second example: the ethane molecule. Assuming we want to see the interaction of two \\( \cdot \\)CH3 radicals, such fragmentation will involve breaking a covalent bond, which leads to an alpha unpaired electron in one \\( \cdot \\)CH3 radical and a beta unpaired electron in another radical. In this case we need to specify negative spin in the input file, which represents the beta spin:
+
 ```
 %mem=4GB
 %nprocshared=4
@@ -156,12 +164,11 @@ H(fragment=2)   -3.27329940    0.41044905    2.13105517
 
 ```
 
-It is equivalent to interchange 2/-2. The coupling of an alpha unpaired electron with a beta unpaired electron leads to the total spin singlet.
-
-The GKS-EDA supports up to 20 fragments. For convenience only examples containing two fragments are shown above.
+It is equivalent to interchange 2/-2. The coupling of an alpha unpaired electron with a beta unpaired electron leads to the total spin singlet. The GKS-EDA supports up to 20 fragments. For convenience only examples containing two fragments are shown above.
 
 ## 5.3.4 LMO-EDA
 The LMO-EDA calculations can be performed using HF, MP2, CCSD or CCSD(T) methods for monomers and the complex. This method is used less frequently than GKS-EDA nowadays. If you want to use HF or MP2, then maybe GKS-EDA is a better choice (since DFT is computationally economic). If you want to use CCSD or CCSD(T), the desired computation may be too time-consuming. Anyway, here is one input example of `frag_guess_wfn` for LMO-EDA:
+
 ```
 %mem=16GB
 %nprocshared=8
@@ -183,9 +190,8 @@ H(fragment=2)    -1.10944265   -1.98408759    0.57601295
 `frag_guess_wfn` will call Gaussian to perform HF calculations for monomers and the complex. That is to say, currently only the SCF steps would be accelerated in GAMESS. The CCSD amplitude iteration is not accelerated.
 
 ## 5.3.5 SAPT0
-`frag_guess_wfn` is also able to generate the input file of SAPT0 computation in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the future. Similarly, `frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal with strong interactions come from two fragments by breaking covalent bonds (in that case you should use the GKS-EDA method).
+`frag_guess_wfn` is also able to generate the input file of SAPT0 computation in PSI4. Currently only SAPT0 (and sSAPT0) is supported. More advanced methods like SAPT2+ and SAPT2+(3)\\( \delta \\)MP2 will be supported in the future. Similarly, `frag_guess_wfn` will first call the Gaussian to perform HF/DFT computations and then generate the input file of SAPT job for PSI4. Be aware that SAPT cannot deal with strong interactions come from two fragments by breaking covalent bonds (in that case you should use the GKS-EDA method). Here is an SAPT example:
 
-Here is an SAPT example:
 ```
 %mem=16GB
 %nprocshared=8
@@ -234,7 +240,7 @@ h2o_nh3.gjf, h2o_nh3.inp, h2o_nh3.log
 
 The converged MOs are stored in `*.A` files. If UHF-based SAPT calculations are performed, there should also be `*.B` files generated. Please do not delete these orbital files since they will be needed in SAPT calculations. Now submit the generated h2o_nh3.inp to PSI4:
 ```
-psi4 h2o_nh3.inp h2o_nh3.out -n 16
+psi4 h2o_nh3.inp h2o_nh3.out -n 8
 ```
 
 Both of SAPT0 and sSAPT0 results can be found in PSI4 output:
@@ -257,7 +263,8 @@ The SAPT paper (JCP 140, 094106 (2014)) recommends three levels of theory to be 
 (2) *silver*: SAPT2+/aug-cc-pVDZ;  
 (3) *gold*: SAPT2+(3)\\( \delta\\)MP2/aug-cc-pVTZ.
 
-So far the open shell calculations have not been implemented for *silver* and *gold* level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be recognized as the *bronze* level. You are always recommended to use jun-cc-pVDZ unless there is some element which is out of the range of jun-cc-pVDZ (in that case def2TZVP is recommended).
+So far the open shell calculations have not been implemented for *silver* and *gold* level in PSI4 (it is OK for sSAPT0). Currently only the *bronze* level is supported in `frag_guess_wfn`. `{sapt}` or `{sapt,bronze}` in the Title Card line will be recognized as the *bronze* level. You are always recommended to use `jun-cc-pVDZ` unless there is some element which is out of the range of jun-cc-pVDZ (in that case def2TZVP is recommended).
+
 
 ## 5.3.6 Tricks for accelerations
 For some simple fragments (water molecules, organic ligands, etc), if you are sure that they have closed-shell wave function, you can append a character `r` after the Cartesian coordinates of any atom of the fragment. Again, taking the [Ti(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup> cation as the example
@@ -282,4 +289,23 @@ This will force the use of R(O)HF calculation for this fragment, thus saving com
 If the `r` is not written, UHF and wave function stability test will be performed for this fragment. In this special case we know that UHF is unnecessary for this fragment.
 
 This trick accelerates computations only when UHF/UDFT is required for the supermolecule so that we can force some fragment(s) to use closed-shell methods. If restricted HF or DFT methods are required for the supermolecule, this trick will not reduce computational time.
+
+
+## 5.3.7 Other notes
+(1) If you want to use the implicit solvent model, PCM is strongly recommended instead of SMD.
+
+(2) Do not use scalar relativistic Hamiltonian like DKH2 since it has not been tested by GKS-EDA users.
+
+(3) An exception of basis set is that definition for each atom tag is unsupported. For example, the following definition
+
+```
+1 0
+def2TZVP
+****
+2 0
+def2SVP
+****
+```
+
+is currently NOT supported for `frag_guess_wfn`.
 
