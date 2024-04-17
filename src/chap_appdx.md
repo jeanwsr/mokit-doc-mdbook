@@ -15,6 +15,7 @@ If any of those cannot solve your problem, please consider [Bug report](#a3-bug-
 | [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-mo_occ) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
 | [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for radial grid](#q16-gks-eda-warning-for-radial-grid) | 
 | [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
+| [undefined symbol GOMP](#q22-undefined-symbol-gomp) | | |
 
 Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
 
@@ -265,6 +266,13 @@ A20: Try to modify 'DIIS=.F. SOSCF=.T.' to 'DIIS=.T. SOSCF=.F.' in the .inp file
 Why does my computation proceed slowly? It took a long time in HF and GVB calculations. Is there any acceleration techniques/tricks?
 
 A21: Firstly, please read Section 3.1 and 3.2 for suggestions on choosing appropriate methods and basis sets. Secondly, assuming your method and basis set is already reasonable, there is no trick to be used currently. The HF step is performed by Gaussian and it does not support RI or density fitting techniques. In the future version of MOKIT, users can specify PSI4 as the HF_prog, where RI is supported. The author jxzou will write a RI-GVB program in a year, then the GVB computation can be greatly accelerated.
+
+### Q22: undefined symbol GOMP
+I find errors like `undefined symbol: GOMP_parallel` when importing some modules in `mokit.lib`. 
+
+A22: The python modules provided by MOKIT (conda installation) should work with `libgomp` version 11, which is usually statisfied by environments recently created by conda, regardless of the version of conda, the version of python and the version of Anaconda/miniconda distribution. 
+
+The version of `libgomp` may be different in some rare conditions. Here is one of them: it comes from `conda-forge` instead of `defaults` channel, which is probably caused by installing numpy or other packages from `conda-forge`. One can do `conda list | grep libgomp` to check that. Currently the only way to avoid this error is to avoid installation of `libgomp` from `conda-forge`.
 
 ## A2 Limitations and Suggestions
 ### A2.1 Basic knowledge of multi-reference methods
