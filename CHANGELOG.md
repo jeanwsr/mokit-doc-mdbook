@@ -1,7 +1,7 @@
 # v1.2.6
 * documentation added
   - SA-CASSCF
-  - keywords: block_mpi, MRCISDT_prog
+  - keywords: block_mpi, MRCISDT_prog, LocDocc
   - utilities: lazy import, mirror_wfn, mkl2xxx, fch2tm, molden2fch
   - chap 3.1: quick start with examples
   - chap 2.5: dependency
@@ -10,7 +10,7 @@
   - examples: autosr, eda
   - keywords: GVB_conv, FcGVB
   - utilities: mkl2gjf, qchem, fch2qchem, fch2mkl, bas_fch2py
-  - apis: fchk
+  - APIs: fchk
   - chap 2.2: conda, pre-built and homebrew install
   - index for chap 4.5
 * style

@@ -25,6 +25,8 @@ Generalized Valence Bond theory.
 
 Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read [GVB_prog](./chap4-4.md#4410-gvb_prog) carefully.
 
+If a high-spin GVB computation is performed (it can be the target computation, or an intermediate step in a CASSCF computation) and there are more than 1 singly occupied orbital, the singly occupied orbitals will be localized and saved into `xxx_s.fch`. The corresponding orbital localization method is Pipek-Mezey and it can be controlled by [LocalM](./chap4-4.md#445-localm).
+
 ## 4.3.2 CASSCF
 Complete Active Space Self-consistent Field.
 

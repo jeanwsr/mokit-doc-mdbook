@@ -82,24 +82,11 @@ Currently, there are 7 allowed values for ist:
 The value 0 (default) is recommended, if you do not know which one to choose.
 
 ## 4.4.5 LocalM
-Specify the orbital localization method. Only the Boys (also called Foster-Boys)
-localization and PM (Pipek-Mezey) localization method are supported. The corresponding
-keywords are `LocalM=Boys` and `LocalM=PM`. By default, the PM localization is used.
+Specify the orbital localization method. Only the Boys (also called Foster-Boys) localization and PM (Pipek-Mezey) localization method are supported. The corresponding keywords are `LocalM=Boys` and `LocalM=PM`(default), respectively. Note that there are 3 localization steps controlled by this keyword: (1) the orbital localization during constructing GVB initial guess; (2) the orbital localization of singly occupied orbitals (only if you perform a high-spin GVB calculation, here high-spin means triplet or higher); (3) the orbital localization of doubly occupied orbitals (only if you specify the keyword [LocDocc]()).
 
-Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM
-method tends to keep them separated. These two methods make no difference when the
-target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\)
-bonds). But if you are dealing with multiple \\( \pi \\) bonds or conjugated \\( \pi \\) systems
-like oligoacene (benzene, naphthalene, etc), or if you want the active space to contain
-only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals
-will be affected by the localization method sometimes. If you explicitly specify the
-size of active space which is equal to the \\( \pi \\) space (note that frontier natural
-orbitals are usually \\( \pi \\) orbitals), then using `LocalM=Boys` is OK since Boys localization
-among pure \\( \pi \\) orbitals is safe (no sigma orbital is in the set).
+Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM method tends to keep them separated. These two methods make no difference when the target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\) bonds). But if you are dealing with multiple \\( \pi \\) bonds or conjugated \\( \pi \\) systems like oligoacene (benzene, naphthalene, etc), or if you want the active space to contain only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals will be affected by the localization method sometimes. If you explicitly specify the size of active space which is equal to the \\( \pi \\) space (note that frontier natural orbitals are usually \\( \pi \\) orbitals), then using `LocalM=Boys` is OK since Boys localization among pure \\( \pi \\) orbitals is safe (no sigma orbital is in the set).
 
-For people who are keen on comparing initial guesses generated from different methods/
-algorithms, `LocalM=Boys` is strongly recommended to be taken into consideration,
-to see whether a lower GVB, CASCI or CASSCF energy occurs.
+For people who are keen on comparing initial guesses generated from different methods/algorithms, `LocalM=Boys` is strongly recommended to be taken into consideration, to see whether a lower GVB, CASCI or CASSCF energy occurs.
 
 ## 4.4.6 CIonly
 Skip the CASSCF orbital optimization in the CASPT2 or NEVPT2 job. Obviously, this keyword only applies to CASPT2 or NEVPT2 case. Writing CIonly means a CASCI -> CASPT2 or CASCI -> NEVPT2 job. In fact, the CASSCF orbital optimization is always recommended to be performed, unless it is too time-consuming, or you happen to want this type of result.
@@ -111,28 +98,20 @@ Request a calculation of the analytical nuclear gradient. Currently this keyword
 Note that this keyword do not have any attribute value, i.e. do not write 'force=.True.' but only 'force' in {}. Also keep in mind that force is negative gradient.
 
 ## 4.4.8 Cart
-Request the use of Cartesian type atomic basis functions. The default basis type
-in `automr` (i.e. spherical harmonic functions) will then be disabled. These two
-types of basis functions correspond to '6D 10F' (Cartesian functions) and '5D 7F'
-(spherical harmonic functions) in Gaussian. It is strongly recommended to use spherical
-harmonic functions, especially in all-electron relativistic computations (DKH2,
-X2C, etc).
+Request the use of Cartesian type atomic basis functions. The default basis type in `automr` (i.e. spherical harmonic functions) will then be disabled. These two types of basis functions correspond to '6D 10F' (Cartesian functions) and '5D 7F' (spherical harmonic functions) in Gaussian. It is strongly recommended to use spherical harmonic functions, especially in all-electron relativistic computations (DKH2, X2C, etc).
 
-Note that for computations involving the ORCA program, this keyword cannot be used
-since ORCA only support spherical harmonic functions.
+Note that for computations involving the ORCA program, this keyword cannot be used since ORCA only support spherical harmonic functions.
 
-If you don't know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's
-paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5).
-If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
+If you don't know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5). If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
 
 ## 4.4.9 HF_prog
 Specify the program for performing Hartree-Fock (HF) calculations. Supported programs are Gaussian(default), PySCF, PSI4 and ORCA. If the input molecule is singlet, RHF and broken symmetry UHF (plus wave function stability analysis) will be successively performed. If not singlet, only UHF (plus wave function stability analysis) will be performed.
 
-It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the SCF algorithm in Gaussian is the most effective in almost all cases, among all quantum software packages. The only case when you are recommended to use PySCF/PSI4/ORCA, is that if your studied molecule is large and cannot be further simplified (Nbasis>1500), you can consider turn on the RI approximation of HF to accelerate computations in PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
+It is strongly recommended to use the default HF_prog (i.e. Gaussian), since the SCF algorithm in Gaussian is the most effective/robust in almost all cases, among all quantum software packages. The only case when you are recommended to use PySCF/PSI4/ORCA, is that if your studied molecule is large and cannot be further simplified (Nbasis>1500), you can consider turn on the RI approximation of HF to accelerate computations in PySCF, PSI4 or ORCA. For example, in this special case you are supposed to write
 ```
 mokit{RI,HF_prog=PySCF} # (or PSI4, ORCA if you wish)
 ```
-in .gjf file. For small to medium-size molecules (Nbasis<1000), better not use PySCF/PSI4/ORCA since their SCF is usually slower or harder to converge than that of Gaussian.
+in .gjf file. For people who cannot (or are not allowed to) use Gaussian, `HF_prog=PySCF` is a recommended choice.
 
 ## 4.4.10 GVB_prog
 Specify the GVB program. Supported programs are GAMESS(default), Gaussian and QChem. The second-order SCF (SOSCF) algorithm in GAMESS is used to converge the GVB wave function. The GAMESS version >=2017 is strongly recommended. Older versions of GAMESS may work or may not, since they are not tested by the developers. It is always recommended to use the default program GAMESS, rather than Gaussian (due to poor convergence for transition metal).
@@ -154,6 +133,8 @@ You may need to type `y` after running `./modify_GMS1.sh`. The script will modif
 Besides, for GAMESS earlier than version 2021-R1, it only supports 32 CPU cores. If your machine has more cores (and if you want to use >32 cores), you need to modify the variable MAXCPUS in file gamess/ddi/compddi. See a simple guide in file `src/modify_GMS_beyond32CPU.txt`. Since GAMESS 2021, the MAXCPUS is already set to 128, so modification is not needed.
 
 It is strongly recommended to check whether the GAMESS runs normally after modifying. Such check can be done by running `./runall 01` in gamess/ directory, where `01` means checking the executable `gamess.01.x`. This is same as checking for version `00`. All tests are supposed to be passed successfully.
+
+If a high-spin GVB computation is performed (it can be the target computation, or an intermediate step in a CASSCF computation) and there are more than 1 singly occupied orbital, the singly occupied orbitals will be localized and saved into `xxx_s.fch`. The corresponding orbital localization method is Pipek-Mezey and it can be controlled by [LocalM](#445-localm).
 
 ## 4.4.11 CASCI_prog
 Specify the program for performing the CASCI calculation, e.g. `CASCI_prog=PySCF`. Supported programs are PySCF(default), Molpro, GAMESS, OpenMolcas, Gaussian, ORCA, BDF, PSI4 and Dalton.
@@ -464,4 +445,7 @@ mokit{HF_prog=PySCF,DKH2,HFonly}
 
 ## 4.4.52 block_mpi
 Request the MPI version of Block program to be used in DMRG calculations. By default `automr` would call the OpenMP version of the Block2 program since it is faster than MPI version in a single node. Note that this keyword only changes the parallelism of DMRG-CASCI and/or DMRG-CASSCF calculations, but the NEVPT2 calculation after DMRG always utilize MPI parallelism (which requires `mpi4py` to be intalled). Usually you do not need this keyword unless you want to perform tests or debug.
+
+## 4.4.53 LocDocc
+Request to perform the orbital localization upon the doubly occupied orbitals in a GVB job. This GVB job can be a target calculation, or just an intermediate step in a CASCI/CASSCF job. Note that this localization does not change the electronic energy of GVB/CASCI/CASSCF. It is just of convenient usage for some users, or for convenience of identifying core orbitals. The localization method is PM by default, and it is controlled by [LocalM](#445-localm).
 
