@@ -5,6 +5,7 @@
   - utilities: lazy import, mirror_wfn, mkl2xxx, fch2tm, molden2fch
   - chap 3.1: quick start with examples
   - chap 2.5: dependency
+  - chap 4.5: -sf, -mrsf, -sasf arguments for fch2inp, fch2mkl, fch2qchem
   - chap 4.7: autosr
 * updated
   - examples: autosr, eda
