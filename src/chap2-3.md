@@ -172,5 +172,6 @@ also these installation instructions on GitLab
 [离线安装PySCF-2.x-extensions](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85PySCF-2.x-extensions.md?ref_type=heads) (for pyscf[dmrgscf], etc.)  
 [离线安装OpenMolcas-v22.06](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85OpenMolcas-v22.06.md)  
 [编译MPI并行版OpenMolcas](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%BC%96%E8%AF%91MPI%E5%B9%B6%E8%A1%8C%E7%89%88OpenMolcas.md)  
-[block2的编译和安装](https://gitlab.com/jxzou/qcinstall/-/blob/main/block2%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85.md)
+[block2的编译和安装](https://gitlab.com/jxzou/qcinstall/-/blob/main/block2%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85.md)  
+[离线安装量子化学软件Dalton](https://gitlab.com/jxzou/qcinstall/-/blob/main/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E9%87%8F%E5%AD%90%E5%8C%96%E5%AD%A6%E8%BD%AF%E4%BB%B6Dalton.md)
 

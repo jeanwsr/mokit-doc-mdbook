@@ -293,10 +293,10 @@ This is used for transferring GVB orbitals for spin singlet molecule. The order 
 (3) `fch2inp a.fch -gvb 5 -open 1`  
 This is used for transferring GVB orbitals for non-singlet molecule. In this way, you tell the utility fch2inp the number of GVB pairs and singly-occupied orbitals, so that fch2inp can adjust the order of MOs.
 
-(4) `fch2inp high_spin.fch -sf`
+(4) `fch2inp high_spin.fch -sf`  
 This is used to transfer RODFT/UDFT orbitals for the subsequent SF-TDDFT calculation in GAMESS. This spin multiplicity in high_spin.fch is supposed to be >=3, i.e. triplet or higher.
 
-(5) `fch2inp triplet.fch -mrsf`
+(5) `fch2inp triplet.fch -mrsf`  
 This is used to transfer RODFT orbitals for the subsequent MRSF-TDDFT calculation in GAMESS. This spin multiplicity in triplet.fch is supposed to be 3.
 
 This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. To transfer MOs from GAMESS back to Gaussian, see [dat2fch](#4515-dat2fch).
@@ -391,7 +391,7 @@ This is used for transferring R(O)HF, UHF or CASSCF orbitals.
 (2) `fch2qchem h2o.fch -gvb 2`  
 This is used for transferring GVB orbitals. The orbitals in h2o.fch must be ordered in Gaussian GVB preference (bonding1, bonding2, anti-bonding2, anti-bonding1). And `-gvb 2` tells fch2qchem to write GVB-PP related keywords into the .in file.
 
-(3) `fch2qchem high_spin.fch -sasf`
+(3) `fch2qchem high_spin.fch -sasf`  
 This is used to transfer RODFT orbitals for the subsequent SA-SF-DFT calculation in Q-Chem. The spin multiplicity in high_spin.fch is supposed to be >=3, i.e. triplet or higher.
 
 After running any of these commands, a Q-Chem input file `h2o.in` and a scratch directory `h2o` will be generated. The orbital file(s) is put in `h2o/`. Run
