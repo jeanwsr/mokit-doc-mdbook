@@ -27,7 +27,7 @@ H(fragment=2)     0.95548613    1.60139824   -0.32993853
 
 This is clearly a Gaussian .gjf file, and it can be opened by GaussView to show fragments:
 
-![Fragments visualized by GaussView](images/h2o_nh3.png)
+<img src="images/h2o_nh3.png" width="65%" height="65%" />
 
 (click `Tools`, `Atom Groups` in the menu of GaussView)
 

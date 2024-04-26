@@ -48,11 +48,9 @@ file using this keyword. This keyword is usually used along with another keyword
 ## 4.4.2 readuhf
 Read UHF orbitals from a specified .fch(k) file. `automr` will firstly check the difference between alpha and beta MOs. If the difference is tiny, the wave function in .fch file will be identified as a RHF one and will call utility fch_u2r to generate a RHF-type .fch file (in which all beta information is deleted). Otherwise (i.e. truly UHF), `automr` will generate UHF natural orbitals (UNO) using input UHF orbitals. It is strongly recommended to check the stability of UHF wave function (using keyword 'stable=opt' in Gaussian). An instable or not-the-lowest UHF solution sometimes leads to improper GVB or CASSCF results.
 
-It is strongly recommended not to use UDFT orbitals.
+It is not recommended to provide UDFT orbitals.
 
-This keyword is usually used along with another keyword ist=1 or 2 (see [ist](#444-ist)).
-Note that do not provide a UNO .fch file with this keyword. If you want to use any
-type of NOs as the initial guess, see `readno` in the following section.
+This keyword is usually used along with another keyword ist=1 or 2 (see [ist](#444-ist)). Note that do not provide a UNO .fch file with this keyword. If you want to use any type of NOs as the initial guess, see `readno` in the following section.
 
 ## 4.4.3 readno
 Read natural orbital occupation numbers (NOON) and natural orbitals (NO) from a specified .fch file. In this case, you must ensure that the 'Alpha Orbital Energies' section in the .fch file contains occupation numbers, not energy levels or something else, since the size of the active space will be determined according to the (threshold of the) occupation numbers.
@@ -61,12 +59,7 @@ With this keyword, you may try different NOs as the initial guess, like MP2 NOs,
 This keyword is usually used along with another keyword ist=5 (see [ist](#444-ist)).
 
 ## 4.4.4 ist
-Request the use of the *i*-th strategy. Default is 0. This means: (1) if the spin
-of the target molecule is singlet, MOKIT will call the Gaussian software to perform
-RHF and UHF computations, then determine whether to change `ist` to 1 or 3. If the
-E<sub>UHF</sub> = E<sub>RHF</sub>, ist will be changed to 3. If E<sub>UHF</sub> <
-E<sub>RHF</sub>, ist will become 1. (2) if not singlet, ist will be changed to 1
-immediately.
+Request the use of the *i*-th strategy. Default is 0. This means: (1) if the spin of the target molecule is singlet, MOKIT will call the Gaussian software to perform RHF and UHF computations, then determine whether to change `ist` to 1 or 3. If the E<sub>UHF</sub> = E<sub>RHF</sub>, ist will be changed to 3. If E<sub>UHF</sub> <E<sub>RHF</sub>, ist will become 1. (2) if not singlet, ist will be changed to 1 immediately.
 
 For simple organic molecules which have multireference characters (like diradicals), the UHF performed by MOKIT (calling Gaussian) can always find the lowest (and stable) UHF solution. But for complicated systems like binuclear transition metal complex, there often exist multiple UHF solutions. And the UHF solution found by MOKIT is not necessarily the lowest one. In this case you are recommended to do UHF computations by yourself and use ist=1 to read in the Gaussian .fch file. See a practical guide for advanced UHF computations on http://gaussian.com/afc. If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/82).
 
@@ -82,7 +75,9 @@ Currently, there are 7 allowed values for ist:
 The value 0 (default) is recommended, if you do not know which one to choose.
 
 ## 4.4.5 LocalM
-Specify the orbital localization method. Only the Boys (also called Foster-Boys) localization and PM (Pipek-Mezey) localization method are supported. The corresponding keywords are `LocalM=Boys` and `LocalM=PM`(default), respectively. Note that there are 3 localization steps controlled by this keyword: (1) the orbital localization during constructing GVB initial guess; (2) the orbital localization of singly occupied orbitals (only if you perform a high-spin GVB calculation, here high-spin means triplet or higher); (3) the orbital localization of doubly occupied orbitals (only if you specify the keyword [LocDocc]()).
+Specify the orbital localization method. Only the Boys (also called Foster-Boys) localization and PM (Pipek-Mezey) localization method are supported. The corresponding keywords are `LocalM=Boys` and `LocalM=PM`(default), respectively.
+
+Note that there are 3 localization steps controlled by this keyword: (1) the orbital localization during constructing GVB initial guess; (2) the orbital localization of singly occupied orbitals (only if you perform a high-spin GVB calculation, here high-spin means triplet or higher); (3) the orbital localization of doubly occupied orbitals (only if you specify the keyword [LocDocc](#4453-locdocc)).
 
 Note: the Boys method will mix \\( \sigma \\) and \\( \pi \\) orbitals, while the PM method tends to keep them separated. These two methods make no difference when the target molecule contains only \\( \sigma \\) bonds (and possibly a few isolated \\( \pi \\) bonds). But if you are dealing with multiple \\( \pi \\) bonds or conjugated \\( \pi \\) systems like oligoacene (benzene, naphthalene, etc), or if you want the active space to contain only \\( \pi \\) orbitals, better use the PM method. The GVB and CASSCF optimized orbitals will be affected by the localization method sometimes. If you explicitly specify the size of active space which is equal to the \\( \pi \\) space (note that frontier natural orbitals are usually \\( \pi \\) orbitals), then using `LocalM=Boys` is OK since Boys localization among pure \\( \pi \\) orbitals is safe (no sigma orbital is in the set).
 
@@ -95,14 +90,14 @@ Note: if you simply need a CASCI computation, do not use CIonly in a CASSCF job,
 
 ## 4.4.7 Force
 Request a calculation of the analytical nuclear gradient. Currently this keyword only applies to CASSCF. Geometry optimization is currently not supported, but you can use the generated files to perform optimization using corresponding software. Numerical gradient is not supported.
-Note that this keyword do not have any attribute value, i.e. do not write 'force=.True.' but only 'force' in {}. Also keep in mind that force is negative gradient.
+Note that this keyword do not have any attribute value, i.e. do not write 'force=.True.' but only `force` in {}. Also keep in mind that force is negative gradient.
 
 ## 4.4.8 Cart
 Request the use of Cartesian type atomic basis functions. The default basis type in `automr` (i.e. spherical harmonic functions) will then be disabled. These two types of basis functions correspond to '6D 10F' (Cartesian functions) and '5D 7F' (spherical harmonic functions) in Gaussian. It is strongly recommended to use spherical harmonic functions, especially in all-electron relativistic computations (DKH2, X2C, etc).
 
 Note that for computations involving the ORCA program, this keyword cannot be used since ORCA only support spherical harmonic functions.
 
-If you don't know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5). If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
+If you do not know the meaning of 5D or 6D, you are referred to Schlegel and Frisch's paper (DOI: 10.1002/qua.560540202), and a good explanation from [Chemissian](http://www.chemissian.com/ch5). If you can read Chinese, you are recommended to read [Sobereva's blog](http://sobereva.com/51).
 
 ## 4.4.9 HF_prog
 Specify the program for performing Hartree-Fock (HF) calculations. Supported programs are Gaussian(default), PySCF, PSI4 and ORCA. If the input molecule is singlet, RHF and broken symmetry UHF (plus wave function stability analysis) will be successively performed. If not singlet, only UHF (plus wave function stability analysis) will be performed.

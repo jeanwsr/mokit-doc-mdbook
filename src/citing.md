@@ -42,3 +42,5 @@
 
 21. Theoretical Study on Ethylamine Dissociation Reactions Using VRC-VTST and SS-QRRK Methods. ***J Phys Chem A*** DOI: [10.1021/acs.jpca.3c08373](https://doi.org/10.1021/acs.jpca.3c08373)
 
+22. XMECP: Reaching State-of-the-Art MECP Optimization in Multiscale Complex Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.4c00033](https://doi.org/10.1021/acs.jctc.4c00033)
+
