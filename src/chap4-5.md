@@ -184,23 +184,28 @@ This is used for transferring CASCI/CASSCF natural orbitals and corresponding na
 NOTE: `dal2fch` cannot generate a fch file from scratch, and a fch file must be provided and the MOs in it will be replaced. You should firstly use Gaussian to generate a .fch file (with keywords 'nosymm int=nobasistransform'), then generate the `*.dal` and `*.mol` files using `fch2dal`. After Dalton computations finished, you can transfer MOs from Dalton back to Gaussian using `dal2fch`. This procedure seems a little bit tedious, but it ensures an exact reproduce of energy.
 
 ## 4.5.15 dat2fch
-Transfer MOs from GAMESS (.inp/.dat file) to Gaussian .fch file. 4 examples are shown and explained below
+Transfer MOs from GAMESS/Firefly (.inp/.dat file) to Gaussian .fch file. Five examples are shown and explained below
 
-(1) `dat2fch a.dat a.fch`  
-This is used for transferring R(O)HF, UHF or CASSCF orbitals.
+(1) `dat2fch a.dat`  
+This is used for transferring R(O)HF, UHF or CASSCF orbitals. If the file `a.fch` exists, it will be used and MOs are written into that file. If `a.fch` does not exist, the utility `dat2fch` would try to create one such file from scratch. And this requires that the 1st line contains a `$CONTRL` section in file `a.dat`, so that charge and spin multiplicity can be read, e.g.
+```
+ $CONTRL SCFTYP=ROHF RUNTYP=ENERGY ICHARG=0 MULT=2 ISPHER=1 $END
+```
+Usually we have the corresponding .fch file in hand. Creating a .fch file from scratch is only recommended for users who cannot use the Gaussian software, and he/she may have performed the calculation using user-defined basis set in GAMESS/Firefly.
 
-(2) `dat2fch a.dat a.fch -gvb 5`  
+(2) `dat2fch a.dat b.fch`  
+This is the same as (1), but transferring MOs to the specified file `b.fch`.
+
+(3) `dat2fch a.dat a.fch -gvb 5`  
 This is used for transferring GVB orbitals for spin singlet molecule. The order of GVB orbitals is different between Gaussian and GAMESS. Thus you must specify `-gvb [npair]` to tell the utility the number of GVB pairs, so that dat2fch can adjust the order of MOs.
 
-(3) `dat2fch a.dat a.fch -gvb 5 -open 1`  
+(4) `dat2fch a.dat a.fch -gvb 5 -open 1`  
 This is used for transferring GVB orbitals for non-singlet molecule. In this way, you tell the utility the number of GVB pairs and singly-occupied orbitals, so that dat2fch can adjust the order of MOs.
 
-(4) `dat2fch a.dat a.fch -no 5 10`  
-This is used for transferring natural orbitals (NOs) of CASCI/CASSCF. In this way, you tell the utility the beginning index and final index of NOs in .fch file, so that dat2fch can work correctly.
+(5) `dat2fch a.dat a.fch -no 10`  
+This is used for transferring natural orbitals (NOs) of CASCI/CASSCF. In this way, you tell `dat2fch` the number of NOs such that it would work correctly.
 
-NOTE: `dat2fch` cannot generate a fch file from scratch, and a fch file must be provided and the MOs in it will be replaced. You should firstly use Gaussian to generate a .fch file (with keywords 'nosymm int=nobasistransform'), then generate the `*.inp` file using `fch2inp`. After GAMESS computations finished, you can transfer MOs from GAMESS back to Gaussian using `dat2fch`. This procedure seems a little bit tedious, but it ensures an exact reproduce of energy.
-
-This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. To transfer MOs from Gaussian to GAMESS, see [fch2inp](#4522-fch2inp).
+This utility supports two types of basis functions: (1) pure spherical harmonic functions; (2) pure Cartesian functions. But for creating a .fch file from scratch, only the former is supported currently. To transfer MOs from Gaussian to GAMESS/Firefly, see [fch2inp](#4522-fch2inp).
 
 ## 4.5.16 extract_noon2fch
 Extract natural orbital occupation numbers (NOONs) from the following types of files  

@@ -269,8 +269,8 @@ The \\( y_i = n_{\text{LUNO}+i} \\) formula is adopted for these general cases.
 
 There are also modules which calculate the number of unpaired electrons of GVB by reading information from GAMESS .dat/.gms file:
 ```python
-from mokit.lib.wfn_analysis import calc_unpaired_from_gms_dat
-calc_unpaired_from_gms_dat(datname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch',mult=1)
+from mokit.lib.wfn_analysis import calc_unpaired_from_dat
+calc_unpaired_from_dat(datname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4_s.fch',mult=1)
 ```
 
 It requires the user to input the spin multiplicity since there is no spin information in .dat file. Or you can use
