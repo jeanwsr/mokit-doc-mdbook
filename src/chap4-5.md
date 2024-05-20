@@ -343,7 +343,7 @@ This is used for transferring R(O)HF/UHF/CASSCF orbitals. Two files will be gene
 fch2mkl h2o.fch -dft wB97M-V
 fch2mkl h2o.fch -dft 'b3lyp d3bj'
 ```
-If h2o.fch includes a DFT wave function, you can use the commands shown above to transfer orbitals. The functional name is supposed to be provided by the user. If there is also dispersion correction to be added, they need to written together in single quotes '' or double quotation marks "".
+If h2o.fch includes a DFT wave function, you can use the commands shown above to transfer orbitals. The density functional name is supposed to be provided by the user. If there is also dispersion correction to be added, they need to written together in single quotes '' or double quotation marks "".
 
 **(2)** Double hybrid functional calculations  
 Assuming you want firstly to perform the SCF part of the double hybrid functional PWPB95 in Gaussian using def2TZVPP, the Gaussian keywords are
@@ -366,17 +366,22 @@ fch2mkl O2_UDFT.fch -sf
 Theoretically, the SF-TDDFT method can be either based on ROHF/ROKS, or based on UHF/UDFT reference. But ORCA only accepts the UHF/UDFT reference. So please provide a UHF/UDFT .fch file.
 
 **(4)** DLPNO-CCSD(T) calculations  
-Assuming you have perfored an RHF/cc-pVTZ job for H<sub>2</sub>O in Gaussian, and next you want to perform a DLPNO-CCSD(T)/cc-pVTZ computation in ORCA, then you can open the file `h2o_o.inp` and modify the keywords as
+Assuming you have perfored an RHF/cc-pVTZ job for H<sub>2</sub>O in Gaussian, and next you want to perform a DLPNO-CCSD(T)/cc-pVTZ computation in ORCA, then you can open the generated file `h2o_o.inp` and modify the keywords as
 ```
 ! RHF TightSCF DLPNO-CCSD(T) TightPNO RIJK cc-pVTZ/JK cc-pVTZ/C
 ```
-Again there is no need to write the orbital basis set cc-pVTZ since the detailed basis set data was already written in the file `h2o_o.inp`. Of course, you need to modify the parallel and memory settings to suit your computer.
+The RHF calculation would be accelerated by the RIJK approximation. If you prefer RIJCOSX than RIJK, you can modify keywords as
+```
+! RHF TightSCF DLPNO-CCSD(T) TightPNO RIJCOSX defgrid3 cc-pVTZ/C
+```
+
+Again, there is no need to write the orbital basis set `cc-pVTZ` since the detailed basis set data was already written in the file `h2o_o.inp`. Of course, you need to modify the parallel and memory settings to suit your computer. If you want more accurate results, you can modify `DLPNO-CCSD(T)` to `DLPNO-CCSD(T1)`.
 
 To transfer MOs from ORCA to Gaussian, see [mkl2fch](#4535-mkl2fch) and [mkl2gjf](#4536-mkl2gjf). To transfer MOs from ORCA to other software packages, you can use `mkl2amo`,`mkl2cfour`,`mkl2com`,`mkl2dal`,`mkl2inp`,`mkl2inporb`,`mkl2psi`,`mkl2py`,`mkl2qchem`.
 
-**Note 1**: Assuming your ORCA input file is `h2o_o.inp`, you need to run `orca_2mkl h2o_o -gbw` to generate the ORCA `h2o_o.gbw` file since ORCA cannot read `h2o_o.mkl` file directly.
+**Note 1**: Assuming your ORCA input file is `h2o_o.inp`, you need to run `orca_2mkl h2o_o -gbw` to generate the `h2o_o.gbw` file since ORCA cannot read `h2o_o.mkl` file directly.
 
-**Note 2**: For HF calculations, the default keywords in .inp file does not contain any RI approximations, and the `VeryTightSCF` is written (the author does this to ensure a highly accurate reproduction of energy in ORCA). You can modify keywords as you wish, but note that an accurate reproduction of energy may not be assured.
+**Note 2**: When calculating relative energies (i.e. the energy barrier), the computation results must share the same theory level. For example, the RIJCOSX approximation is used in all files.
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .inp or .mkl file, either. To add background charges, you need to use the utility [add_bgcharge_to_inp](#451-add_bgcharge_to_inp).
 

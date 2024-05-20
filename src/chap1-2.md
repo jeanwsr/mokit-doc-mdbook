@@ -27,5 +27,5 @@ Besides, you need to CITE all quantum chemistry software packages called in your
 
 Therefore, in this case you should also cite corresponding references of [Gaussian](http://gaussian.com/citation), [GAMESS](https://www.msg.chem.iastate.edu/gamess/citation.html) and [PySCF](https://pyscf.org/about.html#how-to-cite), as well as possible references of electronic-structure methods and basis sets.
 
-You can use MOKIT to perform computations for other people. But remember to remind him/her that MOKIT should be properly cited.
+**You can use MOKIT to perform computations for other people. But remember to remind him/her that MOKIT should be properly cited in the mainbody of the paper. And of course, all quantum chemistry software packages used in the calculations should be properly cited （您可以使用MOKIT为他人做计算（包括代算），但务必提醒他/她在发表文章时在正文中恰当引用MOKIT。同时，计算中所用到的量子化学软件也应当在发表的文章中恰当地引用之）.**
 
