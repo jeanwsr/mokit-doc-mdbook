@@ -22,14 +22,14 @@ Like [Section 2.3](./chap2-3.md), there is still something to do after "installa
 You can choose option 1 or 2 below. After mokit is successfully installed, if you want GAMESS to be called by `automr`, you need to [install GAMESS properly](./chap4-4.md#4410-gvb_prog) and write related environment variables.
 
 ### Option 1: Install from conda (for Linux only)
-This is the easiest way, but network is required to auto-download the requirements
-(like Intel MKL). And, creating a new environment before installing is highly
-recommended, to avoid changing your base environment.
+This is the easiest way, but network is required to auto-download the requirements (like Intel MKL). And, creating a new environment before installing is highly recommended, to avoid changing your base environment.
 ```
 conda create -n mokit-py39 python=3.9 # 3.7-3.11 are all available
 conda activate mokit-py39
 conda install mokit -c mokit
 ```
+If you have not installed PySCF and you want to install it now, you can run `pip install pyscf` in this virtual environment. Each time when you login onto the machine, you need to activate the virtual environment by `conda activate mokit-py39` and then you can use MOKIT and PySCF.
+
 If you have no access to network, but still do not want to compile MOKIT manually, you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
 
 #### Update MOKIT with conda
@@ -113,8 +113,7 @@ brew upgrade --fetch-HEAD mokit
 
 ## 2.2.2 Pre-built Linux Executables and Libraries
 
-Unlike the conda install approach, using pre-built MOKIT in this subsection do not require network. 
-If you want full functionality of MOKIT, you still need to have necessary dependencies: Python3 environment and NumPy, which can be achieved by anaconda/miniconda (Read [here](#how-to-choose-anaconda-version-if-installing-offline) for installing anaconda offline). If you only want part of MOKIT, especially some certain binary utilities, see [Section 2.2.3](#223-only-want-frag_guess_wfn) for a simpler instruction.
+Unlike the conda install approach, using pre-built MOKIT in this subsection do not require network. If you want full functionality of MOKIT, you still need to have necessary dependencies: Python3 environment and NumPy, which can be achieved by anaconda/miniconda (Read [here](#how-to-choose-anaconda-version-if-installing-offline) for installing anaconda offline). If you only want part of MOKIT, especially some certain binary utilities, see [Section 2.2.3](#223-only-want-frag_guess_wfn) for a simpler instruction.
 
 ### Download
 
