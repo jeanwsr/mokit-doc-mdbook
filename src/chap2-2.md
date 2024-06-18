@@ -16,7 +16,7 @@ This section goes over several installing approaches that, unlike [Section 2.3](
 Like [Section 2.3](./chap2-3.md), there is still something to do after "installation".
 
 1. Setup the environment variables of MOKIT itself. Except conda users, all other users need to set that, which is mentioned at the end of each approaches.
-2. Setup the environment variables of dependencies, like Gaussian, GAMESS, PySCF, etc. Please read [Section 2.5](./chap2-5.md) to determine which dependencies are necessary for you and read [Section 2.3.3](./chap2-3.md#233-environment-variables) to set up them.
+2. Setup the environment variables of dependencies, like Gaussian, GAMESS, PySCF, etc. Please read [Section 2.5](./chap2-5.md) to determine which dependencies are necessary for you and read [Section 2.3.4](./chap2-3.md#234-environment-variables) to set up them.
 
 ## 2.2.1 Online Installation
 You can choose option 1 or 2 below. After mokit is successfully installed, if you want GAMESS to be called by `automr`, you need to [install GAMESS properly](./chap4-4.md#4410-gvb_prog) and write related environment variables.

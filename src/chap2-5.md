@@ -30,12 +30,16 @@ This does not require Gaussian installed on your computer.
 
 ### Setup Gaussian and PySCF
 
-Usually there are no special requirements on setup. Read [Section 2.3.6](./chap2-3.md#236-notes-on-quantum-chemistry-packages) and [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq) if you have trouble calling them with MOKIT.
+Usually there are no special requirements on setup. Read [Section 2.3.7](./chap2-3.md#237-notes-on-quantum-chemistry-packages) and [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq) if you have trouble installing them or calling them with MOKIT.
 
+
+If you have not installed PySCF, the recommended way is to run `pip install pyscf` in the environment in which MOKIT is installed.
 
 ### Modify and Setup GAMESS
 
 Note that the original GAMESS code can only deal with GVB <=12 pairs. But nowadays we can do hundreds of pairs. It is required by MOKIT to modify GAMESS to go beyond 12 pairs. See instructions in [Section 4.4.10](./chap4-4.md#4410-gvb_prog).
+
+Also, you need to set the environment variables as mentioned in [Section 2.3.4](./chap2-3.md#234-environment-variables).
 
 ## Additional requirements for using specific methods
 
@@ -57,6 +61,7 @@ Here we provide a list for common used prog keywords and corresponding dependenc
 
 ## Setups for calling other QC programs
 
-See [Section 2.3.3](./chap2-3.md#233-environment-variables) and [Section 2.3.6](./chap2-3.md#236-notes-on-quantum-chemistry-packages).
+See [Section 2.3.4](./chap2-3.md#234-environment-variables) for setting environment variables for those programs. 
+See [Section 2.3.7](./chap2-3.md#237-notes-on-quantum-chemistry-packages) for installation tips and instructions.
 
 

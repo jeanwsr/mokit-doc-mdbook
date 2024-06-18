@@ -43,9 +43,9 @@ Example 1 (during compilation): error `ifort: command not found` means there is 
 
 Example 2 (during compilation): error `-bash: f2py: command not found` means there is no f2py on your computer, see [Section 2.3.1 Prerequisite](./chap2-3.md#231-prerequisite) for details.
 
-Example 3 (during execution): assuming you've compiled MOKIT successfully, but got the `-bash: automr: command not found` error. Then you should check the MOKIT paths in your ~/.bashrc. See [Section 2.3.3 Environment variables](./chap2-3.md#233-environment-variables) for details.
+Example 3 (during execution): assuming you've compiled MOKIT successfully, but got the `-bash: automr: command not found` error. Then you should check the MOKIT paths in your ~/.bashrc. See [Section 2.3.4 Environment variables](./chap2-3.md#234-environment-variables) for details.
 
-Example 4: errors like `/usr/bin/ld: cannot find -lmkl_rt`, `ld: cannot find -lmkl_intel_lp64` (during compilation) or `error while loading shared libraries: libxxx.so: cannot open ...` (during execution) have two possible reasons: (1) there is no MKL installed on your computer; (2) there is MKL on your node but you did not correctly (or you forgot to) write environment variables of MKL. See [Section 2.3.1 Prerequisite](./chap2-3.md#231-prerequisite) and [Section 2.3.3 Environment variables](./chap2-3.md#233-environment-variables) for details.
+Example 4: errors like `/usr/bin/ld: cannot find -lmkl_rt`, `ld: cannot find -lmkl_intel_lp64` (during compilation) or `error while loading shared libraries: libxxx.so: cannot open ...` (during execution) have two possible reasons: (1) there is no MKL installed on your computer; (2) there is MKL on your node but you did not correctly (or you forgot to) write environment variables of MKL. See [Section 2.3.1 Prerequisite](./chap2-3.md#231-prerequisite) and [Section 2.3.4 Environment variables](./chap2-3.md#234-environment-variables) for details.
 
 
 ### Q2: pre-compiled version
