@@ -117,10 +117,8 @@ Unlike the conda install approach, using pre-built MOKIT in this subsection do n
 
 ### Download
 
-[centos7_conda_py37](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py37)  
 [centos7_conda_py38](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py38)  
 [centos7_conda_py39](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=centos7_conda_py39)   
-[py38_gcc8](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py38_gcc8)  
 [py39_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py39_gcc10)  
 [py310_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py310_gcc10)
 
@@ -151,6 +149,7 @@ If your linux kernel is roughly as old as Centos7's, choose the one started with
 
 | Artifacts | Python version | Compatible Anaconda version | Compatible Miniconda version | NumPy version |
 | :---: | :---: | :---: | :---: | :---: |
+| centos7_conda_py38 | 3.8 | 2021.05 | py38_4.10.3 | 1.20 |
 | centos7_conda_py39 | 3.9 | 2022.10 | py39_22.11.1 | 1.21 |
 | py39_gcc10 | 3.9 | 2022.10 | py39_22.11.1 | 1.21 |
 | py310_gcc10 | 3.10 | 2023.03 | py310_23.3.1 | 1.23 |
@@ -163,10 +162,8 @@ If your linux kernel is roughly as old as Centos7's, choose the one started with
 
 | Artifacts | Compatible OS | Maybe Compatible | Python version | GCC version | NumPy version |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| centos7_conda_py37 | Centos 7 | | 3.7 | 4.8.5 | 1.21 |
-| centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.21 |
+| centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.20 |
 | centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
-| py38_gcc8 | Debian 10, SUSE 15, Ubuntu 20.04 | Centos 8 | 3.8 | 8.3 | 1.21 |
 | py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | 1.21 |
 | py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | 1.23 |
 
