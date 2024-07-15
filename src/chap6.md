@@ -126,10 +126,20 @@ Simple modifications can be done on the GitLab website. Clicking the `Edit` butt
 
 You should [learn some basic Markdown](https://rust-lang.github.io/mdBook/format/markdown.html) to modify the documentation.
 
-However, mdBook's [math support](https://rust-lang.github.io/mdBook/format/mathjax.html) is a little different from common Markdown syntax. 
+#### Math
+mdBook's [math support](https://rust-lang.github.io/mdBook/format/mathjax.html) is a little different from common Markdown syntax. 
 The inline math should be written as `\\( \\)`.
 
-**Flowchart**
+#### Blocks for note/warning
+We can use [admonish](https://github.com/tommilligan/mdbook-admonish)'s note block. It looks like
+
+```admonish note
+Some note.
+```
+
+The type of blocks can be `note`, `tip`, `example`, `warning`, `danger`, etc. See [admonish doc](https://tommilligan.github.io/mdbook-admonish/overview.html) for more information.
+
+#### Flowchart
 
 We now have a flowchart example at the beginning of [Section 4.5](./chap4-5.md), which is an [AntV G6](https://g6.antv.antgroup.com/manual/introduction) graph embedded in an iframe. The G6 graph can be configured in `chap4-5_head.html` and `data.json`.
 
