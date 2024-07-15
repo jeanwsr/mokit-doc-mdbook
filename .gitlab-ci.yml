@@ -3,13 +3,14 @@ variables:
 
 pages:
   stage: deploy
-  image: ubuntu:22.04
+  image: rust:1
   script:
-  - tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
-  - tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
-  - chown root:root mdbook*
-  - ls -l
-  - ./mdbook build
+  - cargo install mdbook
+  #- tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
+  #- tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
+  #- chown root:root mdbook*
+  #- ls -l
+  - mdbook build
   artifacts:
     paths:
     - public

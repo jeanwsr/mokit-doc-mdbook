@@ -21,9 +21,9 @@ git-repository-icon = "fa-gitlab"
 
 #[output.markdown]
 
-[preprocessor.toc]
-command = "./mdbook-toc"
-renderer = ["html"]
+#[preprocessor.toc]
+#command = "./mdbook-toc"
+#renderer = ["html"]
 
 #[preprocessor.mermaid]
 #command = "./mdbook-mermaid"
