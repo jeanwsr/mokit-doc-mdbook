@@ -5,11 +5,12 @@ pages:
   stage: deploy
   image: rust:1
   script:
-  - cargo install mdbook
+  - cargo install mdbook mdbook-admonish
   #- tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
   #- tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
   #- chown root:root mdbook*
   #- ls -l
+  - mdbook-admonish install .
   - mdbook build
   artifacts:
     paths:

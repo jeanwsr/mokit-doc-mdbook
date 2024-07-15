@@ -12,12 +12,17 @@ build-dir = "public"
 #additional-css = ["./assets/custom.css"]
 additional-css = [
   "theme/light.css",
-  "theme/dark.css",
+  "theme/dark.css", 
+  "./mdbook-admonish.css",
 ]
 mathjax-support = true
 git-repository-url = "https://gitlab.com/jeanwsr/mokit-doc-mdbook"
 git-repository-icon = "fa-gitlab"
 #additional-js = ["mermaid.min.js", "mermaid-init.js"]
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
 
 #[output.markdown]
 
