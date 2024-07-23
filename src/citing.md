@@ -44,3 +44,5 @@
 
 22. XMECP: Reaching State-of-the-Art MECP Optimization in Multiscale Complex Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.4c00033](https://doi.org/10.1021/acs.jctc.4c00033)
 
+23. Accurate *ab initio* based potential energy surface and kinetics of the Cl + NH3 → HCl + NH2 reaction. ***J Chem Phys*** DOI: [10.1063/5.0216562](https://doi.org/10.1063/5.0216562)
+
