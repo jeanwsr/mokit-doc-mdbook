@@ -1,10 +1,11 @@
 # mdbook Pages for MOKIT Doc
 
-## Usage for developers
+## Build and preview the documentation locally
 
-Install `mdbook` and `mdbook-admonish` first. You can use `cargo install mdbook mdbook-admonish` or go to the [mdbook release](https://github.com/rust-lang/mdBook/releases) and [mdbook-admonish release]() to download the executables. Then,
+Install `mdbook` and `mdbook-admonish` first. You can use `cargo install mdbook mdbook-admonish` or go to the [mdbook release](https://github.com/rust-lang/mdBook/releases) and [mdbook-admonish release](https://github.com/tommilligan/mdbook-admonish/releases) to download the executables. Then,
 ```
 # modify md in src
+mdbook-admonish install .
 mdbook build
 mdbook serve
 # open your browser to visit http://localhost:3000
