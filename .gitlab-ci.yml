@@ -8,7 +8,7 @@ pages:
   - >
     curl -L --proto '=https' --tlsv1.2 
     -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-  - cargo binstall mdbook mdbook-admonish
+  - cargo binstall -y mdbook mdbook-admonish
   #- tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
   #- tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
   #- chown root:root mdbook*
