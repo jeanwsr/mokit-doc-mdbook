@@ -5,7 +5,10 @@ pages:
   stage: deploy
   image: rust:1
   script:
-  - cargo install mdbook mdbook-admonish
+  - >
+    curl -L --proto '=https' --tlsv1.2 
+    -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+  - cargo binstall mdbook mdbook-admonish
   #- tar xvzf mdbook-v*-x86_64-unknown-linux-gnu.tar.gz
   #- tar xvzf mdbook-toc-*-x86_64-unknown-linux-gnu.tar.gz
   #- chown root:root mdbook*
