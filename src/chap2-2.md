@@ -22,15 +22,27 @@ Like [Section 2.3](./chap2-3.md), there is still something to do after "installa
 You can choose option 1 or 2 below. After mokit is successfully installed, if you want GAMESS to be called by `automr`, you need to [install GAMESS properly](./chap4-4.md#4410-gvb_prog) and write related environment variables.
 
 ### Option 1: Install from conda (for Linux only)
-This is the easiest way, but network is required to auto-download the requirements (like Intel MKL). And, creating a new environment before installing is highly recommended, to avoid changing your base environment.
+This is the easiest way, but network is required to auto-download the requirements (like Intel MKL). 
+
+If you have no access to network, but still do not want to compile MOKIT manually, you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
+
+#### use MOKIT with default channel
+
+Creating a new environment before installing is highly recommended, to avoid changing your base environment.
 ```
 conda create -n mokit-py39 python=3.9 # 3.7-3.11 are all available
 conda activate mokit-py39
 conda install mokit -c mokit
 ```
-If you have not installed PySCF and you want to install it now, you can run `pip install pyscf` in this virtual environment. Each time when you login onto the machine, you need to activate the virtual environment by `conda activate mokit-py39` and then you can use MOKIT and PySCF.
 
-If you have no access to network, but still do not want to compile MOKIT manually, you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
+Each time when you login onto the machine, you need to activate the virtual environment by `conda activate mokit-py39` and then you can use MOKIT.
+
+If you have not installed PySCF and you want to install it now, you can choose to
+
+(1) run `pip install pyscf` in this virtual environment. 
+
+(2) follow the [instruction below](#use-mokit-with-conda-forge-channel) to install pyscf and MOKIT with conda-forge channel. 
+
 
 #### Update MOKIT with conda
 
@@ -38,6 +50,31 @@ Usually `conda update mokit -c mokit` works. Sometimes it may fail to find the l
 ```
 conda uninstall mokit mkl
 conda install mokit -c mokit
+```
+
+#### use MOKIT with conda-forge channel
+
+The MOKIT installed following instructions above, which is from `mokit` channel by default, is hardly compatible with conda-forge environment. If you have to enable conda-forge, an alternative way is to install from `mokit/label/cf`
+
+If you have enabled conda-forge (by `conda config --add channels conda-forge` or modifying condarc), you can directly do
+```
+conda install mokit -c mokit/label/cf
+```
+If not, it's recommended to create an environment first before installing.
+```
+conda create -n mokit-cf python=3.9 -c conda-forge
+conda activate mokit-cf
+conda install mokit -c mokit/label/cf -c conda-forge
+```
+
+When pyscf is also needed, it can be installed in the conda-forge channel at the same time
+```
+conda install mokit pyscf -c mokit/label/cf -c conda-forge
+```
+or separately
+```
+conda install pyscf -c conda-forge
+conda install mokit -c mokit/label/cf -c conda-forge
 ```
 
 ### Option 2: Use homebrew-toolchains (for MacOS only)
