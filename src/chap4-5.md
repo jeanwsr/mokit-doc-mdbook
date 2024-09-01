@@ -691,7 +691,7 @@ py2fch_cghf(fchname, nbf, nif, coeff, ev, gen_density)
 
 
 ## 4.5.46 fchk
-This is a powerful module since it can directly export/generated a Gaussian .fch(k) file (i.e. no need to provide one .fch file in advance). And this module is the basis of many other modules like py2molpro, py2molcas, etc, see [Section 4.6.5](./chap4-6.md#465-the-py2xxx-modules). Three examples are shown below:
+This is a powerful module since it can directly export/generated a Gaussian .fch(k) file (i.e. no need to provide one .fch file in advance). And this module is the basis of many other modules like py2molpro, py2molcas, etc, see [Section 4.6.5](./chap4-6.md#465-the-py2xxx-modules). A few examples are shown below:
 
 (1) transfer HF/DFT MOs from PySCF to Gaussian
 ```python
@@ -706,9 +706,14 @@ mf = mol.RHF().run()
 fchk(mf, 'test.fch')
 ```
 
-Note that if you also want the HF/DFT Total SCF Density to be written into the generated fch file, you should add the `density` attribute/argument
+**Options**
+* To write the HF/DFT Total SCF Density into the generated fch file, you should use the `density` argument
 ```python
 fchk(mf, 'test.fch', density=True)
+```
+* To specify another orbital coefficient (instead of `mf.mo_coeff`), use
+```python
+fchk(mf, 'test.fch', mo_coeff=some_other_mo)
 ```
 
 ```admonish note
