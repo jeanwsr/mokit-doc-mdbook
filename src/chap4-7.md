@@ -102,6 +102,16 @@ Supported programs are Molpro/Gaussian/PySCF/PSI4/ORCA/QChem/OpenMolcas.
 #### CC_prog
 Supported programs are Molpro/Gaussian/PySCF/PSI4/ORCA/QChem/OpenMolcas.
 
+| feature | supported programs |
+| --- | --- |
+| CCSD energy | all |
+| CCSD unrelaxed DM | Molpro/PySCF/PSI4/ORCA/QChem/OpenMolcas |
+| CCSD force | Molpro/PySCF/Gaussian/PSI4/QChem |
+| CCSD relaxed DM | Molpro/Gaussian/PSI4/QChem |
+| CCSD(T) energy | all |
+| CCSD(T) unrelaxed DM | Molpro |
+| CCSD(T) force & relaxed DM | Molpro/PSI4 |
+
 #### ADC_prog
 To be documented.
 
