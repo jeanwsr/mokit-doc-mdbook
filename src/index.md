@@ -26,6 +26,8 @@ Jul 23, 2024
 
 **Hot Topics**
 
+[Install from conda](./chap2-2.md#221-online-installation)
+
 [How to perform GKS-EDA/SAPT](./chap5-3.md) &nbsp;&nbsp;&nbsp; [How to transfer MOs](./chap4-5.md) &nbsp;&nbsp;&nbsp; [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq)
 
 **Tips**

@@ -271,21 +271,23 @@ A21: Firstly, please read Section 3.1 and 3.2 for suggestions on choosing approp
 
 
 ### Q22: undefined symbol GOMP
-I find errors like `undefined symbol: GOMP_parallel` when importing some modules in `mokit.lib`. 
+I find errors like `undefined symbol: GOMP_parallel` or `undefined symbol: omp_get_thread_num` when importing some modules in `mokit.lib`. 
 
-A22: Currently there's two ways to avoid this error:
+A22: If you are using MOKIT from conda: currently there're two ways to avoid this error:
 
 (1) avoid use of `conda-forge` channel. One can do `conda list | grep libg` to check if some packages in the environment come from `conda-forge`. Since currently pyscf's conda package needs `conda-forge`, you can install pyscf from pip in this case if pyscf is needed.
 <!--The python modules provided by MOKIT (conda installation) should work with `libgomp` version 11, which is usually statisfied by environments recently created by conda, regardless of the version of conda, the version of python and the version of Anaconda/miniconda distribution. 
 
 The version of `libgomp` may be different in some rare conditions. Here is one of them: it comes from `conda-forge` instead of `defaults` channel, which is probably caused by installing numpy or other packages from `conda-forge`. One can do `conda list | grep libgomp` to check that.--> 
-(2) use the following command to create an environment (and install MOKIT and pyscf at the same time)
+(2) See [here](./chap2-2.md#use-mokit-with-conda-forge-channel) to install MOKIT with conda-forge channel.
+<!--use the following command to create an environment (and install MOKIT and pyscf at the same time)
 ```
 conda create -n mokitenv python=3.9 mokit pyscf libblas=*=*mkl -c mokit -c pyscf -c conda-forge 
 ```
 If you don't need pyscf, remove `pyscf`,`-c pyscf` in the command.
 
 Usually, option 1 is simple enough, safe, and less tricky. However, sometimes one may really need something from `conda-forge` (some pytorch related stuff), then option 2 is worth a try.
+-->
 
 
 ### Q23: difference between GAMESS .dat files
