@@ -10,13 +10,14 @@
 * updated
   - examples: autosr, eda
   - keywords: GVB_conv, FcGVB
-  - utilities: mkl2gjf, qchem, fch2qchem, fch2mkl, bas_fch2py
+  - utilities: mkl2gjf, qchem, fch2qchem, fch2mkl, bas_fch2py, dat2fch
   - APIs: fchk
   - chap 2.2: conda, pre-built and homebrew install
   - index for chap 4.5
 * style
   - new flowchart for utilities
   - reorganize chap 4.6, 4.4
+  - admonish note/warning block
 
 # v1.2.5
 First version after documentation moved to mdbook.
