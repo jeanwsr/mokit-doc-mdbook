@@ -101,6 +101,7 @@ If you think DMRG-CASSCF calculation is too expensive, you can perform only the 
 
 ## 5.9.2 Visualization via localized active orbitals
 You might notice that for the example shown above, the CASSCF occupation number of HONO happens to be almost equal to that of LUNO. It can be viewed as degenracy in occupation numbers. So we can perform orbital localization upon these 2 NOs without changing their occupation numbers. Start Python and run
+
 ```python
 from mokit.lib.gaussian import loc
 loc(fchname='triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch',idx=range(71,73))
@@ -114,6 +115,7 @@ Note that if you apply this trick to NOs which are not degenerate in occupation 
 
 ## 5.9.3 Visualization via unpaired electron density
 In unrestricted DFT (UDFT) calculations, people often visualize the spin density to find where the unpaired electrons are. In multiconfigurational methods, the unpaired electron density (also called odd electron density) is often used to show the spatial distribution of unpaired electrons. Using the CASSCF NOs of the S1 state as an example, start Python and run
+
 ```python
 from mokit.lib.wfn_analysis import calc_unpaired_from_fch
 calc_unpaired_from_fch(fchname='triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch',wfn_type=3,gen_dm=True)
@@ -121,7 +123,7 @@ calc_unpaired_from_fch(fchname='triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch',w
 
 This will generate the unpaired electron density stored in `triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch`. There are various ways to visualize the unpaired electron density:
 
-**(1) Visualization using GaussView**  
+**(1) Visualizing via GaussView**  
 Run the following command in Shell
 ```
 cubegen 48 fdensity triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch triangulene_unpaired.cub -3 h
@@ -132,7 +134,7 @@ Open the file `triangulene_unpaired.cub` with GaussView, click `Results` on the 
 
 ![Unpaired electron density shown by GaussView](images/unpaired_GV.png)
 
-**(2) Visualization using Multiwfn**  
+**(2) Visualizing via Multiwfn**  
 Start Multiwfn and load the file `triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_unpaired.fch`, then type
 ```
 200
@@ -145,7 +147,7 @@ y
 3
 -1
 ```
-The key idea is to make Multiwfn read the `Total SCF Density` section in .fch file and generate corresponding cubes. Now change the `Isosurface value` to 0.01 a.u. The plot would be like
+The key idea is to make Multiwfn read the `Total SCF Density` section in .fch file and generate corresponding cubes. Note that the procedure above (i.e. integers input interactively) may be slightly different for different versions of Multiwfn, you should pay attention to the information/hints shown in the Multiwfn cmd window. Finally, change the `Isosurface value` to 0.01 a.u. and the plot would be like
 
 ![Unpaired electron density shown by Multiwfn](images/unpaired_Multiwfn.png)
 
