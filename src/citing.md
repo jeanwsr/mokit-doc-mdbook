@@ -32,7 +32,8 @@
 
 16. Methane Activation by [AlFeO3]+: the Hidden Spin Selectivity. ***ChemPhysChem*** DOI: [10.1002/cphc.202300603](https://doi.org/10.1002/cphc.202300603)
 
-17. Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Investigation. DOI: [10.26434/chemrxiv-2023-plj1t-v2](https://doi.org/10.26434/chemrxiv-2023-plj1t-v2)
+17. Electronic Structure Determines Geometry: Bond Length Alternating in Cyclo[2n]carbons. ***J Phys Chem A*** DOI: [10.1021/acs.jpca.4c01540](https://pubs.acs.org/doi/10.1021/acs.jpca.4c01540)   
+Preprint: Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Investigation. DOI: [10.26434/chemrxiv-2023-plj1t-v2](https://doi.org/10.26434/chemrxiv-2023-plj1t-v2)
 
 18. Photocatalytic Reduction of CO<sub>2</sub> to HCOOH and CO by a Phosphine-Bipyridine-Phosphine Ir(III) Catalyst: Photophysics, Nonadiabatic Effects, Mechanism, and Selectivity. ***Angew Chem Int Ed*** DOI: [10.1002/anie.202315300](https://doi.org/10.1002/anie.202315300)
 
