@@ -30,7 +30,7 @@ If you have no access to network, but still do not want to compile MOKIT manuall
 
 Creating a new environment before installing is highly recommended, to avoid changing your base environment.
 ```
-conda create -n mokit-py39 python=3.9 # 3.7-3.11 are all available
+conda create -n mokit-py39 python=3.9 # 3.8-3.11 are available
 conda activate mokit-py39
 conda install mokit -c mokit
 ```
@@ -62,7 +62,7 @@ conda install mokit -c mokit/label/cf
 ```
 If not, it's recommended to create an environment first before installing.
 ```
-conda create -n mokit-cf python=3.9 -c conda-forge
+conda create -n mokit-cf python=3.9 -c conda-forge # 3.9-3.11 are available
 conda activate mokit-cf
 conda install mokit -c mokit/label/cf -c conda-forge
 ```
