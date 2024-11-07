@@ -28,7 +28,7 @@ Example 1. DKH2 scalar relativistic Hamiltonian with the ANO-RCC-VDZP basis set
 ```
 #p CASSCF/ANO-RCC-VDZP
 
-mokit{DKH2}
+mokit{DKH2,CASSCF_prog=ORCA}
 ```
 
 Example 2. CASSCF NMR calculation with the pcSseg-1 basis set

@@ -47,3 +47,5 @@ Preprint: Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Inve
 
 23. Accurate *ab initio* based potential energy surface and kinetics of the Cl + NH3 → HCl + NH2 reaction. ***J Chem Phys*** DOI: [10.1063/5.0216562](https://doi.org/10.1063/5.0216562)
 
+24. Block-Correlated Coupled Cluster Theory Based on the Generalized Valence Bond Reference for Singlet–Triplet Energy Gaps of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.4c02362](https://doi.org/10.1021/acs.jpclett.4c02362)
+

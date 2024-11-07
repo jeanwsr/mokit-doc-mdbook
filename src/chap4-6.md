@@ -362,6 +362,15 @@ lin_comb_two_mo('polyacene.fch', 30, 31) # for bonding orbitals
 lin_comb_two_mo('polyacene.fch', 50, 51) # for anti-bonding orbitals
 ```
 
+### 4.6.3.8 find_antibonding_orb
+Construct antibonding orbitals according to bonding orbitals provided. Sometimes the users already have a set of bonding orbitals, e.g. constructed by IAO, Boys/PM localization as well as manual selection, etc. And they want to obtain the corresponding antibonding orbitals without changing any bonding orbital. Then this module would be best choice. The orbital index range `[i1,i2]` contains the bonding orbitals, the index range `[i3,nif]` contains orbitals which can be optimized/updated to obtain antibonding orbitals. `i3>i2` is required. Once the antibonding orbitals are generated, they will be stored in index range `[i3,i3+i2-i1]`. The orbitals `[1,i3-1]` will not be changed by this module, which is useful when the user wants to keep some orbitals fixed. All MOs are orthonormal before and after using this module.
+
+```python
+from mokit.lib.wfn_analysis import find_antibonding_orb
+find_antibonding_orb(fchname, i1, i2, i3)
+```
+
+
 ## 4.6.4 Other functions in rwwfn
 
 ### 4.6.4.1 read/write mo
