@@ -111,13 +111,16 @@ Generate .inp file, in which the keywords 'Cartesian' of each atom are written (
 Generate .inp file, in which the keywords 'Cartesian' of each atom are not written (in order to use pure spherical harmonic type of basis functions).
 
 ## 4.5.8 bas_gms2molpro
-Generate a Molpro .com file from a GAMESS .inp or .dat file. The Cartesian coordinates and basis set data are written in the .com file. Two examples are shown and explained below
+Generate a Molpro .com file from a GAMESS .inp/.dat file. The Cartesian coordinates and basis set data are written in the .com file. Two examples are shown and explained below
 
-(1) `bas_gms2molpro a.inp`  
-Generate .inp file, in which the keyword 'Cartesian' is written (in order to use pure Cartesian type of basis functions)
+(1) `bas_gms2molpro h2o.inp`  
+Generate `h2o.com`, in which the keyword 'Cartesian' is written (in order to use pure Cartesian type of basis functions)
 
-(2) `bas_gms2molpro a.inp -sph`  
-Generate .inp file, in which the keyword 'Cartesian' is not written (in order to use pure spherical harmonic type of basis functions).
+(2) `bas_gms2molpro h2o.inp -sph`  
+Generate `h2o.com`, in which the keyword 'Cartesian' is not written (in order to use pure spherical harmonic type of basis functions).
+
+(3) `bas_gms2molpro h2o.inp -sph -m15`  
+Generate `h2o.com` for Molpro 2015. Only useful when you are using Molpro 2015 and dealing with ROHF/UHF high-spin wave functions.
 
 ## 4.5.9 bas_gms2psi
 Generate a PSI4 `_psi.inp` file from a GAMESS .inp/.dat file. The Cartesian coordinates and basis set data are written in the `_psi.inp` file.
@@ -262,17 +265,23 @@ fch2cfour h2o.fch
 This is used for transferring R(O)HF or UHF orbitals. One should first read the Cartesian coordinates from the CFOUR output and write a .gjf file to perform the single point calculation. Then use `fch2cfour` to generate CFOUR files, otherwise the molecular orientations of two programs will not be the same. Please use CFOUR v2.1 (or higher), since older versions of CFOUR (like v1.0 or v2.00beta) could not correctly read MOs from the file OLDMOS.
 
 ## 4.5.20 fch2com
-Generate a Molpro .com file from a Gaussian .fch(k) file, with alpha MOs written in a .a file. One example is shown below
-```
-fch2com a.fch
-```
-This is used for transferring R(O)HF, UHF or CASSCF orbitals.
+Generate a Molpro .com file from a Gaussian .fch(k) file, with alpha MOs written in a `*.a` file. Two examples are shown below
 
-This utility will call another two utilities `fch2inp` and `bas_gms2molpro`. So
-if you want to compile fch2com, you have to compile `fch2inp` and `bas_gms2molpro`
-additionally.
+(1) general use
+```
+fch2com h2o.fch
+```
+Files `h2o.com` and `h2o.a` would be generated. If UHF-type wave function is involved, `h2o.b` woud also be generated. This is used for transferring R(O)HF, UHF or CASSCF orbitals.
 
-Note that in Windows* OS, any file with .com suffix/extension may be automatically associated with system, in which case double click of the mouse to open this file does not work. You have to right click on the .com file and choose 'open with'. You can modify the suffix/extension to .inp if you do not like that.
+(2) a special case
+```
+fch2com h2o.fch -m15
+```
+This is only useful when you are using Molpro 2015 and dealing with ROHF/UHF non-singlet wave function. Please do not use it for general purpose.
+
+This utility will call another two utilities `fch2inp` and `bas_gms2molpro`. So if you want to compile fch2com, you have to compile `fch2inp` and `bas_gms2molpro` additionally.
+
+Note that in Windows OS, any file with .com suffix/extension may be automatically associated with system, in which case double click of the mouse to open this file does not work. You have to right click on the .com file and choose 'open with'. You can modify the suffix/extension to .inp if you do not like that.
 
 Note that if you use background charges in your studied system, the background charges are not recorded in the .fch(k) file. So there are no background charges in the generated .com file, either. To add background charges, you need to use the utility [add_bgcharge_to_inp](#451-add_bgcharge_to_inp).
 To transfer MOs from Molpro back to Gaussian, see [xml2fch](#4542-xml2fch).
