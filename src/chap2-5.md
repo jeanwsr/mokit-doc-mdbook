@@ -30,10 +30,11 @@ This does not require Gaussian installed on your computer.
 
 ### Setup Gaussian and PySCF
 
-Usually there are no special requirements on setup. Read [Section 2.3.7](./chap2-3.md#237-notes-on-quantum-chemistry-packages) and [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq) if you have trouble installing them or calling them with MOKIT.
+Usually there are no special requirements on setup Gaussian. 
 
+When installing PySCF and MOKIT from conda, please read [this instruction](./chap2-2.md#use-mokit-with-default-channel) and [this](./chap2-2.md#use-mokit-with-conda-forge-channel).
 
-If you have not installed PySCF, the recommended way is to run `pip install pyscf` in the environment in which MOKIT is installed.
+Read [Section 2.3.7](./chap2-3.md#237-notes-on-quantum-chemistry-packages) and [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq) if you have trouble installing them or calling them with MOKIT.
 
 ### Modify and Setup GAMESS
 
