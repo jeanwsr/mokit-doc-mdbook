@@ -22,13 +22,18 @@ Nov 14, 2024
 - [Examples](./chap5_example.md)
 - [Developer's Guide](./chap6.md)
 - [Papers citing MOKIT](./citing.md)
-- [Appendix](./chap_appdx.md): FAQs, limitations and [bug report](./chap_appdx.md#a3-bug-report)
+- [Appendix](./chap_appdx.md): 
+  + [FAQs](./chap_appdx.md), limitations and [bug report](./chap_appdx.md#a3-bug-report)
 
 **Hot Topics**
 
 [Install from conda](./chap2-2.md#221-online-installation)
 
-[How to perform GKS-EDA/SAPT](./chap5-3.md) &nbsp;&nbsp;&nbsp; [How to transfer MOs](./chap4-5.md) &nbsp;&nbsp;&nbsp; [FAQs](./chap_appdx.md#a1-frequently-asked-questions-faq)
+[How to perform GKS-EDA/SAPT](./chap5-3.md) &nbsp;&nbsp;&nbsp; [How to transfer MOs](./chap4-5.md) &nbsp;&nbsp;&nbsp; 
+
+**News**
+
+[Release v1.2.6](./news.md#20241119-new-release-v126) &nbsp;&nbsp;&nbsp; [1000 downloads on anaconda](./news.md#20241127-1000-downloads-on-anaconda)
 
 **Tips**
 
