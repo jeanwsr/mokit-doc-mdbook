@@ -556,12 +556,23 @@ A file named `water_std.fch` will be generated.
 
 ## 4.6.7 The mirror_wfn module
 ```python
+rmsd_wrapper(fname1, fname2)
 mirror_wfn(fchname)
 mirror_c2c(chkname)
 rotate_atoms_wfn(fchname, coor_file)
 permute_atoms_wfn(fchname, coor_file)
 geom_lin_intrplt(gjfname1, gjfname2, n)
 ```
+The `rmsd_wrapper` function is able to calculate the RMSD value between two molecules. The input files can be one type of xyz/gjf/fch. For exemple,
+
+```python
+from mokit.lib.mirror_wfn import rmsd_wrapper
+rmsd_v = rmsd_wrapper('h2o_1.gjf','h2o_2.gjf')
+print(rmsd_v)
+```
+Note that two molecules can be in different orientations, since RMSD calculation will firstly rotate molecules to achieve maximum overlap. But two molecules must have one-to-one correspondence of atomic labels. e.g. H1-H1, C2-C2. An automatic adjustment of atomic labels to achieve maximum overlap has not been implemented yet.
+
+<br>
 
 The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For exmaple, if we provide a chiral molecule with R-chirality on the carbon center,
 

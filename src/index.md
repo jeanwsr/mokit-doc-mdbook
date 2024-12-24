@@ -1,10 +1,10 @@
 # MOKIT Doc
 
-for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.6
+for [MOKIT](https://gitlab.com/jxzou/mokit) version 1.2.7
 
 MOKIT developers
 
-Nov 14, 2024
+Dec 24, 2024
 
 <br>
 

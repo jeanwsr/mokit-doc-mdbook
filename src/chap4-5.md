@@ -371,13 +371,28 @@ There is no need to write the orbital basis set def2-TZVPP. The keywords in the 
 ! RKS PWPB95 D3BJ def2-TZVPP/C def2/J TightSCF noTRAH defgrid3
 ```
 
-**(3) SF-TDDFT calculations**
+**(3) DLPNO- double hybrid DFT calculations**
+Assume that you have performed a wB97X/def2TZVPP calculation using Gaussian, you can run
+```
+fch2mkl h2o.fch -dft 'DLPNO-wB97X-2 D3'
+```
+to generate the ORCA input file. Keywords are well written in the input file, e.g.
+```
+! RKS DLPNO-wB97X-2 D3 def2-TZVPP/C TightPNO def2/J TightSCF noTRAH defgrid3
+```
+Usually there is no need to modify the keywords above. But if you use def2QZVPP in Gaussian, you need to modify def2-TZVPP/C to def2-QZVPP/C in the ORCA input file. Similarly, if you have performed a B3LYP/def2TZVPP calculation using Gaussian, you can run
+```
+fch2mkl h2o.fch -dft 'DLPNO-B2PLYP D3BJ'
+```
+to generate the ORCA input file.
+
+**(4) SF-TDDFT calculations**
 ```
 fch2mkl O2_UDFT.fch -sf
 ```
 Theoretically, the SF-TDDFT method can be either based on ROHF/ROKS, or based on UHF/UDFT reference. But ORCA only accepts the UHF/UDFT reference. So please provide a UHF/UDFT .fch file.
 
-**(4) DLPNO-CCSD(T) calculations**
+**(5) DLPNO-CCSD(T) calculations**
 Assuming you have perfored an RHF/cc-pVTZ job for H<sub>2</sub>O in Gaussian, and next you want to perform a DLPNO-CCSD(T)/cc-pVTZ computation in ORCA, then you can open the generated file `h2o_o.inp` and modify the keywords as
 ```
 ! RHF TightSCF DLPNO-CCSD(T) TightPNO RIJK cc-pVTZ/JK cc-pVTZ/C
