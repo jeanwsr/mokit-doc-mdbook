@@ -563,7 +563,7 @@ rotate_atoms_wfn(fchname, coor_file)
 permute_atoms_wfn(fchname, coor_file)
 geom_lin_intrplt(gjfname1, gjfname2, n)
 ```
-The `rmsd_wrapper` function is able to calculate the RMSD value between two molecules. The input files can be one type of xyz/gjf/fch. For exemple,
+The `rmsd_wrapper` function is able to calculate the RMSD value between two molecules. The input files can be any type of xyz/gjf/fch. For exemple,
 
 ```python
 from mokit.lib.mirror_wfn import rmsd_wrapper

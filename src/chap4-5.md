@@ -357,7 +357,7 @@ fch2mkl h2o.fch -dft 'HSE06 D3zero'
 ```
 If `h2o.fch` includes a DFT wave function, you can use the commands shown above to transfer orbitals. The density functional name is supposed to be provided by the user. If there is also dispersion correction to be added, they need to written together in single quotes '' or double quotation marks "".
 
-**(2) Double hybrid functional calculations**
+**(2) Double hybrid functional calculations**  
 Assuming you want firstly to perform the SCF part of the double hybrid functional PWPB95 in Gaussian using def2TZVPP, the Gaussian keywords are
 ```
 #p PW91B95/def2TZVPP nosymm int(nobasistransform) IOp(3/76=1000005000,3/77=0000005000,3/78=0731007310)
@@ -371,7 +371,7 @@ There is no need to write the orbital basis set def2-TZVPP. The keywords in the 
 ! RKS PWPB95 D3BJ def2-TZVPP/C def2/J TightSCF noTRAH defgrid3
 ```
 
-**(3) DLPNO- double hybrid DFT calculations**
+**(3) DLPNO double hybrid density functional calculations**  
 Assume that you have performed a wB97X/def2TZVPP calculation using Gaussian, you can run
 ```
 fch2mkl h2o.fch -dft 'DLPNO-wB97X-2 D3'
@@ -392,7 +392,7 @@ fch2mkl O2_UDFT.fch -sf
 ```
 Theoretically, the SF-TDDFT method can be either based on ROHF/ROKS, or based on UHF/UDFT reference. But ORCA only accepts the UHF/UDFT reference. So please provide a UHF/UDFT .fch file.
 
-**(5) DLPNO-CCSD(T) calculations**
+**(5) DLPNO-CCSD(T) calculations**  
 Assuming you have perfored an RHF/cc-pVTZ job for H<sub>2</sub>O in Gaussian, and next you want to perform a DLPNO-CCSD(T)/cc-pVTZ computation in ORCA, then you can open the generated file `h2o_o.inp` and modify the keywords as
 ```
 ! RHF TightSCF DLPNO-CCSD(T) TightPNO RIJK cc-pVTZ/JK cc-pVTZ/C
