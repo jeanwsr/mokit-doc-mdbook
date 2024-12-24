@@ -38,6 +38,7 @@ jobs:
           rustup update
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | sh
           cargo binstall mdbook mdbook-admonish
+          mdbook-admonish install .
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
