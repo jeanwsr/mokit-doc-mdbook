@@ -293,6 +293,8 @@ If you don't need pyscf, remove `pyscf`,`-c pyscf` in the command.
 Usually, option 1 is simple enough, safe, and less tricky. However, sometimes one may really need something from `conda-forge` (some pytorch related stuff), then option 2 is worth a try.
 -->
 
+If you are compiling MOKIT from source, there's a workround: add `-lgomp` to `F2_FLAGS` in the Makefile. See [issues/29](https://gitlab.com/jxzou/mokit/-/issues/29) for more information.
+
 
 ### Q23: difference between GAMESS .dat files
 What is the difference between `xxx2gvb4.dat` and `xxx2gvb4_s.dat`?
