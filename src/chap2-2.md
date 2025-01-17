@@ -173,14 +173,19 @@ export GMS=$HOME/software/gamess/rungms
 The `LD_LIBRARY_PATH` is needed since the OpenBLAS dynamic library is put there.
 Remember to modify the `GMS` path to suit your local environment. 
 
-> Attention: the PYTHONPATH has changed since MOKIT version 1.2.5rc2.
+```admonish warning
+The PYTHONPATH has changed since MOKIT version 1.2.5rc2.
+```
 
 Note that you need to run `source ~/.bashrc` or exit the terminal as well as
 re-login, in order to activate newly written environment variables.
 
 ### How to choose Anaconda Version if installing offline
 
-Installing prebuilt MOKIT offline usually means the user cannot get NumPy with network. So it's important to get a certain version of anaconda which provides proper version of NumPy needed by MOKIT. The recommended versions of anaconda for some prebuilts are listed below (compatible miniconda version is also listed but it does not mean miniconda comes with NumPy).
+Installing prebuilt MOKIT offline usually means the user cannot get NumPy with network. 
+So it's important to get a certain version of anaconda which provides proper version of NumPy needed by MOKIT. 
+The recommended versions of anaconda for some prebuilts are listed below (compatible miniconda version is also listed but it does not mean miniconda comes with NumPy). 
+See [Anaconda release note](https://docs.anaconda.com/anaconda/release-notes/) for more information.
 
 If your linux kernel is roughly as old as Centos7's, choose the one started with `centos7_`. 
 
