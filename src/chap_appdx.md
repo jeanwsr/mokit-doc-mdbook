@@ -85,27 +85,23 @@ users, the development will be much easier and quicker.
 ### Q5: OpenMolcas: Error in keyword
 Why there is a keyword error in OpenMolcas output when using DKH2 Hamiltonian? Two possible errors are given: (1) ERROR: RELATIVISTIC is not a keyword!, Error in keyword. (2) ERROR: R02O is not a keyword!, Error in keyword.
 
-A5: This is due to a recent update of OpenMolcas. If version <= 18.09, the keyword
-for DKH2 is simply `R02O`; but for version >=20.10, this keyword become `RELAtivistic = R02O`.
-For version >18.09 and <20.10, the author jxzou has no manual and thus it is not
-tested (but you can test if you like).
+A5: This is due to a recent update of OpenMolcas. If version <= 18.09, the keyword for DKH2 is simply `R02O`; but for version >=20.10, this keyword become `RELAtivistic = R02O`. For version >18.09 and <20.10, we have no manual and thus it is not tested (but you can test if you like).
 
-If you encounter any of the two errors, you have two choices: (1) update your OpenMolcas
-to a newer version, e.g. >=20.10; (2) modify the source code of MOKIT and re-compile
-it. If you choose (2), you will need to modify the words `RELAtivistic = R02O` to
-`R02O` in file `src/automr.f90`, and run `make automr` in Shell to re-compile the
-program automr.
+If you encounter any of the two errors, you have two choices: (1) update your OpenMolcas to a newer version, e.g. >=20.10; (2) modify the source code of MOKIT and re-compile it. If you choose (2), you will need to modify the words `RELAtivistic = R02O` to `R02O` in file `$MOKIT_ROOT/src/automr.f90`, and run `make automr` in Shell to re-compile the program automr.
 
 
 ### Q6: executable paths of Gaussian, etc.
 How does `automr` read the executable paths of Gaussian, OpenMolcas, PySCF, ORCA, and GAMESS?
 
-A6: For Gaussian, the paths of executable files are read from the environment variables
-`$GAUSS_EXEDIR`. For PySCF and OpenMolcas, the `python` and `pymolcas` executable
-are used directly, assuming the user had installed the corresponding programs correctly.
-For ORCA, the absolute path is automatically obtained from echo `which orca`. For
-GAMESS, the user must define the `$GMS` environment variable in his/her `~/.bashrc` file,
-such that the automr program can find corresponding paths.
+A6: For Gaussian, the paths of executable files are read from the environment variables `$GAUSS_EXEDIR`. Note: this does not mean that you need to explicitly define the variable `$GAUSS_EXEDIR`. A correct example of Gaussian environment variable definitions look like
+```
+export g16root=/opt
+source $g16root/g16/bsd/g16.profile
+export GAUSS_SCRDIR=/scratch/$USER/gaussian
+```
+where the `$GAUSS_EXEDIR` is already defined in the file `g16.profile`.
+
+For PySCF and OpenMolcas, the `python` and `pymolcas` executable are used directly, assuming the user had installed the corresponding programs correctly. For ORCA, the absolute path is automatically obtained from echo `which orca`. For GAMESS, the user must define the `$GMS` environment variable in his/her `~/.bashrc` file, such that the automr program can find corresponding paths.
 
 
 ### Q7: GAMESS: ERROR DIMENSIONS EXCEEDED

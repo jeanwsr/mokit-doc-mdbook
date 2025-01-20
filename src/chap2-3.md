@@ -181,7 +181,7 @@ The (py)block2 the most recommended one among these DMRG packages.
 For MC-PDFT related packages:  
 pyscf-forge latest
 
-Older versions are not recommended, since (1) they are possibly not tested by the developers, (2) they had been tested but some functionality had not been (correctly) implemented at that time. So that they may work or may not. OpenMolcas-v18.09 has also been tested, but you need to take care of a problem, see Section A1, Q5 in Appendix.
+Older versions are not recommended, since (1) they are possibly not tested by the developers, (2) they had been tested but some functionality had not been (correctly) implemented at that time. So that they may work or may not. OpenMolcas-v18.09 has also been tested, but you need to take care of a [problem](./chap_appdx.md#q5-openmolcas-error-in-keyword).
 
 Of course, not all packages will be called in an `automr` job. It depends on the job type and the program specified by users (see [Section 2.5](./chap2-5.md) for details). Usually three software packages (Gaussian, PySCF and GAMESS) are extensively used in routine computations. Thus you are recommended to install at least these 3 packages. 
 
