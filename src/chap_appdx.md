@@ -366,9 +366,9 @@ Currently implicit solvent effect cannot be taken into consideration. But you ca
 ## A3 Bug Report
 If you find any bug frequently occurs, please go to [MOKIT GitLab](https://gitlab.com/jxzou/mokit) to download the latest version of MOKIT and check whether the bug still exists. If it still exists, you can
 
-(1) Open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page of MOKIT.  
-(2) Join the Tencent QQ group (Group ID: 470745084) if you can communicate in Chinese. It is recommended to show your problem in the QQ group. Private messages through QQ will probably be answered with the least/lowest priority.  
-(3) Contact the developer jxzou via E-mail njumath[at]sina.cn, with your input and output files attached.
+(1) Open an [issue](https://gitlab.com/jxzou/mokit/-/issues) on the GitLab page, or [issue](https://github.com/1234zou/MOKIT/issues) on the GitHub page of MOKIT.  
+(2) Join the Tencent QQ group (Group ID: 470745084) if you can communicate in Chinese, and show your problem in the QQ group. Private messages through QQ might not be replied.  
+(3) Contact the developer jxzou via E-mail njumath[at]sina.cn, with your input and output files attached. Reply/Answer is not guaranteed since jxzou is very busy.
 
 ## A4 Acknowledgement
 Thanks to all MOKIT developers and users for constructive suggestions, bugs report and contributions.
