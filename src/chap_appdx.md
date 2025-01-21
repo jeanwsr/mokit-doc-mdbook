@@ -332,6 +332,16 @@ When you use `6D 10F`, GAMESS uses `6D 10F` in the code during computation, and 
 By default, MOKIT uses `5D 7F` no matter you use any basis set or ECP/PP. And MOKIT will make all quantum chemistry packages use `5D 7F` during computations (unless `5D 7F` is not supported by some rare functionalities). Thus the user does not need to worry about this detail. If you want to (or you have to) use Cartesian functions, you need to specify `mokit{Cart}` in the Title Card line. This not recommended since it does not bring any advantage, and it is easy to cause [basis set linear dependency](https://mp.weixin.qq.com/s/XLeL0Tq61RcgYrWXqQCWbA).
 
 
+### Q26: Molpro does not generate molden files
+Some users want to use MOKIT utilities (e.g. `molden2fch`) to treat Molpro .molden files, but found their Molpro cannot generate molden files when `{put,molden}` is written in the Molpro input file. A possible reason is that they are using Molpro 2024.2, which has a bug of generating .molden files. The version information could be found in Molpro output, which looks like
+```
+                                         ***  PROGRAM SYSTEM MOLPRO  ***
+                                       Copyright, TTI GmbH Stuttgart, 2015
+                                    Version 2024.2 linked Wed Nov 13 17:55:21 2024
+```
+In fact, the molden content is printed into the Molpro output file, not into an individual .molden file. You are recommended to use another version of Molpro in such case.
+
+
 ## A2 Limitations and Suggestions
 
 ### A2.1 Basic knowledge of multi-reference methods

@@ -222,15 +222,13 @@ Extract natural orbital occupation numbers (NOONs) from the following types of f
 and write NOONs (as the 'Alpha Orbital Energies' section) into a given .fch file. This is for the convenience of visualizing orbitals using GaussView or Multiwfn+VMD.
 
 ## 4.5.17 fch2amo
-Generate [AMESP](www.amesp.xyz) files (.aip and .amo) from a Gaussian .fch(k) file. Cartesian coordinates are written in the .aip file, while the basis set data is written both in the .aip and .amo files (in different formats). Both spherical harmonic type and Cartesian type basis functions are supported. An example is shown below
-
+Generate [Amesp](www.amesp.xyz) files (.aip and .amo) from a Gaussian .fch(k) file. Cartesian coordinates are written in the .aip file, while the basis set data is written both in the .aip and .amo files (in different formats). Both spherical harmonic type and Cartesian type basis functions are supported. An example is shown below
 ```
 fch2amo h2o.fch
 a2m h2o.amo
 ```
 
 The first line will generate `h2o.aip` and `h2o.amo` files. `h2o.aip` is the input file of AMESP, and `h2o.amo` is the wave function file. The second line converts the ASCII text file `h2o.amo` into a binary file `h2o.mo`. This procedure is very similar to the file operations in Gaussian, where the correspondence is
-
 ```
 h2o.gjf <-> h2o.aip
 h2o.fch <-> h2o.amo
@@ -239,7 +237,7 @@ formchk <-> m2a
 unfchk  <-> a2m
 ```
 
-The utility `amo2fch` is under development.
+To transfer MOs from Amesp back to Gaussian, you can use the `amo2fch` utility.
 
 ## 4.5.18 fch2bdf
 Generate three BDF files (`_bdf.inp`, .BAS, .scforb/.inporb) from a Gaussian .fch(k) file. Cartesian coordinates are written in the `_bdf.inp` file, while the basis set data is held in .BAS file. The molecular orbitals are written in the .scforb/.inporb file. Note that BDF does not support Cartesian-type basis functions, so only spherical harmonic functions will be used. If there exists any Cartesian-type basis function in .fch(k) file, this utility will signal errors. Two examples are shown and explained below
