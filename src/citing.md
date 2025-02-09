@@ -37,15 +37,31 @@ Preprint: Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Inve
 
 18. Photocatalytic Reduction of CO<sub>2</sub> to HCOOH and CO by a Phosphine-Bipyridine-Phosphine Ir(III) Catalyst: Photophysics, Nonadiabatic Effects, Mechanism, and Selectivity. ***Angew Chem Int Ed*** DOI: [10.1002/anie.202315300](https://doi.org/10.1002/anie.202315300)
 
-19. Block-Correlated Coupled Cluster Theory with up to Four-Pair Correlation for Accurate Static Correlation of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c03373](https://doi.org/10.1021/acs.jpclett.3c03373)
+19. Light- and thermal-driven gold-catalyzed reaction of o-alkynylphenols with aryldiazonium salts: Computational insights into mechanistic similarities and differencesy. ***Chin. J. Chem. Phys*** DOI: [10.1063/1674-0068/cjcp2304029](https://doi.org/10.1063/1674-0068/cjcp2304029)
 
-20. Renormalized-Residue-Based Multireference Configuration Interaction Method for Strongly Correlated Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.3c01247](https://doi.org/10.1021/acs.jctc.3c01247)
+20. Block-Correlated Coupled Cluster Theory with up to Four-Pair Correlation for Accurate Static Correlation of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.3c03373](https://doi.org/10.1021/acs.jpclett.3c03373)
 
-21. Theoretical Study on Ethylamine Dissociation Reactions Using VRC-VTST and SS-QRRK Methods. ***J Phys Chem A*** DOI: [10.1021/acs.jpca.3c08373](https://doi.org/10.1021/acs.jpca.3c08373)
+21. Renormalized-Residue-Based Multireference Configuration Interaction Method for Strongly Correlated Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.3c01247](https://doi.org/10.1021/acs.jctc.3c01247)
 
-22. XMECP: Reaching State-of-the-Art MECP Optimization in Multiscale Complex Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.4c00033](https://doi.org/10.1021/acs.jctc.4c00033)
+22. Theoretical Study on Ethylamine Dissociation Reactions Using VRC-VTST and SS-QRRK Methods. ***J Phys Chem A*** DOI: [10.1021/acs.jpca.3c08373](https://doi.org/10.1021/acs.jpca.3c08373)
 
-23. Accurate *ab initio* based potential energy surface and kinetics of the Cl + NH3 → HCl + NH2 reaction. ***J Chem Phys*** DOI: [10.1063/5.0216562](https://doi.org/10.1063/5.0216562)
+23. XMECP: Reaching State-of-the-Art MECP Optimization in Multiscale Complex Systems. ***J Chem Theory Comput*** DOI: [10.1021/acs.jctc.4c00033](https://doi.org/10.1021/acs.jctc.4c00033)
 
-24. Block-Correlated Coupled Cluster Theory Based on the Generalized Valence Bond Reference for Singlet–Triplet Energy Gaps of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.4c02362](https://doi.org/10.1021/acs.jpclett.4c02362)
+24. Triel Bonds between BH3/C5H4BX and M(MDA)2 (X = H, CN, F, CH3, NH2; M = Ni, Pd, Pt, MDA = Enolated Malondialdehyde) and Group 10 Transition Metal Electron Donors. ***Molecules*** DOI: [10.3390/molecules29071602](https://doi.org/10.3390/molecules29071602)
+
+25. Accurate *ab initio* based potential energy surface and kinetics of the Cl + NH3 → HCl + NH2 reaction. ***J Chem Phys*** DOI: [10.1063/5.0216562](https://doi.org/10.1063/5.0216562)
+
+26. Strong Triel Bonds with Be as Electron Donor. ***Inorg. Chem.*** DOI: [10.1021/acs.inorgchem.4c02186](https://doi.org/10.1021/acs.inorgchem.4c02186)
+
+27. A weight growth route from 2-naphthylmethyl radical to tricyclic aromatics. ***Proc. Combust. Inst.*** DOI: [10.1016/j.proci.2024.105535](https://doi.org/10.1016/j.proci.2024.105535)
+
+28. Block-Correlated Coupled Cluster Theory Based on the Generalized Valence Bond Reference for Singlet–Triplet Energy Gaps of Strongly Correlated Systems. ***J Phys Chem Lett*** DOI: [10.1021/acs.jpclett.4c02362](https://doi.org/10.1021/acs.jpclett.4c02362)
+
+29. Intensity-dependent three-body Coulomb explosion of methane in femtosecond laser pulses. ***Phys. Rev. A*** DOI: [10.1103/PhysRevA.109.023115](https://doi.org/10.1103/PhysRevA.109.023115)
+
+30. Theoretical investigation on unimolecular decomposition network of *n*-propylamine with advanced kinetic methods. ***Combust. Flame*** DOI: [10.1016/j.combustflame.2025.113996](https://doi.org/10.1016/j.combustflame.2025.113996)
+
+31. Preprint: Facile Wet Chemical Synthesis of Dimeric Triangulene Derivatives through Intramolecular Radical-Radical Coupling. DOI: [10.21203/rs.3.rs-3185783/v1](https://doi.org/10.21203/rs.3.rs-3185783/v1)
+
+32. Preprint: Endeavoring the First Lanthanide–Carbon Triple-Bond in Fullerene Cage. DOI: [10.21203/rs.3.rs-5351349/v1](https://doi.org/10.21203/rs.3.rs-5351349/v1)
 
