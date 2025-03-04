@@ -6,7 +6,7 @@ Currently, the keywords of all supported methods in `automr` are:
 
 [NEVPT2](#436-nevpt2), [CASPT2](#437-caspt2), [CASPT2K](#438-caspt2k), [CASPT3](#439-caspt3), [SDSPT2](#4310-sdspt2), [MRMP2](#4311-mrmp2), [OVBMP2](#4312-ovbmp2), [MRCISD](#4313-mrcisd), [MRCISDT](#4314-mrcisdt), 
 
-[MCPDFT](#4315-mcpdft), [DFTCI](#4316-dftci), [MRCC](#4317-ficmrccsd), [BCCC2b](#4318-bccc2b), [BCCC3b](#4319-bccc3b).
+[MCPDFT](#4315-mcpdft), [DFTCI](#4316-dftci), [FICMRCCSD](#4317-ficmrccsd), [BCCC2b](#4318-bccc2b), [BCCC3b](#4319-bccc3b).
 
 More multi-configurational and multi-reference methods will be supported in the future.
 These terms should be written in the `#p ...` line in the .gjf file.
@@ -60,10 +60,7 @@ Second order Perturbation Theory based on CASSCF reference.
 
 This is a new feature since ORCA 5.0. A revised zeroth order Hamiltonian is applied to alleviate the intruder state problem of CASPT2 method. No IP-EA shift is needed in this method.
 
-Note here you can write this keyword as either CASPT2K or CASPT2-K in .gjf file,
-but you'd better use the method name CASPT2-K in official writing or publishing.
-The keyword `CASPT2_prog` will automatically be set as ORCA, since this method is
-only supported in ORCA currently.
+Note here you can write this keyword as either CASPT2K or CASPT2-K in .gjf file, but you'd better use the method name CASPT2-K in official writing or publishing. The keyword `CASPT2_prog` will automatically be set as ORCA, since this method is only supported in ORCA currently.
 
 ## 4.3.9 CASPT3
 Third order Perturbation Theory based on CASSCF reference.
@@ -125,45 +122,26 @@ Currently, to perform DFT/MRCI computations, you should have ORCA and DFT/MRCI p
 
 Note: full implementation of this keyword has not been finished yet.
 
-## 4.3.17 FIC-MRCCSD
+## 4.3.17 FICMRCCSD
 Multi-reference Coupled Cluster theory, based on the CASCI/CASSCF reference.
 
-Currently only the FIC-MRCCSD method in ORCA(>=5.0.0) is supported.
+Currently only the FIC-MRCCSD method in ORCA(>=5.0.0) is supported. Note here you can write this keyword as either FICMRCCSD or FIC-MRCCSD in .gjf file, but you'd better use the method name FIC-MRCCSD in official writing or publishing.
 
 ## 4.3.18 BCCC2b
 Block-correlated coupled cluster theory based on the GVB reference.
 
-This is in fact a multi-reference coupled cluster theory based on GVB wave function,
-where 2b means only the two-block excitation operators \\( {\hat{T_2}} \\) are considered
-in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
+This is in fact a multi-reference coupled cluster theory based on GVB wave function, where 2b means only the two-block excitation operators \\( {\hat{T_2}} \\) are considered in the cluster expansion. Moreover, this method is a spin-pure coupled-cluster method.
 
-Currently only spin singlet is supported. This program is developed by jxzou during
-his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)'s research group.
-Currently this program has not been released yet, but will probably be released
-after its corresponding paper published.
+Currently only spin singlet is supported. This program was originally developed by jxzou during his Ph.D. in Prof. [Shuhua Li](https://itcc.nju.edu.cn/shuhua)'s research group. Currently this program has not been released yet. There exists more efficient GVB-BCCC programs in Prof. Li's group currently.
 
-Currently only correlations between two pairs are taken into consideration (i.e.
-occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a *rough*
-theory. Note that the intra-pair excitation operator \\( \hat{{T_1}} \\) plays
-little role, so the BCCC2b (i.e. only \\( \hat{{T_2}} \\) ) is extremely close to
-BCCC2 (i.e. \\( \hat{{T_1}} + \hat{{T_2}} \\) ). For GVB(2), the BCCC2 is equivalent
-to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4).
-For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*)
-using GVB orbitals.
+Currently only correlations between two pairs are taken into consideration (i.e. occ->pair, occ->vir, pair->vir not considered so far). So BCCC2b is just a *rough* theory. Note that the intra-pair excitation operator \\( \hat{{T_1}} \\) plays little role, so the BCCC2b (i.e. only \\( \hat{{T_2}} \\) ) is extremely close to BCCC2 (i.e. \\( \hat{{T_1}} + \hat{{T_2}} \\) ). For GVB(2), the BCCC2 is equivalent to CASCI(4,4) using GVB orbitals, and thus BCCC2b is extremely close to CASCI(4,4). For GVB(*n*), *n*>2, the GVB(*n*)-BCCC is an approximation method to CASCI(2*n*,2*n*) using GVB orbitals.
 
-This program scales as *O*(*n*<sup>4</sup>), where *n* is the number of GVB pairs.
-But the integral transformation needed for the BCCC2b scales as *O*(*n*<sup>5</sup>),
-so the overall scaling might behave as *O*(*n*<sup>5</sup>) for large number of
-pairs.
+This program scales as *O*(*n*<sup>4</sup>), where *n* is the number of GVB pairs. But the integral transformation needed for the BCCC2b scales as *O*(*n*<sup>5</sup>), so the overall scaling might behave as *O*(*n*<sup>5</sup>) for large number of pairs.
 
 ## 4.3.19 BCCC3b
-Block-correlated coupled cluster theory based on the GVB reference, where 3b means
-\\( \hat{{T_2}} + \hat{{T_3}} \\).
+Block-correlated coupled cluster theory based on the GVB reference, where 3b means \\( \hat{{T_2}} + \hat{{T_3}} \\).
 
-This means two-pair and three-pair correlations are considered based on the GVB
-reference. Also, this method is spin-pure. Currently only spin singlet is supported.
+This means two-pair and three-pair correlations are considered based on the GVB reference. Also, this method is spin-pure. Currently only spin singlet is supported.
 
-For practical computations with desired accuracy, you should use BCCC3b rather than
-BCCC2b. This program scales as *O*(*n*<sup>5</sup>), where *n* is the number of
-GVB pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
+For practical computations with desired accuracy, you should use BCCC3b rather than BCCC2b. This program scales as *O*(*n*<sup>5</sup>), where *n* is the number of GVB pairs. As stated in 4.3.18 BCCC2b, this program has not been released yet.
 
