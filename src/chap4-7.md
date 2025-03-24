@@ -18,13 +18,16 @@ H     0.000000    0.783976   -0.492052
 
 Different keywords in the Title Card Line can be applied:
 
-(1) RI-MP2: `mokit{}`.
-(2) MP2 NO using unrelaxed density: `mokit{noRI,NO}`.
-(3) MP2 NO using relaxed density: `mokit{noRI,NO,relaxed_dm}`.
-(4) RI-MP2 NO using unrelaxed density: `mokit{NO}`.
-(5) RI-MP2 NO using relaxed density: `mokit{NO,relaxed_dm}`.
-(6) MP2 analytical gradients: `mokit{noRI,force}`.
-(7) RI-MP2 analytical gradients: `mokit{force}`.
+| cases | keywords |
+| --- | --- |
+| MP2 energy | mokit{noRI} |
+| MP2 NO using unrelaxed density | mokit{noRI,NO} |
+| MP2 NO using relaxed density | mokit{noRI,NO,relaxed_dm} |
+| MP2 analytical gradients | mokit{noRI,force} |
+| RI-MP2 energy | mokit{} |
+| RI-MP2 NO using unrelaxed density | mokit{NO} |
+| RI-MP2 NO using relaxed density | mokit{NO,relaxed_dm} |
+| RI-MP2 analytical gradients | mokit{force} |
 
 ### 4.7.1.2 CCD, CCSD, CCSD(T), CCSD(T)-F12
 ```
@@ -80,7 +83,83 @@ mokit{DLPNO,NO,relaxed_dm}
 mokit{DLPNO,force}
 ```
 
-### 4.7.1.4 EOM-CCSD, IP-EOM-CCSD, EA-EOM-CCSD
+### 4.7.1.4 ADC, IP-ADC, EA-ADC
+RI-ADC(2) for electronic excited states
+```
+%mem=6GB
+%nprocshared=4
+#p ADC(2)/def2TZVP
+
+mokit{}
+
+0 1
+O         0.00000000     0.00000000     0.06200700
+H         0.00000000    -0.78397600    -0.49205200
+H         0.00000000     0.78397600    -0.49205200
+
+```
+
+RI-ADC(3) for electronic excited states
+```
+%mem=6GB
+%nprocshared=4
+#p ADC(3)/def2TZVP
+
+mokit{ADC_prog=PSI4}
+
+0 1
+O         0.00000000     0.00000000     0.06200700
+H         0.00000000    -0.78397600    -0.49205200
+H         0.00000000     0.78397600    -0.49205200
+
+```
+
+RI-accelerated IP-ADC(2) for ionized states
+```
+%mem=6GB
+%nprocshared=4
+#p IP-ADC(2)/def2TZVP
+
+mokit{}
+
+0 1
+O         0.00000000     0.00000000     0.06200700
+H         0.00000000    -0.78397600    -0.49205200
+H         0.00000000     0.78397600    -0.49205200
+
+```
+
+RI-accelerated EA-ADC(2) for electron attachment
+```
+%mem=6GB
+%nprocshared=4
+#p EA-ADC(2)/def2TZVP
+
+mokit{}
+
+0 1
+O         0.00000000     0.00000000     0.06200700
+H         0.00000000    -0.78397600    -0.49205200
+H         0.00000000     0.78397600    -0.49205200
+
+```
+
+ADC(2) (with RI approximation turned off) for electronic excited states
+```
+%mem=6GB
+%nprocshared=4
+#p ADC(2)/def2TZVP
+
+mokit{ADC_prog=PSI4,noRI}
+
+0 1
+O         0.00000000     0.00000000     0.06200700
+H         0.00000000    -0.78397600    -0.49205200
+H         0.00000000     0.78397600    -0.49205200
+
+```
+
+### 4.7.1.5 EOM-CCSD, IP-EOM-CCSD, EA-EOM-CCSD
 To be documented.
 
 ## 4.7.2 Keywords in `autosr`
