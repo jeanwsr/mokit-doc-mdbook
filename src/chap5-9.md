@@ -1,7 +1,7 @@
 # 5.9 Visualization of upaired electrons
 After a multiconfigurational/multireference calculation is accomplished, people often want to know where the unpaired electron is, or at which atom(s) are unpaired electrons located. 3 approaches are introduced below.
 
-## 5.9.1 Visualization via natural orbitals
+## 5.9.1 Visualization of natural orbitals
 Taking the triangulene molecule as an example  
 ![triangluene](images/triangluene.png)
 
@@ -99,7 +99,52 @@ The number of unpaired electrons are calculated based on all NOs, so they will b
 
 If you think DMRG-CASSCF calculation is too expensive, you can perform only the GVB calculation, and use GVB NOs in the `*_s.fch` file to demonstrate unpaired electrons or diradical characters.
 
-## 5.9.2 Visualization via localized active orbitals
+Note that these techniques/tricks can, of course, also be applied to the analysis of single reference calculations. For example, assuming we want to find the open-shell singlet excited state of the ethene molecule using RKS-based TDDFT. Here is the ethene.gjf file
+```
+%chk=ethene.chk
+%mem=16GB
+%nprocshared=8
+#p PBE1PBE/cc-pVDZ TD(nstates=10) nosymm int=nobasistransform density
+
+title
+
+0 1
+ C                 -1.76890146   -0.14978602    0.00000000
+ H                 -1.23573772   -1.07749094    0.00000000
+ H                 -2.83890146   -0.14978602    0.00000000
+ C                 -1.09362716    1.02519128    0.00000000
+ H                 -1.62679090    1.95289620    0.00000000
+ H                 -0.02362716    1.02519128    0.00000000
+
+
+--Link1--
+%chk=ethene.chk
+%mem=16GB
+%nprocshared=8
+#p PBE1PBE chkbasis nosymm int=nobasistransform guess(read,only,save,NaturalOrbitals) geom=allcheck
+
+```
+
+Once the the Gaussian job is accomplished, you can find the S1 state is mainly contributed by 8->9 excitation
+```
+ Excited State   1:      Singlet-?Sym    7.9680 eV  155.60 nm  f=0.3635  <S**2>=0.000
+       8 ->  9         0.70368
+       8 <-  9        -0.10343
+```
+Since TDDFT only takes one-electron excitations into consideration and RKS-based TDDFT in Gaussian is a spin-adapted method, 8->9 excitation stands for the linear combination of two Slater determinants sqrt(2)/2 (8a9b - 8b9a), which is open-shell singlet.
+
+We can double check via TDDFT NOs. Run
+```
+formchk ethene.chk ethene.fch
+```
+Natural orbitals of the S1 state are kept in `ethene.fch`. NOs with occupation numbers significantly deviate from 2.0/0.0 are
+
+![ethene_S1_NO](images/ethene_S1_NO.png)
+
+which means that the C-C pi/pi* orbital has one unpaired electron, respectively. Whether using unrelaxed or relaxed density usually does not matter here. See Section 5.9.3 below for unpaired electrons and unpaired electron density.
+
+
+## 5.9.2 Visualization of localized active orbitals
 You might notice that for the example shown above, the CASSCF occupation number of HONO happens to be almost equal to that of LUNO. It can be viewed as degenracy in occupation numbers. So we can perform orbital localization upon these 2 NOs without changing their occupation numbers. Start Python and run
 
 ```python
@@ -113,7 +158,8 @@ This trick can also be applied to high-spin triplet GVB or CASSCF calcuations, i
 
 Note that if you apply this trick to NOs which are not degenerate in occupation numbers, their occupation numbers will no longer exist, and only occupation number expectaion values exist (i.e. the occupation number matrix becomes not diagonal).
 
-## 5.9.3 Visualization via unpaired electron density
+
+## 5.9.3 Visualization of unpaired electron density
 In unrestricted DFT (UDFT) calculations, people often visualize the spin density to find where the unpaired electrons are. In multiconfigurational methods, the unpaired electron density (also called odd electron density) is often used to show the spatial distribution of unpaired electrons. Using the CASSCF NOs of the S1 state as an example, start Python and run
 
 ```python
@@ -152,4 +198,25 @@ The key idea is to make Multiwfn read the `Total SCF Density` section in .fch fi
 ![Unpaired electron density shown by Multiwfn](images/unpaired_Multiwfn.png)
 
 Of course, you can use also Multiwfn + VMD to get even better plots.
+
+Note that the unpaired electrons as well as density can, of course, also be applied to the analysis of single reference calculations (MP2, CCSD, TDDFT, etc). Taking the S1 natural orbtial file `ethene.fch` as an example, running the following Python script
+
+```python
+from mokit.lib.wfn_analysis import calc_unpaired_from_fch
+calc_unpaired_from_fch(fchname='ethene.fch',wfn_type=3,gen_dm=True)
+```
+
+The number of unpaired electrons are printed on the screen
+```
+----------------------- Radical index -----------------------
+biradical character y0 = n_LUNO =  0.988
+tetraradical character y1 = n_{LUNO+1} =  0.021
+Yamaguchi's unpaired electrons  (sum_n n(2-n)      ):  2.169
+Head-Gordon's unpaired electrons(sum_n min(n,(2-n))):  2.060
+Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  2.004
+-------------------------------------------------------------
+```
+where an open-shell singlet species is supposed to have about 2.0 unpaired electrons. Besides, the file `ethene_unpaired.fch` is generated and the unpaired electron density is located on two C atoms
+
+![Unpaired electron density of ethene S1 state](images/unpaired_dm_ethene.png)
 
