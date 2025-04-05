@@ -327,7 +327,8 @@ DO NOT modify the default value unless you are an experienced user.
 Request the exclusion of inactive X-H bonds after normal GVB computation finished. For example, a normal GVB computation of the benzene molecule using cc-pVDZ basis set will lead to 15 pairs in total, which contains 9 pairs of C-C bonds and 6 pairs of C-H bonds. If the keyword `excludeXH` is specified in `mokit{}`, then a GVB(9) computation containing only C-C bonds will be automatically performed after GVB(15).
 
 ## 4.4.38 NMR
-Request the calculation of nuclear shielding constants. Currently only the CASSF method is supported. Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shielding tensors. Note that:
+Request the calculation of nuclear shielding constants. Currently only the CASSCF method is supported. 
+Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shielding tensors. Note that:
 
 (1) This keyword should be written in mokit{}, not in the Gaussian keyword line `#p ...`.
 
@@ -345,9 +346,9 @@ If you want ICSS, please read [5.4.1 ICSS of the ground state of cyclobutadiene]
 (7) MOKIT assumes the user uses 32-bit integer Dalton. The maximum memory allowed for 32-bit integer Dalton is around 16GB. So MOKIT will automatically reduce the memory to 16GB if the user specify >16GB in a NMR job.
 
 ## 4.4.39 ICSS
-Request the calculation ICSS (Isochemical Shielding Surfaces). Currently only the
-CASSF method is supported. Gauge-Independent Atomic Orbital (GIAO) method is used
-to compute the NMR shieldings. See the example `$MOKIT_ROOT/examples/automr/16-C4H4.gjf`.
+Request the calculation ICSS (Isochemical Shielding Surfaces). Currently only the CASSCF method is supported. 
+Gauge-Independent Atomic Orbital (GIAO) method is used to compute the NMR shieldings. 
+See the example `$MOKIT_ROOT/examples/automr/16-C4H4.gjf`.
 Note that:
 
 (1) This keyword should be written in `mokit{}`, not in the Gaussian keyword line (#p ...).
