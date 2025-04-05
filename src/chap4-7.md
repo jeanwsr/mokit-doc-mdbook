@@ -170,7 +170,7 @@ There are quite a few keywords that do the same thing here as in `automr`, as fo
 
 Search them in [Section 4.4](./chap4-4.md) for their usage.
 
-### 4.7.2.1 Sepcify programs for each step
+### 4.7.2.1 Specify programs for each step
 
 #### HF_prog
 Supported programs are Gaussian/PySCF/PSI4/ORCA.

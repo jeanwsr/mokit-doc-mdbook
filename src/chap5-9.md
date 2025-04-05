@@ -64,11 +64,13 @@ triangulene_cc-pVDZ_S_uhf_uno_asrot2gvb11_s.fch
 triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch
 ```
 
-which include UHF natural orbitals (UNOs), GVB NOs, and CASSCF NOs, respectively. Choose a file, open it using GaussView, click `MO Editor`, and click `Visualize` (if it is in grey color and cannot be clicked, it implies that you need to install the Gaussian software). By default, the 72th and 73th NOs are supposed to be highlighted. If they are not, you can click/choose them to be highlighted. Change `Isovalue` if you want (0.04 will be used in the following figures). Finally, click `Update` and wait for a few seconds. Here are the HONO and LUNO of GVB and DMRG-CASSCF calculations, respectively
+which include UHF natural orbitals (UNOs), GVB NOs, and CASSCF NOs, respectively. 
+Choose a file, open it using GaussView, click `MO Editor`, and click `Visualize` (if it is in grey color and cannot be clicked, it implies that you need to install the Gaussian software). By default, the 72th and 73th NOs are supposed to be highlighted. If they are not, you can click/choose them to be highlighted. Change `Isovalue` if you want (0.04 will be used in the following figures). Finally, click `Update` and wait for a few seconds. 
+Here are the HONO and LUNO of GVB and DMRG-CASSCF calculations, respectively
 
 ![HONO and LUNO from GVB and CASSCF](images/HONO_LUNO.png)
 
-(NOONs are shown below correponding orbitals)
+(NOONs are shown below corresponding orbitals)
 
 The natural orbital occupation numbers (NOONs) of HONO and LUNO are close to 1.0, which means 1 unpaired electron is occupied in each of these orbitals. It can be seen that these NOs are somewhat delocalized, but mainly with C_1 and C_18 the largest populations. So the following skeletal formula may represent the molecule better
 
@@ -95,7 +97,7 @@ Head-Gordon's unpaired electrons(sum_n (n(2-n))^2  ):  2.531
 -------------------------------------------------------------
 ```
 
-The number of unpaired electrons are calculated based on all NOs, so they will be slightly larger than 2 (the definition sum_n (n(2-n))^2 is recommended). Anyway, we know that there exists 2 unpaired eletrons for the S1 state of this molecule.
+The number of unpaired electrons are calculated based on all NOs, so they will be slightly larger than 2 (the definition sum_n (n(2-n))^2 is recommended). Anyway, we know that there exists 2 unpaired electrons for the S1 state of this molecule.
 
 If you think DMRG-CASSCF calculation is too expensive, you can perform only the GVB calculation, and use GVB NOs in the `*_s.fch` file to demonstrate unpaired electrons or diradical characters.
 
@@ -145,7 +147,8 @@ which means that the C-C pi/pi* orbital has one unpaired electron, respectively.
 
 
 ## 5.9.2 Visualization of localized active orbitals
-You might notice that for the example shown above, the CASSCF occupation number of HONO happens to be almost equal to that of LUNO. It can be viewed as degenracy in occupation numbers. So we can perform orbital localization upon these 2 NOs without changing their occupation numbers. Start Python and run
+You might notice that for the example shown above, the CASSCF occupation number of HONO happens to be almost equal to that of LUNO. It can be viewed as degeneracy in occupation numbers. So we can perform orbital localization upon these 2 NOs without changing their occupation numbers. 
+Start Python and run
 
 ```python
 from mokit.lib.gaussian import loc
@@ -154,9 +157,9 @@ loc(fchname='triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO.fch',idx=range(71,73))
 
 Then a file named `triangulene_cc-pVDZ_S_uhf_gvb11_CASSCF_NO_LMO.fch` is obtained. These two active orbitals will become a little more localized.
 
-This trick can also be applied to high-spin triplet GVB or CASSCF calcuations, in which there will be (at least) two unpaired alpha electrons in GVB or CASSCF NOs. Whenever singly occupied orbitals are delocalized, orbital localization will do much help.
+This trick can also be applied to high-spin triplet GVB or CASSCF calculations, in which there will be (at least) two unpaired alpha electrons in GVB or CASSCF NOs. Whenever singly occupied orbitals are delocalized, orbital localization will do much help.
 
-Note that if you apply this trick to NOs which are not degenerate in occupation numbers, their occupation numbers will no longer exist, and only occupation number expectaion values exist (i.e. the occupation number matrix becomes not diagonal).
+Note that if you apply this trick to NOs which are not degenerate in occupation numbers, their occupation numbers will no longer exist, and only occupation number expectation values exist (i.e. the occupation number matrix becomes not diagonal).
 
 
 ## 5.9.3 Visualization of unpaired electron density

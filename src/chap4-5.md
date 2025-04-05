@@ -269,7 +269,7 @@ Generate a Molpro .com file from a Gaussian .fch(k) file, with alpha MOs written
 ```
 fch2com h2o.fch
 ```
-Files `h2o.com` and `h2o.a` would be generated. If UHF-type wave function is involved, `h2o.b` woud also be generated. This is used for transferring R(O)HF, UHF or CASSCF orbitals.
+Files `h2o.com` and `h2o.a` would be generated. If UHF-type wave function is involved, `h2o.b` would also be generated. This is used for transferring R(O)HF, UHF or CASSCF orbitals.
 
 (2) a special case
 ```

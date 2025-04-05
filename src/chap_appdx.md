@@ -274,7 +274,7 @@ A22: If you are using MOKIT from conda: currently there're two approaches to avo
 (1) If you are using MOKIT from default channel, please check:
 
 * no packages used from `conda-forge` channel. One can do `conda list | grep libg` to check if some packages in the environment come from `conda-forge`. Since currently pyscf's conda package needs `conda-forge`, you can install pyscf from pip in this case if pyscf is needed. If for some reason you have to enable `conda-forge` channel, please go to approach (2).
-<!--The python modules provided by MOKIT (conda installation) should work with `libgomp` version 11, which is usually statisfied by environments recently created by conda, regardless of the version of conda, the version of python and the version of Anaconda/miniconda distribution. 
+<!--The python modules provided by MOKIT (conda installation) should work with `libgomp` version 11, which is usually satisfied by environments recently created by conda, regardless of the version of conda, the version of python and the version of Anaconda/miniconda distribution. 
 
 The version of `libgomp` may be different in some rare conditions. Here is one of them: it comes from `conda-forge` instead of `defaults` channel, which is probably caused by installing numpy or other packages from `conda-forge`. One can do `conda list | grep libgomp` to check that.--> 
 * package `blas` should be `*mkl` instead of `*openblas`. Do `conda list | grep blas` to check it. See [issues/19](https://gitlab.com/jxzou/mokit/-/issues/19) to make it right.
@@ -289,7 +289,7 @@ If you don't need pyscf, remove `pyscf`,`-c pyscf` in the command.
 Usually, option 1 is simple enough, safe, and less tricky. However, sometimes one may really need something from `conda-forge` (some pytorch related stuff), then option 2 is worth a try.
 -->
 
-If you are compiling MOKIT from source, there's a workround: add `-lgomp` to `F2_FLAGS` in the Makefile. See [issues/29](https://gitlab.com/jxzou/mokit/-/issues/29) for more information.
+If you are compiling MOKIT from source, there's a workaround: add `-lgomp` to `F2_FLAGS` in the Makefile. See [issues/29](https://gitlab.com/jxzou/mokit/-/issues/29) for more information. After 1.2.7rc4 we have made this as default so this should not be a problem any more.
 
 
 ### Q23: difference between GAMESS .dat files
@@ -323,9 +323,9 @@ The MO coefficients in `xxx2gvb4_s.dat`/`xxx2gvb4_s.fch` are in GAMESS/Gaussian 
 
 
 ### Q25: dimensions of MOs in GAMESS .inp/.dat files
-GAMESS sopports both spherical harmonic functions (5D 7F) and Cartesian functions (6D 10F). It is controlled by the `ISPHER` keyword in the GAMESS `.inp` file. Some people thinks that GAMESS only supports `6D 10F` (unfortunately, this is not the truth). If you perform any ab inito calculation for the water molecule using cc-pVDZ, you will find the number of MOs is 24. The dimension of MOs in .fch file is 24\*24, while the the dimension of MOs in .dat file is 24\*25. This is because GAMESS always adopts Cartesian-type MO coefficients.
+GAMESS supports both spherical harmonic functions (5D 7F) and Cartesian functions (6D 10F). It is controlled by the `ISPHER` keyword in the GAMESS `.inp` file. Some people thinks that GAMESS only supports `6D 10F` (unfortunately, this is not the truth). If you perform any ab inito calculation for the water molecule using cc-pVDZ, you will find the number of MOs is 24. The dimension of MOs in .fch file is 24\*24, while the the dimension of MOs in .dat file is 24\*25. This is because GAMESS always adopts Cartesian-type MO coefficients.
 
-When you use `5D 7F`, GAMESS uses `5D 7F` in the code during computation; but when printing MOs into the .dat file, these MOs will be exapanded to obtain new MOs based on Cartesian-type basis functions. When transforming MOs from .dat to .fch file, the `dat2fch` utility needs to contract the Cartesian-type MOs (24\*25) back into spherical harmonic type MOs (24\*24) and then print them into .fch file. When transforming MOs from .fch to .dat file, the `fc2inp` utility needs to expand spherical harmonic type MOs (24\*24) to Cartesian-type MOs (24\*25) and then print them into .inp file. The permutations of MO coefficients are also needed besides contraction/expansion.
+When you use `5D 7F`, GAMESS uses `5D 7F` in the code during computation; but when printing MOs into the .dat file, these MOs will be expanded to obtain new MOs based on Cartesian-type basis functions. When transforming MOs from .dat to .fch file, the `dat2fch` utility needs to contract the Cartesian-type MOs (24\*25) back into spherical harmonic type MOs (24\*24) and then print them into .fch file. When transforming MOs from .fch to .dat file, the `fc2inp` utility needs to expand spherical harmonic type MOs (24\*24) to Cartesian-type MOs (24\*25) and then print them into .inp file. The permutations of MO coefficients are also needed besides contraction/expansion.
 
 When you use `6D 10F`, GAMESS uses `6D 10F` in the code during computation, and printing the same MOs into the .dat file. The dimension of MOs in .dat/.fch files are both 24\*25. In such case, contraction/expansion is not needed for `dat2fch` or `fch2inp`, but permutations of MO coefficients are still needed.
 

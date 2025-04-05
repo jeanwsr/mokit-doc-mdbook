@@ -279,7 +279,7 @@ from mokit.lib.wfn_analysis import calc_unpaired_from_gms_out
 calc_unpaired_from_gms_out(outname='00-h2o_cc-pVDZ_1.5_uhf_uno_asrot2gvb4.gms')
 ```
 
-Reference for these two types of unpaired eletrons:  
+Reference for these two types of unpaired electrons:  
 [1] Theoret. Chim. Acta (Berl.) 48, 175-183 (1978). DOI: 10.1007/BF00549017.  
 [2] Chemical Physics Letters 372 (2003) 508–511. DOI: 10.1016/S0009-2614(03)00422-6.
 
@@ -563,7 +563,7 @@ rotate_atoms_wfn(fchname, coor_file)
 permute_atoms_wfn(fchname, coor_file)
 geom_lin_intrplt(gjfname1, gjfname2, n)
 ```
-The `rmsd_wrapper` function is able to calculate the RMSD value between two molecules. The input files can be any type of xyz/gjf/fch. For exemple,
+The `rmsd_wrapper` function is able to calculate the RMSD value between two molecules. The input files can be any type of xyz/gjf/fch. For example,
 
 ```python
 from mokit.lib.mirror_wfn import rmsd_wrapper
@@ -574,7 +574,7 @@ Note that two molecules can be in different orientations, since RMSD calculation
 
 <br>
 
-The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For exmaple, if we provide a chiral molecule with R-chirality on the carbon center,
+The `mirror_wfn` function transforms a molecule into its mirror image by multiplying all z-components of Cartesian coordinates with -1. Besides, the MO coefficients as well as density matrix in the .fch(k) file are updated. For example, if we provide a chiral molecule with R-chirality on the carbon center,
 
 ```python
 from mokit.lib.mirror_wfn import mirror_wfn
@@ -583,7 +583,7 @@ mirror_wfn('CHFClBr_R.fch')
 
 the function `mirror_wfn` will return a file named `CHFClBr_R_m.fch`, where `_m` means mirror. This new file includes new Cartesian coordinates with S-chirality, updated MO coefficients, total density matrix and spin density matrix (if it was in the CHFClBr_R.fch file).
 
-If you start with the file `CHFClBr_R.chk`, not `CHFClBr_R.fch`, and you want to get the .chk file of the mirror image, you can use the function `mirror_c2c`, which is a wrapper of `formchk -> mirror_wfn -> unfchk`. For exemple,
+If you start with the file `CHFClBr_R.chk`, not `CHFClBr_R.fch`, and you want to get the .chk file of the mirror image, you can use the function `mirror_c2c`, which is a wrapper of `formchk -> mirror_wfn -> unfchk`. For example,
 
 ```python
 from mokit.lib.mirror_wfn import mirror_c2c

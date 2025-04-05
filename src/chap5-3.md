@@ -37,7 +37,7 @@ In the Title Card line, `{morokuma}` is written to tell the utility `frag_guess_
 
 (1) Only the RHF method can be used. ROHF, UHF or any DFT methods cannot be used. Both the total system and every fragment should be treated with RHF. This means broken bonds cannot be dealt with.
 
-(2) Spherical harmonic functions cannot be used. The utility `frag_guess_wfn` will automatically switch to Cartesian fucntions (i.e. 6D 10F) when calling Gaussian to perform SCF computations.
+(2) Spherical harmonic functions cannot be used. The utility `frag_guess_wfn` will automatically switch to Cartesian functions (i.e. 6D 10F) when calling Gaussian to perform SCF computations.
 
 Assuming the filename is `nh3_h2o.gjf`, you simply need to run
 ```

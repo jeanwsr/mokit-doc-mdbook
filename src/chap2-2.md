@@ -5,7 +5,7 @@ This section goes over several installing approaches that, unlike [Section 2.3](
 1. Install from conda (for Linux only). Binary package is provided in this approach.
 2. Use homebrew build (for MacOS only). Although there's no binaries for MacOS yet, this approach will build it automatically.
 3. Manually download pre-built Linux binaries (it's not a conda package). 
-    > Unlike conda, this approach will not take care of dependency versions (like numpy) for you, and you need to set environment variables manually. So this approach is usually not recomended. 
+    > Unlike conda, this approach will not take care of dependency versions (like numpy) for you, and you need to set environment variables manually. So this approach is usually not recommended. 
     >
     > However, this approach does not require network, which may be a reason for choosing it.
 
@@ -111,10 +111,9 @@ Also assume you use mokit in a py-39 environment.
 
 ```
 brew install ansatzx/homebrew-mokit/mokit --with-py39 --HEAD
-
 ```
 
-Finally, follow caveats guides, add these commmand in your `~/.zshrc` (or bash/fish etc. profile).
+Finally, follow caveats guides, add these environment variables in your `~/.zshrc` (or bash/fish etc. profile).
 
 You can run `brew info mokit` to check details.
 
