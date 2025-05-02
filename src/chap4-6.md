@@ -1,6 +1,16 @@
 # 4.6 APIs in MOKIT
 Currently only Python APIs are provided. C/C++ APIs may be provided in the future. 
 
+Table of Content
+
+* [4.6.1 APIs from `gaussian` and `rwwfn` module](#461-apis-from-gaussian-and-rwwfn-module)
+* [4.6.2 APIs related to PDB file](#462-apis-related-to-pdb-file)
+* [4.6.3 Other wavefunction APIs](#463-other-wavefunction-apis)
+* [4.6.4 Other functions in rwwfn](#464-other-functions-in-rwwfn)
+* [4.6.5 The py2xxx modules](#465-the-py2xxx-modules)
+* [4.6.6 The qchem module](#466-the-qchem-module)
+* [4.6.7 The mirror_wfn module](#467-the-mirror_wfn-module)
+
 
 ## 4.6.1 APIs from `gaussian` and `rwwfn` module
 
@@ -42,11 +52,19 @@ where the module gaussian is actually the file `$MOKIT_ROOT/mokit/lib/gaussian.p
 Perform orbital localization for a given .fch(k) file. Two localization methods are supported: Foster-Boys or Pipek-Mezey. For example, run python in Shell
 ```python
 from mokit.lib.gaussian import loc
-loc(fchname='benzene_5D7F_rhf.fchk', method='pm', idx=range(6,21))
+loc(fchname='benzene_5D7F_rhf.fchk', idx=range(6,21), method='pm')
 ```
-Only 'boys' or 'pm' is allowed for the 2nd argument. You should specify the orbital indices or range in the 3rd argument. Note that the starting integer index is 0 in Python convention, and the final index cannot be reached. So range(6,21) means orbitals 7-21, which are valence occupied orbitals for benzene. The localized orbitals will be exported/written into a new file with suffix `*_LMO.fch` (in this case, it is benzene_5D7F_rhf_LMO.fch).
+The method option can be either 'boys' or 'pm'. You should specify the orbital indices or range in the `idx` argument. Note that the starting integer index is 0 in Python convention, and the final index cannot be reached. So range(6,21) means orbitals 7-21, which are valence occupied orbitals for benzene. The localized orbitals will be exported/written into a new file with suffix `*_LMO.fch` (in this case, it is `benzene_5D7F_rhf_LMO.fch`).
 
 For system containing only \\( \sigma \\) bonds, these two methods make little difference. While for system containing \\( \sigma \\) and \\( \pi \\) bonds, the Boys localization method tends to mix \\( \sigma \\) and \\( \pi \\) bonds, which leads to 'banana' bonds. The PM localization method tends to keep \\( \sigma \\) and \\( \pi \\) separated. If you want to analyze localized \\( \pi \\) bonds after localization, you should choose `method='pm'`.
+
+For PBC orbital localization the `pbc_loc` function can be used. For example, the following code performs orbital localization with a given CP2K .molden file.
+```python
+from mokit.lib.gaussian import pbc_loc
+pbc_loc('water64-MOS-1_0.molden', box=np.eye(3)*12.42, method='berry')
+```
+The method can be either 'berry' or 'pm'. The wannier centers of the localized orbitals will be exported into a new file with suffix `*_wannier.xyz` by default.
+
 
 ### 4.6.1.3 uno
 Generate UHF natural orbitals(UNOs) from a given Gaussian .fch(k) file. For example
