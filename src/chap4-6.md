@@ -181,7 +181,7 @@ Argument `istate`: the *i*-th excited state. For example, i=1 for the first exci
 The last python statement means exporting the transition density matrix into a plain text file, see the API below.
 
 ### 4.6.1.12 export_mat_into_txt
-Export a square matrix into a plain text file. The example of exporting transition density matrix is shown in Section 4.6.11. Here I offer one more example - export the lower triangle of a symmetric AO-basis overlap matrix
+Export a square matrix into a plain text file. The example of exporting transition density matrix is shown in Section 4.6.1.11. Here I offer one more example - export the lower triangle of a symmetric AO-basis overlap matrix
 
 ```python
 from mokit.lib import rwwfn
