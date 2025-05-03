@@ -24,7 +24,7 @@ Table of Content
 6. read_int1e_from_gau_log(logname, itype, nbf)
 7. read_mo_from_fch(fchname, nbf, nif, ab)
 8. read_density_from_gau_log(logname, itype, nbf)
-9. read_density_from_fch(fchname, itype, nbf)
+9. read_dm_from_fch(fchname, itype, nbf)
 10. write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
 11. gen_ao_tdm(logname, nbf, nif, mo, istate)
 12. export_mat_into_txt(txtname, n, mat, lower, label)
@@ -127,12 +127,12 @@ den = rwwfn.read_density_from_gau_log(logname='00-h2o_cc-pVDZ_1.5.log', itype=2,
 argument `itype`:  
 1/2/3 for Total/Alpha/Beta Density Matrix.
 
-### 4.6.1.9 read_density_from_fch
+### 4.6.1.9 read_dm_from_fch
 Read various types of density matrix from a Gaussian .fch(k) file. For example, read the Total SCF Density from a .fchk file
 
 ```python
 from mokit.lib import rwwfn
-den = rwwfn.read_density_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
+den = rwwfn.read_dm_from_fch(fchname='00-h2o_cc-pVDZ_1.5.fchk',itype=1,nbf=24)
 ```
 
 | itype | type of density | itype | type of density |
@@ -152,7 +152,7 @@ Write a PySCF density matrix into a given Gaussian .fch(k) file. This module doe
 write_pyscf_dm_into_fch(fchname, nbf, dm, itype, force)
 ```
 
-where `dm` is the PySCF density matrix with dimension (nbf,nbf). `itype` has the same meaning with that in [read_density_from_fch](#4619-read_density_from_fch). `force` is a bool variable, and its meaning is:
+where `dm` is the PySCF density matrix with dimension (nbf,nbf). `itype` has the same meaning with that in [read_dm_from_fch](#4619-read_dm_from_fch). `force` is a bool variable, and its meaning is:
 
 (1) If the string corresponding to `itype` (e.g. 'Total SCF Density') can be found/located in the given .fch file, this parameter will not be used, i.e. setting True/False does not matter.
 
@@ -399,6 +399,7 @@ read_mo_from_orb(orbname, nbf, nif, ab, mo)
 read_mo_from_xml(xmlname, nbf, nif, ab, mo)  
 read_mo_from_bdf_orb(orbname, nbf, nif, ab, mo)  
 read_mo_from_dalton_mopun(orbname, nbf, nif, coeff)  
+read_mo_from_mos(fname, nbf, nif, coeff)
 write_mo_into_fch(fchname, nbf, nif, ab, mo)  
 write_mo_into_psi_mat(matfile, nbf, nif, mo)  
 copy_orb_and_den_in_fch(fchname1, fchname2, deleted)  
@@ -422,14 +423,15 @@ write_on_to_orb(orbname, nif, ab, on, replace)
 ### 4.6.4.3 read/write basic information
 
 ```
-modify_IROHF_in_fch(fchname, k)  
+modify_irohf_in_fch(fchname, k)  
 read_mult_from_fch(fchname, mult)  
 read_charge_and_mult_from_fch(fchname, charge, mult)  
-read_charge_and_mult_from_mkl(mklname, charge, mult)  
+read_charge_and_mult_from_mkl(mklname, charge, mult)
+modify_charge_and_mult_in_fch(fchname, charge, mult) 
 read_na_and_nb_from_fch(fchname, na, nb)  
 read_nbf_and_nif_from_fch(fchname, nbf, nif)  
 read_nbf_and_nif_from_orb(orbname, nbf, nif)  
-read_nbf_from_dat(datname, nbf)  
+read_cart_nbf_from_dat(datname, nbf)  
 read_ncontr_from_fch(fchname, ncontr)  
 read_shltyp_and_shl2atm_from_fch(fchname, k, shltyp, shl2atm)  
 ```
@@ -438,14 +440,16 @@ read_shltyp_and_shl2atm_from_fch(fchname, k, shltyp, shl2atm)
 
 ```
 read_ovlp_from_molcas_out(outname, nbf, S)  
-write_density_into_fch(fchname, nbf, total, dm)  
+write_dm_into_fch(fchname, nbf, total, dm)  
+copy_dm_between_fch(fchname1, fchname2, itype, total)
 detect_spin_scf_density_in_fch(fchname, alive)  
 add_density_str_into_fch(fchname, itype)  
 update_density_using_mo_in_fch(fchname)  
 update_density_using_no_and_on(fchname)  
 read_ao_ovlp_from_47(file47, nbf, S)  
 ```
-See also [4.6.1.6](#4616-read_int1e_from_gau_log), [4.6.1.8](#4618-read_density_from_gau_log), [4.6.1.9](#4619-read_density_from_fch), [4.6.1.10](#46110-write_pyscf_dm_into_fch).
+See also [4.6.1.6](#4616-read_int1e_from_gau_log), [4.6.1.8](#4618-read_density_from_gau_log), 
+[4.6.1.9](#4619-read_dm_from_fch), [4.6.1.10](#46110-write_pyscf_dm_into_fch).
 
 ### 4.6.4.5 read energy and other results
 
@@ -468,10 +472,9 @@ read_mrpt_energy_from_molpro_out(outname, itype, ref_e, corr_e)
 read_mrpt_energy_from_orca_out(outname, itype, ref_e, corr_e)  
 read_mrpt_energy_from_gms_out(outname, ref_e, corr_e)  
 read_mrpt_energy_from_bdf_out(outname, itype, ref_e, corr_e, dav_e)  
-read_mrcisd_energy_from_output(CtrType, mrcisd_prog, outname, ptchg_e, nuc_pt_e, davidson_e, e)  
+read_mrci_energy_from_output(CtrType, mrcisd_prog, outname, ptchg_e, nuc_pt_e, davidson_e, e)  
 read_mcpdft_e_from_output(prog, outname, ref_e, corr_e)  
 find_npair0_from_dat(datname, npair, npair0)  
-find_npair0_from_fch(fchname, nopen, npair0)  
 read_no_info_from_fch(fchname, nbf, nif, ndb, nopen, nacta, nactb, nacto, nacte)  
 ```
 
@@ -479,11 +482,14 @@ read_no_info_from_fch(fchname, nbf, nif, ndb, nopen, nacta, nactb, nacto, nacte)
 
 ```
 determine_sph_or_cart(fchname, cart)  
-check_cart(fchname, cart)  
-check_sph(fchname, sph)  
+check_cart_in_fch(fchname, cart)  
+check_sph_in_fch(fchname, sph)  
 check_if_uhf_equal_rhf(fchname, eq)  
-get_no_from_density_and_ao_ovlp(nbf, nif, P, ao_ovlp, noon, new_coeff)  
+gen_no_from_density_and_ao_ovlp(nbf, nif, P, ao_ovlp, noon, new_coeff)  
 get_1e_exp_and_sort_pair(mo_fch, no_fch, npair)
+sort_no_by_noon(fchname, i1, i2)
+get_core_valence_sep_idx(fchname, idx)
+fch_r2u(fchname, brokensym)
 ```
 
 ## 4.6.5 The py2xxx modules
