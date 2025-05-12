@@ -12,10 +12,11 @@ If any of those cannot solve your problem, please consider [Bug report](#a3-bug-
 | --- | --- | --- |
 | [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) | [OpenMolcas: Error in keyword](#q5-openmolcas-error-in-keyword) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
 | [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-gamess-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
-| [PySCF: has no attribute mo_occ](#q10-pyscf-has-no-attribute-mo_occ) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
+| [GAMESS: gamess.01.x could not be found](#q7-gamess-error-dimensions-exceeded) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
 | [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for radial grid](#q16-gks-eda-warning-for-radial-grid) | 
 | [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
 | [undefined symbol GOMP](#q22-undefined-symbol-gomp) | | |
+<!-- q7 is quite frequent so place two entries for it -->
 
 Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
 
@@ -106,17 +107,16 @@ For PySCF and OpenMolcas, the `python` and `pymolcas` executable are used direct
 
 ### Q7: GAMESS: ERROR DIMENSIONS EXCEEDED
 What are the possible reasons and solutions of the following errors
-```
-(1) '***** ERROR **** DIMENSIONS EXCEEDED *****'
-(2) 'PAIR=   xx MAX=   12'
-(3) 'DDI Error: Could not initialize xx shared memory segments.'
-(4) 'DDI was compiled to support 32 shared memory segments.'
-(5) 'The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x
-could not be found in directory ...'
-```
+
+1. `***** ERROR **** DIMENSIONS EXCEEDED *****`
+2. `PAIR=   xx MAX=   12`
+3. `DDI Error: Could not initialize xx shared memory segments.`
+4. `DDI was compiled to support 32 shared memory segments.`
+5. `The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x could not be found in directory ...`
+
 in GAMESS .gms file (where xx is an integer >12)?
 
-A7: Please read Section 4.4.10 carefully.
+A7: Please read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully.
 
 
 ### Q8: GAMESS: semget errno=ENOSPC 
@@ -129,10 +129,11 @@ A8: Please search `ENOSPC` on [this FAQ](https://github.com/gms-bbg/faq) of GAME
 I found the error `DDI Process 0: trapped a floating point error (SIGFPE).`
 How to solve it?
 
-A9: See this page https://github.com/gms-bbg/gamess-issues/issues/40.
+A9: See this page [gamess-issues/issues/40](https://github.com/gms-bbg/gamess-issues/issues/40).
 
 
 ### Q10: PySCF: has no attribute mo_occ
+<!-- to be moved to old questions? -->
 I found the following error
 ```
 AttributeError: 'CASSCF' object has no attribute 'mo_occ'
@@ -255,9 +256,9 @@ Besides, to better compare the cost (of time) between the human and automatic ap
 
 
 ### Q20: GKS-EDA: SCF fail
-Why does the GKS-EDA jobs fail even if I used the utility frag_guess_wfn to generate GAMESS .inp file?
+Why does the GKS-EDA jobs fail even if I used the utility `frag_guess_wfn` to generate GAMESS .inp file?
 
-A20: Try to modify 'DIIS=.F. SOSCF=.T.' to 'DIIS=.T. SOSCF=.F.' in the .inp file, and re-submit the job (remember to remove temporary files before re-submitting).
+A20: Try to modify `DIIS=.F. SOSCF=.T.` to `DIIS=.T. SOSCF=.F.` in the .inp file, and re-submit the job (remember to remove temporary files before re-submitting).
 
 
 ### Q21: my computation so slow!
