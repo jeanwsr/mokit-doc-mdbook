@@ -246,13 +246,9 @@ those of `hardwfn`) into the CAS input files to ensure a better convergence. Not
 usually you do not need this keyword, and it is useless if you specify other programs
 as the CAS solver.
 
-For example, when the N<sub>2</sub> molecule is stretched to *d*(N-N) = 4.0 Å, this is
-a system which features strong correlation and requires a CAS(6,6) active space.
-The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may
-not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn`
-will increase the NSTATE to 10, so that the singlet state can be found.
+For example, when the N<sub>2</sub> molecule is stretched to *d*(N-N) = 4.0 Å, this is a system which features strong correlation and requires a CAS(6,6) active space. The Davidson iterative diagonalization in determinant CASCI (using GAMESS) may not find the singlet state in the lowest 5 states. In this case, specifying `crazywfn` will increase the NSTATE to 10, so that the singlet state can be found.
 
-## 4.4.25 charge
+## 4.4.25 Charge
 This keyword has identical meaning with the same keyword in Gaussian software, i.e. including background point charges in calculations. This keyword is supported for almost all methods in `automr`. Methods which are incompatible with background point charges will signal errors immediately. The charge-charge and charge-nuclei interaction energies are both included in all electronic energies printed (UHF, GVB, CASSCF, NEVPT2, etc).
 
 The including of background point charges is useful for QM/MM calculations or fragmentation-based linear scaling methods (like GEBF, Many-body expansion, etc).
@@ -261,11 +257,40 @@ Note: please write this keyword in `mokit{}`. DO NOT WRITE this keyword in the R
 Section of .gjf file (i.e. '#p ...' line).
 
 ## 4.4.26 OtPDF
-The choice of the on-top pair density functional. This keyword has identical meaning with the keyword KSDFT in (Open)Molcas software. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. For more details please refer to the Molcas manual. Note that the available functionals depends on your version of OpenMolcas or GAMESS. Old versions may not support some of the functionals.
+Specify the on-top pair density functional in a MC-PDFT calculation. This keyword has identical meaning with the keyword `KSDFT`/`FUNC` in `&MCPDFT` of (Open)Molcas. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. The functional name must be included in a pair of **singlet quotes**, i.e. `OtPDF='tPBE'`. The MC-PDFT output of `automr` would look like
+```
+Enter subroutine do_mcpdft...
+MC-PDFT based on CASSCF orbitals.
+MC-PDFT(4e,4o) using program openmolcas
+$pymolcas -nt 6 h2o_uhf_gvb4_CASSCF_MCPDFT.input >h2o_uhf_gvb4_CASSCF_MCPDFT.out 2>&1
 
-Note that for Openmolcas >= v22.02, the on-top pair density functional keywords in .input file of OpenMolcas have been changed to T:PBE, FT:PBE, etc. The user need not worry about this problem in MOKIT, since `automr` will automatically detect the version of OpenMolcas and change the keyword tPBE into T:PBE if needed.
+E(ref)      =       -75.90823031 a.u.
+E(MC-PDFT)  =       -76.14952255 a.u.
+E(TPBE) =       -76.14952255 a.u.
+Leave subroutine do_mcpdft at Sat May 24 22:57:19 2025
+```
+where the `E(MC-PDFT)` is equal to `E(TPBE)` since only one functional tPBE is used here.
 
-Note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
+Users often want to compare energies calculated by different on-top pair density functionals. In such case, one can specify more than one functional such as `OtPDF='tBLYP;tPBE'`. There is no need to run another MC-PDFT job. When there are multiple functionals, they must be separated by the symbol `;`, please do not write any spacing ` ` or comma `,` in this pair of **singlet quotes**. The MC-PDFT output of `automr` would look like
+```
+Enter subroutine do_mcpdft...
+MC-PDFT based on CASSCF orbitals.
+MC-PDFT(4e,4o) using program openmolcas
+$pymolcas -nt 6 h2o_uhf_gvb4_CASSCF_MCPDFT.input >h2o_uhf_gvb4_CASSCF_MCPDFT.out 2>&1
+
+E(ref)      =       -75.90823031 a.u.
+E(MC-PDFT)  =       -76.21854605 a.u.
+E(TBLYP) =       -76.21854605 a.u.
+E(TPBE) =       -76.14952255 a.u.
+Leave subroutine do_mcpdft at Sat May 24 23:05:32 202
+```
+where the electronic energy of each functional is printed. `E(MC-PDFT)` is always equal to the 1st functional specified in `OtPDF='tPBE;tBLYP'`. If the keyword `Force` is also specified in `mokit{}`, only the analytical gradients of the 1st functional would be calculated.
+
+For more details of on-top functionals, please refer to the (Open)Molcas manual. Note that the available functionals depends on your version of OpenMolcas or GAMESS. Old versions may not support some of the functionals.
+
+Note that for Openmolcas >= v22.02, the on-top pair density functional keywords in .input file of OpenMolcas have been changed to T:PBE, FT:PBE, etc. The user need not worry about this problem in MOKIT, since `automr` will automatically detect the version of OpenMolcas and change the keyword tPBE into T:PBE if needed. Note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2).
+
+See related keywords [MCPDFT_prog](#4420-mcpdft_prog) and [Force](#447-force).
 
 ## 4.4.27 DKH2
 Request the 2nd order scalar relativistic Douglas–Kroll–Hess (DKH2) correction to the one-electron Hamiltonian. Note that: (1) The two keywords DKH2 and X2C are mutually exclusive, i.e. you can only write one of them. (2) You should use all-electron basis sets like 'cc-pVTZ-DK', 'x2c-TZVPall' or 'ANO-RCC-VDZ' for all-electron relativistic calculations. Pseudopotential should not be used. (3) It is strongly not recommended to use Cartesian-type function of basis set (severe numerical instability observed), please just use the default spherical harmonic functions.
