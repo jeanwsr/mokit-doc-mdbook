@@ -26,7 +26,7 @@ This is the easiest way, but network is required to auto-download the requiremen
 
 If you have no access to network, but still do not want to compile MOKIT manually, you can try options in [Section 2.2.2](#222-pre-built-linux-executables-and-libraries).
 
-#### use MOKIT with default channel
+#### Use MOKIT with default channel
 
 Creating a new environment before installing is highly recommended, to avoid changing your base environment.
 ```
@@ -52,7 +52,7 @@ conda uninstall mokit mkl
 conda install mokit -c mokit
 ```
 
-#### use MOKIT with conda-forge channel
+#### Use MOKIT with conda-forge channel
 
 The MOKIT installed following instructions above, which is from `mokit` channel by default, is hardly compatible with conda-forge environment. If you have to enable conda-forge, an alternative way is to install from `mokit/label/cf`
 
@@ -201,12 +201,12 @@ If your linux kernel is roughly as old as Centos7's, choose the one started with
 
 ### Detailed Compatibility Note
 
-| Artifacts | Compatible OS | Python version | GCC version | NumPy version |
-| :---: | :---: | :---: | :---: | :---: |
-| centos7_conda_py38 | Centos 7 | 3.8 | 5.3 | 1.20 |
-| centos7_conda_py39 | Centos 7 | 3.9 | 5.3 | 1.21 |
-| py39_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 3.9 | 10.2 | 1.21 |
-| py310_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 3.10 | 10.2 | 1.23 |
+| Artifacts | Compatible OS | glibc version | Python version | GCC version | NumPy version |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| centos7_conda_py38 | Centos 7 | 2.17 | 3.8 | 5.3 | 1.20 |
+| centos7_conda_py39 | Centos 7 | 2.17 | 3.9 | 5.3 | 1.21 |
+| py39_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 2.31 | 3.9 | 10.2 | 1.21 |
+| py310_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 2.31 | 3.10 | 10.2 | 1.23 |
 
 Tips:
 * Do not extract the zip with right-click (like the one in KDE)! Use `unzip` in command line.
