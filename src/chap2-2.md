@@ -201,18 +201,19 @@ If your linux kernel is roughly as old as Centos7's, choose the one started with
 
 ### Detailed Compatibility Note
 
-| Artifacts | Compatible OS | Maybe Compatible | Python version | GCC version | NumPy version |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| centos7_conda_py38 | Centos 7 | | 3.8 | 4.8.5 | 1.20 |
-| centos7_conda_py39 | Centos 7 | | 3.9 | 4.8.5 | 1.21 |
-| py39_gcc10 | Debian 11, Ubuntu 20.04 | SUSE 15 | 3.9 | 10.2 | 1.21 |
-| py310_gcc10 | Debian 11 | Ubuntu 22.04 | 3.10 | 10.2 | 1.23 |
+| Artifacts | Compatible OS | Python version | GCC version | NumPy version |
+| :---: | :---: | :---: | :---: | :---: |
+| centos7_conda_py38 | Centos 7 | 3.8 | 5.3 | 1.20 |
+| centos7_conda_py39 | Centos 7 | 3.9 | 5.3 | 1.21 |
+| py39_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 3.9 | 10.2 | 1.21 |
+| py310_gcc10 | Debian >= 11, Ubuntu >= 20.04 | 3.10 | 10.2 | 1.23 |
 
 Tips:
 * Do not extract the zip with right-click (like the one in KDE)! Use `unzip` in command line.
 * The artifacts started with 'centos7_conda' need to be used with Anaconda3/Miniconda3, and the rest works with system-provided python (conda is also OK).
-* We cannot list every supported linux distribution here, especially those similar to listed ones: Rocky Linux, OpenEuler, etc. More compatibility tests and reports are welcome.
+* We cannot list every supported linux distribution here, like Rocky Linux, OpenEuler, OpenSUSE etc. Basically the compatibility is determined by `glibc` version. You can check the [Distro compatibility table](https://github.com/mayeut/pep600_compliance?tab=readme-ov-file#distro-compatibility) for relevant information. More compatibility tests and reports are welcome.
 * The GCC and NumPy version listed refer to the version used to compile the artifacts. 
+  - You don't need to have the same GCC in your local machine.
   - NumPy can be sensitive to version sometimes. Try upgrade (or downgrade) numpy if your python complained about version when `import`. 
   - The NumPy version for each prebuilt is fixed, because offline anaconda users cannot update anything and have to follow the [anaconda version recommendation](#how-to-choose-anaconda-version-if-installing-offline) above. We may switch to newer miniconda image when the current ones are considered too old. The NumPy version for `py*_gcc*` prebuilts used to be latest but after 1.2.6rc26 they are also fixed.
 
