@@ -172,19 +172,11 @@ is no need for IP-EA shift, real or imaginary shift in NEVPT2 or CASPT2-K method
 ## 4.4.16 NEVPT2_prog
 Specify the program for performing NEVPT2 calculation, e.g. `NEVPT2_prog=PySCF`. Currently supported programs are PySCF(default), Molpro, ORCA, OpenMolcas and BDF. All core orbitals are not frozen.
 
-Note that there exist at least two variants of the NEVPT2: SC-NEVPT2 and FIC-NEVPT2
-(aka PC-NEVPT2). By default, for NEVPT2_prog=PySCF/Molpro/ORCA/OpenMolcas, SC-NEVPT2
-is chosen; while for `NEVPT2_prog=BDF`, FIC-NEVPT2 is chosen. To turn on the FIC-NEVPT2
-when using PySCF/Molpro/ORCA/OpenMolcas, please read [FIC](#4434-fic). Also
-note that
+Note that there exist at least two variants of the NEVPT2: SC-NEVPT2 and FIC-NEVPT2 (aka PC-NEVPT2). By default, for NEVPT2_prog=PySCF/Molpro/ORCA/OpenMolcas, SC-NEVPT2 is chosen; while for `NEVPT2_prog=BDF`, FIC-NEVPT2 is chosen. To turn on the FIC-NEVPT2 when using PySCF/Molpro/ORCA/OpenMolcas, please read [FIC](#4434-fic). Also note that
 
-(1) When you specify `NEVPT2_prog=Molpro` or OpenMolcas, both of the SC-NEVPT2 and
-FIC-NEVPT2 energies are actually printed in Molpro/OpenMolcas output (.out file).
-You can open the output file and read it manually, if you need that energy.  
-(2) If you specify `NEVPT2_prog=OpenMolcas`, it actually turns into a DMRG-NEVPT2
-computation, no matter how large/small the size of active space is. In this special
-case, you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG
-computations.
+(1) When you specify `NEVPT2_prog=Molpro` or OpenMolcas, both of the SC-NEVPT2 and FIC-NEVPT2 energies are actually printed in Molpro/OpenMolcas output (.out file). You can open the output file and read it manually, if you need that energy.
+
+(2) If you specify `NEVPT2_prog=OpenMolcas`, it actually turns into a DMRG-NEVPT2 computation, no matter how large/small the size of active space is. In this special case, you need to install the QCMaquis package (interfaced with OpenMolcas) for DMRG computations.
 
 ## 4.4.17 MRCISD_prog
 Specify the program for performing MRCISD calculation. By default, `MRCISD_prog=OpenMolcas`. You MUST also specify a contraction type, please read [CtrType](#4421-ctrtype) carefully. Currently, `automr` supports the interfaces of three MRCISD variants:
@@ -217,9 +209,11 @@ Specify the program for performing an MRMP2 calculation. Only GAMESS is supporte
 ## 4.4.20 MCPDFT_prog
 Specify the program for performing a MC-PDFT calculation. Supported programs are OpenMolcas(default)/PySCF/GAMESS. If you use `MCPDFT_prog=PySCF`, you need to install [pyscf-forge](https://github.com/pyscf/pyscf-forge).
 
-Note that if the active space is larger than (15,15), the MC-PDFT will be automatically switched to DMRG-PDFT. In this special case you need to install the QCMaquis package if you use the default `MCPDFT_prog`, i.e. OpenMolcas. If you use `MCPDFT_prog=PySCF` in this case, you need to install Block. DMRG-PDFT is not supported in GAMESS currently.
+Note that MC-PDFT will be automatically switched to DMRG-PDFT if DMRG-CASCI/CASSCF is invoked in a previous step. In this special case you need to install the QCMaquis package if you use the default `MCPDFT_prog`, i.e. OpenMolcas. If you use `MCPDFT_prog=PySCF` in this case, you need to install Block-1.5/Block2. DMRG-PDFT is not supported in GAMESS currently.
 
 Also note that in GAMESS, the MC-PDFT is only supported for version >= 2019(R2), and currently it can only be run in serial.
+
+See related keywords [CASCI_prog](./chap4-3.html#433-casci), [CASSCF_prog](./chap4-3.html#432-casscf), [OtPDF](#4426-otpdf) and [Force](#447-force).
 
 ## 4.4.21 CtrType
 Specify the contraction type of the MRCISD method. The default value is 0. When you specify the MRCISD method and the `MRCISD_prog`, you must assign an integer for this variable, where
@@ -257,7 +251,7 @@ Note: please write this keyword in `mokit{}`. DO NOT WRITE this keyword in the R
 Section of .gjf file (i.e. '#p ...' line).
 
 ## 4.4.26 OtPDF
-Specify the on-top pair density functional in a MC-PDFT calculation. This keyword has identical meaning with the keyword `KSDFT`/`FUNC` in `&MCPDFT` of (Open)Molcas. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. The functional name must be included in a pair of **singlet quotes**, i.e. `OtPDF='tPBE'`. The MC-PDFT output of `automr` would look like
+Specify the on-top pair density functional in a MC-PDFT calculation. This keyword has identical meaning with the keyword `KSDFT`/`FUNC` in `&MCPDFT` of (Open)Molcas. Currently available functionals are tPBE(default), tBLYP, tLSDA, trevPBE, tOPBE, ftPBE, ftBLYP, ftLSDA, ftrevPBE and ftOPBE. The functional name must be included in a pair of **single quotes**, i.e. `OtPDF='tPBE'`. The MC-PDFT output of `automr` would look like
 ```
 Enter subroutine do_mcpdft...
 MC-PDFT based on CASSCF orbitals.
@@ -271,7 +265,7 @@ Leave subroutine do_mcpdft at Sat May 24 22:57:19 2025
 ```
 where the `E(MC-PDFT)` is equal to `E(TPBE)` since only one functional tPBE is used here.
 
-Users often want to compare energies calculated by different on-top pair density functionals. In such case, one can specify more than one functional such as `OtPDF='tBLYP;tPBE'`. There is no need to run another MC-PDFT job. When there are multiple functionals, they must be separated by the symbol `;`, please do not write any spacing ` ` or comma `,` in this pair of **singlet quotes**. The MC-PDFT output of `automr` would look like
+Users often want to compare energies calculated by different on-top pair density functionals. In such case, one can specify more than one functional such as `OtPDF='tBLYP;tPBE'`. There is no need to run another MC-PDFT job. When there are multiple functionals, they must be separated by the symbol `;`, please do not write any spacing ` ` or comma `,` in this pair of **single quotes**. The MC-PDFT output of `automr` would look like
 ```
 Enter subroutine do_mcpdft...
 MC-PDFT based on CASSCF orbitals.
@@ -284,7 +278,7 @@ E(TBLYP) =       -76.21854605 a.u.
 E(TPBE) =       -76.14952255 a.u.
 Leave subroutine do_mcpdft at Sat May 24 23:05:32 202
 ```
-where the electronic energy of each functional is printed. `E(MC-PDFT)` is always equal to the 1st functional specified in `OtPDF='tPBE;tBLYP'`. If the keyword `Force` is also specified in `mokit{}`, only the analytical gradients of the 1st functional would be calculated.
+where the electronic energy of each functional is printed. `E(MC-PDFT)` is always equal to the 1st functional specified in `OtPDF='tBLYP;tPBE'`. If the keyword `Force` is also specified in `mokit{}`, only the analytical gradients of the 1st functional would be calculated.
 
 For more details of on-top functionals, please refer to the (Open)Molcas manual. Note that the available functionals depends on your version of OpenMolcas or GAMESS. Old versions may not support some of the functionals.
 

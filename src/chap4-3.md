@@ -25,25 +25,33 @@ Generalized Valence Bond theory.
 
 Note that the original GAMESS source code can only deal with GVB up to 12 pairs. To go beyond that (which is routine type of calculation in `automr` of MOKIT), you need to modify the GAMESS source code, please read [GVB_prog](./chap4-4.md#4410-gvb_prog) carefully.
 
-If a high-spin GVB computation is performed (it can be the target computation, or an intermediate step in a CASSCF computation) and there are more than 1 singly occupied orbital, the singly occupied orbitals will be localized and saved into `xxx_s.fch`. The corresponding orbital localization method is Pipek-Mezey and it can be controlled by [LocalM](./chap4-4.md#445-localm).
+If a high-spin GVB computation is performed (it can be the target computation, or an intermediate step in a CASSCF computation) and there are more than 1 singly occupied orbital, the singly occupied orbitals will be automatically localized and saved into `xxx_s.fch`. The corresponding orbital localization method is Pipek-Mezey (PM) and it can be controlled by [LocalM](./chap4-4.md#445-localm).
 
 ## 4.3.2 CASSCF
 Complete Active Space Self-consistent Field.
 
-Currently excited state computations are not supported. Please read Section A2.3 for comments on excited state computations. Please read related keyword [CASSCF_prog](./chap4-4.md#4412-casscf_prog) in Section 4.4.
+Three types of calculations are supported: ground state CASSCF (most commonly used), state specific CASSCF (SS-CASSCF), and state-averaged CASSCF (SA-CASSCF). SS-CASSCF is usually applied to calculate a specific excited state which you are interested in, and orbitals are optimized at that specific excited state. SA-CASSCF calculates several states simultaneously, and is usually applied to the case where degenerate states exist. Please read related keyword [CASSCF_prog](./chap4-4.md#4412-casscf_prog) in Section 4.4.
+
+The utility `automr` automatically detects the active space size and decides whether to switch from CASSCF to DMRG-CASSCF. If the number of Slater determinants are larger than that of doublet CAS(15,15), DMRG will be invoked. The reason is that doublet CASSCF(15,15) probably reaches the memory limit of a single HPC node, and DMRG-CASSCF prevails for larger active space.
 
 ## 4.3.3 CASCI
 Complete Active Space Configuration Interaction.
 
 CASCI can be viewed as the 0-th step of the CASSCF step, i.e. CASSCF without orbital optimization. It is always recommended to perform CASSCF rather than CASCI, expect for those who wish to compare the quality of different initial guesses, and/or do not want the CASSCF result. Please read related keyword [CASCI_prog](./chap4-4.md#4411-casci_prog) in Section 4.4.
 
+The utility `automr` automatically detects the active space size and decides whether to switch from CASCI to DMRG-CASCI. If the number of Slater determinants are larger than that of singlet CAS(16,16), DMRG will be invoked. The reason is that singlet CASCI(16,16) probably reaches the memory limit of a single HPC node, and DMRG-CASCI prevails for larger active space.
+
 ## 4.3.4 DMRGSCF
 Here the keyword DMRGSCF actually means the DMRG-CASSCF method. Please also read [DMRGSCF_prog](./chap4-4.md#4414-dmrgscf_prog) for related information.
+
+DMRG-CASSCF aims at orbital optimizations of a very large active space. For an active space smaller than doublet CAS(15,15), CASSCF is recommended and there is no need to use DMRG-CASSCF (see [CASSCF](#432-casscf)). But if you are interested in the behavior/performance of DMRG-CASSCF in such case, you can specify `DMRGSCF` in the Route Section of the .gjf file.
 
 ## 4.3.5 DMRGCI
 Here the keyword DMRGCI actually means the DMRG-CASCI method. Please also read [DMRGCI_prog](./chap4-4.md#4413-dmrgci_prog) for related information.
 
-DMRGCI can be viewed as the 0-th step of the DMRGSCF step, i.e. DMRGSCF without orbital optimization. It is always recommended to perform DMRGSCF rather than DMRGCI, expect for those who wish to compare the quality of different initial guesses, and/or do not want the DMRGSCF result.
+DMRGCI can be viewed as the 0-th step of the DMRGSCF step, i.e. DMRGSCF without orbital optimization. It is always recommended to perform DMRGSCF rather than DMRGCI, expect for those who wish to compare the quality of different initial guess orbitals.
+
+DMRG-CASCI aims at solving the CI problem for a very large active space. For an active space smaller than singlet CAS(16,16), CASCI is recommended and there is no need to use DMRG-CASCI (see [CASCI](#433-casci)). But if you are interested in the behavior/performance of DMRG-CASCI in such case, you can specify `DMRGCI` in the Route Section of the .gjf file.
 
 ## 4.3.6 NEVPT2
 Second order N-Electron Valence state Perturbation Theory based on the CASSCF reference.

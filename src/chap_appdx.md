@@ -333,6 +333,34 @@ When you use `6D 10F`, GAMESS uses `6D 10F` in the code during computation, and 
 By default, MOKIT uses `5D 7F` no matter you use any basis set or ECP/PP. And MOKIT will make all quantum chemistry packages use `5D 7F` during computations (unless `5D 7F` is not supported by some rare functionalities). Thus the user does not need to worry about this detail. If you want to (or you have to) use Cartesian functions, you need to specify `mokit{Cart}` in the Title Card line. This not recommended since it does not bring any advantage, and it is easy to cause [basis set linear dependency](https://mp.weixin.qq.com/s/XLeL0Tq61RcgYrWXqQCWbA).
 
 
+### Q26: MAXIT=500 error in GAMESS .inp
+If you encounter the following GAMESS error when using `automr`
+```
+ ERROR: MAXIT MUST BE BETWEEN 0 AND 200, NOT     500
+ DDI Process 7: error code 911
+
+              *** ERROR(S) DETECTED ***
+```
+it means that you probably forgot to modify and re-compile GAMESS. Please read [GVB_prog](./chap4-4.html#4410-gvb_prog) carefully. If you can read Chinese, you can also read the [GAMESS installation tutorial](https://gitlab.com/jxzou/qcinstall/-/blob/main/GAMESS%E7%BC%96%E8%AF%91%E6%95%99%E7%A8%8B.md?ref_type=heads) written in Chinese.
+
+
+### Q27: No module named 'pyparsing' when using OpenMolcas
+If you encounter the following OpenMolcas error when using `automr`
+```
+Traceback (most recent call last):
+  File "/public/home/jxzou/software/OpenMolcas-v25.02/bin/pymolcas", line 588, in <module>
+    exec('import zlib,base64;exec(zlib.decompress(base64.b64decode(bytes(m[1],\'ascii\'))),module.__dict__);del zlib,base64')
+  File "<string>", line 1, in <module>
+  File "<string>", line 26, in <module>
+ModuleNotFoundError: No module named 'pyparsing'
+```
+It means that your current Python does not have the 'pyparsing' library, and you can install it via running
+```
+conda install pyparsing
+```
+Note that if you are using MOKIT in an virtual environment, you need to install pyparsing exactly in that environment.
+
+
 ## A2 Limitations and Suggestions
 
 ### A2.1 Basic knowledge of multi-reference methods
@@ -348,7 +376,7 @@ If, unfortunately, you are forced by your supervisor/advisor to learn how to per
 Unfortunately, molecular point group symmetry cannot be taken into consideration in any module of MOKIT. This is due to: (1) use of symmetry may change the orientation of the target molecule, and the MO coefficients will be changed accordingly; (2) localized orbitals are used in almost all modules of `automr`, this usually contradicts with symmetry.
 
 ### A2.3 Validity of MOs obtained by `automr` for excited state calculations
-When you use `automr` to perform a ground state CASSCF calculation, the obtained CASSCF MOs (whether pseudo-canonical MOs or NOs) is supposed to be excellent for the ground state electronic structure of the target molecule. And you can use this set of MOs (held in a .fch file) to further conduct excited state calculations like state-averaged CASSCF (SA-CASSCF). And moreover, NEVPT2, CASPT2 or MRCISD, if you wish.
+When you use `automr` to perform a ground state CASSCF calculation, the obtained CASSCF MOs (whether pseudo-canonical MOs or NOs) is supposed to be excellent for the ground state electronic structure of the target molecule. And you can use this set of MOs (held in a .fch file) to further conduct excited state calculations like SS-CASSCF or SA-CASSCF. And moreover, MC-PDFT, NEVPT2, CASPT2 or even MRCISD, if you wish.
 
 However, the resulting excitation energies and excited state MOs (e.g. state-averaged NOs) are not necessarily excellent. Here 'not necessarily excellent' means for some molecules you may get good results while may be unsatisfactory for some other molecules. The reason is simple: the current algorithms in `automr` focus on the multi-reference characters in the ground state of the molecule. Thus `automr` 'finds' excellent active orbitals of the ground state. But the active orbitals of excited states are not necessarily the same as those of the ground state. And the orbital optimization in SA-CASSCF does not guarantee leading to good MOs for excited states. This problem actually exists in almost all methods/programs which feature black-box or automatic multi-reference calculations.
 
