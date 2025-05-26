@@ -10,13 +10,14 @@ If any of those cannot solve your problem, please consider [Bug report](#a3-bug-
 
 | Error messages | | |
 | --- | --- | --- |
-| [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) | [OpenMolcas: Error in keyword](#q5-openmolcas-error-in-keyword) | [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
+| [command not found!](#q1-command-not-found) / [cannot open ...](#q1-command-not-found) |  [executable paths of Gaussian, etc.](#q6-executable-paths-of-gaussian-etc) |
 | [GAMESS: ERROR DIMENSIONS EXCEEDED](#q7-gamess-error-dimensions-exceeded) | [GAMESS: semget errno=ENOSPC](#q8-gamess-semget-errnoenospc) | [GAMESS: floating point error (SIGFPE)](#q9-gamess-floating-point-error-sigfpe) |
-| [GAMESS: gamess.01.x could not be found](#q7-gamess-error-dimensions-exceeded) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) |
-| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) | [GKS-EDA: Warning for radial grid](#q16-gks-eda-warning-for-radial-grid) | 
-| [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) |
-| [undefined symbol GOMP](#q22-undefined-symbol-gomp) | | |
-<!-- q7 is quite frequent so place two entries for it -->
+| [GAMESS: gamess.01.x could not be found](#q7-gamess-error-dimensions-exceeded) | [GAMESS: MAXIT MUST BE](#q7-gamess-error-dimensions-exceeded) |
+| [OpenMolcas: Error in keyword](#q5-openmolcas-error-in-keyword) | [OpenMolcas: Error detected in HDF5](#q12-openmolcas-error-detected-in-hdf5) | [OpenMolcas: No module named pyparsing](#q26-no-module-named-pyparsing-when-using-openmolcas) |
+| [Syntax error: Bad fd number](#q14-syntax-error-bad-fd-number) | [Warning for OMP_STACKSIZE](#q15-warning-for-omp_stacksize) |  
+| [Psi4: h5py Error](#q17-psi4-h5py-error) | [PySCF: No such file block.spin_adapted](#q11-pyscf-no-such-file-blockspin_adapted) | [PySCF: No module named h5py](#q18-pyscf-no-module-named-h5py) |
+[GKS-EDA: Warning for radial grid](#q16-gks-eda-warning-for-radial-grid) | [GKS-EDA: SCF fail](#q20-gks-eda-scf-fail) | [undefined symbol GOMP](#q22-undefined-symbol-gomp) |
+<!-- q7 is quite frequent so place 3 entries for it -->
 
 Note: not all the error messages shows on screen, they may be found in program log files (usually MOKIT will print a message on screen to suggest you checking those files).
 
@@ -109,14 +110,18 @@ For PySCF and OpenMolcas, the `python` and `pymolcas` executable are used direct
 What are the possible reasons and solutions of the following errors
 
 1. `***** ERROR **** DIMENSIONS EXCEEDED *****`
-2. `PAIR=   xx MAX=   12`
+2. `PAIR=   xx MAX=   12`  (where xx is an integer >12)
 3. `DDI Error: Could not initialize xx shared memory segments.`
 4. `DDI was compiled to support 32 shared memory segments.`
-5. `The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x could not be found in directory ...`
+5. `ERROR: MAXIT MUST BE BETWEEN 0 AND 200, NOT     500`
+6. `The GAMESS executable gamess.01.x or else the DDIKICK executable ddikick.x could not be found in directory ...`
 
-in GAMESS .gms file (where xx is an integer >12)?
+in GAMESS .gms file?
 
-A7: Please read [Section 4.4.10](./chap4-4.md#4410-gvb_prog) carefully.
+A7: If you encounter those GAMESS errors when using `automr`
+it means that you probably forgot to modify and re-compile GAMESS. 
+Please read [GVB_prog](./chap4-4.html#4410-gvb_prog) carefully. 
+If you can read Chinese, you can also read the [GAMESS installation tutorial](https://gitlab.com/jxzou/qcinstall/-/blob/main/GAMESS%E7%BC%96%E8%AF%91%E6%95%99%E7%A8%8B.md?ref_type=heads) written in Chinese.
 
 
 ### Q8: GAMESS: semget errno=ENOSPC 
@@ -333,18 +338,7 @@ When you use `6D 10F`, GAMESS uses `6D 10F` in the code during computation, and 
 By default, MOKIT uses `5D 7F` no matter you use any basis set or ECP/PP. And MOKIT will make all quantum chemistry packages use `5D 7F` during computations (unless `5D 7F` is not supported by some rare functionalities). Thus the user does not need to worry about this detail. If you want to (or you have to) use Cartesian functions, you need to specify `mokit{Cart}` in the Title Card line. This not recommended since it does not bring any advantage, and it is easy to cause [basis set linear dependency](https://mp.weixin.qq.com/s/XLeL0Tq61RcgYrWXqQCWbA).
 
 
-### Q26: MAXIT=500 error in GAMESS .inp
-If you encounter the following GAMESS error when using `automr`
-```
- ERROR: MAXIT MUST BE BETWEEN 0 AND 200, NOT     500
- DDI Process 7: error code 911
-
-              *** ERROR(S) DETECTED ***
-```
-it means that you probably forgot to modify and re-compile GAMESS. Please read [GVB_prog](./chap4-4.html#4410-gvb_prog) carefully. If you can read Chinese, you can also read the [GAMESS installation tutorial](https://gitlab.com/jxzou/qcinstall/-/blob/main/GAMESS%E7%BC%96%E8%AF%91%E6%95%99%E7%A8%8B.md?ref_type=heads) written in Chinese.
-
-
-### Q27: No module named 'pyparsing' when using OpenMolcas
+### Q26: No module named 'pyparsing' when using OpenMolcas
 If you encounter the following OpenMolcas error when using `automr`
 ```
 Traceback (most recent call last):
