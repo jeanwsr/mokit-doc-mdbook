@@ -37,5 +37,5 @@ May 25, 2025
 
 **Tips**
 
-You can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` on your keyboard.
+You can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `/` on your keyboard.
 
