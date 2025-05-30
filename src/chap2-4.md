@@ -15,20 +15,41 @@ make all                    # compile MOKIT
 
 The first line finds which versions of software packages you can choose. The 2nd and 3rd lines load the corresponding software. The 4th line is that you enter the MOKIT source code directory. And the 5th line is compiling MOKIT. This is just a simple example telling you how to load modules on a Cluster. For detailed questions, please consult the administrator of your Cluster.
 
-## 2.4.2 Use MOKIT on Cluster
+
+## 2.4.2 Install MOKIT on Cluster
+For online installation, there is no difference between personal computer and Cluster, please read [2.2.1 Online Installation](./chap2-2.html#221-online-installation). If you want to compile MOKIT from source code, read Section 2.4.1 above.
+
+
+## 2.4.3 Use MOKIT on Cluster
 Usually you are not allowed to submit any job in the main node or login node. And there exists a queue/batch system on your cluster, e.g. `bsub` of LSF, `qsub` of PBS, or `sbatch` of SLURM, which distributes your job to a certain computation node. Taking `bsub` as an example, you should write a Shell script like
 ```
 #!/bin/sh
 #BSUB -q ... # queue name
 #BSUB -n 4 # number of cores
+
 module load intel/2019u5
 module load anaconda/2024.2
+export MOKIT_ROOT=$HOME/software/mokit
+export PATH=$MOKIT_ROOT/bin:$PATH
+export PYTHONPATH=$MOKIT_ROOT:$PYTHONPATH
+export GMS=$HOME/software/gamess/rungms
 
 gjfname=$1
 outname=${gjfname%.*}.out
 automr $gjfname > $outname 2>&1
 ```
-Then you can run
+Here `module load` and `export` assumes that you compiled MOKIT from its source code, using some specific compiler and Python. So corresponding libraries and environment variables are set firstly. But if you install MOKIT using `conda install`, the script may be slightly different
+```
+#!/bin/sh
+#BSUB -q ... # queue name
+#BSUB -n 4 # number of cores
+
+source activate mokit-py39
+gjfname=$1
+outname=${gjfname%.*}.out
+automr $gjfname > $outname 2>&1
+```
+where everything is well set in the virtual environment `mokit-py39`. Thus only an activation is needed. Next you can run
 ```
 bsub run.sh 00-h2o_cc-pVDZ_1.5.gjf
 ```
@@ -39,26 +60,24 @@ If you are using the SLURM, the Shell script would look like
 #!/bin/bash
 #SBATCH -J automr
 #SBATCH -e automr.err.%j
-#SBATCH -p ... # queue name
+#SBATCH -p cpu # queue name
 #SBATCH -N 1
 #SBATCH -n 1   # number of MPI processors
 #SBATCH -c 32  # number of OpenMP threads
 #SBATCH --mem=64G
 
+source activate mokit-py39
 gjfname=$1
 outname=${gjfname%.*}.out
 automr $gjfname > $outname 2>&1
 ```
-And you need to run
+Here `source activate mokit-py39` assumes that the MOKIT is installed in the virtual environment `mokit-py39`, so we activate the target environment before using MOKIT. If you compile MOKIT from source code and use no virtual environment, there is no need to write this line. Next you can run
 ```
 sbatch run.sh 00-h2o_cc-pVDZ_1.5.gjf
 ```
-to submit the job. This job will call the quantum chemistry packages Gaussian, GAMESS and PySCF in succession, and all three packages are of OpenMP parallelism. Note that before you submit the calculation job, you are supposed to be in the appropriate Python virtual environment. For example, the Bash in the terminal on my computer looks like
-```
-(mokit-py39) [jxzou@mu012 src]$
-(mokit-py39) [jxzou@mu012 src]$ sbatch run_automr.sh
-```
-which means that I am in the `mokit-py39` virtual environment currently. Some users may want to write `conda init` and `conda activate mokit-py39` in the SLURM script, but it often does not work since SLURM does not support `conda` commands properly. So it is recommended that you are already in an appropriate virtual environment.
+to submit the job. This job will call the quantum chemistry packages Gaussian, GAMESS and PySCF in succession, and all three packages are of OpenMP parallelism.
+
+**Important**: `source activate mokit-py39` means that activating the virtual environment (before running `automr`). It is not recommended to write `conda activate mokit-py39`. And it is recommended that you submit the SLURM script in the `(base)` environment. Please do not enter `(mokit-py39)` in advance since it is done in the script via `source activate`.
 
 If some MPI programs (e.g. ORCA) would be called during computations, remember to swap the parameters of `-n` and `-c`. For example, if `mokit{CASSCF_prog=ORCA}` is specified in your input file, you will need a Shell script like
 ```
@@ -71,13 +90,14 @@ If some MPI programs (e.g. ORCA) would be called during computations, remember t
 #SBATCH -c 1   # number of OpenMP threads
 #SBATCH --mem=64G
 
+source activate mokit-py39
 gjfname=$1
 outname=${gjfname%.*}.out
 automr $gjfname > $outname 2>&1
 ```
 Do not worried about `-c 1`. OpenMP programs can also run parallelly.
 
-If you need to run a small MOKIT job on the current node without modifying your `~/.bashrc`, you should create a Shell script, e.g. `run.sh`, with
+If you compile MOKIT from source code and you want to run a small MOKIT job on the current node without modifying your `~/.bashrc`, you can create a Shell script, e.g. `run.sh`, with
 ```
 module load intel/2019u5
 module load anaconda/2024.2

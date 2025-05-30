@@ -17,7 +17,7 @@ If you do not have the `ifort` compiler or Intel MKL on your computer, you may w
 (1) Intel Parallel Studio XE 2017~2020 are all OK (2019 or 2020 preferred).  
 (2) Since 2021, there is no Parallel Studio XE, but only the Intel OneAPI. You should download and install both HPC Toolkit and MKL if you want to use 2021 version.
 
-If you want to use other compilers, please read [Section 2.3.5](#235-compiler-notes).
+If you want to use other compilers, please read [Section 2.3.6](#236-compiler-notes).
 
 
 ## 2.3.2 Using make to compile
@@ -35,13 +35,11 @@ and run
 ```
 make all
 ```
-to compile MOKIT. This will take about 2 minutes. There is no `make install` step.
-
-If you want to use gfortran+OpenBLAS instead of ifort+MKL, you should run
+to compile MOKIT. This will take about 2 minutes. There is no `make install` step. If you are using Intel 2025 or higher, where there is `ifx` but no `ifort`, you can run
 ```
-make all -f Makefile.gnu_openblas
+make all -f Makefile.intel_ifx
 ```
-to compile MOKIT.
+instead.
 
 If you do not need `automr` for automatic multireference calculations and only want to compile one or several modules, e.g. `fch2inp` (for Gaussian -> GAMESS orbital transferring), then you simply need to run
 ```
@@ -73,10 +71,10 @@ If you prefer gfortran+OpenBLAS, you are supposed to run
 ```
 mv fpm.toml tpm_mkl.toml
 mv fpm_openblas.toml fpm.toml
-fpm build --flag="-O2 -cpp -fPIC -fopenmp" --link-flag="-L$HOME/software/openblas-0.3.26/lib64 -lopenblas"
-fpm install --flag="-O2 -cpp -fPIC -fopenmp" --link-flag="-L$HOME/software/openblas-0.3.26/lib64 -lopenblas" --prefix .
+fpm build --flag="-O2 -cpp -fPIC -fopenmp" --link-flag="-L$HOME/software/openblas-0.3.29/lib64 -lopenblas"
+fpm install --flag="-O2 -cpp -fPIC -fopenmp" --link-flag="-L$HOME/software/openblas-0.3.29/lib64 -lopenblas" --prefix .
 ```
-Here the OpenBLAS is assumed to be already installed in `$HOME/software/openblas-0.3.26`.
+Here the OpenBLAS is assumed to be already installed in `$HOME/software/openblas-0.3.29`.
 
 One can use [fpm](https://github.com/fortran-lang/fpm) to compile the latest MOKIT source code under Windows OS, e.g. in msys2.
 
@@ -93,11 +91,11 @@ export PSI4=$HOME/psi4conda/bin/psi4          # optional
 export BDF=$HOME/software/bdf-pkg/sbin/run.sh # optional
 ```
 
-Please modify the above paths to suit your situations. Since PySCF is run by `python`, OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4` and Dalton is run by `dalton`, there is no extra environment variable to be exported here. But if you define `export PSI4=...`, then this variable has priority to the path found by `which psi4`. 
+Please modify the above paths to suit your situations. '# optional' means it is not obligatory and it depends on your usage. Since PySCF is run by `python`, OpenMolcas is run by `pymolcas`, Molpro is run by `molpro`, PSI4 is run by `psi4` and Dalton is run by `dalton`, there is no extra environment variable to be exported here. But if you define `export PSI4=...`, then this variable has priority to the path found by `which psi4`. 
 
 For Dalton, you can install either MKL or MPI version since both are supported, and it would be automatically detected by MOKIT. The environment variable `BDF` are optional, there is no need to write it if you do not want to use BDF.
 
-The configuration file 'program.info' is no longer used since MOKIT 1.2.1. After writing environment variables, a logout and re-login on your terminal is strongly recommended. 
+The configuration file `program.info` is no longer used since MOKIT 1.2.1. After writing environment variables, a logout and re-login on your terminal is strongly recommended. 
 
 **Setup GAMESS**
 

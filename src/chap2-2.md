@@ -35,7 +35,7 @@ conda activate mokit-py39
 conda install mokit -c mokit
 ```
 
-Each time when you login onto the machine, you need to activate the virtual environment by `conda activate mokit-py39` and then you can use MOKIT.
+Each time when you login onto the machine, you need to activate the virtual environment by `conda activate mokit-py39` and then you can use MOKIT on the current computer/node. But if you want to submit MOKIT jobs to a queue on Cluster（集群）, things are somewhat different and please read [Section 2.4.3](./chap2-4.html#243-use-mokit-on-cluster) carefully.
 
 If you have not installed PySCF and you want to install it now, you can choose to
 
@@ -158,8 +158,7 @@ Unlike the conda install approach, using pre-built MOKIT in this subsection do n
 [py39_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py39_gcc10)  
 [py310_gcc10](https://gitlab.com/jxzou/mokit/-/jobs/artifacts/master/download?job=py310_gcc10)
 
-After downloading the pre-built artifacts, you need to set the following environment
-variables (assuming MOKIT is put in `$HOME/software/mokit`) in your `~/.bashrc`:
+After downloading the pre-built artifacts, you need to set the following environment variables (assuming MOKIT is put in `$HOME/software/mokit`) in your `~/.bashrc`:
 
 ```bash
 export MOKIT_ROOT=$HOME/software/mokit
@@ -176,8 +175,7 @@ Remember to modify the `GMS` path to suit your local environment.
 The PYTHONPATH has changed since MOKIT version 1.2.5rc2.
 ```
 
-Note that you need to run `source ~/.bashrc` or exit the terminal as well as
-re-login, in order to activate newly written environment variables.
+Note that you need to run `source ~/.bashrc` or exit the terminal as well as re-login, in order to activate newly written environment variables.
 
 ### How to choose Anaconda Version if installing offline
 
@@ -237,5 +235,5 @@ export PATH=$MOKIT_ROOT/bin:$PATH
 export LD_LIBRARY_PATH=$MOKIT_ROOT/mokit/lib:$LD_LIBRARY_PATH
 ```
 
-Remember to run `source ~/.bashrc` to make the environment variables valid. If you are working on a Cluster（集群） and using a script to submit any computational task, you should write the environment variables into your script.
+Remember to run `source ~/.bashrc` to make the environment variables valid. If you are working on a Cluster and using a script to submit any computational task, you should write the environment variables into your script.
 
