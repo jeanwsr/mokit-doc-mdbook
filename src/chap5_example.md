@@ -8,5 +8,5 @@
 * [5.6 Generating different GVB solutions](./chap5-6.html)
 * [5.7 Examples of dinuclear transition metal molecules](./chap5-7.html)
 * [5.8 Examples of autosr](./chap5-8.html)
-* [5.9 Visualization of upaired electrons](./chap5-9.html)
+* [5.9 Visualization of unpaired electrons](./chap5-9.html)
 

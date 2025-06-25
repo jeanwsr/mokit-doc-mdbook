@@ -1,4 +1,4 @@
-# 5.9 Visualization of upaired electrons
+# 5.9 Visualization of unpaired electrons
 After a multiconfigurational/multireference calculation is accomplished, people often want to know where the unpaired electron is, or at which atom(s) are unpaired electrons located. 3 approaches are introduced below.
 
 ## 5.9.1 Visualization of natural orbitals

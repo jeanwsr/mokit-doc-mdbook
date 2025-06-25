@@ -63,7 +63,8 @@ Preprint: Chemistry of Cyclo-[2n]-Carbon: A Many-Particle Quantum Mechanics Inve
 
 30. Preprint: Facile Wet Chemical Synthesis of Dimeric Triangulene Derivatives through Intramolecular Radical-Radical Coupling. DOI: [10.21203/rs.3.rs-3185783/v1](https://doi.org/10.21203/rs.3.rs-3185783/v1)
 
-31. Preprint: Endeavoring the First Lanthanide–Carbon Triple-Bond in Fullerene Cage. DOI: [10.21203/rs.3.rs-5351349/v1](https://doi.org/10.21203/rs.3.rs-5351349/v1)
+31. A lanthanide–carbon triple bond stabilized within a fullerene cage. ***Nat Chem*** DOI: [10.1038/s41557-025-01856-2](https://doi.org/10.1038/s41557-025-01856-2)  
+Preprint: Endeavoring the First Lanthanide–Carbon Triple-Bond in Fullerene Cage. DOI: [10.21203/rs.3.rs-5351349/v1](https://doi.org/10.21203/rs.3.rs-5351349/v1)
 
 ## 2025
 
