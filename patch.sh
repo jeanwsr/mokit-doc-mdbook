@@ -1,1 +1,1 @@
-sed -i '/^<body*/a <style type="text/css">i {color:blue;}</style>' ./src/bib/2025.html
+sed -i 's/<i>/<i style="color:blue">/' ./src/bib/2025.html
