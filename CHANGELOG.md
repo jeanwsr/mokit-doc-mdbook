@@ -1,3 +1,21 @@
+# v1.2.7
+* documentation added
+  - chap 4.7: ADC
+  - chap 5.9: add ethene TD S1 NO example
+* updated
+  - utilities: fch2mkl, mirror_wfn, molden2fch
+  - python version needed
+  - chap 2.4: cluster
+  - chap 4.6: brief doc for pbc_loc, update rwwfn apis
+  - faqs: q26, q7
+  - chap 2.2: linux prebuilt info
+  - chap 4.4: otpdf
+* style
+  - toc for chap 4.6
+  - use zotero-generated html for paper 2025, use a patch for color style
+* chores
+  - add news
+
 # v1.2.6
 * documentation added
   - SA-CASSCF
