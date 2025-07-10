@@ -33,9 +33,9 @@ Jun 25, 2025
 
 **News**
 
-[Release v1.2.6](./news.md#20241119-new-release-v126) &nbsp;&nbsp;&nbsp; [1000 downloads on anaconda](./news.md#20241127-1000-downloads-on-anaconda)
+[Release v1.2.6](./news.md#20241119-new-release-v126) &nbsp;&nbsp;&nbsp; [1500 downloads on anaconda](./news.md#20250710-1500-downloads-on-anaconda)
 
 **Tips**
 
-You can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `/` on your keyboard.
+You can use the &#128269; tool in the left upper corner of this page to search the whole manual, or simply press `s` or `/` on your keyboard.
 
