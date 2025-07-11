@@ -41,16 +41,11 @@ If you have not installed PySCF and you want to install it now, you can choose t
 
 (1) run `pip install pyscf` in this virtual environment. 
 
-(2) follow the [instruction below](#use-mokit-with-conda-forge-channel) to install pyscf and MOKIT with conda-forge channel. 
+(2) follow the [instruction below](#use-mokit-with-conda-forge-channel) to install pyscf and MOKIT with conda-forge channel.
+
+See [here](#update-mokit-with-conda) for updating mokit with conda.
 
 
-#### Update MOKIT with conda
-
-Usually `conda update mokit -c mokit` works. Sometimes it may fail to find the latest version of MOKIT. In this case, a workaround can be 
-```
-conda uninstall mokit mkl
-conda install mokit -c mokit
-```
 
 #### Use MOKIT with conda-forge channel
 
@@ -74,6 +69,43 @@ conda install mokit pyscf -c mokit/label/cf -c conda-forge
 or separately
 ```
 conda install pyscf -c conda-forge
+conda install mokit -c mokit/label/cf -c conda-forge
+```
+
+#### Update MOKIT with conda
+
+Usually the following command works. 
+```
+# for default channel
+conda update mokit -c mokit
+# for conda-forge channel
+conda update mokit -c mokit/label/cf -c conda-forge
+```
+
+Sometimes it may fail to find the latest version of MOKIT, especially when you haven't update mokit for a few months or use conda-forge in which dependencies evolve quite fast. 
+In this case, there's a few workarounds:
+
+(1) update mokit along with some dependencies
+```
+# for default channel
+conda update mokit mkl -c mokit
+# for conda-forge channel
+conda update mokit openblas -c mokit/label/cf -c conda-forge
+```
+(2) install a specified version (please visit [here](https://anaconda.org/mokit/mokit) to see the latest version number)
+```
+# for default channel
+conda install mokit=1.2.7rc8 -c mokit
+# for conda-forge channel
+conda install mokit=1.2.7rc8 -c mokit/label/cf -c conda-forge
+```
+(3) remove and install
+```
+# for default channel
+conda uninstall mokit mkl -c mokit
+conda install mokit -c mokit
+# for conda-forge channel
+conda uninstall mokit openblas -c mokit/label/cf -c conda-forge
 conda install mokit -c mokit/label/cf -c conda-forge
 ```
 
