@@ -39,3 +39,4 @@
 - [Appendix](./chap_appdx.md)
 
 [News](./news.md)
+[Charts](./charts.md)

@@ -1,7 +1,7 @@
 # 4.5 List of Utilities in MOKIT
 **The utilities for transferring MOs** are summarized in the following figure.
 
-<iframe width=750 height=510 src="./chap4-5_head.html">
+<iframe width=750 height=510  style="border:none; background:white;" src="./chap4-5_head.html">
 </iframe>
 
 For detailed explanations of all utilities, please read the following subsections. Clicking any utility label (in red color) -- for example, `fch2py` -- in the figure will redirect you to the corresponding subsection.

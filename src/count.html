@@ -1,0 +1,113 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
+    <style>
+        .chart-container {
+            width: 60%;
+            margin: 30px auto;
+            border: 1px solid #eee;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h2 class="chart-title">Download Count</h2>
+        <canvas id="downloadChart"></canvas>
+    </div>
+    
+    <div class="chart-container">
+        <h2 class="chart-title">Cite Count</h2>
+        <canvas id="citeChart"></canvas>
+    </div>
+
+    <script>
+
+    function add_chart(canvasId, jsonFilePath) {  
+        
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            // 使用fetch获取JSON文件
+            fetch(jsonFilePath)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    
+                    let labels, values;
+                    labels = data.dates;
+                    values = data.counts;
+                    
+                    // 创建图表
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'count',
+                                data: values,
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            interaction: {
+                                intersect: false,
+                                mode: 'index'
+                            },
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        parser: 'yyyy-MM-dd',
+                                        tooltipFormat: 'yyyy-MM-dd',
+                                    },
+                                    ticks: {
+                                        maxTicksLimit: 10
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'date'
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'count'
+                                    },
+                                    min: 0
+                                }
+                            }
+                        }
+                    });
+                }).catch(error => {
+                    console.error('获取数据失败:', error);
+                    document.body.innerHTML += `<p style="color: red;">加载数据失败: ${error.message}</p>`;
+                });
+        //});
+    }
+    // 调用函数，传入JSON文件的路径
+    document.addEventListener('DOMContentLoaded', function() {
+    add_chart('downloadChart', './count/download.json');
+    add_chart('citeChart', './count/cite.json');
+    });
+    </script>
+</body>
+</html>
