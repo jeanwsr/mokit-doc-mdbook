@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
     <style>
         .chart-container {
-            width: 60%;
+            width: 80%;
             margin: 30px auto;
             border: 1px solid #eee;
             padding: 20px;
@@ -74,10 +74,14 @@
                                     type: 'time',
                                     time: {
                                         parser: 'yyyy-MM-dd',
+                                        unit: 'day',
                                         tooltipFormat: 'yyyy-MM-dd',
+                                        displayFormats: {
+                                            day: 'yyyy-MM'
+                                        }
                                     },
                                     ticks: {
-                                        maxTicksLimit: 10
+                                        maxTicksLimit: 10,
                                     },
                                     title: {
                                         display: true,
