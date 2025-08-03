@@ -30,7 +30,7 @@ If you have no access to network, but still do not want to compile MOKIT manuall
 
 Creating a new environment before installing is highly recommended, to avoid changing your base environment.
 ```
-conda create -n mokit-py39 python=3.9 # 3.8-3.11 are available
+conda create -n mokit-py39 python=3.9 # 3.9-3.11 are available
 conda activate mokit-py39
 conda install mokit -c mokit
 ```
@@ -95,17 +95,17 @@ conda update mokit openblas -c mokit/label/cf -c conda-forge
 (2) install a specified version (please visit [here](https://anaconda.org/mokit/mokit) to see the latest version number)
 ```
 # for default channel
-conda install mokit=1.2.7rc8 -c mokit
+conda install mokit=1.2.7rc9 -c mokit
 # for conda-forge channel
-conda install mokit=1.2.7rc8 -c mokit/label/cf -c conda-forge
+conda install mokit=1.2.7rc9 -c mokit/label/cf -c conda-forge
 ```
 (3) remove and install
 ```
 # for default channel
-conda uninstall mokit mkl -c mokit
+conda uninstall mokit numpy mkl -c mokit
 conda install mokit -c mokit
 # for conda-forge channel
-conda uninstall mokit openblas -c mokit/label/cf -c conda-forge
+conda uninstall mokit numpy openblas -c mokit/label/cf -c conda-forge
 conda install mokit -c mokit/label/cf -c conda-forge
 ```
 
