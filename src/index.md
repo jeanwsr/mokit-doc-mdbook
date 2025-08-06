@@ -33,6 +33,7 @@ Jun 25, 2025
 
 **News**
 
+[Charts](./charts.md) for download/citation count &nbsp;&nbsp;&nbsp; 
 [Release v1.2.6](./news.md#20241119-new-release-v126) &nbsp;&nbsp;&nbsp; [1500 downloads on anaconda](./news.md#20250710-1500-downloads-on-anaconda)
 
 **Tips**
